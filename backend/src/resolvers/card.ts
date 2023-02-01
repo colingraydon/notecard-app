@@ -1,5 +1,5 @@
-// import { Field, InputType, ObjectType, Resolver } from "type-graphql";
-// import { Card } from "../entities/Card";
+import { Resolver } from "type-graphql";
+import { Card } from "../entities/Card";
 
 // @InputType()
 // class CardInput {
@@ -17,7 +17,12 @@
 //   hasMore: boolean;
 // }
 
-// @Resolver(Card)
-// export class CardResolver {
-
-// }
+@Resolver(Card)
+export class CardResolver {
+  // @Query(() => PaginatedCards)
+  // async cards(
+  //     @Ctx() {}: SessionContext
+  // ): Promise<Card> {} {
+  //     return Card.find({ where: {id}})
+  // }
+}

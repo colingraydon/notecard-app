@@ -3,6 +3,12 @@ import { dataSource } from "./data-source";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 import { TestResolver } from "./resolvers/test";
+import { Context } from "./types";
+import { UserResolver } from "./resolvers/user";
+import connectRedis from "connect-redis";
+import session from "express-session";
+import Redis from "ioredis";
+import { COOKIENAME } from "./constants";
 
 const main = async () => {
   await dataSource.initialize();
@@ -13,19 +19,63 @@ const main = async () => {
     res.send("API working");
   });
 
+  /**********redis middleware starts here. must be before the apollo middleware**/
+  // redis@v4
+
+  const RedisStore = connectRedis(session);
+
+  //tossed in any typing as connect-redis @types were not up to date
+
+  const redis: any = new Redis({});
+  // redis.connect().catch(console.error)
+
+  app.use(
+    session({
+      name: COOKIENAME,
+      store: new RedisStore({
+        client: redis,
+        disableTouch: true, //optional arg, touching increases the time session will be active
+      }),
+      cookie: {
+        maxAge: 1000 * 60 * 60 * 60 * 364 * 10, //10 year cookie time
+        httpOnly: true, //javascript code in front end cannot access cookie
+        secure: true, //cookie only works in https if true. can set to __prod__ if in prod
+        sameSite: "none", //must be changed to lax for prod
+      },
+      saveUninitialized: false,
+      secret: "randomizedstringaasdfasdf",
+      resave: false,
+    })
+  );
+
+  //enabled for dev only, to make graphql sandbox work
+  //   app.set("trust proxy", true);
+
+  /*****redis middleware ends here*********/
   app.listen(4000, () => {
-    console.log("Listening on port 4000");
+    console.log("🚀 Listening on port 4000");
   });
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [TestResolver],
+      resolvers: [TestResolver, UserResolver],
       validate: false,
+    }),
+    context: ({ req, res }): Context => ({
+      req,
+      res,
     }),
   });
 
   await apolloServer.start();
 
+  //********* */
+  apolloServer.applyMiddleware({
+    app,
+    cors: { credentials: true, origin: "https://studio.apollographql.com" },
+  });
+
+  //****** */
   apolloServer.applyMiddleware({ app });
 };
 
