@@ -29,6 +29,7 @@
     "typescript": "^4.9.5"
   },
   "dependencies": {
+    "@apollo/server-plugin-landing-page-graphql-playground": "^4.0.0",
     "apollo-server-express": "^3.11.1",
     "argon2": "^0.30.3",
     "connect-redis": "^6.1.3",

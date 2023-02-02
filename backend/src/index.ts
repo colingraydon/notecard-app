@@ -9,6 +9,8 @@ import connectRedis from "connect-redis";
 import session from "express-session";
 import Redis from "ioredis";
 import { COOKIENAME } from "./constants";
+//the plugin for playground which allows cookies, prod only
+import { ApolloServerPluginLandingPageGraphQLPlayground } from "@apollo/server-plugin-landing-page-graphql-playground";
 
 const main = async () => {
   await dataSource.initialize();
@@ -39,8 +41,8 @@ const main = async () => {
       cookie: {
         maxAge: 1000 * 60 * 60 * 60 * 364 * 10, //10 year cookie time
         httpOnly: true, //javascript code in front end cannot access cookie
-        secure: true, //cookie only works in https if true. can set to __prod__ if in prod
-        sameSite: "none", //must be changed to lax for prod
+        secure: false, //cookie only works in https if true. can set to __prod__ if in prod
+        sameSite: "lax", //must be changed to lax for prod
       },
       saveUninitialized: false,
       secret: "randomizedstringaasdfasdf",
@@ -65,6 +67,8 @@ const main = async () => {
       req,
       res,
     }),
+    //only for prod
+    plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
   });
 
   await apolloServer.start();
