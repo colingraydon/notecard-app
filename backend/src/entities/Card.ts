@@ -8,7 +8,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { User } from "./User";
+import { Subject } from "./Subject";
 
 @ObjectType()
 @Entity()
@@ -22,8 +22,8 @@ export class Card extends BaseEntity {
   creatorId!: number;
 
   @Field()
-  @ManyToOne(() => User, (user) => user.cards)
-  creator: User;
+  @ManyToOne(() => Subject, (subject) => subject.cards)
+  subject: Subject;
 
   @Field()
   @Column()

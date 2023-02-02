@@ -4,29 +4,24 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { Subject } from "./Subject";
+import { Card } from "./Card";
+import { User } from "./User";
 
 @ObjectType()
 @Entity()
-export class User extends BaseEntity {
+export class Subject extends BaseEntity {
   @Field()
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Field()
-  @Column({ unique: true })
-  username!: string;
-
-  @Field()
-  @Column({ unique: true })
-  email!: string;
-
+  @Field(() => String)
   @Column()
-  password!: string;
+  name!: string;
 
   @Field(() => String)
   @CreateDateColumn()
@@ -36,6 +31,10 @@ export class User extends BaseEntity {
   @UpdateDateColumn()
   updatedAt!: Date;
 
-  @OneToMany(() => Subject, (subject) => subject.user)
-  subjects?: Subject[];
+  @Field()
+  @ManyToOne(() => User, (user) => user.subjects)
+  user: User;
+
+  @OneToMany(() => Card, (card) => card.subject)
+  cards?: Card[];
 }

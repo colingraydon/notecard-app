@@ -1,19 +1,21 @@
-import { User } from "../entities/User";
-import {
-  ObjectType,
-  Field,
-  Resolver,
-  Mutation,
-  Ctx,
-  Arg,
-  Query,
-} from "type-graphql";
-import { Context } from "../types";
-import { UsernamePasswordInput } from "./UsernamePasswordInput";
-import { dataSource } from "../data-source";
 import argon2 from "argon2";
-import { validateRegister } from "../utils/validateRegister";
+import {
+  Arg,
+  Ctx,
+  Field,
+  Mutation,
+  ObjectType,
+  Query,
+  Resolver,
+  UseMiddleware,
+} from "type-graphql";
 import { COOKIENAME } from "../constants";
+import { dataSource } from "../data-source";
+import { User } from "../entities/User";
+import { isAuthenticated } from "../middleware/isAuthenticated";
+import { Context } from "../types";
+import { validateRegister } from "../utils/validateRegister";
+import { UsernamePasswordInput } from "./UsernamePasswordInput";
 
 @ObjectType()
 class FieldError {
@@ -81,6 +83,8 @@ export class UserResolver {
           ],
         };
       }
+
+      //@TODO implement dupe email error, add enumaration to prevent attacks
       console.log("message: ", err.message);
     }
 
@@ -161,5 +165,15 @@ export class UserResolver {
       return null;
     }
     return User.findOne({ where: { id: req.session.userId } });
+  }
+
+  //   //@TODO implement cascading for deleting associated cards
+  //   //deletes the user's account
+  //   //deleting a card, cascading not implemented yet
+  @Mutation(() => Boolean)
+  @UseMiddleware(isAuthenticated)
+  async deleteUser(@Ctx() { req }: Context): Promise<boolean> {
+    await User.delete({ id: req.session.userId });
+    return true;
   }
 }

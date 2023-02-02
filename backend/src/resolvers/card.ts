@@ -1,4 +1,3 @@
-import { isAuthenticated } from "../middleware/isAuthenticated";
 import {
   Arg,
   Ctx,
@@ -6,14 +5,14 @@ import {
   InputType,
   Int,
   Mutation,
-  ObjectType,
   Query,
   Resolver,
   UseMiddleware,
 } from "type-graphql";
-import { Card } from "../entities/Card";
-import { Context } from "../types";
 import { dataSource } from "../data-source";
+import { Card } from "../entities/Card";
+import { isAuthenticated } from "../middleware/isAuthenticated";
+import { Context } from "../types";
 
 @InputType()
 class CardInput {
@@ -24,21 +23,21 @@ class CardInput {
 }
 
 //to be used in the delete mutation
-@ObjectType()
-class DeleteResponse {
-  @Field(() => Boolean, { nullable: true })
-  errors?: boolean;
+// @ObjectType()
+// class DeleteResponse {
+//   @Field(() => Boolean, { nullable: true })
+//   errors?: boolean;
 
-  @Field(() => String, { nullable: true })
-  response?: string;
-}
-@ObjectType()
-class PaginatedCards {
-  @Field(() => [Card])
-  cards: Card[];
-  @Field()
-  hasMore: boolean;
-}
+//   @Field(() => String, { nullable: true })
+//   response?: string;
+// }
+// @ObjectType()
+// class PaginatedCards {
+//   @Field(() => [Card])
+//   cards: Card[];
+//   @Field()
+//   hasMore: boolean;
+// }
 
 @Resolver(Card)
 export class CardResolver {
