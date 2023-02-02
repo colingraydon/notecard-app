@@ -11,6 +11,7 @@ import Redis from "ioredis";
 import { COOKIENAME } from "./constants";
 //the plugin for playground which allows cookies, prod only
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "@apollo/server-plugin-landing-page-graphql-playground";
+import { CardResolver } from "./resolvers/card";
 
 const main = async () => {
   await dataSource.initialize();
@@ -60,7 +61,7 @@ const main = async () => {
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [TestResolver, UserResolver],
+      resolvers: [TestResolver, UserResolver, CardResolver],
       validate: false,
     }),
     context: ({ req, res }): Context => ({
