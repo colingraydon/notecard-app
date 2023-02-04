@@ -12,18 +12,18 @@ import { COOKIENAME } from "./constants";
 //the plugin for playground which allows cookies, prod only
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "@apollo/server-plugin-landing-page-graphql-playground";
 import { CardResolver } from "./resolvers/card";
-import { Card } from "./entities/Card";
-import { User } from "./entities/User";
-import { Subject } from "./entities/Subject";
+import { SubjectResolver } from "./resolvers/subject";
+// import { Card } from "./entities/Card";
+// import { User } from "./entities/User";
+// import { Subject } from "./entities/Subject";
 
 const main = async () => {
   await dataSource.initialize();
 
   //deleting all old data
-  await Card.delete({});
-  await User.delete({});
-  await Subject.delete({});
-  // await Post.delete({});
+  // await Card.delete({});
+  // await Subject.delete({});
+  // await User.delete({});
 
   const app = express();
 
@@ -70,7 +70,7 @@ const main = async () => {
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [TestResolver, UserResolver, CardResolver],
+      resolvers: [TestResolver, UserResolver, CardResolver, SubjectResolver],
       validate: false,
     }),
     context: ({ req, res }): Context => ({

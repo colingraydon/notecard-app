@@ -33,8 +33,12 @@ export class Subject extends BaseEntity {
 
   @Field()
   @ManyToOne(() => User, (user) => user.subjects)
-  user: User;
+  creator: User;
 
-  @OneToMany(() => Card, (card) => card.subject)
+  @Field()
+  @Column()
+  creatorId: number;
+
+  @OneToMany(() => Card, (card) => card.subject, { cascade: true })
   cards?: Card[];
 }

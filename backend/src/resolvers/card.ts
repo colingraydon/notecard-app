@@ -22,6 +22,12 @@ class CardInput {
   text: string;
 }
 
+// @InputType()
+// class SubjectInput {
+//   @Field()
+//   title: string;
+// }
+
 //to be used in the delete mutation
 // @ObjectType()
 // class DeleteResponse {
@@ -60,6 +66,21 @@ export class CardResolver {
       creatorId: req.session.userId,
     }).save();
   }
+
+  //   @Mutation(() => Subject)
+  //   @UseMiddleware(isAuthenticated)
+  //   async createSubject(
+  //     @Arg("input") input: string,
+  //     @Ctx() { req }: Context
+  //   ): Promise<Subject> {
+  //     const user = await User.find({ where: { id: req.session.userId } });
+  //     const user1 = user[0];
+  //     return Subject.create({
+  //       name: input,
+  //       creator: user1,
+  //       creatorId: req.session.userId,
+  //     }).save();
+  //   }
 
   //queries and returns a nullable card by card.id
   @Query(() => Card, { nullable: true })

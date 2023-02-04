@@ -36,6 +36,7 @@ export class User extends BaseEntity {
   @UpdateDateColumn()
   updatedAt!: Date;
 
-  @OneToMany(() => Subject, (subject) => subject.user)
+  @Field(() => [Subject], { nullable: true })
+  @OneToMany(() => Subject, (subject) => subject.creator, { cascade: true })
   subjects?: Subject[];
 }

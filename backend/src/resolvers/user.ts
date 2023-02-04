@@ -11,6 +11,7 @@ import {
 } from "type-graphql";
 import { COOKIENAME } from "../constants";
 import { dataSource } from "../data-source";
+import { Subject } from "../entities/Subject";
 import { User } from "../entities/User";
 import { isAuthenticated } from "../middleware/isAuthenticated";
 import { Context } from "../types";
@@ -158,6 +159,12 @@ export class UserResolver {
     );
   }
 
+  //   //queries and the Subject array for a user
+  //   @Query(() => Subject, { nullable: true })
+  //   subject(@Arg("id", () => Int) id: number): Promise<Subject[] | null> {
+  //     return Subject.find({ where: { id } });
+  //   }
+
   //Returns user based on cookie
   @Query(() => User, { nullable: true })
   me(@Ctx() { req }: Context) {
@@ -176,4 +183,11 @@ export class UserResolver {
     await User.delete({ id: req.session.userId });
     return true;
   }
+
+  //gets a user's subject list, checks auth status
+  //   @Query(() => [Subject], { nullable: true })
+  //   @UseMiddleware(isAuthenticated)
+  //   async getSubjects(@Ctx() { req }: Context): Promise<Subject[] | undefined> {
+  //     return Subject.find({ where: { creatorId: req.session.userId } });
+  //   }
 }
