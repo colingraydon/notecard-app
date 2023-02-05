@@ -11,7 +11,6 @@ import {
 } from "type-graphql";
 import { COOKIENAME } from "../constants";
 import { dataSource } from "../data-source";
-import { Subject } from "../entities/Subject";
 import { User } from "../entities/User";
 import { isAuthenticated } from "../middleware/isAuthenticated";
 import { Context } from "../types";

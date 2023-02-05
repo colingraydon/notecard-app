@@ -39,5 +39,5 @@ export class Card extends BaseEntity {
 
   @Field(() => String)
   @UpdateDateColumn()
-  updatedAt?: Date;
+  updatedAt!: Date;
 }

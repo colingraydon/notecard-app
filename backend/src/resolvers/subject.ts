@@ -29,14 +29,31 @@ export class SubjectResolver {
   async createSubject(
     @Arg("input") input: string,
     @Ctx() { req }: Context
-  ): Promise<Subject> {
+  ): Promise<any> {
     const user = await User.find({ where: { id: req.session.userId } });
     const user1 = user[0];
-    return Subject.create({
+    const subjects: Subject[] =
+      typeof user1.subjects === "undefined" ? [] : user1.subjects;
+    const subj = Subject.create({
       name: input,
       creator: user1,
       creatorId: req.session.userId,
-    }).save();
+    });
+    // console.log("subj: ", subj);
+    subjects.push(subj);
+    console.log("subjects: ", subjects);
+
+    // console.log("req.session.userId: ", req.session.userId);
+    const result = await dataSource
+      .createQueryBuilder()
+      .update(User)
+      .set({ subjects: subjects })
+      .where("id = :id", { id: req.session.userId })
+      .execute();
+
+    console.log("result: ", result);
+    console.log("---------------");
+    return result;
   }
 
   @Query(() => [Subject], { nullable: true })
@@ -45,7 +62,6 @@ export class SubjectResolver {
     return Subject.find({ where: { creatorId: req.session.userId } });
   }
 
-  //   //@TODO implement cascading for deleting associated cards
   //   //deletes a single subject, checks that user is logged in
   @Mutation(() => Boolean)
   @UseMiddleware(isAuthenticated)

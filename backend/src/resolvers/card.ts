@@ -1,3 +1,4 @@
+import { Subject } from "../entities/Subject";
 import {
   Arg,
   Ctx,
@@ -59,12 +60,26 @@ export class CardResolver {
   @UseMiddleware(isAuthenticated)
   async createCard(
     @Arg("input") input: CardInput,
+    @Arg("id", () => Int) id: number,
     @Ctx() { req }: Context
   ): Promise<Card> {
-    return Card.create({
+    const subj = await Subject.find({ where: { id } });
+    const subj1 = subj[0];
+    const card = Card.create({
       ...input,
-      creatorId: req.session.userId,
+      ...subj1,
     }).save();
+    console.log("Card: ", card);
+    return card;
+    // await dataSource
+    //   .createQueryBuilder()
+    //   .insert()
+    //   .into(Card)
+    //   .values({
+    //     creatorId: req.session.userId,
+    //     subject: subj,
+
+    //   })
   }
 
   //   @Mutation(() => Subject)

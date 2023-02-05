@@ -4,6 +4,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -37,8 +38,9 @@ export class Subject extends BaseEntity {
 
   @Field()
   @Column()
-  creatorId: number;
+  creatorId!: number;
 
+  @Field(() => [Subject])
   @OneToMany(() => Card, (card) => card.subject, { cascade: true })
-  cards?: Card[];
+  cards: Card[];
 }
