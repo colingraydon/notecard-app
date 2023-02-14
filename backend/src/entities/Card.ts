@@ -24,7 +24,6 @@ export class Card extends BaseEntity {
 
   @Field(() => Subject)
   @ManyToOne(() => Subject, (subject) => subject.cards)
-  @JoinColumn({ name: "creatorId" })
   subject!: Subject;
 
   @Field()

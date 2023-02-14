@@ -63,7 +63,7 @@ export class CardResolver {
     @Arg("title") title: string,
     @Arg("id", () => Int) id: number,
     @Ctx() { req }: Context
-  ): Promise<any> {
+  ): Promise<Card> {
     const subj = await Subject.find({ where: { id } });
     const subj1 = subj[0];
 
@@ -73,21 +73,22 @@ export class CardResolver {
     //   title: title,
     //   text: text,
     // });
+    const cardRepository = dataSource.getRepository(Card);
 
-    // console.log("subject: ", subj1);
+    console.log("subject: ", subj1);
+
+    const card = new Card();
+    card.text = text;
+    card.title = title;
+    card.subject = subj1;
+    card.creatorId = req.session.userId as number;
+    return cardRepository.save(card);
+
     // return Card.create({
-    //   creatorId: req.session.userId,
-    //   subject: subj1,
+    //   ...subj1,
     //   title: title,
     //   text: text,
-    // });
-
-    return Card.create({
-      ...subj1,
-      creatorId: req.session.userId,
-      title: "test1",
-      text: "text2",
-    }).save();
+    // }).save();
 
     // return Subject.create({
     //   name: input,

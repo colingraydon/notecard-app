@@ -34,7 +34,6 @@ export class Subject extends BaseEntity {
 
   @Field(() => User)
   @ManyToOne(() => User, (user) => user.subjects)
-  @JoinColumn({ name: "creatorId" })
   creator!: User;
 
   @Field()
