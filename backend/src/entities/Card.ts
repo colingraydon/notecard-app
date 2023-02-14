@@ -4,7 +4,6 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -23,7 +22,9 @@ export class Card extends BaseEntity {
   creatorId!: number;
 
   @Field(() => Subject)
-  @ManyToOne(() => Subject, (subject) => subject.cards)
+  @ManyToOne(() => Subject, (subject) => subject.cards, {
+    onDelete: "CASCADE",
+  })
   subject!: Subject;
 
   @Field()

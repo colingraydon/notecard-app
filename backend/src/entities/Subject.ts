@@ -4,7 +4,6 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -33,7 +32,9 @@ export class Subject extends BaseEntity {
   updatedAt!: Date;
 
   @Field(() => User)
-  @ManyToOne(() => User, (user) => user.subjects)
+  @ManyToOne(() => User, (user) => user.subjects, {
+    onDelete: "CASCADE",
+  })
   creator!: User;
 
   @Field()
@@ -43,8 +44,6 @@ export class Subject extends BaseEntity {
   @Field(() => [Card])
   @OneToMany(() => Card, (card) => card.subject, {
     cascade: true,
-    onDelete: "CASCADE",
-    onUpdate: "CASCADE",
     eager: true,
   })
   cards!: Card[];

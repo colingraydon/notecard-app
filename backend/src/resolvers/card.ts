@@ -1,4 +1,3 @@
-import { Subject } from "../entities/Subject";
 import {
   Arg,
   Ctx,
@@ -12,6 +11,7 @@ import {
 } from "type-graphql";
 import { dataSource } from "../data-source";
 import { Card } from "../entities/Card";
+import { Subject } from "../entities/Subject";
 import { isAuthenticated } from "../middleware/isAuthenticated";
 import { Context } from "../types";
 
@@ -59,42 +59,22 @@ export class CardResolver {
   @Mutation(() => Card)
   @UseMiddleware(isAuthenticated)
   async createCard(
-    @Arg("text") text: string,
-    @Arg("title") title: string,
+    @Arg("input") input: CardInput,
     @Arg("id", () => Int) id: number,
     @Ctx() { req }: Context
   ): Promise<Card> {
-    const subj = await Subject.find({ where: { id } });
-    const subj1 = subj[0];
-
-    // return dataSource.createQueryBuilder().insert().into(Card).values({
-    //   creatorId: req.session.userId,
-    //   subject: subj1,
-    //   title: title,
-    //   text: text,
-    // });
+    const rawSubj = await Subject.find({ where: { id } });
+    const subj = rawSubj[0];
     const cardRepository = dataSource.getRepository(Card);
 
-    console.log("subject: ", subj1);
+    console.log("subject: ", subj);
 
     const card = new Card();
-    card.text = text;
-    card.title = title;
-    card.subject = subj1;
+    card.text = input.text;
+    card.title = input.title;
+    card.subject = subj;
     card.creatorId = req.session.userId as number;
     return cardRepository.save(card);
-
-    // return Card.create({
-    //   ...subj1,
-    //   title: title,
-    //   text: text,
-    // }).save();
-
-    // return Subject.create({
-    //   name: input,
-    //   creator: user,
-    //   creatorId: req.session.userId,
-    // }).save();
   }
 
   //queries and returns a nullable card by card.id
@@ -107,8 +87,7 @@ export class CardResolver {
   @UseMiddleware(isAuthenticated)
   async updateCard(
     @Arg("id", () => Int) id: number,
-    @Arg("title") title: string,
-    @Arg("text") text: string,
+    @Arg("input") input: CardInput,
     @Ctx() { req }: Context
   ): Promise<Card | null> {
     //fetches and updates post with query builder
@@ -116,7 +95,7 @@ export class CardResolver {
     const post = await dataSource
       .createQueryBuilder()
       .update(Card)
-      .set({ title, text })
+      .set({ title: input.title, text: input.text })
       .where('id = :id and "creatorId" = :creatorId', {
         id,
         creatorId: req.session.userId,
@@ -131,11 +110,8 @@ export class CardResolver {
   //deleting a card, cascading not implemented yet
   @Mutation(() => Boolean)
   @UseMiddleware(isAuthenticated)
-  async deleteCard(
-    @Arg("id", () => Int) id: number,
-    @Ctx() { req }: Context
-  ): Promise<boolean> {
-    await Card.delete({ id, creatorId: req.session.userId });
+  async deleteCard(@Arg("id", () => Int) id: number): Promise<boolean> {
+    await Card.delete({ id });
     return true;
   }
 }
