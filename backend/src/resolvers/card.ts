@@ -59,43 +59,42 @@ export class CardResolver {
   @Mutation(() => Card)
   @UseMiddleware(isAuthenticated)
   async createCard(
-    @Arg("input") input: CardInput,
+    @Arg("text") text: string,
+    @Arg("title") title: string,
     @Arg("id", () => Int) id: number,
     @Ctx() { req }: Context
-  ): Promise<Card> {
+  ): Promise<any> {
     const subj = await Subject.find({ where: { id } });
     const subj1 = subj[0];
-    const card = Card.create({
-      ...input,
+
+    // return dataSource.createQueryBuilder().insert().into(Card).values({
+    //   creatorId: req.session.userId,
+    //   subject: subj1,
+    //   title: title,
+    //   text: text,
+    // });
+
+    // console.log("subject: ", subj1);
+    // return Card.create({
+    //   creatorId: req.session.userId,
+    //   subject: subj1,
+    //   title: title,
+    //   text: text,
+    // });
+
+    return Card.create({
       ...subj1,
+      creatorId: req.session.userId,
+      title: "test1",
+      text: "text2",
     }).save();
-    console.log("Card: ", card);
-    return card;
-    // await dataSource
-    //   .createQueryBuilder()
-    //   .insert()
-    //   .into(Card)
-    //   .values({
-    //     creatorId: req.session.userId,
-    //     subject: subj,
 
-    //   })
+    // return Subject.create({
+    //   name: input,
+    //   creator: user,
+    //   creatorId: req.session.userId,
+    // }).save();
   }
-
-  //   @Mutation(() => Subject)
-  //   @UseMiddleware(isAuthenticated)
-  //   async createSubject(
-  //     @Arg("input") input: string,
-  //     @Ctx() { req }: Context
-  //   ): Promise<Subject> {
-  //     const user = await User.find({ where: { id: req.session.userId } });
-  //     const user1 = user[0];
-  //     return Subject.create({
-  //       name: input,
-  //       creator: user1,
-  //       creatorId: req.session.userId,
-  //     }).save();
-  //   }
 
   //queries and returns a nullable card by card.id
   @Query(() => Card, { nullable: true })

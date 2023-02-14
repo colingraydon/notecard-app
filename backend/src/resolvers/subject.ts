@@ -1,17 +1,17 @@
-import { Subject } from "../entities/Subject";
 import {
-  Query,
   Arg,
-  Int,
-  Resolver,
   Ctx,
+  Int,
   Mutation,
+  Query,
+  Resolver,
   UseMiddleware,
 } from "type-graphql";
+import { dataSource } from "../data-source";
+import { Subject } from "../entities/Subject";
 import { User } from "../entities/User";
 import { isAuthenticated } from "../middleware/isAuthenticated";
 import { Context } from "../types";
-import { dataSource } from "../data-source";
 
 @Resolver(Subject)
 export class SubjectResolver {
@@ -30,30 +30,41 @@ export class SubjectResolver {
     @Arg("input") input: string,
     @Ctx() { req }: Context
   ): Promise<any> {
-    const user = await User.find({ where: { id: req.session.userId } });
-    const user1 = user[0];
-    const subjects: Subject[] =
-      typeof user1.subjects === "undefined" ? [] : user1.subjects;
-    const subj = Subject.create({
+    // const user = await User.find({ where: { id: req.session.userId } });
+    // const user1 = user[0];
+    // const subjects: Subject[] =
+    //   typeof user1.subjects === "undefined" ? [] : user1.subjects;
+    // // const subj = Subject.create({
+    // //   name: input,
+    // //   creator: user1,
+    // //   creatorId: req.session.userId,
+    // // });
+
+    // const subj = Subject.create({
+    //   creator: user1,
+    //   creatorId: req.session.userId,
+    //   name: input,
+    // });
+    // // console.log("subj: ", subj);
+    // subjects.push(subj);
+    // console.log("subjects: ", subjects);
+
+    // // console.log("req.session.userId: ", req.session.userId);
+    // return dataSource
+    //   .createQueryBuilder()
+    //   .update(User)
+    //   .set({ subjects: subjects })
+    //   .where("id = :id", { id: req.session.userId })
+    //   .execute();
+
+    const rawUser = await User.find({ where: { id: req.session.userId } });
+    const user = rawUser[0];
+    console.log("User:", user);
+    return Subject.create({
       name: input,
-      creator: user1,
+      creator: user,
       creatorId: req.session.userId,
-    });
-    // console.log("subj: ", subj);
-    subjects.push(subj);
-    console.log("subjects: ", subjects);
-
-    // console.log("req.session.userId: ", req.session.userId);
-    const result = await dataSource
-      .createQueryBuilder()
-      .update(User)
-      .set({ subjects: subjects })
-      .where("id = :id", { id: req.session.userId })
-      .execute();
-
-    console.log("result: ", result);
-    console.log("---------------");
-    return result;
+    }).save();
   }
 
   @Query(() => [Subject], { nullable: true })

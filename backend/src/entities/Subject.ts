@@ -32,15 +32,21 @@ export class Subject extends BaseEntity {
   @UpdateDateColumn()
   updatedAt!: Date;
 
-  @Field()
+  @Field(() => User)
   @ManyToOne(() => User, (user) => user.subjects)
-  creator: User;
+  @JoinColumn({ name: "creatorId" })
+  creator!: User;
 
   @Field()
   @Column()
   creatorId!: number;
 
-  @Field(() => [Subject])
-  @OneToMany(() => Card, (card) => card.subject, { cascade: true })
-  cards: Card[];
+  @Field(() => [Card])
+  @OneToMany(() => Card, (card) => card.subject, {
+    cascade: true,
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE",
+    eager: true,
+  })
+  cards!: Card[];
 }
