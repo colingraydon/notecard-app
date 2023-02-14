@@ -173,7 +173,6 @@ export class UserResolver {
     return User.findOne({ where: { id: req.session.userId } });
   }
 
-  //   //@TODO implement cascading for deleting associated cards
   //   //deletes the user's account
   //   //deleting a card, cascading not implemented yet
   @Mutation(() => Boolean)

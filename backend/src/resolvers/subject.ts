@@ -59,10 +59,9 @@ export class SubjectResolver {
 
     const rawUser = await User.find({ where: { id: req.session.userId } });
     const user = rawUser[0];
-    console.log("User:", user);
     return Subject.create({
       name: input,
-      creator: user,
+      ...user,
       creatorId: req.session.userId,
     }).save();
   }

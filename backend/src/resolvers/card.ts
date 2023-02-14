@@ -67,8 +67,6 @@ export class CardResolver {
     const subj = rawSubj[0];
     const cardRepository = dataSource.getRepository(Card);
 
-    console.log("subject: ", subj);
-
     const card = new Card();
     card.text = input.text;
     card.title = input.title;
