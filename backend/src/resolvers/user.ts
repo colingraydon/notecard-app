@@ -1,4 +1,5 @@
 import argon2 from "argon2";
+import { sendEmail } from "../utils/sendEmail";
 import {
   Arg,
   Ctx,
@@ -9,6 +10,7 @@ import {
   Resolver,
   UseMiddleware,
 } from "type-graphql";
+import { v4 } from "uuid";
 import { COOKIENAME } from "../constants";
 import { dataSource } from "../data-source";
 import { User } from "../entities/User";
@@ -16,6 +18,7 @@ import { isAuthenticated } from "../middleware/isAuthenticated";
 import { Context } from "../types";
 import { validateRegister } from "../utils/validateRegister";
 import { UsernamePasswordInput } from "./UsernamePasswordInput";
+import { FORGET_PASSWORD_PREFIX } from "../constants";
 
 @ObjectType()
 class FieldError {
@@ -158,12 +161,100 @@ export class UserResolver {
     );
   }
 
-  //   //queries and the Subject array for a user
-  //   @Query(() => Subject, { nullable: true })
-  //   subject(@Arg("id", () => Int) id: number): Promise<Subject[] | null> {
-  //     return Subject.find({ where: { id } });
-  //   }
+  @Mutation(() => UserResponse)
+  async changePassword(
+    @Arg("token") token: string,
+    @Arg("newPassword") newPassword: string,
+    @Ctx() { redis, req }: Context
+  ): Promise<UserResponse> {
+    if (newPassword.length < 5) {
+      return {
+        errors: [
+          {
+            field: "newPassword",
+            message: "Password must be 5 characters or longer",
+          },
+        ],
+      };
+    }
+    //get userID from redis
+    const key = FORGET_PASSWORD_PREFIX + token;
+    const userId = await redis.get(key);
+    if (!userId) {
+      return {
+        errors: [
+          {
+            field: "token",
+            message: "expired token",
+          },
+        ],
+      };
+    }
 
+    const userIdNum = parseInt(userId);
+    //get current user, lookup by userId
+    //need to parse int to type match int to str
+    const user = await User.findOne({ where: { id: userIdNum } });
+
+    if (!user) {
+      return {
+        errors: [
+          {
+            field: "token",
+            message: "user no longer exists",
+          },
+        ],
+      };
+    }
+
+    //apply hashing logic, run update sql
+    User.update(
+      { id: userIdNum },
+      {
+        password: await argon2.hash(newPassword),
+      }
+    );
+
+    //delete the token
+    await redis.del(key);
+    //loginuser after setting password
+    req.session.userId = user.id;
+    return { user };
+  }
+
+  @Mutation(() => Boolean)
+  async forgotPassword(@Arg("email") email: string, @Ctx() { redis }: Context) {
+    // const user = await em.findOne(User, {email});
+    const user = await User.findOne({ where: { email } });
+    //email not in DB
+    if (!user) {
+      //returning true will not allow a request to determine if there is a particular email in db
+      return true;
+    }
+
+    //generates token from uuid
+    const token = v4();
+
+    //redis stuff here
+    //wrapped in try/catch because it was not working
+    try {
+      await redis.set(
+        FORGET_PASSWORD_PREFIX + token,
+        user.id,
+        "EX",
+        1000 * 60 * 60 * 24 * 4
+      );
+    } catch (error) {
+      console.log(error);
+    }
+    //anchor tag to send in email, provides a token
+
+    await sendEmail(
+      email,
+      `<a href="http://localhost:3000/change-password/${token}">resetpassword</a>`
+    );
+    return true;
+  }
   //Returns user based on cookie
   @Query(() => User, { nullable: true })
   me(@Ctx() { req }: Context) {

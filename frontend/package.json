@@ -1,0 +1,35 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "gen": "graphql-codegen --config codegen.ts"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.7.7",
+    "@apollo/react-ssr": "^4.0.0",
+    "@chakra-ui/icons": "^2.0.17",
+    "@chakra-ui/react": "^2.5.0",
+    "@chakra-ui/theme-tools": "^2.0.16",
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.9.0",
+    "formik": "^2.2.9",
+    "framer-motion": "^6.3.0",
+    "graphql": "^16.6.0",
+    "next": "latest",
+    "next-apollo": "^5.0.8",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-is": "^18.2.0"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "3.0.0",
+    "@graphql-codegen/client-preset": "2.0.0",
+    "@graphql-codegen/typescript-react-apollo": "^3.3.7",
+    "@types/node": "^18.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.10",
+    "typescript": "^4.9.5"
+  }
+}

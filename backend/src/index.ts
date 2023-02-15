@@ -76,6 +76,7 @@ const main = async () => {
     context: ({ req, res }): Context => ({
       req,
       res,
+      redis,
     }),
     //only for prod
     plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
