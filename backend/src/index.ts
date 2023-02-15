@@ -13,6 +13,7 @@ import { COOKIENAME } from "./constants";
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "@apollo/server-plugin-landing-page-graphql-playground";
 import { CardResolver } from "./resolvers/card";
 import { SubjectResolver } from "./resolvers/subject";
+import cors from "cors";
 // import { Card } from "./entities/Card";
 // import { User } from "./entities/User";
 // import { Subject } from "./entities/Subject";
@@ -31,6 +32,12 @@ const main = async () => {
     res.send("API working");
   });
 
+  app.use(
+    cors({
+      origin: "http://localhost:3000",
+      credentials: true,
+    })
+  );
   /**********redis middleware starts here. must be before the apollo middleware**/
   // redis@v4
 
@@ -87,7 +94,8 @@ const main = async () => {
   //********* */
   apolloServer.applyMiddleware({
     app,
-    cors: { credentials: true, origin: "https://studio.apollographql.com" },
+    // cors: { credentials: true, origin: "https://studio.apollographql.com" },
+    cors: false,
   });
 
   //****** */
