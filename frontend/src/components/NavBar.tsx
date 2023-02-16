@@ -54,12 +54,6 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
   } else {
     body = (
       <Flex>
-        <NextLink
-          style={{ marginLeft: "auto", marginRight: "12px" }}
-          href="/create-post"
-        >
-          create post
-        </NextLink>
         <Box mr={2}>{data.me.username}</Box>
         <Button
           isLoading={logoutFetching}
