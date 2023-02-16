@@ -180,6 +180,22 @@ export type ChangePasswordMutation = {
   };
 };
 
+export type CreateSubjectMutationVariables = Exact<{
+  input: Scalars["String"];
+}>;
+
+export type CreateSubjectMutation = {
+  __typename?: "Mutation";
+  createSubject: {
+    __typename?: "Subject";
+    id: number;
+    name: string;
+    createdAt: string;
+    updatedAt: string;
+    creatorId: number;
+  };
+};
+
 export type ForgotPasswordMutationVariables = Exact<{
   email: Scalars["String"];
 }>;
@@ -306,6 +322,60 @@ export type ChangePasswordMutationResult =
 export type ChangePasswordMutationOptions = Apollo.BaseMutationOptions<
   ChangePasswordMutation,
   ChangePasswordMutationVariables
+>;
+export const CreateSubjectDocument = gql`
+  mutation CreateSubject($input: String!) {
+    createSubject(input: $input) {
+      id
+      name
+      createdAt
+      updatedAt
+      creatorId
+    }
+  }
+`;
+export type CreateSubjectMutationFn = Apollo.MutationFunction<
+  CreateSubjectMutation,
+  CreateSubjectMutationVariables
+>;
+
+/**
+ * __useCreateSubjectMutation__
+ *
+ * To run a mutation, you first call `useCreateSubjectMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateSubjectMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createSubjectMutation, { data, loading, error }] = useCreateSubjectMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateSubjectMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreateSubjectMutation,
+    CreateSubjectMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    CreateSubjectMutation,
+    CreateSubjectMutationVariables
+  >(CreateSubjectDocument, options);
+}
+export type CreateSubjectMutationHookResult = ReturnType<
+  typeof useCreateSubjectMutation
+>;
+export type CreateSubjectMutationResult =
+  Apollo.MutationResult<CreateSubjectMutation>;
+export type CreateSubjectMutationOptions = Apollo.BaseMutationOptions<
+  CreateSubjectMutation,
+  CreateSubjectMutationVariables
 >;
 export const ForgotPasswordDocument = gql`
   mutation ForgotPassword($email: String!) {

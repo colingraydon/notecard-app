@@ -54,6 +54,12 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
   } else {
     body = (
       <Flex>
+        <NextLink
+          style={{ marginLeft: "auto", marginRight: "12px" }}
+          href="/create-notecards"
+        >
+          create notecards
+        </NextLink>
         <Box mr={2}>{data.me.username}</Box>
         <Button
           isLoading={logoutFetching}
