@@ -7,14 +7,17 @@ import {
   MenuItem,
   MenuList,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { useGetSubjectsQuery } from "../generated/graphql";
 
 interface SubjectSelectProps {}
 
 export const SubjectSelect: React.FC<SubjectSelectProps> = () => {
   const { data, error, loading } = useGetSubjectsQuery();
+
+  const [value, setValue] = useState("chose a subject");
   const subjects = data?.getSubjects;
+
   return (
     <Box>
       {loading ? (
@@ -23,11 +26,13 @@ export const SubjectSelect: React.FC<SubjectSelectProps> = () => {
         <React.Fragment>
           <Menu>
             <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-              choose a subject...
+              {value}
             </MenuButton>
             <MenuList h={80} sx={{ overflow: "scroll" }}>
               {subjects.map((item, key) => (
-                <MenuItem key={key}>{item.name}</MenuItem>
+                <MenuItem onClick={() => setValue(item.name)} key={key}>
+                  {item.name}
+                </MenuItem>
               ))}
             </MenuList>
           </Menu>
