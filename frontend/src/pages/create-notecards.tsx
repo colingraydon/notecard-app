@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { InputField } from "../components/InputField";
 import { Layout } from "../components/Layout";
+import { SubjectSelect } from "../components/SubjectSelect";
 import { useCreateSubjectMutation, useMeQuery } from "../generated/graphql";
 import useIsAuth from "../utils/useIsAuth";
 import { withApollo } from "../utils/withApollo";
@@ -18,16 +19,17 @@ const createPost: React.FC<{}> = ({}) => {
   return (
     <Layout variant="small">
       <Formik
-        initialValues={{ title: "" }}
+        initialValues={{ subject: "" }}
         onSubmit={async (values, { setErrors }) => {
           const { errors } = await createSubject({
-            variables: { input: values.title },
+            variables: { input: values.subject },
             //updateing apollo cache
             update: (cache) => {
               //evicting a query, on the root query, put in posts
-              cache.evict({ fieldName: "posts" });
+              cache.evict({ fieldName: "subject" });
             },
           });
+          console.log("values: ", values);
           if (!errors) {
             router.push("/");
           }
@@ -35,15 +37,7 @@ const createPost: React.FC<{}> = ({}) => {
       >
         {({ isSubmitting }) => (
           <Form>
-            <InputField name="title" placeholder="title" label="Title" />
-            <Box mt={4}>
-              <InputField
-                name="text"
-                placeholder="text..."
-                label="Body"
-                textArea
-              />
-            </Box>
+            <InputField name="subject" placeholder="subject" label="Subject" />
             <Flex>
               <Button
                 type="submit"
@@ -52,12 +46,13 @@ const createPost: React.FC<{}> = ({}) => {
                 background="teal"
                 isLoading={isSubmitting}
               >
-                create post
+                create subject
               </Button>
             </Flex>
           </Form>
         )}
       </Formik>
+      <SubjectSelect></SubjectSelect>
     </Layout>
   );
 };

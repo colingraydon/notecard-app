@@ -256,6 +256,17 @@ export type RegisterMutation = {
   };
 };
 
+export type GetSubjectsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetSubjectsQuery = {
+  __typename?: "Query";
+  getSubjects?: Array<{
+    __typename?: "Subject";
+    name: string;
+    id: number;
+  }> | null;
+};
+
 export type MeQueryVariables = Exact<{ [key: string]: never }>;
 
 export type MeQuery = {
@@ -581,6 +592,62 @@ export type RegisterMutationResult = Apollo.MutationResult<RegisterMutation>;
 export type RegisterMutationOptions = Apollo.BaseMutationOptions<
   RegisterMutation,
   RegisterMutationVariables
+>;
+export const GetSubjectsDocument = gql`
+  query GetSubjects {
+    getSubjects {
+      name
+      id
+    }
+  }
+`;
+
+/**
+ * __useGetSubjectsQuery__
+ *
+ * To run a query within a React component, call `useGetSubjectsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetSubjectsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetSubjectsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetSubjectsQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    GetSubjectsQuery,
+    GetSubjectsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<GetSubjectsQuery, GetSubjectsQueryVariables>(
+    GetSubjectsDocument,
+    options
+  );
+}
+export function useGetSubjectsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    GetSubjectsQuery,
+    GetSubjectsQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<GetSubjectsQuery, GetSubjectsQueryVariables>(
+    GetSubjectsDocument,
+    options
+  );
+}
+export type GetSubjectsQueryHookResult = ReturnType<typeof useGetSubjectsQuery>;
+export type GetSubjectsLazyQueryHookResult = ReturnType<
+  typeof useGetSubjectsLazyQuery
+>;
+export type GetSubjectsQueryResult = Apollo.QueryResult<
+  GetSubjectsQuery,
+  GetSubjectsQueryVariables
 >;
 export const MeDocument = gql`
   query Me {

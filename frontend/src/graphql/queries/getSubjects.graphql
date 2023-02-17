@@ -1,0 +1,6 @@
+query GetSubjects {
+  getSubjects {
+    name
+    id
+  }
+}
