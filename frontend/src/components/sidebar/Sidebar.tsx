@@ -12,7 +12,7 @@ export const Sidebar = ({ collapse }) => (
       <Logo collapse={collapse} />
       <Navigation collapse={collapse} />
     </Box>
-    <DarkModeSwitch></DarkModeSwitch>
     <AvatarBox collapse={collapse} />
+    {/* <DarkModeSwitch></DarkModeSwitch> */}
   </React.Fragment>
 );

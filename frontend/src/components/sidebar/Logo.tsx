@@ -13,17 +13,9 @@ export const Logo = ({ collapse }) => (
       <Icon as={AiFillThunderbolt} fontSize={30} />
       {collapse && (
         <Text fontWeight="bold" fontSize={16}>
-          Notecard App
+          NotecardApp
         </Text>
       )}
     </Box>
-    <IconButton
-      variant="ghost"
-      aria-label="search"
-      icon={<AiOutlineSearch />}
-      fontSize={26}
-      color="gray.400"
-      borderRadius="50%"
-    />
   </Flex>
 );

@@ -1,4 +1,4 @@
-import { Flex, Button, Heading, Box } from "@chakra-ui/react";
+import { Flex, Button, Heading, Box, IconButton } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
 import { useApolloClient } from "@apollo/client";
@@ -8,13 +8,15 @@ import {
   useLogoutMutation,
   useMeQuery,
 } from "../generated/graphql";
+import { MdMenu } from "react-icons/md";
+import { useState } from "react";
 
 interface NavBarProps {}
 
 //used to pass into logout function
 let logoutVar: LogoutMutationVariables;
 
-export const NavBar: React.FC<NavBarProps> = ({}) => {
+export const NewNavBar: React.FC<NavBarProps> = ({}) => {
   const router = useRouter();
   // useEffect only runs in the browser, so just set state, which will rerender the page
   //needed to fix hydration errors
@@ -23,6 +25,7 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
 
   const [logout, { loading: logoutFetching }] = useLogoutMutation();
 
+  const [collapse, setCollapse] = useState(true);
   //apollo client stuff
   const apollo = useApolloClient();
   const { data, loading } = useMeQuery({
@@ -76,14 +79,16 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
     );
   }
   return (
-    <Flex bg="teal.500" top={0} zIndex={1} p={4}>
-      <Flex align="center" flex={1} m="auto" w="100%">
-        <NextLink href="/">
-          <Heading>NotecardApp</Heading>
-        </NextLink>
-        <Box mr={2} ml={"auto"}>
-          {body}
-        </Box>
+    <Flex height={20} bg="teal.500" top={0} p={4} w="100%">
+      <Flex align="center" flex={1}>
+        <IconButton
+          aria-label="Menu Collapse"
+          icon={<MdMenu />}
+          top={2}
+          left={2}
+          onClick={() => setCollapse(!collapse)}
+        />
+        <Box mr={2}>{body}</Box>
       </Flex>
     </Flex>
   );
