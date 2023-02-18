@@ -25,7 +25,6 @@ export const NewNavBar: React.FC<NavBarProps> = ({}) => {
 
   const [logout, { loading: logoutFetching }] = useLogoutMutation();
 
-  const [collapse, setCollapse] = useState(true);
   //apollo client stuff
   const apollo = useApolloClient();
   const { data, loading } = useMeQuery({
@@ -81,13 +80,6 @@ export const NewNavBar: React.FC<NavBarProps> = ({}) => {
   return (
     <Flex height={20} bg="teal.500" top={0} p={4} w="100%">
       <Flex align="center" flex={1}>
-        <IconButton
-          aria-label="Menu Collapse"
-          icon={<MdMenu />}
-          top={2}
-          left={2}
-          onClick={() => setCollapse(!collapse)}
-        />
         <Box mr={2}>{body}</Box>
       </Flex>
     </Flex>

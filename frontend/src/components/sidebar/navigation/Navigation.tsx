@@ -16,41 +16,35 @@ import { NavItem } from "./NavItem";
 const items = [
   {
     type: "link",
-    label: "Dashboard",
+    label: "subjects",
     icon: MdOutlineSpaceDashboard,
-    path: "/",
+    path: "/create-subject",
   },
   {
     type: "link",
-    label: "Products",
+    label: "manage subjects",
     icon: MdOutlineShoppingBag,
     path: "/",
   },
+
   {
     type: "link",
-    label: "Mail",
-    icon: MdMailOutline,
-    path: "/",
-  },
-  {
-    type: "link",
-    label: "Campaings",
-    icon: MdOutlineFlag,
-    path: "/",
-  },
-  {
-    type: "link",
-    label: "Calendar",
+    label: "notecards",
     icon: MdCalendarToday,
     path: "/",
   },
   {
     type: "link",
-    label: "Contacts",
+    label: "manage notecards",
     icon: MdOutlineSupervisorAccount,
     path: "/",
   },
-
+  {
+    type: "link",
+    label: "quiz",
+    icon: MdOutlineFlag,
+    path: "/",
+  },
   {
     type: "header",
     label: "Account",
@@ -58,28 +52,28 @@ const items = [
 
   {
     type: "link",
-    label: "Notifications",
+    label: "notifications",
     icon: MdOutlineNotificationsActive,
     path: "/",
     notifications: 24,
   },
+
   {
     type: "link",
-    label: "Chat",
-    icon: MdOutlineChatBubbleOutline,
-    path: "/",
-    messages: 8,
-  },
-  {
-    type: "link",
-    label: "Settings",
+    label: "settings",
     icon: MdOutlineSettingsInputComposite,
     path: "/",
   },
 ];
 
+const about = {
+  type: "link",
+  label: "about",
+  icon: MdOutlineSettingsInputComposite,
+  path: "/",
+};
 export const Navigation = ({ collapse }) => (
-  <List w="full" my={8}>
+  <List w="full" my={8} mb={300}>
     {items.map((item, index) => (
       <ListItem key={index}>
         <NavItem item={item} isActive={index === 0} collapse={collapse} />

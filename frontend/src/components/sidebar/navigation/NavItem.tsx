@@ -13,11 +13,11 @@ export const NavItem = ({ item, isActive, collapse }) => {
   const { label } = item;
 
   if (item.type === "link") {
-    const { icon, notifications, messages } = item;
+    const { icon, notifications, messages, path } = item;
     return (
       <Box display="flex" alignItems="center" my={6} justifyContent="center">
         <LinkChakra
-          href=""
+          href={path}
           as={Link}
           gap={1}
           display="flex"

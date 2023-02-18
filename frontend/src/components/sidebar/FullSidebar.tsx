@@ -18,7 +18,8 @@ const FullSidebar = () => {
           as="aside"
           w="full"
           h="full"
-          maxW={collapse ? 350 : 100}
+          maxW={collapse ? 300 : 100}
+          minW={collapse ? 300 : 100}
           bg="white"
           alignItems="start"
           padding={6}
@@ -27,31 +28,32 @@ const FullSidebar = () => {
           transition="ease-in-out .2s"
           borderRadius="12px"
         >
+          <Flex>
+            <Box ml="auto">
+              <Logo collapse={collapse} />
+            </Box>
+            <IconButton
+              aria-label="Menu Collapse"
+              icon={<MdMenu />}
+              marginLeft="auto"
+              onClick={() => setCollapse(!collapse)}
+            />
+          </Flex>
           <Sidebar collapse={collapse} />
         </Flex>
-        {/* <Flex>
-        <Flex
-          as="main"
-          w="full"
-          h="full"
-          bg="white"
-          alignItems="center"
-          justifyContent="center"
-          flexDirection="column"
-          position="relative"
-          borderRadius="12px"
-        >
-          <IconButton
-            aria-label="Menu Collapse"
-            icon={<MdMenu />}
-            position="absolute"
-            top={2}
-            left={2}
-            onClick={() => setCollapse(!collapse)}
-          />
-          <Text fontSize={100} color="gray.300"></Text>
+        <Flex>
+          <Flex
+            as="main"
+            w="full"
+            h="full"
+            bg="white"
+            alignItems="center"
+            justifyContent="center"
+            flexDirection="column"
+            position="relative"
+            borderRadius="12px"
+          ></Flex>
         </Flex>
-      </Flex> */}
       </HStack>
     </Flex>
   );

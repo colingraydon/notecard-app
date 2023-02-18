@@ -9,10 +9,8 @@ import { DarkModeSwitch } from "../DarkModeSwitch";
 export const Sidebar = ({ collapse }) => (
   <React.Fragment>
     <Box w="full">
-      <Logo collapse={collapse} />
       <Navigation collapse={collapse} />
     </Box>
-    <AvatarBox collapse={collapse} />
-    {/* <DarkModeSwitch></DarkModeSwitch> */}
+    {/* <AvatarBox collapse={collapse} /> */}
   </React.Fragment>
 );

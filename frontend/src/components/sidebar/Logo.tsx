@@ -1,5 +1,6 @@
 import { Box, Flex, Icon, IconButton, Text } from "@chakra-ui/react";
 import { AiFillThunderbolt, AiOutlineSearch } from "react-icons/ai";
+import { MdMenu } from "react-icons/md";
 
 export const Logo = ({ collapse }) => (
   <Flex
@@ -10,7 +11,6 @@ export const Logo = ({ collapse }) => (
     gap={4}
   >
     <Box display="flex" alignItems="center" gap={2}>
-      <Icon as={AiFillThunderbolt} fontSize={30} />
       {collapse && (
         <Text fontWeight="bold" fontSize={16}>
           NotecardApp
