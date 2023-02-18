@@ -1,8 +1,10 @@
 import {
   Arg,
   Ctx,
+  Field,
   Int,
   Mutation,
+  ObjectType,
   Query,
   Resolver,
   UseMiddleware,
@@ -12,7 +14,17 @@ import { Subject } from "../entities/Subject";
 import { User } from "../entities/User";
 import { isAuthenticated } from "../middleware/isAuthenticated";
 import { Context } from "../types";
+import { FieldError } from "./user";
 
+@ObjectType()
+class SubjectResponse {
+  //set the type
+  @Field(() => [FieldError], { nullable: true })
+  errors?: FieldError[];
+
+  @Field(() => Subject, { nullable: true })
+  subject?: Subject;
+}
 @Resolver(Subject)
 export class SubjectResolver {
   //queries and the Subject array for a user
@@ -24,12 +36,12 @@ export class SubjectResolver {
   //creates a subject in the subject table.
   //finds user by cookie, checks authentication, that user owns the subject
   //move this to user resolver class and refactor?
-  @Mutation(() => Subject)
+  @Mutation(() => SubjectResponse)
   @UseMiddleware(isAuthenticated)
   async createSubject(
     @Arg("input") input: string,
     @Ctx() { req }: Context
-  ): Promise<any> {
+  ): Promise<SubjectResponse> {
     // const user = await User.find({ where: { id: req.session.userId } });
     // const user1 = user[0];
     // const subjects: Subject[] =
@@ -57,13 +69,26 @@ export class SubjectResolver {
     //   .where("id = :id", { id: req.session.userId })
     //   .execute();
 
+    if (input.length === 0) {
+      return {
+        errors: [
+          {
+            message: "subject cannot be empty",
+            field: "subject",
+          },
+        ],
+      };
+    }
     const rawUser = await User.find({ where: { id: req.session.userId } });
     const user = rawUser[0];
-    return Subject.create({
+    const subj = Subject.create({
       name: input,
       ...user,
       creatorId: req.session.userId,
-    }).save();
+    });
+    console.log("subj: ", subj);
+    subj.save();
+    return { subject: subj };
   }
 
   @Query(() => [Subject], { nullable: true })

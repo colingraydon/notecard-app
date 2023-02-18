@@ -21,7 +21,7 @@ import { UsernamePasswordInput } from "./UsernamePasswordInput";
 import { FORGET_PASSWORD_PREFIX } from "../constants";
 
 @ObjectType()
-class FieldError {
+export class FieldError {
   @Field()
   field: string;
 
