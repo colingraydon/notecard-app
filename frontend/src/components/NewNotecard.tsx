@@ -19,7 +19,7 @@ const NewNotecard: React.FC<NewNotecardProps> = ({}) => {
     <Formik
       initialValues={{ title: "", text: "" }}
       onSubmit={async (values, { setErrors }) => {
-        const;
+        const {errors} = 
         // const {errors} = await createPost({
         //     variables: {input: values},
         //     //updateing apollo cache
