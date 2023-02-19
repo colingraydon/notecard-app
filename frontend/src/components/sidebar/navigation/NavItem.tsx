@@ -33,7 +33,7 @@ export const NavItem = ({ item, isActive, collapse }) => {
         </LinkChakra>
         {collapse && (
           <React.Fragment>
-            {notifications && (
+            {notifications > 0 && (
               <Badge
                 borderRadius="full"
                 colorScheme="yellow"

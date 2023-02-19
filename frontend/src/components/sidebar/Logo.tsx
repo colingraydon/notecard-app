@@ -6,13 +6,19 @@ export const Logo = ({ collapse }) => (
   <Flex
     w="full"
     alignItems="center"
-    justifyContent="space-between"
+    justifyContent="center"
     flexDirection={collapse ? "row" : "column"}
-    gap={4}
+    // gap={4}
   >
-    <Box display="flex" alignItems="center" gap={2}>
+    <Box display="flex" alignItems="center" justifyContent="center" gap={2}>
       {collapse && (
-        <Text fontWeight="bold" fontSize={16}>
+        <Text
+          fontWeight="bold"
+          mr={79}
+          justifyContent="center"
+          alignItems="center"
+          fontSize={20}
+        >
           NotecardApp
         </Text>
       )}

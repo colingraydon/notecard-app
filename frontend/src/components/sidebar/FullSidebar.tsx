@@ -13,48 +13,53 @@ const FullSidebar = () => {
 
   return (
     <Flex>
-      <HStack w="full" h="100vh" bg="gray.100" padding={4}>
-        <Flex
-          as="aside"
-          w="full"
-          h="full"
-          maxW={collapse ? 300 : 100}
-          minW={collapse ? 300 : 100}
-          bg="white"
-          alignItems="start"
-          padding={6}
-          flexDirection="column"
-          justifyContent="space-between"
-          transition="ease-in-out .2s"
-          borderRadius="12px"
-        >
-          <Flex>
-            <Box ml="auto">
-              <Logo collapse={collapse} />
-            </Box>
-            <IconButton
-              aria-label="Menu Collapse"
-              icon={<MdMenu />}
-              marginLeft="auto"
-              onClick={() => setCollapse(!collapse)}
-            />
-          </Flex>
-          <Sidebar collapse={collapse} />
-        </Flex>
-        <Flex>
+      <Box>
+        <HStack w="full" h="100vh" bg="gray.100" padding={4}>
           <Flex
-            as="main"
+            as="aside"
             w="full"
             h="full"
+            maxW={collapse ? 300 : 100}
+            minW={collapse ? 300 : 100}
             bg="white"
-            alignItems="center"
-            justifyContent="center"
+            padding={6}
             flexDirection="column"
-            position="relative"
             borderRadius="12px"
-          ></Flex>
-        </Flex>
-      </HStack>
+          >
+            <Flex
+              display="flex"
+              transition="ease-in-out .2s"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Box alignContent="center">
+                <Logo collapse={collapse} />
+              </Box>
+              <IconButton
+                aria-label="Menu Collapse"
+                icon={<MdMenu />}
+                justifyContent="center"
+                alignContent="center"
+                onClick={() => setCollapse(!collapse)}
+              />
+            </Flex>
+            <Sidebar collapse={collapse} />
+          </Flex>
+          <Flex>
+            <Flex
+              as="main"
+              w="full"
+              h="full"
+              bg="white"
+              alignItems="center"
+              justifyContent="center"
+              flexDirection="column"
+              position="relative"
+              borderRadius="12px"
+            ></Flex>
+          </Flex>
+        </HStack>
+      </Box>
     </Flex>
   );
 };

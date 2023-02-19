@@ -1,16 +1,13 @@
-import { IconProps, List, ListItem, Text } from "@chakra-ui/react";
+import { List, ListItem } from "@chakra-ui/react";
 import {
-  MdOutlineSpaceDashboard,
-  MdOutlineShoppingBag,
-  MdMailOutline,
-  MdOutlineFlag,
   MdCalendarToday,
-  MdOutlineSupervisorAccount,
-  MdOutlineSettingsInputComposite,
-  MdOutlineChatBubbleOutline,
+  MdOutlineFlag,
   MdOutlineNotificationsActive,
+  MdOutlineSettingsInputComposite,
+  MdOutlineShoppingBag,
+  MdOutlineSpaceDashboard,
+  MdOutlineSupervisorAccount,
 } from "react-icons/md";
-import { DarkModeSwitch } from "../../DarkModeSwitch";
 import { NavItem } from "./NavItem";
 
 const items = [
@@ -55,7 +52,7 @@ const items = [
     label: "notifications",
     icon: MdOutlineNotificationsActive,
     path: "/",
-    notifications: 24,
+    notifications: 0,
   },
 
   {
@@ -67,7 +64,7 @@ const items = [
 ];
 
 export const Navigation = ({ collapse }) => (
-  <List w="full" my={8} mb={300}>
+  <List w="full" my={8} mb={3000}>
     {items.map((item, index) => (
       <ListItem key={index}>
         <NavItem item={item} isActive={index === 0} collapse={collapse} />
