@@ -42,33 +42,7 @@ export class SubjectResolver {
     @Arg("input") input: string,
     @Ctx() { req }: Context
   ): Promise<SubjectResponse> {
-    // const user = await User.find({ where: { id: req.session.userId } });
-    // const user1 = user[0];
-    // const subjects: Subject[] =
-    //   typeof user1.subjects === "undefined" ? [] : user1.subjects;
-    // // const subj = Subject.create({
-    // //   name: input,
-    // //   creator: user1,
-    // //   creatorId: req.session.userId,
-    // // });
-
-    // const subj = Subject.create({
-    //   creator: user1,
-    //   creatorId: req.session.userId,
-    //   name: input,
-    // });
-    // // console.log("subj: ", subj);
-    // subjects.push(subj);
-    // console.log("subjects: ", subjects);
-
-    // // console.log("req.session.userId: ", req.session.userId);
-    // return dataSource
-    //   .createQueryBuilder()
-    //   .update(User)
-    //   .set({ subjects: subjects })
-    //   .where("id = :id", { id: req.session.userId })
-    //   .execute();
-
+    console.log("got to start");
     if (input.length === 0) {
       return {
         errors: [

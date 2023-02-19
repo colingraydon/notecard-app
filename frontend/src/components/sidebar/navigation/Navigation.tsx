@@ -66,12 +66,6 @@ const items = [
   },
 ];
 
-const about = {
-  type: "link",
-  label: "about",
-  icon: MdOutlineSettingsInputComposite,
-  path: "/",
-};
 export const Navigation = ({ collapse }) => (
   <List w="full" my={8} mb={300}>
     {items.map((item, index) => (

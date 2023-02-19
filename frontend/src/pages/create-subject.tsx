@@ -7,6 +7,7 @@ import { Layout } from "../components/Layout";
 import FullSidebar from "../components/sidebar/FullSidebar";
 import { SubjectSelect } from "../components/SubjectSelect";
 import { useCreateSubjectMutation, useMeQuery } from "../generated/graphql";
+import { toErrorMap } from "../utils/toErrorMap";
 import useIsAuth from "../utils/useIsAuth";
 import { withApollo } from "../utils/withApollo";
 
@@ -24,17 +25,20 @@ const createSubject: React.FC<{}> = ({}) => {
         <Formik
           initialValues={{ subject: "" }}
           onSubmit={async (values, { setErrors }) => {
-            const { errors } = await createSubject({
+            const response = await createSubject({
               variables: { input: values.subject },
               //updateing apollo cache
-              update: (cache) => {
-                //evicting a query, on the root query, put in posts
-                cache.evict({ fieldName: "subject" });
-              },
+              // update: (cache) => {
+              //   //evicting a query, on the root query, put in posts
+              //   cache.evict({ fieldName: "subject" });
+              // },
             });
-            console.log("values: ", values);
-            if (!errors) {
-              router.push("/");
+            console.log("response: ", response);
+            // if (!errors) {
+            //   router.push("/");
+            // }
+            if (response.data?.createSubject.errors) {
+              setErrors(toErrorMap(response.data.createSubject.errors));
             }
           }}
         >

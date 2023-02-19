@@ -49,7 +49,7 @@ export type Mutation = {
   __typename?: "Mutation";
   changePassword: UserResponse;
   createCard: Card;
-  createSubject: Subject;
+  createSubject: SubjectResponse;
   deleteCard: Scalars["Boolean"];
   deleteSubject: Scalars["Boolean"];
   deleteUser: Scalars["Boolean"];
@@ -134,6 +134,12 @@ export type Subject = {
   updatedAt: Scalars["String"];
 };
 
+export type SubjectResponse = {
+  __typename?: "SubjectResponse";
+  errors?: Maybe<Array<FieldError>>;
+  subject?: Maybe<Subject>;
+};
+
 export type User = {
   __typename?: "User";
   createdAt: Scalars["String"];
@@ -187,12 +193,19 @@ export type CreateSubjectMutationVariables = Exact<{
 export type CreateSubjectMutation = {
   __typename?: "Mutation";
   createSubject: {
-    __typename?: "Subject";
-    id: number;
-    name: string;
-    createdAt: string;
-    updatedAt: string;
-    creatorId: number;
+    __typename?: "SubjectResponse";
+    errors?: Array<{
+      __typename?: "FieldError";
+      field: string;
+      message: string;
+    }> | null;
+    subject?: {
+      __typename?: "Subject";
+      name: string;
+      createdAt: string;
+      updatedAt: string;
+      id: number;
+    } | null;
   };
 };
 
@@ -337,11 +350,16 @@ export type ChangePasswordMutationOptions = Apollo.BaseMutationOptions<
 export const CreateSubjectDocument = gql`
   mutation CreateSubject($input: String!) {
     createSubject(input: $input) {
-      id
-      name
-      createdAt
-      updatedAt
-      creatorId
+      errors {
+        field
+        message
+      }
+      subject {
+        name
+        createdAt
+        updatedAt
+        id
+      }
     }
   }
 `;

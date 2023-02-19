@@ -14,6 +14,8 @@ import { ApolloServerPluginLandingPageGraphQLPlayground } from "@apollo/server-p
 import { CardResolver } from "./resolvers/card";
 import { SubjectResolver } from "./resolvers/subject";
 import cors from "cors";
+// import { onError } from "apollo-link-error";
+
 // import { Card } from "./entities/Card";
 // import { User } from "./entities/User";
 // import { Subject } from "./entities/Subject";
@@ -21,7 +23,7 @@ import cors from "cors";
 const main = async () => {
   await dataSource.initialize();
 
-  //deleting all old data
+  // //deleting all old data
   // await Card.delete({});
   // await Subject.delete({});
   // await User.delete({});
@@ -75,6 +77,17 @@ const main = async () => {
     console.log("🚀 Listening on port 4000");
   });
 
+  //graphql apollo error stuff
+  // const link = onError(({ graphQLErrors, networkError }) => {
+  //   if (graphQLErrors)
+  //     graphQLErrors.forEach(({ message, locations, path }) =>
+  //       console.log(
+  //         `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+  //       )
+  //     );
+  //   if (networkError) console.log(`[Network error]: ${networkError}`);
+  // });
+
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
       resolvers: [TestResolver, UserResolver, CardResolver, SubjectResolver],
@@ -85,6 +98,7 @@ const main = async () => {
       res,
       redis,
     }),
+
     //only for prod
     plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
   });
