@@ -39,6 +39,12 @@ export type CardInput = {
   title: Scalars["String"];
 };
 
+export type CardResponse = {
+  __typename?: "CardResponse";
+  card?: Maybe<Card>;
+  errors?: Maybe<Array<FieldError>>;
+};
+
 export type FieldError = {
   __typename?: "FieldError";
   field: Scalars["String"];
@@ -48,7 +54,7 @@ export type FieldError = {
 export type Mutation = {
   __typename?: "Mutation";
   changePassword: UserResponse;
-  createCard: Card;
+  createCard: CardResponse;
   createSubject: SubjectResponse;
   deleteCard: Scalars["Boolean"];
   deleteSubject: Scalars["Boolean"];
@@ -182,6 +188,30 @@ export type ChangePasswordMutation = {
       id: number;
       updatedAt: string;
       username: string;
+    } | null;
+  };
+};
+
+export type CreateCardMutationVariables = Exact<{
+  input: CardInput;
+  id: Scalars["Int"];
+}>;
+
+export type CreateCardMutation = {
+  __typename?: "Mutation";
+  createCard: {
+    __typename?: "CardResponse";
+    errors?: Array<{
+      __typename?: "FieldError";
+      field: string;
+      message: string;
+    }> | null;
+    card?: {
+      __typename?: "Card";
+      title: string;
+      text: string;
+      createdAt: string;
+      updatedAt: string;
     } | null;
   };
 };
@@ -346,6 +376,66 @@ export type ChangePasswordMutationResult =
 export type ChangePasswordMutationOptions = Apollo.BaseMutationOptions<
   ChangePasswordMutation,
   ChangePasswordMutationVariables
+>;
+export const CreateCardDocument = gql`
+  mutation createCard($input: CardInput!, $id: Int!) {
+    createCard(input: $input, id: $id) {
+      errors {
+        field
+        message
+      }
+      card {
+        title
+        text
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
+export type CreateCardMutationFn = Apollo.MutationFunction<
+  CreateCardMutation,
+  CreateCardMutationVariables
+>;
+
+/**
+ * __useCreateCardMutation__
+ *
+ * To run a mutation, you first call `useCreateCardMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateCardMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createCardMutation, { data, loading, error }] = useCreateCardMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useCreateCardMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreateCardMutation,
+    CreateCardMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<CreateCardMutation, CreateCardMutationVariables>(
+    CreateCardDocument,
+    options
+  );
+}
+export type CreateCardMutationHookResult = ReturnType<
+  typeof useCreateCardMutation
+>;
+export type CreateCardMutationResult =
+  Apollo.MutationResult<CreateCardMutation>;
+export type CreateCardMutationOptions = Apollo.BaseMutationOptions<
+  CreateCardMutation,
+  CreateCardMutationVariables
 >;
 export const CreateSubjectDocument = gql`
   mutation CreateSubject($input: String!) {

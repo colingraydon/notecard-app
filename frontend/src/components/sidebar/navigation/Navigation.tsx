@@ -13,7 +13,7 @@ import { NavItem } from "./NavItem";
 const items = [
   {
     type: "link",
-    label: "subjects",
+    label: "create subjects",
     icon: MdOutlineSpaceDashboard,
     path: "/create-subject",
   },
@@ -26,9 +26,9 @@ const items = [
 
   {
     type: "link",
-    label: "notecards",
+    label: "create notecards",
     icon: MdCalendarToday,
-    path: "/",
+    path: "/create-notecards",
   },
   {
     type: "link",
@@ -64,7 +64,7 @@ const items = [
 ];
 
 export const Navigation = ({ collapse }) => (
-  <List w="full" my={8} mb={3000}>
+  <List w="full" my={8}>
     {items.map((item, index) => (
       <ListItem key={index}>
         <NavItem item={item} isActive={index === 0} collapse={collapse} />

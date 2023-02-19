@@ -5,6 +5,7 @@ import {
   InputType,
   Int,
   Mutation,
+  ObjectType,
   Query,
   Resolver,
   UseMiddleware,
@@ -14,6 +15,7 @@ import { Card } from "../entities/Card";
 import { Subject } from "../entities/Subject";
 import { isAuthenticated } from "../middleware/isAuthenticated";
 import { Context } from "../types";
+import { FieldError } from "./user";
 
 @InputType()
 class CardInput {
@@ -23,11 +25,15 @@ class CardInput {
   text: string;
 }
 
-// @InputType()
-// class SubjectInput {
-//   @Field()
-//   title: string;
-// }
+@ObjectType()
+class CardResponse {
+  //set the type
+  @Field(() => [FieldError], { nullable: true })
+  errors?: FieldError[];
+
+  @Field(() => Card, { nullable: true })
+  card?: Card;
+}
 
 //to be used in the delete mutation
 // @ObjectType()
@@ -56,23 +62,63 @@ export class CardResolver {
   //   }
 
   //creates a card, uses middleware to check auth
-  @Mutation(() => Card)
+  @Mutation(() => CardResponse)
   @UseMiddleware(isAuthenticated)
   async createCard(
     @Arg("input") input: CardInput,
     @Arg("id", () => Int) id: number,
     @Ctx() { req }: Context
-  ): Promise<Card> {
+  ): Promise<CardResponse> {
+    if (input.text.length === 0) {
+      return {
+        errors: [
+          {
+            message: "back cannot be empty",
+            field: "back",
+          },
+        ],
+      };
+    }
+    if (input.title.length === 0) {
+      return {
+        errors: [
+          {
+            message: "front cannot be empty",
+            field: "front",
+          },
+        ],
+      };
+    }
+    if (id === null) {
+      return {
+        errors: [
+          {
+            message: "please select a subject",
+            field: "front",
+          },
+        ],
+      };
+    }
     const rawSubj = await Subject.find({ where: { id } });
     const subj = rawSubj[0];
-    const cardRepository = dataSource.getRepository(Card);
+    const card = Card.create({
+      id,
+      text: input.text,
+      title: input.title,
+      creatorId: req.session.userId as number,
+      subject: subj,
+    });
+    console.log("card: ", card);
+    card.save();
+    // const cardRepository = dataSource.getRepository(Card);
+    // const card = new Card();
+    // card.text = input.text;
+    // card.title = input.title;
+    // card.subject = subj;
+    // card.creatorId = req.session.userId as number;
+    // cardRepository.save(card);
 
-    const card = new Card();
-    card.text = input.text;
-    card.title = input.title;
-    card.subject = subj;
-    card.creatorId = req.session.userId as number;
-    return cardRepository.save(card);
+    return { card };
   }
 
   //queries and returns a nullable card by card.id

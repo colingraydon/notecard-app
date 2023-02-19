@@ -1,12 +1,15 @@
-import { Box, Button, Flex } from "@chakra-ui/react";
+import { Box, Button, Flex, Stack } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/router";
 import React from "react";
 import { InputField } from "../components/InputField";
-import { Layout } from "../components/Layout";
+import { NewNavBar } from "../components/NewNavBar";
 import FullSidebar from "../components/sidebar/FullSidebar";
-import { SubjectSelect } from "../components/SubjectSelect";
-import { useCreateSubjectMutation, useMeQuery } from "../generated/graphql";
+import {
+  useCreateSubjectMutation,
+  useGetSubjectsQuery,
+  useMeQuery,
+} from "../generated/graphql";
 import { toErrorMap } from "../utils/toErrorMap";
 import useIsAuth from "../utils/useIsAuth";
 import { withApollo } from "../utils/withApollo";
@@ -18,53 +21,75 @@ const createSubject: React.FC<{}> = ({}) => {
   //custom hook that checks authorization using MeQuery
   useIsAuth();
   const [createSubject] = useCreateSubjectMutation();
+  const { data: dataSub, error, loading: loadingSub } = useGetSubjectsQuery();
+
   return (
     <Flex>
       <FullSidebar></FullSidebar>
-      <Layout variant="small">
-        <Formik
-          initialValues={{ subject: "" }}
-          onSubmit={async (values, { setErrors }) => {
-            const response = await createSubject({
-              variables: { input: values.subject },
-              //updateing apollo cache
-              // update: (cache) => {
-              //   //evicting a query, on the root query, put in posts
-              //   cache.evict({ fieldName: "subject" });
-              // },
-            });
-            console.log("response: ", response);
-            // if (!errors) {
-            //   router.push("/");
-            // }
-            if (response.data?.createSubject.errors) {
-              setErrors(toErrorMap(response.data.createSubject.errors));
-            }
-          }}
-        >
-          {({ isSubmitting }) => (
-            <Form>
-              <InputField
-                name="subject"
-                placeholder="subject"
-                label="Subject"
-              />
-              <Flex>
-                <Button
-                  type="submit"
-                  mr={2}
-                  mt={6}
-                  background="teal"
-                  isLoading={isSubmitting}
-                >
-                  create subject
-                </Button>
-              </Flex>
-            </Form>
+      <Box w="100%">
+        <NewNavBar></NewNavBar>
+        <Box p={4}>
+          <Formik
+            initialValues={{ subject: "" }}
+            onSubmit={async (values, { setErrors }) => {
+              const response = await createSubject({
+                variables: { input: values.subject },
+                //updateing apollo cache
+                // update: (cache) => {
+                //   //evicting a query, on the root query, put in posts
+                //   cache.evict({ fieldName: "subject" });
+                // },
+              });
+              console.log("response: ", response);
+              // if (!errors) {
+              //   router.push("/");
+              // }
+              if (response.data?.createSubject.errors) {
+                setErrors(toErrorMap(response.data.createSubject.errors));
+              }
+            }}
+          >
+            {({ isSubmitting }) => (
+              <Box>
+                <Form>
+                  <Flex align="end">
+                    <Box w={250} mr={10}>
+                      <InputField
+                        name="subject"
+                        placeholder="subject"
+                        label="Subject"
+                      />
+                    </Box>
+                    <Box>
+                      <Button
+                        type="submit"
+                        background="teal"
+                        isLoading={isSubmitting}
+                      >
+                        create subject
+                      </Button>
+                    </Box>
+                  </Flex>
+                </Form>
+              </Box>
+            )}
+          </Formik>
+          {/*put in stuff here*/}
+          {!dataSub && loadingSub ? (
+            <Box>loading...</Box>
+          ) : (
+            <Stack spacing={8}>
+              {dataSub!.getSubjects.map((s) =>
+                !s ? null : (
+                  <Flex key={s.id} p={5}>
+                    <Box flex={1}>{s.name}</Box>
+                  </Flex>
+                )
+              )}
+            </Stack>
           )}
-        </Formik>
-        <SubjectSelect></SubjectSelect>
-      </Layout>
+        </Box>
+      </Box>
     </Flex>
   );
 };

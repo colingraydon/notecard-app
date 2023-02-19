@@ -56,16 +56,11 @@ export const NewNavBar: React.FC<NavBarProps> = ({}) => {
   } else {
     body = (
       <Flex>
-        <NextLink
-          style={{ marginLeft: "auto", marginRight: "12px" }}
-          href="/create-notecards"
-        >
-          create notecards
-        </NextLink>
         <Box mr={2}>{data.me.username}</Box>
         <Button
           isLoading={logoutFetching}
           variant="link"
+          color="black"
           onClick={async () => {
             await logout(logoutVar);
             //refreshes cache
@@ -78,9 +73,22 @@ export const NewNavBar: React.FC<NavBarProps> = ({}) => {
     );
   }
   return (
-    <Flex height={20} bg="teal.500" top={0} p={4} w="100%">
-      <Flex align="center" flex={1}>
-        <Box mr={2}>{body}</Box>
+    <Flex w="100%" height={20} align="center" bg="gray.100">
+      <Flex
+        height={10}
+        bg="white"
+        top={0}
+        p={4}
+        w="100%"
+        borderRadius={12}
+        padding={6}
+      >
+        <Flex align="center" flex={1}>
+          <Box>a lightweight study tool</Box>
+          <Box ml="auto" mr={2}>
+            {body}
+          </Box>
+        </Flex>
       </Flex>
     </Flex>
   );

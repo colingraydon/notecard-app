@@ -1,0 +1,14 @@
+mutation createCard($input: CardInput!, $id: Int!) {
+  createCard(input: $input, id: $id) {
+    errors {
+      field
+      message
+    }
+    card {
+      title
+      text
+      createdAt
+      updatedAt
+    }
+  }
+}
