@@ -12,7 +12,6 @@ import {
 } from "type-graphql";
 import { dataSource } from "../data-source";
 import { Card } from "../entities/Card";
-import { Subject } from "../entities/Subject";
 import { isAuthenticated } from "../middleware/isAuthenticated";
 import { Context } from "../types";
 import { FieldError } from "./user";
@@ -69,46 +68,44 @@ export class CardResolver {
     @Arg("id", () => Int) id: number,
     @Ctx() { req }: Context
   ): Promise<CardResponse> {
-    if (input.text.length === 0) {
-      return {
-        errors: [
-          {
-            message: "back cannot be empty",
-            field: "back",
-          },
-        ],
-      };
-    }
     if (input.title.length === 0) {
       return {
         errors: [
           {
             message: "front cannot be empty",
-            field: "front",
+            field: "title",
           },
         ],
       };
     }
+    if (input.text.length === 0) {
+      return {
+        errors: [
+          {
+            message: "back cannot be empty",
+            field: "text",
+          },
+        ],
+      };
+    }
+
     if (id === null) {
       return {
         errors: [
           {
             message: "please select a subject",
-            field: "front",
+            field: "text",
           },
         ],
       };
     }
-    const rawSubj = await Subject.find({ where: { id } });
-    const subj = rawSubj[0];
+
     const card = Card.create({
-      id,
       text: input.text,
       title: input.title,
       creatorId: req.session.userId as number,
-      subject: subj,
+      id: id,
     });
-    console.log("card: ", card);
     card.save();
     // const cardRepository = dataSource.getRepository(Card);
     // const card = new Card();

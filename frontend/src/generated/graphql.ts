@@ -206,13 +206,7 @@ export type CreateCardMutation = {
       field: string;
       message: string;
     }> | null;
-    card?: {
-      __typename?: "Card";
-      title: string;
-      text: string;
-      createdAt: string;
-      updatedAt: string;
-    } | null;
+    card?: { __typename?: "Card"; title: string; text: string } | null;
   };
 };
 
@@ -387,8 +381,6 @@ export const CreateCardDocument = gql`
       card {
         title
         text
-        createdAt
-        updatedAt
       }
     }
   }

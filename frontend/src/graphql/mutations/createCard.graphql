@@ -5,10 +5,8 @@ mutation createCard($input: CardInput!, $id: Int!) {
       message
     }
     card {
-      title
       text
-      createdAt
-      updatedAt
+      title
     }
   }
 }

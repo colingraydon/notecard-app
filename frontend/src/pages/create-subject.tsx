@@ -40,7 +40,10 @@ const createSubject: React.FC<{}> = ({}) => {
                 //   cache.evict({ fieldName: "subject" });
                 // },
               });
-              console.log("response: ", response);
+              console.log(
+                "response.data.createSubject.errors)",
+                response.data.createSubject.errors
+              );
               // if (!errors) {
               //   router.push("/");
               // }
