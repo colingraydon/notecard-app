@@ -15,7 +15,7 @@ import { Subject } from "./Subject";
 export class Card extends BaseEntity {
   @Field()
   @PrimaryGeneratedColumn()
-  id!: number;
+  cardId!: number;
 
   @Field()
   @Column()

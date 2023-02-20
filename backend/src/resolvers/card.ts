@@ -12,6 +12,7 @@ import {
 } from "type-graphql";
 import { dataSource } from "../data-source";
 import { Card } from "../entities/Card";
+import { Subject } from "../entities/Subject";
 import { isAuthenticated } from "../middleware/isAuthenticated";
 import { Context } from "../types";
 import { FieldError } from "./user";
@@ -22,6 +23,8 @@ class CardInput {
   title: string;
   @Field()
   text: string;
+  @Field()
+  subId: number;
 }
 
 @ObjectType()
@@ -65,7 +68,7 @@ export class CardResolver {
   @UseMiddleware(isAuthenticated)
   async createCard(
     @Arg("input") input: CardInput,
-    @Arg("id", () => Int) id: number,
+    // @Arg("id", () => Int) id: number,
     @Ctx() { req }: Context
   ): Promise<CardResponse> {
     if (input.title.length === 0) {
@@ -89,7 +92,7 @@ export class CardResolver {
       };
     }
 
-    if (id === null) {
+    if (input.subId === null) {
       return {
         errors: [
           {
@@ -99,35 +102,39 @@ export class CardResolver {
         ],
       };
     }
+    const rawSubj = await Subject.find({ where: { id: input.subId } });
+    const subj = rawSubj[0];
+    // const card = Card.create({
+    //   text: input.text,
+    //   title: input.title,
+    //   ...subj,
+    // });
+    // card.save();
 
-    const card = Card.create({
-      text: input.text,
-      title: input.title,
-      creatorId: req.session.userId as number,
-      id: id,
-    });
-    card.save();
-    // const cardRepository = dataSource.getRepository(Card);
-    // const card = new Card();
-    // card.text = input.text;
-    // card.title = input.title;
-    // card.subject = subj;
-    // card.creatorId = req.session.userId as number;
-    // cardRepository.save(card);
+    const cardRepository = dataSource.getRepository(Card);
+    const card = new Card();
+    console.log("card before: ", card);
+    card.text = input.text;
+    card.title = input.title;
+    card.subject = subj;
+    card.creatorId = req.session.userId as number;
+    cardRepository.save(card);
+
+    console.log("Card: ", card);
 
     return { card };
   }
 
   //queries and returns a nullable card by card.id
   @Query(() => Card, { nullable: true })
-  card(@Arg("id", () => Int) id: number): Promise<Card | null> {
-    return Card.findOne({ where: { id } });
+  card(@Arg("id", () => Int) cardId: number): Promise<Card | null> {
+    return Card.findOne({ where: { cardId } });
   }
 
   @Mutation(() => Card, { nullable: true })
   @UseMiddleware(isAuthenticated)
   async updateCard(
-    @Arg("id", () => Int) id: number,
+    @Arg("cardId", () => Int) cardId: number,
     @Arg("input") input: CardInput,
     @Ctx() { req }: Context
   ): Promise<Card | null> {
@@ -137,8 +144,8 @@ export class CardResolver {
       .createQueryBuilder()
       .update(Card)
       .set({ title: input.title, text: input.text })
-      .where('id = :id and "creatorId" = :creatorId', {
-        id,
+      .where('cardId = :cardId and "creatorId" = :creatorId', {
+        cardId,
         creatorId: req.session.userId,
       })
       .returning("*")
@@ -151,8 +158,8 @@ export class CardResolver {
   //deleting a card, cascading not implemented yet
   @Mutation(() => Boolean)
   @UseMiddleware(isAuthenticated)
-  async deleteCard(@Arg("id", () => Int) id: number): Promise<boolean> {
-    await Card.delete({ id });
+  async deleteCard(@Arg("id", () => Int) cardId: number): Promise<boolean> {
+    await Card.delete({ cardId });
     return true;
   }
 }

@@ -25,9 +25,9 @@ export type Scalars = {
 
 export type Card = {
   __typename?: "Card";
+  cardId: Scalars["Float"];
   createdAt: Scalars["String"];
   creatorId: Scalars["Float"];
-  id: Scalars["Float"];
   subject: Subject;
   text: Scalars["String"];
   title: Scalars["String"];
@@ -35,6 +35,7 @@ export type Card = {
 };
 
 export type CardInput = {
+  subId: Scalars["Float"];
   text: Scalars["String"];
   title: Scalars["String"];
 };
@@ -73,7 +74,6 @@ export type MutationChangePasswordArgs = {
 };
 
 export type MutationCreateCardArgs = {
-  id: Scalars["Int"];
   input: CardInput;
 };
 
@@ -103,7 +103,7 @@ export type MutationRegisterArgs = {
 };
 
 export type MutationUpdateCardArgs = {
-  id: Scalars["Int"];
+  cardId: Scalars["Int"];
   input: CardInput;
 };
 
@@ -194,7 +194,6 @@ export type ChangePasswordMutation = {
 
 export type CreateCardMutationVariables = Exact<{
   input: CardInput;
-  id: Scalars["Int"];
 }>;
 
 export type CreateCardMutation = {
@@ -206,7 +205,7 @@ export type CreateCardMutation = {
       field: string;
       message: string;
     }> | null;
-    card?: { __typename?: "Card"; title: string; text: string } | null;
+    card?: { __typename?: "Card"; text: string; title: string } | null;
   };
 };
 
@@ -372,15 +371,15 @@ export type ChangePasswordMutationOptions = Apollo.BaseMutationOptions<
   ChangePasswordMutationVariables
 >;
 export const CreateCardDocument = gql`
-  mutation createCard($input: CardInput!, $id: Int!) {
-    createCard(input: $input, id: $id) {
+  mutation createCard($input: CardInput!) {
+    createCard(input: $input) {
       errors {
         field
         message
       }
       card {
-        title
         text
+        title
       }
     }
   }
@@ -404,7 +403,6 @@ export type CreateCardMutationFn = Apollo.MutationFunction<
  * const [createCardMutation, { data, loading, error }] = useCreateCardMutation({
  *   variables: {
  *      input: // value for 'input'
- *      id: // value for 'id'
  *   },
  * });
  */

@@ -1,5 +1,5 @@
-mutation createCard($input: CardInput!, $id: Int!) {
-  createCard(input: $input, id: $id) {
+mutation createCard($input: CardInput!) {
+  createCard(input: $input) {
     errors {
       field
       message
