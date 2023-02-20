@@ -27,11 +27,16 @@ const NewNotecard: React.FC<NewNotecardProps> = ({}) => {
   useIsAuth();
 
   const { data: dataSub, error, loading: loadingSub } = useGetSubjectsQuery();
-  const [value, setValue] = useState(undefined);
+  // const [value, setValue] = useState(undefined);
   const subjects = dataSub?.getSubjects;
 
   const [createNotecards] = useCreateCardMutation();
 
+  interface inValues {
+    title: string;
+    text: string;
+    subId: number;
+  }
   return (
     <Box>
       {loading || loadingSub ? (
@@ -39,12 +44,18 @@ const NewNotecard: React.FC<NewNotecardProps> = ({}) => {
       ) : (
         <Box>
           <Formik
-            initialValues={{ title: "", text: "", subId: value }}
+            initialValues={{ title: "", text: "", subId: undefined }}
             onSubmit={async (values, { setErrors }) => {
               console.log("values: ", values);
+              const tempSID: number = parseInt(values.subId);
+              const newValues = {
+                title: values.title,
+                text: values.text,
+                subId: tempSID,
+              };
               const response = await createNotecards({
                 //CHANGE THIS, just for testing
-                variables: { input: values },
+                variables: { input: newValues },
               });
 
               if (response.data?.createCard.errors) {
@@ -93,10 +104,11 @@ const NewNotecard: React.FC<NewNotecardProps> = ({}) => {
                     </Select>
                   </FormControl> */}
                   <InputFieldSelect
-                    name="subject"
+                    name="subId"
                     placeholder="choose a subject..."
                     label="subject"
                     options={subjects}
+                    type="number"
                   />
                   <InputField
                     name="title"
