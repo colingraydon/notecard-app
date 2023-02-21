@@ -8,6 +8,7 @@ import {
 } from "../generated/graphql";
 import { SingleSub } from "../types";
 import useIsAuth from "../utils/useIsAuth";
+import SingleNotecard from "./SingleNotecard";
 import { SubjectSelect } from "./SubjectSelect";
 
 interface SubjectSelectWrapperProps {}
@@ -25,21 +26,28 @@ export const SubjectSelectWrapper: React.FC<
   const subjects = data?.getSubjects;
 
   const handleClick = ({ name: string, id: number }: SingleSub) => {
-    console.log("entered handleClick");
     setValue({ name: string, id: number });
   };
 
+  let index: number;
   return (
     <Box>
-      {loadingMe ? (
+      {loadingMe || loading ? (
         <Box>loading...</Box>
       ) : (
-        <SubjectSelect
-          loading={loading}
-          handleClick={handleClick}
-          subjects={subjects}
-          value={value}
-        />
+        <Box>
+          <SubjectSelect
+            loading={loading}
+            handleClick={handleClick}
+            subjects={subjects}
+            value={value}
+          />
+          {subjects[
+            subjects.findIndex((sub) => sub.id === value.id)
+          ]?.cards.map((item, key) => (
+            <SingleNotecard title={item.title} text={item.text} key={key} />
+          ))}
+        </Box>
       )}
     </Box>
   );
