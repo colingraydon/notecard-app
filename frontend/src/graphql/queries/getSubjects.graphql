@@ -2,5 +2,9 @@ query GetSubjects {
   getSubjects {
     name
     id
+    cards {
+      title
+      text
+    }
   }
 }

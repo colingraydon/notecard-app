@@ -35,15 +35,12 @@ const createSubject: React.FC<{}> = ({}) => {
               const response = await createSubject({
                 variables: { input: values.subject },
                 //updateing apollo cache
-                // update: (cache) => {
-                //   //evicting a query, on the root query, put in posts
-                //   cache.evict({ fieldName: "subject" });
-                // },
+                update: (cache) => {
+                  //evicting a query, on the root query, put in posts
+                  cache.evict({ fieldName: "subject" });
+                },
               });
-              console.log(
-                "response.data.createSubject.errors)",
-                response.data.createSubject.errors
-              );
+
               // if (!errors) {
               //   router.push("/");
               // }

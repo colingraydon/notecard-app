@@ -33,6 +33,12 @@ export class SubjectResolver {
     return Subject.find({ where: { id } });
   }
 
+  //queries a subject and returns all cards
+  // @Query(() => Card, {nullable: true})
+  // getCards(@Arg("id", () => Int) id: number): Promise<Card[] | null> {
+
+  // }
+
   //creates a subject in the subject table.
   //finds user by cookie, checks authentication, that user owns the subject
   //move this to user resolver class and refactor?

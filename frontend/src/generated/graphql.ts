@@ -300,6 +300,7 @@ export type GetSubjectsQuery = {
     __typename?: "Subject";
     name: string;
     id: number;
+    cards: Array<{ __typename?: "Card"; title: string; text: string }>;
   }> | null;
 };
 
@@ -696,6 +697,10 @@ export const GetSubjectsDocument = gql`
     getSubjects {
       name
       id
+      cards {
+        title
+        text
+      }
     }
   }
 `;

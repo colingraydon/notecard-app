@@ -13,16 +13,16 @@ import { NavItem } from "./NavItem";
 const items = [
   {
     type: "link",
-    label: "create subjects",
+    label: "subjects",
     icon: MdOutlineSpaceDashboard,
     path: "/create-subject",
   },
-  {
-    type: "link",
-    label: "manage subjects",
-    icon: MdOutlineShoppingBag,
-    path: "/",
-  },
+  // {
+  //   type: "link",
+  //   label: "manage subjects",
+  //   icon: MdOutlineShoppingBag,
+  //   path: "/",
+  // },
 
   {
     type: "link",
@@ -32,9 +32,9 @@ const items = [
   },
   {
     type: "link",
-    label: "manage notecards",
+    label: "view notecards",
     icon: MdOutlineSupervisorAccount,
-    path: "/",
+    path: "/view-notecards",
   },
   {
     type: "link",
