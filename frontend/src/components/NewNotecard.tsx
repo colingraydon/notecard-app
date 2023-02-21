@@ -1,14 +1,7 @@
-import {
-  Box,
-  Button,
-  Flex,
-  FormControl,
-  FormLabel,
-  Select,
-} from "@chakra-ui/react";
-import { Field, Form, Formik } from "formik";
+import { Box, Button, Flex } from "@chakra-ui/react";
+import { Form, Formik, isNaN } from "formik";
 import { useRouter } from "next/router";
-import React, { FormEvent, useState } from "react";
+import React from "react";
 import {
   useCreateCardMutation,
   useGetSubjectsQuery,
@@ -46,13 +39,23 @@ const NewNotecard: React.FC<NewNotecardProps> = ({}) => {
           <Formik
             initialValues={{ title: "", text: "", subId: undefined }}
             onSubmit={async (values, { setErrors }) => {
-              console.log("values: ", values);
               const tempSID: number = parseInt(values.subId);
-              const newValues = {
+              let newValues = {
                 title: values.title,
                 text: values.text,
                 subId: tempSID,
               };
+              // console.log("typeof tempSID: ", typeof tempSID);
+              // console.log("typeof newValues.subId ", typeof newValues.subId);
+              if (isNaN(tempSID)) {
+                newValues = {
+                  title: values.title,
+                  text: values.text,
+                  subId: 0,
+                };
+              }
+              console.log("newValues: ", newValues);
+
               const response = await createNotecards({
                 //CHANGE THIS, just for testing
                 variables: { input: newValues },
@@ -64,45 +67,14 @@ const NewNotecard: React.FC<NewNotecardProps> = ({}) => {
               //     //updateing apollo cache
               //     update: (cache) => {
               //         //evicting a query, on the root query, put in cards
-              //         cache.evict({fieldName: "cards"})
+              //         cache.evict({fieldName: "card"})
               //     }
               // })
-              // if (!errors){
-              //     router.push('/');
-              // }
             }}
           >
             {({ isSubmitting }) => (
               <Box w={400}>
                 <Form>
-                  {/* <FormControl>
-                    <FormLabel>Subject</FormLabel>
-                    <Select
-                      name="subject"
-                      id="subject"
-                      placeholder="select a subject"
-                      onChange={(e) => {
-                        setValue(e.target.value);
-                        console.log("e.target.value: ", e.target.value);
-                        console.log("value: ", value);
-                        setValue(e.target.value);
-                      }}
-                      value={value}
-                    >
-                      {subjects.map((item, key) => (
-                        <option
-                          onClick={() => {
-                            setValue(item.id);
-                            console.log("item.name: ", item.name);
-                            console.log("value: ", value);
-                          }}
-                          key={key}
-                        >
-                          {item.name}
-                        </option>
-                      ))}
-                    </Select>
-                  </FormControl> */}
                   <InputFieldSelect
                     name="subId"
                     placeholder="choose a subject..."

@@ -71,6 +71,7 @@ export class CardResolver {
     // @Arg("id", () => Int) id: number,
     @Ctx() { req }: Context
   ): Promise<CardResponse> {
+    console.log("entered method--------------");
     if (input.title.length === 0) {
       return {
         errors: [
@@ -92,12 +93,12 @@ export class CardResolver {
       };
     }
 
-    if (input.subId === null) {
+    if (input.subId === 0) {
       return {
         errors: [
           {
             message: "please select a subject",
-            field: "text",
+            field: "subId",
           },
         ],
       };
