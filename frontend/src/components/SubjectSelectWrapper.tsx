@@ -29,7 +29,12 @@ export const SubjectSelectWrapper: React.FC<
     setValue({ name: string, id: number });
   };
 
-  let index: number;
+  //used to lock and unlock posts for editing
+  const [lockState, setLockState] = useState(true);
+
+  const handleLockState = () => {
+    setLockState(!lockState);
+  };
   return (
     <Box>
       {loadingMe || loading ? (
@@ -50,6 +55,8 @@ export const SubjectSelectWrapper: React.FC<
               text={item.text}
               key={key}
               cardId={item.cardId}
+              lockState={lockState}
+              handleLockState={handleLockState}
             />
           ))}
         </Box>

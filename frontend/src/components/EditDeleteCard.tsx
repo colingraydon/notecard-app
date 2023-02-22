@@ -5,18 +5,21 @@ import { useDeleteCardMutation } from "../generated/graphql";
 
 interface EditDeleteCardProps {
   cardId: number;
+  lockState: boolean;
+  handleLockState: () => void;
+  text: string;
+  title: string;
 }
 
 export const EditDeleteCard: React.FC<EditDeleteCardProps> = (props) => {
   const [deleteCard] = useDeleteCardMutation();
-  //used to lock and unlock posts for editing
-  const [lockState, setLockState] = useState(true);
+
   return (
     <Flex>
       <IconButton
         ml={5}
         icon={<DeleteIcon />}
-        aria-label="Delete Post"
+        aria-label="Delete Card"
         onClick={() => {
           console.log("props.cardId: ", props.cardId);
           deleteCard({
@@ -29,9 +32,9 @@ export const EditDeleteCard: React.FC<EditDeleteCardProps> = (props) => {
       />
       <IconButton
         ml={5}
-        icon={lockState ? <UnlockIcon /> : <LockIcon />}
-        aria-label="Edit Post"
-        onClick={() => setLockState(!lockState)}
+        icon={props.lockState ? <UnlockIcon /> : <LockIcon />}
+        aria-label="Edit Card"
+        onClick={() => props.handleLockState()}
       />
     </Flex>
   );
