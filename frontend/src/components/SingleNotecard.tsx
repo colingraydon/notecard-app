@@ -20,18 +20,22 @@ const SingleNotecard: React.FC<SingleNotecardProps> = (
   const [textState, setTextState] = useState(props.text);
   const [titleState, setTitleState] = useState(props.title);
 
+  //extra state tracking to reduce sql queries, updateCard will not run if false
+  const [updated, setUpdate] = useState(false);
+
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTextState(e.target.value);
-    console.log("text value: ", textState);
+    setUpdate(true);
   };
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTitleState(e.target.value);
-    console.log("title value: ", titleState);
+    setUpdate(true);
   };
 
   const [deleteCard] = useDeleteCardMutation();
   const [updateCard] = useUpdateCardMutation();
+
   return (
     <Box>
       <Flex>
@@ -73,6 +77,7 @@ const SingleNotecard: React.FC<SingleNotecardProps> = (
               props.handleLockState();
               console.log("textState: ", textState);
               !props.lockState &&
+                updated &&
                 updateCard({
                   variables: {
                     cardId: props.cardId,
