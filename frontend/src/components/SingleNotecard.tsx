@@ -1,6 +1,10 @@
-import { Box, Flex, Textarea } from "@chakra-ui/react";
+import { DeleteIcon, LockIcon, UnlockIcon } from "@chakra-ui/icons";
+import { Box, Flex, IconButton, Textarea } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { EditDeleteCard } from "./EditDeleteCard";
+import {
+  useDeleteCardMutation,
+  useUpdateCardMutation,
+} from "../generated/graphql";
 
 interface SingleNotecardProps {
   title: string;
@@ -25,27 +29,60 @@ const SingleNotecard: React.FC<SingleNotecardProps> = (
     setTitleState(e.target.value);
     console.log("title value: ", titleState);
   };
+
+  const [deleteCard] = useDeleteCardMutation();
+  const [updateCard] = useUpdateCardMutation();
   return (
     <Box>
       <Flex>
         <Textarea
           w={400}
+          h={200}
           defaultValue={titleState}
           onChange={handleTitleChange}
+          isReadOnly={props.lockState}
           mr={4}
         ></Textarea>
         <Textarea
           w={400}
+          h={200}
           defaultValue={textState}
           onChange={handleTextChange}
+          isReadOnly={props.lockState}
         ></Textarea>
-        <EditDeleteCard
-          lockState={props.lockState}
-          cardId={props.cardId}
-          handleLockState={props.handleLockState}
-          text={props.text}
-          title={props.title}
-        />
+        <Box>
+          <IconButton
+            ml={5}
+            icon={<DeleteIcon />}
+            aria-label="Delete Card"
+            onClick={() => {
+              console.log("props.cardId: ", props.cardId);
+              deleteCard({
+                variables: { cardId: props.cardId },
+                update: (cache) => {
+                  cache.evict({ id: "Card:" + props.cardId });
+                },
+              });
+            }}
+          />
+          <IconButton
+            ml={5}
+            icon={props.lockState ? <LockIcon /> : <UnlockIcon />}
+            aria-label="Edit Card"
+            onClick={() => {
+              props.handleLockState();
+              console.log("textState: ", textState);
+              !props.lockState &&
+                updateCard({
+                  variables: {
+                    cardId: props.cardId,
+                    text: textState,
+                    title: titleState,
+                  },
+                });
+            }}
+          />
+        </Box>
       </Flex>
     </Box>
   );
