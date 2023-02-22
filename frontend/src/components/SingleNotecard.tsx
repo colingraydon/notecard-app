@@ -12,12 +12,8 @@ const SingleNotecard: React.FC<SingleNotecardProps> = (
   return (
     <Box>
       <Flex>
-        <Textarea w={300} isReadOnly>
-          {props.title}
-        </Textarea>
-        <Textarea w={300} isReadOnly>
-          {props.text}
-        </Textarea>
+        <Textarea w={300} isReadOnly value={props.title}></Textarea>
+        <Textarea w={300} isReadOnly value={props.text}></Textarea>
       </Flex>
     </Box>
   );
