@@ -60,7 +60,6 @@ const SingleNotecard: React.FC<SingleNotecardProps> = (
             icon={<DeleteIcon />}
             aria-label="Delete Card"
             onClick={() => {
-              console.log("props.cardId: ", props.cardId);
               deleteCard({
                 variables: { cardId: props.cardId },
                 update: (cache) => {
@@ -85,6 +84,7 @@ const SingleNotecard: React.FC<SingleNotecardProps> = (
                     title: titleState,
                   },
                 });
+              setUpdate(false);
             }}
           />
         </Box>
