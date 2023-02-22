@@ -45,7 +45,12 @@ export const SubjectSelectWrapper: React.FC<
           {subjects[
             subjects.findIndex((sub) => sub.id === value.id)
           ]?.cards.map((item, key) => (
-            <SingleNotecard title={item.title} text={item.text} key={key} />
+            <SingleNotecard
+              title={item.title}
+              text={item.text}
+              key={key}
+              cardId={item.cardId}
+            />
           ))}
         </Box>
       )}

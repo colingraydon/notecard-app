@@ -136,7 +136,8 @@ export class CardResolver {
   @UseMiddleware(isAuthenticated)
   async updateCard(
     @Arg("cardId", () => Int) cardId: number,
-    @Arg("input") input: CardInput,
+    @Arg("text") text: string,
+    @Arg("title") title: string,
     @Ctx() { req }: Context
   ): Promise<Card | null> {
     //fetches and updates post with query builder
@@ -144,7 +145,7 @@ export class CardResolver {
     const post = await dataSource
       .createQueryBuilder()
       .update(Card)
-      .set({ title: input.title, text: input.text })
+      .set({ title: title, text: text })
       .where('cardId = :cardId and "creatorId" = :creatorId', {
         cardId,
         creatorId: req.session.userId,
@@ -159,7 +160,7 @@ export class CardResolver {
   //deleting a card, cascading not implemented yet
   @Mutation(() => Boolean)
   @UseMiddleware(isAuthenticated)
-  async deleteCard(@Arg("id", () => Int) cardId: number): Promise<boolean> {
+  async deleteCard(@Arg("cardId", () => Int) cardId: number): Promise<boolean> {
     await Card.delete({ cardId });
     return true;
   }

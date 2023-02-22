@@ -3,6 +3,7 @@ query GetSubjects {
     name
     id
     cards {
+      cardId
       title
       text
     }
