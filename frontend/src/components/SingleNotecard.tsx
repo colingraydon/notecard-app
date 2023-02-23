@@ -63,16 +63,7 @@ const SingleNotecard: React.FC<SingleNotecardProps> = (
             ml={5}
             icon={<DeleteIcon />}
             aria-label="Delete Card"
-            // onClick={() => {
-            //   deleteCard({
-            //     variables: { cardId: props.cardId },
-            //     update: (cache) => {
-            //       cache.evict({ id: "Card:" + props.cardId });
-            //     },
-            //   });
-            // }}
             onClick={() => {
-              //   props.handleDelete({props.name, props.id}, props.cardId);
               props.handleDelete(props.subName, props.id, props.cardId);
             }}
           />
