@@ -6,7 +6,7 @@ import {
   useCreateSubjectMutation,
   useGetSubjectsQuery,
 } from "../generated/graphql";
-import { SingleSub } from "../types";
+import { CardArr, SingleSub } from "../types";
 import useIsAuth from "../utils/useIsAuth";
 import SingleNotecard from "./SingleNotecard";
 import { SubjectSelect } from "./SubjectSelect";
@@ -22,17 +22,20 @@ export const SubjectSelectWrapper: React.FC<
   useIsAuth();
 
   const { data, error, loading } = useGetSubjectsQuery();
-  const [value, setValue] = useState({ name: "choose a subject", id: 0 });
+  const [value, setValue] = useState({
+    name: "choose a subject",
+    id: 0,
+    cards: undefined,
+  });
 
   const subjects = data?.getSubjects;
-  const [currSubState, setCurrSubState] = useState(null);
 
-  const handleClick = ({ name: string, id: number }: SingleSub) => {
-    setValue({ name: string, id: number });
-    console.log("value: ", value);
-    // console.log("before assignment currSubState: ", currSubState);
-
-    // console.log("after assignment currSubState: ", currSubState);
+  const handleClick = ({ name, id }: SingleSub) => {
+    setValue({
+      name: name,
+      id: id,
+      cards: subjects[subjects.findIndex((sub) => sub.id === id)].cards,
+    });
   };
 
   const [initialRender, setInitialRender] = useState(true);
@@ -41,10 +44,8 @@ export const SubjectSelectWrapper: React.FC<
     if (initialRender) {
       setInitialRender(false);
     } else {
-      console.log("subState pre: ", currSubState);
-      const index: number = subjects.findIndex((sub) => sub.id === value.id);
-      setCurrSubState(subjects[index]);
-      console.log("subState post: ", currSubState);
+      console.log("value.cards: ", value.cards);
+      // console.log("typeof value.cards: ", typeof value.cards);
     }
   }, [value]);
 
@@ -66,11 +67,11 @@ export const SubjectSelectWrapper: React.FC<
             subjects={subjects}
             value={value}
           />
-          {currSubState?.cards.map((item, key) => (
+          {value?.cards?.map((item) => (
             <SingleNotecard
               title={item.title}
               text={item.text}
-              key={key}
+              key={item.cardId}
               cardId={item.cardId}
               lockState={lockState}
               handleLockState={handleLockState}
