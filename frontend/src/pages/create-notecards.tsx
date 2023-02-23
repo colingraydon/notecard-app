@@ -1,7 +1,7 @@
 import { Box, Flex } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
-import { NewNavBar } from "../components/NewNavBar";
+import { NavBar } from "../components/NavBar";
 import NewNotecard from "../components/NewNotecard";
 import FullSidebar from "../components/sidebar/FullSidebar";
 import { SubjectSelect } from "../components/SubjectSelect";
@@ -21,7 +21,7 @@ const createNotecards: React.FC<createNotecardsProps> = ({}) => {
     <Flex>
       <FullSidebar></FullSidebar>
       <Box w="100%">
-        <NewNavBar></NewNavBar>
+        <NavBar></NavBar>
         <Flex ml={8} mt={8} align="center"></Flex>
         <NewNotecard></NewNotecard>
       </Box>

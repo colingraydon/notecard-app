@@ -1,5 +1,5 @@
 import { Flex } from "@chakra-ui/react";
-import { NewNavBar } from "../components/NewNavBar";
+import { NavBar } from "../components/NavBar";
 import FullSidebar from "../components/sidebar/FullSidebar";
 import { withApollo } from "../utils/withApollo";
 
@@ -7,7 +7,7 @@ const Index = () => {
   return (
     <Flex>
       <FullSidebar></FullSidebar>
-      <NewNavBar></NewNavBar>
+      <NavBar></NavBar>
     </Flex>
   );
 };

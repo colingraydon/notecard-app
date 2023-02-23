@@ -1,4 +1,4 @@
-import { Flex, Button, Heading, Box } from "@chakra-ui/react";
+import { Flex, Button, Heading, Box, IconButton } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
 import { useApolloClient } from "@apollo/client";
@@ -8,6 +8,8 @@ import {
   useLogoutMutation,
   useMeQuery,
 } from "../generated/graphql";
+import { MdMenu } from "react-icons/md";
+import { useState } from "react";
 
 interface NavBarProps {}
 
@@ -54,16 +56,11 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
   } else {
     body = (
       <Flex>
-        <NextLink
-          style={{ marginLeft: "auto", marginRight: "12px" }}
-          href="/create-notecards"
-        >
-          create notecards
-        </NextLink>
         <Box mr={2}>{data.me.username}</Box>
         <Button
           isLoading={logoutFetching}
           variant="link"
+          color="black"
           onClick={async () => {
             await logout(logoutVar);
             //refreshes cache
@@ -76,14 +73,30 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
     );
   }
   return (
-    <Flex bg="teal.500" top={0} zIndex={1} p={4}>
-      <Flex align="center" flex={1} m="auto" w="100%">
-        <NextLink href="/">
-          <Heading>NotecardApp</Heading>
-        </NextLink>
-        <Box mr={2} ml={"auto"}>
-          {body}
-        </Box>
+    <Flex
+      w="100%"
+      position="sticky"
+      top="0"
+      height="20"
+      zIndex="1"
+      bg="gray.100"
+      pt="4"
+    >
+      <Flex
+        height={10}
+        bg="white"
+        top={0}
+        p={4}
+        w="100%"
+        borderRadius={12}
+        padding={6}
+      >
+        <Flex align="center" flex={1}>
+          <Box>a lightweight study tool</Box>
+          <Box ml="auto" mr={2}>
+            {body}
+          </Box>
+        </Flex>
       </Flex>
     </Flex>
   );

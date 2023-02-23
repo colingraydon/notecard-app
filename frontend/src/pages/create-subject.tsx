@@ -3,7 +3,7 @@ import { Form, Formik } from "formik";
 import { useRouter } from "next/router";
 import React from "react";
 import { InputField } from "../components/InputField";
-import { NewNavBar } from "../components/NewNavBar";
+import { NavBar } from "../components/NavBar";
 import FullSidebar from "../components/sidebar/FullSidebar";
 import {
   useCreateSubjectMutation,
@@ -27,7 +27,7 @@ const createSubject: React.FC<{}> = ({}) => {
     <Flex>
       <FullSidebar></FullSidebar>
       <Box w="100%">
-        <NewNavBar></NewNavBar>
+        <NavBar></NavBar>
         <Box p={4}>
           <Formik
             initialValues={{ subject: "" }}

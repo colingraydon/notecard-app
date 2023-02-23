@@ -1,7 +1,7 @@
 import { Box, Flex, HStack, IconButton, Text } from "@chakra-ui/react";
 import React from "react";
 import { MdMenu } from "react-icons/md";
-import { NewNavBar } from "../NewNavBar";
+import { NavBar } from "../NavBar";
 import { AvatarBox } from "./AvatarBox";
 import { Logo } from "./Logo";
 import { Navigation } from "./navigation/Navigation";
@@ -12,7 +12,7 @@ const FullSidebar = () => {
   const [collapse, setCollapse] = React.useState(true);
 
   return (
-    <Box position="sticky" top="0" height="20" zIndex="1">
+    <Box position="sticky" top="0" height="1" zIndex="1">
       <HStack w="full" h="100vh" bg="gray.100" padding={4}>
         <Flex
           as="aside"
