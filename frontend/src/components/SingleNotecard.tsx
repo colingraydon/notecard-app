@@ -5,13 +5,17 @@ import {
   useDeleteCardMutation,
   useUpdateCardMutation,
 } from "../generated/graphql";
+import { SingleSub } from "../types";
 
 interface SingleNotecardProps {
   title: string;
   text: string;
   cardId: number;
   lockState: boolean;
+  subName: string; //subjectname
+  id: number; //subjectId
   handleLockState: () => void;
+  handleDelete: (name: string, id: number, cardId: number) => void;
 }
 
 const SingleNotecard: React.FC<SingleNotecardProps> = (
@@ -59,13 +63,17 @@ const SingleNotecard: React.FC<SingleNotecardProps> = (
             ml={5}
             icon={<DeleteIcon />}
             aria-label="Delete Card"
+            // onClick={() => {
+            //   deleteCard({
+            //     variables: { cardId: props.cardId },
+            //     update: (cache) => {
+            //       cache.evict({ id: "Card:" + props.cardId });
+            //     },
+            //   });
+            // }}
             onClick={() => {
-              deleteCard({
-                variables: { cardId: props.cardId },
-                update: (cache) => {
-                  cache.evict({ id: "Card:" + props.cardId });
-                },
-              });
+              //   props.handleDelete({props.name, props.id}, props.cardId);
+              props.handleDelete(props.subName, props.id, props.cardId);
             }}
           />
           <IconButton

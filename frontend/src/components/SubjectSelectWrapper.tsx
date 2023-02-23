@@ -5,8 +5,9 @@ import {
   useMeQuery,
   useCreateSubjectMutation,
   useGetSubjectsQuery,
+  useDeleteCardMutation,
 } from "../generated/graphql";
-import { CardArr, SingleSub } from "../types";
+import { SingleSub } from "../types";
 import useIsAuth from "../utils/useIsAuth";
 import SingleNotecard from "./SingleNotecard";
 import { SubjectSelect } from "./SubjectSelect";
@@ -40,12 +41,12 @@ export const SubjectSelectWrapper: React.FC<
 
   const [initialRender, setInitialRender] = useState(true);
 
+  //controls render state to avoid error on first hydration
   useEffect(() => {
     if (initialRender) {
       setInitialRender(false);
     } else {
       console.log("value.cards: ", value.cards);
-      // console.log("typeof value.cards: ", typeof value.cards);
     }
   }, [value]);
 
@@ -55,6 +56,30 @@ export const SubjectSelectWrapper: React.FC<
   const handleLockState = () => {
     setLockState(!lockState);
   };
+
+  const [deleteCard] = useDeleteCardMutation();
+  const handleDelete = (subName: string, id: number, cardId: number) => {
+    deleteCard({
+      variables: { cardId },
+      update: (cache) => {
+        cache.evict({ id: "Card:" + cardId });
+      },
+    });
+    const index = value.cards.findIndex((card) => card.cardId === cardId);
+
+    const newVal = [];
+    value.cards.forEach((card) => {
+      if (card.cardId !== cardId) {
+        newVal.push(card);
+      }
+    });
+    setValue({
+      name: subName,
+      id: id,
+      cards: newVal,
+    });
+  };
+
   return (
     <Box>
       {loadingMe || loading ? (
@@ -75,6 +100,9 @@ export const SubjectSelectWrapper: React.FC<
               cardId={item.cardId}
               lockState={lockState}
               handleLockState={handleLockState}
+              handleDelete={handleDelete}
+              subName={value.name}
+              id={value.id}
             />
           ))}
         </Box>
