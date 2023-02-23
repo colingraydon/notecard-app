@@ -21,7 +21,7 @@ interface SubjectSelectProps {
     name: string;
     id: number;
   };
-  handleClick: (item: SingleSub) => void;
+  handleClick: (item: { name: string; id: number }) => void;
 }
 
 export const SubjectSelect: React.FC<SubjectSelectProps> = (
@@ -50,7 +50,7 @@ export const SubjectSelect: React.FC<SubjectSelectProps> = (
                     // const tempVar: SingleSub = {name: item.name, id: item.id}
                     props.handleClick({ name: item.name, id: item.id });
                   }}
-                  key={key}
+                  key={item.id}
                 >
                   {item.name}
                 </MenuItem>

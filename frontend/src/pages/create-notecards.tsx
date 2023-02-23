@@ -22,8 +22,9 @@ const createNotecards: React.FC<createNotecardsProps> = ({}) => {
       <FullSidebar></FullSidebar>
       <Box w="100%">
         <NavBar></NavBar>
-        <Flex ml={8} mt={8} align="center"></Flex>
-        <NewNotecard></NewNotecard>
+        <Box ml={8} mt={8}>
+          <NewNotecard></NewNotecard>
+        </Box>
       </Box>
     </Flex>
   );

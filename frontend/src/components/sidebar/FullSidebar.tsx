@@ -43,6 +43,9 @@ const FullSidebar = () => {
             />
           </Flex>
           <Sidebar collapse={collapse} />
+          <Box mt="auto">
+            <AvatarBox collapse={collapse} />
+          </Box>
         </Flex>
         <Flex>
           <Flex

@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, CircularProgress } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import {
@@ -83,7 +83,7 @@ export const SubjectSelectWrapper: React.FC<
   return (
     <Box>
       {loadingMe || loading ? (
-        <Box>loading...</Box>
+        <CircularProgress isIndeterminate value={50} />
       ) : (
         <Box>
           <SubjectSelect

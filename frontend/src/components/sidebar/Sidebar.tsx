@@ -11,6 +11,5 @@ export const Sidebar = ({ collapse }) => (
     <Box w="full">
       <Navigation collapse={collapse} />
     </Box>
-    {/* <AvatarBox collapse={collapse} /> */}
   </React.Fragment>
 );

@@ -339,7 +339,12 @@ export type MeQueryVariables = Exact<{ [key: string]: never }>;
 
 export type MeQuery = {
   __typename?: "Query";
-  me?: { __typename?: "User"; id: number; username: string } | null;
+  me?: {
+    __typename?: "User";
+    id: number;
+    username: string;
+    email: string;
+  } | null;
 };
 
 export const ChangePasswordDocument = gql`
@@ -891,6 +896,7 @@ export const MeDocument = gql`
     me {
       id
       username
+      email
     }
   }
 `;

@@ -1,4 +1,4 @@
-import { List, ListItem } from "@chakra-ui/react";
+import { Box, List, ListItem } from "@chakra-ui/react";
 import {
   MdCalendarToday,
   MdOutlineFlag,
@@ -8,6 +8,7 @@ import {
   MdOutlineSpaceDashboard,
   MdOutlineSupervisorAccount,
 } from "react-icons/md";
+import { AvatarBox } from "../AvatarBox";
 import { NavItem } from "./NavItem";
 
 const items = [
@@ -40,7 +41,7 @@ const items = [
     type: "link",
     label: "quiz",
     icon: MdOutlineFlag,
-    path: "/",
+    path: "/quiz",
   },
   {
     type: "header",
