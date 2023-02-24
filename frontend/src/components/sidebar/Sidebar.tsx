@@ -1,10 +1,6 @@
-import React from "react";
 import { Box } from "@chakra-ui/react";
-import { AvatarBox } from "./AvatarBox";
-import { Logo } from "./Logo";
+import React from "react";
 import { Navigation } from "./navigation/Navigation";
-import { SwitchButtons } from "./SwitchButtons";
-import { DarkModeSwitch } from "../DarkModeSwitch";
 
 export const Sidebar = ({ collapse }) => (
   <React.Fragment>

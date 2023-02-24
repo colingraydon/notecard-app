@@ -10,6 +10,7 @@ import {
 } from "../generated/graphql";
 import { MdMenu } from "react-icons/md";
 import { useState } from "react";
+import { DarkModeSwitch } from "./DarkModeSwitch";
 
 interface NavBarProps {}
 

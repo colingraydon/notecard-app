@@ -50,6 +50,7 @@ const SingleNotecard: React.FC<SingleNotecardProps> = (
           onChange={handleTitleChange}
           isReadOnly={props.lockState}
           mr={4}
+          resize="none"
         ></Textarea>
         <Textarea
           w={400}
@@ -57,6 +58,7 @@ const SingleNotecard: React.FC<SingleNotecardProps> = (
           defaultValue={textState}
           onChange={handleTextChange}
           isReadOnly={props.lockState}
+          resize="none"
         ></Textarea>
         <Box>
           <IconButton

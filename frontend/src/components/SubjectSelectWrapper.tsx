@@ -39,6 +39,14 @@ export const SubjectSelectWrapper: React.FC<
     });
   };
 
+  const handleChange = ({ name, id }: SingleSub) => {
+    setValue({
+      name: name,
+      id: id,
+      cards: subjects[subjects.findIndex((sub) => sub.id === id)].cards,
+    });
+  };
+
   const [initialRender, setInitialRender] = useState(true);
 
   //controls render state to avoid error on first hydration
@@ -91,6 +99,7 @@ export const SubjectSelectWrapper: React.FC<
             handleClick={handleClick}
             subjects={subjects}
             value={value}
+            handleChange={handleChange}
           />
           {value?.cards?.map((item) => (
             <SingleNotecard

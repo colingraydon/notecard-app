@@ -1,4 +1,4 @@
-import { Flex, Textarea, Box, Checkbox } from "@chakra-ui/react";
+import { Flex, Textarea, Box, Checkbox, Center } from "@chakra-ui/react";
 import React from "react";
 
 interface QuizCardProps {
@@ -9,7 +9,7 @@ interface QuizCardProps {
 
 const QuizCard: React.FC<QuizCardProps> = (props: QuizCardProps) => {
   return (
-    <Box>
+    <Box mb={8}>
       <Flex>
         <Textarea
           w={400}
@@ -17,15 +17,19 @@ const QuizCard: React.FC<QuizCardProps> = (props: QuizCardProps) => {
           defaultValue={props.title}
           isReadOnly
           mr={4}
+          resize="none"
         ></Textarea>
         <Textarea
           w={400}
           h={200}
           defaultValue={props.text}
           isReadOnly
+          resize="none"
         ></Textarea>
-        <Checkbox>mark for review</Checkbox>
       </Flex>
+      <Box textAlign="end">
+        <Checkbox>mark for review</Checkbox>
+      </Box>
     </Box>
   );
 };
