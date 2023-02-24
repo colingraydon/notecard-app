@@ -59,12 +59,7 @@ export const SubjectSelect: React.FC<SubjectSelectProps> = (
               }}
             >
               {props.subjects.map((item) => (
-                <option
-                  // value='{"name":"${item.name}", "id":"item.id"}'
-                  data-id={item.id}
-                  value={item.name}
-                  key={item.id}
-                >
+                <option data-id={item.id} value={item.name} key={item.id}>
                   {item.name}
                 </option>
               ))}

@@ -1,4 +1,4 @@
-import { Box, Button, Flex } from "@chakra-ui/react";
+import { Box, Button, CircularProgress, Flex } from "@chakra-ui/react";
 import { Form, Formik, isNaN } from "formik";
 import { useRouter } from "next/router";
 import React from "react";
@@ -33,7 +33,7 @@ const NewNotecard: React.FC<NewNotecardProps> = ({}) => {
   return (
     <Box>
       {loading || loadingSub ? (
-        <Box>loading...</Box>
+        <CircularProgress isIndeterminate value={50} />
       ) : (
         <Box>
           <Formik

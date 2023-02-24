@@ -1,10 +1,12 @@
-import { Flex, Textarea, Box, Checkbox, Center } from "@chakra-ui/react";
+import { Box, Checkbox, Flex, Textarea } from "@chakra-ui/react";
 import React from "react";
 
 interface QuizCardProps {
   title: string;
   text: string;
   cardId: number;
+  checkState: boolean;
+  handleCheckChange: () => void;
 }
 
 const QuizCard: React.FC<QuizCardProps> = (props: QuizCardProps) => {
@@ -28,7 +30,7 @@ const QuizCard: React.FC<QuizCardProps> = (props: QuizCardProps) => {
         ></Textarea>
       </Flex>
       <Box textAlign="end">
-        <Checkbox>mark for review</Checkbox>
+        <Checkbox onChange={props.handleCheckChange}>mark incorrect</Checkbox>
       </Box>
     </Box>
   );
