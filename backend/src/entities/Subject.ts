@@ -41,6 +41,14 @@ export class Subject extends BaseEntity {
   @Column()
   creatorId!: number;
 
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  prevScore!: number;
+
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  prevTime!: number;
+
   @Field(() => [Card])
   @OneToMany(() => Card, (card) => card.subject, {
     cascade: true,

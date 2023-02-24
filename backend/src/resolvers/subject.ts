@@ -2,6 +2,7 @@ import {
   Arg,
   Ctx,
   Field,
+  InputType,
   Int,
   Mutation,
   ObjectType,
@@ -24,6 +25,18 @@ class SubjectResponse {
 
   @Field(() => Subject, { nullable: true })
   subject?: Subject;
+}
+
+@InputType()
+class SubjectInput {
+  @Field()
+  prevScore: number;
+  @Field()
+  prevTime: number;
+  @Field()
+  id: number;
+  @Field()
+  name: String;
 }
 @Resolver(Subject)
 export class SubjectResolver {
@@ -89,19 +102,42 @@ export class SubjectResolver {
   }
 
   //updates a subject's name. checks auth.
+  // @Mutation(() => Subject)
+  // @UseMiddleware(isAuthenticated)
+  // async updateSubject(
+  //   @Arg("id", () => Int) id: number,
+  //   @Arg("name") name: string,
+  //   @Ctx() { req }: Context
+  // ): Promise<Subject | null> {
+  //   const subj = await dataSource
+  //     .createQueryBuilder()
+  //     .update(Subject)
+  //     .set({ name })
+  //     .where('id = :id and "creatorId" = :creatorId', {
+  //       id,
+  //       creatorId: req.session.userId,
+  //     })
+  //     .returning("*")
+  //     .execute();
+
+  //   return subj.raw[0];
+  // }
   @Mutation(() => Subject)
   @UseMiddleware(isAuthenticated)
   async updateSubject(
-    @Arg("id", () => Int) id: number,
-    @Arg("name") name: string,
+    @Arg("input") input: SubjectInput,
     @Ctx() { req }: Context
   ): Promise<Subject | null> {
     const subj = await dataSource
       .createQueryBuilder()
       .update(Subject)
-      .set({ name })
+      .set({
+        name: input.name,
+        prevScore: input.prevScore,
+        prevTime: input.prevTime,
+      })
       .where('id = :id and "creatorId" = :creatorId', {
-        id,
+        id: input.id,
         creatorId: req.session.userId,
       })
       .returning("*")
