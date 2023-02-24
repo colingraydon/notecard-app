@@ -1,17 +1,6 @@
-import { ChevronDownIcon } from "@chakra-ui/icons";
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  Select,
-} from "@chakra-ui/react";
+import { Box, CircularProgress, Select } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { Subject, useGetSubjectsQuery } from "../generated/graphql";
-import { SingleSub } from "../types";
+import { useGetSubjectsQuery } from "../generated/graphql";
 
 interface SubjectSelectProps {
   subjects?: Array<{
@@ -23,6 +12,7 @@ interface SubjectSelectProps {
     name: string;
     id: number;
   };
+  started: boolean;
   handleClick: (item: { name: string; id: number }) => void;
   handleChange: (item: { name: string; id: number }) => void;
 }
@@ -42,6 +32,7 @@ export const SubjectSelect: React.FC<SubjectSelectProps> = (
         <React.Fragment>
           <Box w={400}>
             <Select
+              isDisabled={props.started}
               placeholder="select a subject"
               onChange={(e) => {
                 const subName: string = e.target.value;

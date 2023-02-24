@@ -1,20 +1,12 @@
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Flex,
-  FormControl,
-  FormLabel,
-  Textarea,
-} from "@chakra-ui/react";
-import { Form, Formik } from "formik";
+import { Box, Button, CircularProgress, Flex } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { useMeQuery, useGetSubjectsQuery } from "../../generated/graphql";
+import { useGetSubjectsQuery, useMeQuery } from "../../generated/graphql";
 import { SingleSub } from "../../types";
 import useIsAuth from "../../utils/useIsAuth";
 import { SubjectSelect } from "../SubjectSelect";
 import QuizCard from "./QuizCard";
+import Timer from "./Timer";
 
 interface QuizWrapperProps {}
 
@@ -33,7 +25,7 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
 
   const subjects = data?.getSubjects;
 
-  /*not currently needed, used for old subjectSelect component */
+  /*used forsubjectSelect component */
   const handleClick = ({ name, id }: SingleSub) => {
     setValue({
       name: name,
@@ -56,6 +48,7 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
   //used to start quiz
   const [started, setStarted] = useState(false);
   const handleStart = () => {
+    console.log("handle start");
     setStarted(true);
   };
 
@@ -71,13 +64,10 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
   // }, [value]);
   /**************************************************** */
 
-  //tracks state of
-
   //used to track checked state
   const [checkState, setCheckState] = useState(false);
   const [incorrectCountState, setIncorrectCountState] = useState(0);
   const handleCheckChange = () => {
-    console.log("test");
     if (checkState) {
       setCheckState(false);
       setIncorrectCountState((count) => count - 1);
@@ -105,6 +95,7 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
               subjects={subjects}
               value={value}
               handleChange={handleChange}
+              started={started}
             />
             {value?.cards?.map((item) => (
               <QuizCard
@@ -117,9 +108,13 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
               />
             ))}
           </Box>
-          <Button onClick={handleStart}>start</Button>
+          <Button isDisabled={started} onClick={handleStart}>
+            start
+          </Button>
         </Flex>
       )}
+      <Button>submit</Button>
+      <Timer minutes={0} seconds={0} started={started} />
     </Box>
   );
 };
