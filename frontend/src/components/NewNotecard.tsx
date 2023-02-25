@@ -25,11 +25,6 @@ const NewNotecard: React.FC<NewNotecardProps> = ({}) => {
 
   const [createNotecards] = useCreateCardMutation();
 
-  interface inValues {
-    title: string;
-    text: string;
-    subId: number;
-  }
   return (
     <Box>
       {loading || loadingSub ? (
@@ -54,7 +49,6 @@ const NewNotecard: React.FC<NewNotecardProps> = ({}) => {
                   subId: 0,
                 };
               }
-              console.log("newValues: ", newValues);
 
               const response = await createNotecards({
                 variables: { input: newValues },

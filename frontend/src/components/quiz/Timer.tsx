@@ -32,7 +32,7 @@ const Timer: React.FC<TimerProps> = (props: TimerProps) => {
   });
 
   return (
-    <Box>
+    <Box fontSize={28}>
       {`${time.minutes.toString().padStart(2, "0")}:${time.seconds
         .toString()
         .padStart(2, "0")}`}

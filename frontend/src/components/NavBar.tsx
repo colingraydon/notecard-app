@@ -78,10 +78,10 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
       w="100%"
       position="sticky"
       top="0"
-      height="20"
+      height="16"
       zIndex="1"
       bg="gray.100"
-      pt="4"
+      pt="2"
     >
       <Flex
         height={10}

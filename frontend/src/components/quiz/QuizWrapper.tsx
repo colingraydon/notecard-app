@@ -24,6 +24,7 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
     cards: undefined,
     prevScore: undefined,
     prevTime: undefined,
+    numQuestions: 0,
   });
 
   const subjects = data?.getSubjects;
@@ -48,6 +49,7 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
       cards: subjects[index].cards,
       prevScore: subjects[index].prevScore,
       prevTime: subjects[index].prevTime,
+      numQuestions: subjects[index].cards.length,
     });
   };
   /*************************************** */
@@ -84,26 +86,37 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
     }
   };
 
-  useEffect(
-    () => console.log("countState: ", incorrectCountState),
-    [incorrectCountState]
-  );
+  // useEffect(
+  //   () => console.log("countState: ", incorrectCountState),
+  //   [incorrectCountState]
+  // );
 
   return (
     <Flex>
-      <Box>
+      <Box p={8}>
         {loadingMe || loading ? (
           <CircularProgress isIndeterminate value={50} />
         ) : (
           <Flex>
             <Box>
-              <SubjectSelect
-                loading={loading}
-                subjects={subjects}
-                value={value}
-                handleChange={handleChange}
-                started={started}
-              />
+              <Flex>
+                <Box ml={4} mb={12}>
+                  <SubjectSelect
+                    loading={loading}
+                    subjects={subjects}
+                    value={value}
+                    handleChange={handleChange}
+                    started={started}
+                  />
+                </Box>
+                {value?.id === 0 ? null : (
+                  <Box ml="auto" pr={4}>
+                    <Button w={24} isDisabled={started} onClick={handleStart}>
+                      start
+                    </Button>
+                  </Box>
+                )}
+              </Flex>
               {value?.cards?.map((item) => (
                 <QuizCard
                   title={item.title}
@@ -115,18 +128,18 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
                 />
               ))}
             </Box>
-            <Button isDisabled={started} onClick={handleStart}>
-              start
-            </Button>
           </Flex>
         )}
-        <Button>submit</Button>
       </Box>
-      <QuizSidebar
-        prevScore={value.prevScore}
-        prevTime={value.prevTime}
-        started={started}
-      />
+      {value?.id === 0 ? null : (
+        <QuizSidebar
+          prevScore={value.prevScore}
+          prevTime={value.prevTime}
+          started={started}
+          numQuestions={value.numQuestions}
+          numIncorrect={incorrectCountState}
+        />
+      )}
     </Flex>
   );
 };
