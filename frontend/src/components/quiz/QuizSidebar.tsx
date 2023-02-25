@@ -50,11 +50,8 @@ const QuizSidebar: React.FC<QuizSidebarProps> = (props: QuizSidebarProps) => {
       seconds: props.prevTime % 60,
       minutes: (props.prevTime - (props.prevTime % 60)) / 60,
     });
-    console.log("props.name: ", props.hasCards);
   }, [props.hasCards]);
   /**********************************************/
-
-  useEffect(() => console.log("props.hasCards: ", props.hasCards), []);
 
   const [updateSubject] = useUpdateSubjectMutation();
 

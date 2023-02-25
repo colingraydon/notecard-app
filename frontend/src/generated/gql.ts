@@ -17,6 +17,7 @@ const documents = {
     "mutation createCard($input: CardInput!) {\n  createCard(input: $input) {\n    errors {\n      field\n      message\n    }\n    card {\n      text\n      title\n    }\n  }\n}": types.CreateCardDocument,
     "mutation CreateSubject($input: String!) {\n  createSubject(input: $input) {\n    errors {\n      field\n      message\n    }\n    subject {\n      name\n      createdAt\n      updatedAt\n      id\n    }\n  }\n}": types.CreateSubjectDocument,
     "mutation DeleteCard($cardId: Int!) {\n  deleteCard(cardId: $cardId)\n}": types.DeleteCardDocument,
+    "mutation DeleteSubject($id: Int!) {\n  deleteSubject(id: $id)\n}": types.DeleteSubjectDocument,
     "mutation ForgotPassword($email: String!) {\n  forgotPassword(email: $email)\n}": types.ForgotPasswordDocument,
     "mutation Login($usernameOrEmail: String!, $password: String!) {\n  login(usernameOrEmail: $usernameOrEmail, password: $password) {\n    errors {\n      message\n      field\n    }\n    user {\n      createdAt\n      id\n      updatedAt\n      username\n    }\n  }\n}": types.LoginDocument,
     "mutation Logout {\n  logout\n}": types.LogoutDocument,
@@ -57,6 +58,10 @@ export function graphql(source: "mutation CreateSubject($input: String!) {\n  cr
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "mutation DeleteCard($cardId: Int!) {\n  deleteCard(cardId: $cardId)\n}"): (typeof documents)["mutation DeleteCard($cardId: Int!) {\n  deleteCard(cardId: $cardId)\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation DeleteSubject($id: Int!) {\n  deleteSubject(id: $id)\n}"): (typeof documents)["mutation DeleteSubject($id: Int!) {\n  deleteSubject(id: $id)\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

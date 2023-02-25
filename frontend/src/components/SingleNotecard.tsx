@@ -68,16 +68,18 @@ const SingleNotecard: React.FC<SingleNotecardProps> = (
         </Box>
       </Flex>
       <Flex mt={2} justify="end">
+        <Box>delete</Box>
         <IconButton
-          ml={5}
+          ml={2}
           icon={<DeleteIcon />}
           aria-label="Delete Card"
           onClick={() => {
             props.handleDelete(props.subName, props.id, props.cardId);
           }}
         />
+        <Box ml={5}>edit</Box>
         <IconButton
-          ml={5}
+          ml={2}
           icon={props.lockState ? <LockIcon /> : <UnlockIcon />}
           aria-label="Edit Card"
           onClick={() => {

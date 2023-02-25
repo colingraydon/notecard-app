@@ -250,6 +250,15 @@ export type DeleteCardMutation = {
   deleteCard: boolean;
 };
 
+export type DeleteSubjectMutationVariables = Exact<{
+  id: Scalars["Int"];
+}>;
+
+export type DeleteSubjectMutation = {
+  __typename?: "Mutation";
+  deleteSubject: boolean;
+};
+
 export type ForgotPasswordMutationVariables = Exact<{
   email: Scalars["String"];
 }>;
@@ -595,6 +604,54 @@ export type DeleteCardMutationResult =
 export type DeleteCardMutationOptions = Apollo.BaseMutationOptions<
   DeleteCardMutation,
   DeleteCardMutationVariables
+>;
+export const DeleteSubjectDocument = gql`
+  mutation DeleteSubject($id: Int!) {
+    deleteSubject(id: $id)
+  }
+`;
+export type DeleteSubjectMutationFn = Apollo.MutationFunction<
+  DeleteSubjectMutation,
+  DeleteSubjectMutationVariables
+>;
+
+/**
+ * __useDeleteSubjectMutation__
+ *
+ * To run a mutation, you first call `useDeleteSubjectMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteSubjectMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteSubjectMutation, { data, loading, error }] = useDeleteSubjectMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteSubjectMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    DeleteSubjectMutation,
+    DeleteSubjectMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    DeleteSubjectMutation,
+    DeleteSubjectMutationVariables
+  >(DeleteSubjectDocument, options);
+}
+export type DeleteSubjectMutationHookResult = ReturnType<
+  typeof useDeleteSubjectMutation
+>;
+export type DeleteSubjectMutationResult =
+  Apollo.MutationResult<DeleteSubjectMutation>;
+export type DeleteSubjectMutationOptions = Apollo.BaseMutationOptions<
+  DeleteSubjectMutation,
+  DeleteSubjectMutationVariables
 >;
 export const ForgotPasswordDocument = gql`
   mutation ForgotPassword($email: String!) {
