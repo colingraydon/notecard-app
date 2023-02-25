@@ -1,7 +1,8 @@
 import { Box, Divider, Flex } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { useDeleteSubjectMutation } from "../generated/graphql";
-import SubjectEditDelete from "./SubjectEditDelete";
+import { useDeleteSubjectMutation } from "../../generated/graphql";
+import SubjectDelete from "./SubjectDelete";
+import SubjectEdit from "./SubjectEdit";
 
 interface SingleSubjectProps {
   name: string;
@@ -17,12 +18,6 @@ const SingleSubject: React.FC<SingleSubjectProps> = (
   const [readableDate, setReadableDate] = useState(
     new Date(parseInt(props.updatedAt)).toDateString()
   );
-
-  useEffect(() => {
-    const newDate = new Date(props.updatedAt).toDateString();
-    setReadableDate(readableDate);
-    console.log("readableDate: ", readableDate);
-  }, [props.updatedAt]);
 
   const [parsedTime, setParsedTime] = useState({
     minutes: Math.floor(props.prevTime / 60),
@@ -42,6 +37,14 @@ const SingleSubject: React.FC<SingleSubjectProps> = (
       variables: { id },
     });
   };
+
+  const [updated, setUpdate] = useState(false);
+
+  const [nameState, setNameState] = useState(props.name);
+  const handleNameChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setNameState(e.target.value);
+    setUpdate(true);
+  };
   return (
     <Box>
       <Box w={960} mt={8} borderRadius={12} border="solid" borderWidth={1}>
@@ -55,15 +58,20 @@ const SingleSubject: React.FC<SingleSubjectProps> = (
             </Box>
 
             <Box pb={2} mr={2}>
-              <SubjectEditDelete
-                name={props.name}
+              <SubjectDelete
                 key={props.id}
                 id={props.id}
+                handleDelete={handleDelete}
+              />
+              <SubjectEdit
+                key={props.id}
+                name={nameState}
                 lockState={lockState}
-                handleLockState={handleLockState}
+                id={props.id}
                 prevScore={props.prevScore}
                 prevTime={props.prevTime}
-                handleDelete={handleDelete}
+                handleLockState={handleLockState}
+                handleNameChange={handleNameChange}
               />
             </Box>
             <Box>

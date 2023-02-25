@@ -56,9 +56,10 @@ const QuizSidebar: React.FC<QuizSidebarProps> = (props: QuizSidebarProps) => {
   const [updateSubject] = useUpdateSubjectMutation();
 
   return (
-    <Box>
+    <Box position="sticky" top={55} height="1" zIndex="0" pr={2}>
       {props.hasCards === 0 ? null : (
-        <Box position="sticky" top={30} height="1" zIndex="1" mt={8}>
+        <Box>
+          <Box h={8}></Box>
           <Box p={3} w={200} border="solid" borderRadius={12} borderWidth={1}>
             <Flex>
               <Box fontSize={28} textAlign="end">

@@ -4,8 +4,7 @@ import React, { useState } from "react";
 import {
   useDeleteCardMutation,
   useUpdateCardMutation,
-} from "../generated/graphql";
-import { SingleSub } from "../types";
+} from "../../generated/graphql";
 
 interface SingleNotecardProps {
   title: string;

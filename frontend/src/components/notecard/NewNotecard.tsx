@@ -6,11 +6,11 @@ import {
   useCreateCardMutation,
   useGetSubjectsQuery,
   useMeQuery,
-} from "../generated/graphql";
-import { toErrorMap } from "../utils/toErrorMap";
-import useIsAuth from "../utils/useIsAuth";
-import { InputField } from "./InputField";
-import { InputFieldSelect } from "./InputFieldSelect";
+} from "../../generated/graphql";
+import { toErrorMap } from "../../utils/toErrorMap";
+import useIsAuth from "../../utils/useIsAuth";
+import { InputField } from "../InputField";
+import { InputFieldSelect } from "../InputFieldSelect";
 
 interface NewNotecardProps {}
 

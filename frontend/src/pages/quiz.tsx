@@ -1,7 +1,7 @@
 import { Flex, Box } from "@chakra-ui/react";
 import React from "react";
 import { NavBar } from "../components/NavBar";
-import NewNotecard from "../components/NewNotecard";
+import NewNotecard from "../components/notecard/NewNotecard";
 import QuizWrapper from "../components/quiz/QuizWrapper";
 import FullSidebar from "../components/sidebar/FullSidebar";
 import { withApollo } from "../utils/withApollo";

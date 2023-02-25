@@ -93,7 +93,7 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
 
   return (
     <Flex>
-      <Box p={8}>
+      <Box p={8} pb={2}>
         {loadingMe || loading ? (
           <CircularProgress isIndeterminate value={50} />
         ) : (

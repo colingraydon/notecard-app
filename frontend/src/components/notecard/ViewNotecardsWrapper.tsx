@@ -1,25 +1,23 @@
 import { Box, CircularProgress, Link } from "@chakra-ui/react";
+import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import {
-  useMeQuery,
-  useCreateSubjectMutation,
-  useGetSubjectsQuery,
   useDeleteCardMutation,
-} from "../generated/graphql";
-import { SingleSub } from "../types";
-import useIsAuth from "../utils/useIsAuth";
+  useGetSubjectsQuery,
+  useMeQuery,
+} from "../../generated/graphql";
+import { SingleSub } from "../../types";
+import useIsAuth from "../../utils/useIsAuth";
+import { SubjectSelect } from "../SubjectSelect";
 import SingleNotecard from "./SingleNotecard";
-import { SubjectSelect } from "./SubjectSelect";
-import NextLink from "next/link";
 
-interface SubjectSelectWrapperProps {}
+interface ViewNotecardsWrapperProps {}
 
-export const SubjectSelectWrapper: React.FC<
-  SubjectSelectWrapperProps
+export const ViewNotecardsWrapper: React.FC<
+  ViewNotecardsWrapperProps
 > = ({}) => {
   const { data: dataMe, loading: loadingMe } = useMeQuery();
-  const router = useRouter();
 
   useIsAuth();
 
@@ -54,8 +52,6 @@ export const SubjectSelectWrapper: React.FC<
   useEffect(() => {
     if (initialRender) {
       setInitialRender(false);
-    } else {
-      console.log("value.cards: ", value.cards);
     }
   }, [value]);
 

@@ -12,7 +12,7 @@ import React from "react";
 import { InputField } from "../components/InputField";
 import { NavBar } from "../components/NavBar";
 import FullSidebar from "../components/sidebar/FullSidebar";
-import SingleSubject from "../components/SingleSubject";
+import SingleSubject from "../components/subject/SingleSubject";
 import {
   useCreateSubjectMutation,
   useGetSubjectsQuery,
