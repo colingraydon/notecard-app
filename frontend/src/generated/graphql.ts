@@ -326,6 +326,20 @@ export type UpdateCardMutation = {
   } | null;
 };
 
+export type UpdateSubjectMutationVariables = Exact<{
+  input: SubjectInput;
+}>;
+
+export type UpdateSubjectMutation = {
+  __typename?: "Mutation";
+  updateSubject: {
+    __typename?: "Subject";
+    id: number;
+    prevScore?: number | null;
+    prevTime?: number | null;
+  };
+};
+
 export type GetSubjectsQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetSubjectsQuery = {
@@ -335,6 +349,7 @@ export type GetSubjectsQuery = {
     name: string;
     id: number;
     prevScore?: number | null;
+    updatedAt: string;
     prevTime?: number | null;
     cards: Array<{
       __typename?: "Card";
@@ -840,12 +855,65 @@ export type UpdateCardMutationOptions = Apollo.BaseMutationOptions<
   UpdateCardMutation,
   UpdateCardMutationVariables
 >;
+export const UpdateSubjectDocument = gql`
+  mutation UpdateSubject($input: SubjectInput!) {
+    updateSubject(input: $input) {
+      id
+      prevScore
+      prevTime
+    }
+  }
+`;
+export type UpdateSubjectMutationFn = Apollo.MutationFunction<
+  UpdateSubjectMutation,
+  UpdateSubjectMutationVariables
+>;
+
+/**
+ * __useUpdateSubjectMutation__
+ *
+ * To run a mutation, you first call `useUpdateSubjectMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateSubjectMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateSubjectMutation, { data, loading, error }] = useUpdateSubjectMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateSubjectMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UpdateSubjectMutation,
+    UpdateSubjectMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    UpdateSubjectMutation,
+    UpdateSubjectMutationVariables
+  >(UpdateSubjectDocument, options);
+}
+export type UpdateSubjectMutationHookResult = ReturnType<
+  typeof useUpdateSubjectMutation
+>;
+export type UpdateSubjectMutationResult =
+  Apollo.MutationResult<UpdateSubjectMutation>;
+export type UpdateSubjectMutationOptions = Apollo.BaseMutationOptions<
+  UpdateSubjectMutation,
+  UpdateSubjectMutationVariables
+>;
 export const GetSubjectsDocument = gql`
   query GetSubjects {
     getSubjects {
       name
       id
       prevScore
+      updatedAt
       prevTime
       cards {
         cardId

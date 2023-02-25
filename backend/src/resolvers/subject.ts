@@ -61,12 +61,21 @@ export class SubjectResolver {
     @Arg("input") input: string,
     @Ctx() { req }: Context
   ): Promise<SubjectResponse> {
-    console.log("got to start");
     if (input.length === 0) {
       return {
         errors: [
           {
             message: "subject cannot be empty",
+            field: "subject",
+          },
+        ],
+      };
+    }
+    if (input.length > 30) {
+      return {
+        errors: [
+          {
+            message: "subject must have 30 or fewer characters",
             field: "subject",
           },
         ],
@@ -79,7 +88,6 @@ export class SubjectResolver {
       ...user,
       creatorId: req.session.userId,
     });
-    console.log("subj: ", subj);
     subj.save();
     return { subject: subj };
   }

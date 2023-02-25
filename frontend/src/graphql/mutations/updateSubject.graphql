@@ -1,0 +1,7 @@
+mutation UpdateSubject($input: SubjectInput!) {
+  updateSubject(input: $input) {
+    id
+    prevScore
+    prevTime
+  }
+}

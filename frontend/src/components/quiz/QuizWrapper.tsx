@@ -1,4 +1,4 @@
-import { Box, Button, CircularProgress, Flex } from "@chakra-ui/react";
+import { Box, Button, CircularProgress, Flex, Link } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useGetSubjectsQuery, useMeQuery } from "../../generated/graphql";
@@ -6,14 +6,14 @@ import { SingleSub } from "../../types";
 import useIsAuth from "../../utils/useIsAuth";
 import { SubjectSelect } from "../SubjectSelect";
 import QuizCard from "./QuizCard";
+import NextLink from "next/link";
+
 import QuizSidebar from "./QuizSidebar";
-import Timer from "./Timer";
 
 interface QuizWrapperProps {}
 
 const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
   const { data: dataMe, loading: loadingMe } = useMeQuery();
-  const router = useRouter();
 
   useIsAuth();
 
@@ -109,7 +109,7 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
                     started={started}
                   />
                 </Box>
-                {value?.id === 0 ? null : (
+                {value?.id === 0 || value?.cards.length === 0 ? null : (
                   <Box ml="auto" pr={4}>
                     <Button w={24} isDisabled={started} onClick={handleStart}>
                       start
@@ -117,6 +117,13 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
                   </Box>
                 )}
               </Flex>
+              {value?.cards?.length === 0 && (
+                <Box ml={4}>
+                  <Link as={NextLink} href="/create-notecards">
+                    create notecards
+                  </Link>
+                </Box>
+              )}
               {value?.cards?.map((item) => (
                 <QuizCard
                   title={item.title}
@@ -138,6 +145,9 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
           started={started}
           numQuestions={value.numQuestions}
           numIncorrect={incorrectCountState}
+          id={value.id}
+          name={value.name}
+          hasCards={value.cards.length}
         />
       )}
     </Flex>

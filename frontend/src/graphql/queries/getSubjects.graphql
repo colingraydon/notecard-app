@@ -3,6 +3,7 @@ query GetSubjects {
     name
     id
     prevScore
+    updatedAt
     prevTime
     cards {
       cardId

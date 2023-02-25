@@ -82,11 +82,31 @@ export class CardResolver {
         ],
       };
     }
+    if (input.title.length > 500) {
+      return {
+        errors: [
+          {
+            message: "must have 500 or fewer characters",
+            field: "title",
+          },
+        ],
+      };
+    }
     if (input.text.length === 0) {
       return {
         errors: [
           {
             message: "back cannot be empty",
+            field: "text",
+          },
+        ],
+      };
+    }
+    if (input.text.length > 1000) {
+      return {
+        errors: [
+          {
+            message: "must have 1000 or fewer characters",
             field: "text",
           },
         ],
@@ -105,24 +125,14 @@ export class CardResolver {
     }
     const rawSubj = await Subject.find({ where: { id: input.subId } });
     const subj = rawSubj[0];
-    // const card = Card.create({
-    //   text: input.text,
-    //   title: input.title,
-    //   ...subj,
-    // });
-    // card.save();
 
     const cardRepository = dataSource.getRepository(Card);
     const card = new Card();
-    console.log("card before: ", card);
     card.text = input.text;
     card.title = input.title;
     card.subject = subj;
     card.creatorId = req.session.userId as number;
     cardRepository.save(card);
-
-    console.log("Card: ", card);
-
     return { card };
   }
 

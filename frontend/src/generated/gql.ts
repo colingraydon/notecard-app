@@ -22,7 +22,8 @@ const documents = {
     "mutation Logout {\n  logout\n}": types.LogoutDocument,
     "mutation Register($options: UsernamePasswordInput!) {\n  register(options: $options) {\n    errors {\n      message\n      field\n    }\n    user {\n      createdAt\n      id\n      updatedAt\n      username\n    }\n  }\n}": types.RegisterDocument,
     "mutation UpdateCard($cardId: Int!, $title: String!, $text: String!) {\n  updateCard(cardId: $cardId, title: $title, text: $text) {\n    cardId\n    title\n    text\n  }\n}": types.UpdateCardDocument,
-    "query GetSubjects {\n  getSubjects {\n    name\n    id\n    prevScore\n    prevTime\n    cards {\n      cardId\n      title\n      text\n    }\n  }\n}": types.GetSubjectsDocument,
+    "mutation UpdateSubject($input: SubjectInput!) {\n  updateSubject(input: $input) {\n    id\n    prevScore\n    prevTime\n  }\n}": types.UpdateSubjectDocument,
+    "query GetSubjects {\n  getSubjects {\n    name\n    id\n    prevScore\n    updatedAt\n    prevTime\n    cards {\n      cardId\n      title\n      text\n    }\n  }\n}": types.GetSubjectsDocument,
     "query Me {\n  me {\n    id\n    username\n    email\n  }\n}": types.MeDocument,
 };
 
@@ -79,7 +80,11 @@ export function graphql(source: "mutation UpdateCard($cardId: Int!, $title: Stri
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query GetSubjects {\n  getSubjects {\n    name\n    id\n    prevScore\n    prevTime\n    cards {\n      cardId\n      title\n      text\n    }\n  }\n}"): (typeof documents)["query GetSubjects {\n  getSubjects {\n    name\n    id\n    prevScore\n    prevTime\n    cards {\n      cardId\n      title\n      text\n    }\n  }\n}"];
+export function graphql(source: "mutation UpdateSubject($input: SubjectInput!) {\n  updateSubject(input: $input) {\n    id\n    prevScore\n    prevTime\n  }\n}"): (typeof documents)["mutation UpdateSubject($input: SubjectInput!) {\n  updateSubject(input: $input) {\n    id\n    prevScore\n    prevTime\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query GetSubjects {\n  getSubjects {\n    name\n    id\n    prevScore\n    updatedAt\n    prevTime\n    cards {\n      cardId\n      title\n      text\n    }\n  }\n}"): (typeof documents)["query GetSubjects {\n  getSubjects {\n    name\n    id\n    prevScore\n    updatedAt\n    prevTime\n    cards {\n      cardId\n      title\n      text\n    }\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

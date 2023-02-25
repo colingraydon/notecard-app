@@ -1,10 +1,18 @@
-import { Box, Button, Flex, Stack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Flex,
+  Stack,
+  useToast,
+} from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/router";
 import React from "react";
 import { InputField } from "../components/InputField";
 import { NavBar } from "../components/NavBar";
 import FullSidebar from "../components/sidebar/FullSidebar";
+import SingleSubject from "../components/SingleSubject";
 import {
   useCreateSubjectMutation,
   useGetSubjectsQuery,
@@ -22,7 +30,7 @@ const createSubject: React.FC<{}> = ({}) => {
   useIsAuth();
   const [createSubject] = useCreateSubjectMutation();
   const { data: dataSub, error, loading: loadingSub } = useGetSubjectsQuery();
-
+  const toast = useToast();
   return (
     <Flex>
       <FullSidebar></FullSidebar>
@@ -41,11 +49,16 @@ const createSubject: React.FC<{}> = ({}) => {
                 },
               });
 
-              // if (!errors) {
-              //   router.push("/");
-              // }
               if (response.data?.createSubject.errors) {
                 setErrors(toErrorMap(response.data.createSubject.errors));
+              } else {
+                toast({
+                  title: "subject created.",
+                  description: "get started by creating notecards!",
+                  status: "success",
+                  duration: 3000,
+                  isClosable: true,
+                });
               }
             }}
           >
@@ -74,16 +87,21 @@ const createSubject: React.FC<{}> = ({}) => {
               </Box>
             )}
           </Formik>
-          {/*put in stuff here*/}
+
           {!dataSub && loadingSub ? (
-            <Box>loading...</Box>
+            <CircularProgress isIndeterminate value={50} />
           ) : (
             <Stack spacing={8}>
               {dataSub!.getSubjects.map((s) =>
                 !s ? null : (
-                  <Flex key={s.id} p={5}>
-                    <Box flex={1}>{s.name}</Box>
-                  </Flex>
+                  <SingleSubject
+                    name={s.name}
+                    id={s.id}
+                    prevScore={s.prevScore}
+                    prevTime={s.prevTime}
+                    updatedAt={s.updatedAt}
+                    key={s.id}
+                  />
                 )
               )}
             </Stack>

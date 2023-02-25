@@ -29,7 +29,7 @@ export const SubjectSelect: React.FC<SubjectSelectProps> = (
         <CircularProgress isIndeterminate value={50} />
       ) : (
         <React.Fragment>
-          <Box w={400}>
+          <Box w={350}>
             <Select
               isDisabled={props.started}
               placeholder="select a subject"
@@ -41,8 +41,7 @@ export const SubjectSelect: React.FC<SubjectSelectProps> = (
                 const optionElementId: number = parseInt(
                   optionElement.getAttribute("data-id")
                 );
-                console.log("subName: ", subName);
-                console.log("subname type: ", typeof subName);
+
                 if (subName.length > 1) {
                   props.handleChange({ name: subName, id: optionElementId });
                 }

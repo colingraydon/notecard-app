@@ -1,5 +1,5 @@
 import { DeleteIcon, LockIcon, UnlockIcon } from "@chakra-ui/icons";
-import { Box, Flex, IconButton, Textarea } from "@chakra-ui/react";
+import { Box, Divider, Flex, IconButton, Textarea } from "@chakra-ui/react";
 import React, { useState } from "react";
 import {
   useDeleteCardMutation,
@@ -41,54 +41,60 @@ const SingleNotecard: React.FC<SingleNotecardProps> = (
   const [updateCard] = useUpdateCardMutation();
 
   return (
-    <Box>
+    <Box w={886} mt={8}>
       <Flex>
-        <Textarea
-          w={400}
-          h={200}
-          defaultValue={titleState}
-          onChange={handleTitleChange}
-          isReadOnly={props.lockState}
-          mr={4}
-          resize="none"
-        ></Textarea>
-        <Textarea
-          w={400}
-          h={200}
-          defaultValue={textState}
-          onChange={handleTextChange}
-          isReadOnly={props.lockState}
-          resize="none"
-        ></Textarea>
-        <Box>
-          <IconButton
-            ml={5}
-            icon={<DeleteIcon />}
-            aria-label="Delete Card"
-            onClick={() => {
-              props.handleDelete(props.subName, props.id, props.cardId);
-            }}
-          />
-          <IconButton
-            ml={5}
-            icon={props.lockState ? <LockIcon /> : <UnlockIcon />}
-            aria-label="Edit Card"
-            onClick={() => {
-              props.handleLockState();
-              console.log("textState: ", textState);
-              !props.lockState &&
-                updated &&
-                updateCard({
-                  variables: {
-                    cardId: props.cardId,
-                    text: textState,
-                    title: titleState,
-                  },
-                });
-              setUpdate(false);
-            }}
-          />
+        <Box p={3} border="solid" borderRadius={12} borderWidth={1} mr={2}>
+          <Textarea
+            w={400}
+            h={200}
+            defaultValue={titleState}
+            onChange={handleTitleChange}
+            isReadOnly={props.lockState}
+            resize="none"
+          ></Textarea>
         </Box>
+        <Box h={226} mr={2} ml={2}>
+          <Divider orientation="vertical" />
+        </Box>
+        <Box p={3} border="solid" borderRadius={12} borderWidth={1} ml={2}>
+          <Textarea
+            w={400}
+            h={200}
+            defaultValue={textState}
+            onChange={handleTextChange}
+            isReadOnly={props.lockState}
+            resize="none"
+          ></Textarea>
+        </Box>
+      </Flex>
+      <Flex mt={2} justify="end">
+        <IconButton
+          ml={5}
+          icon={<DeleteIcon />}
+          aria-label="Delete Card"
+          onClick={() => {
+            props.handleDelete(props.subName, props.id, props.cardId);
+          }}
+        />
+        <IconButton
+          ml={5}
+          icon={props.lockState ? <LockIcon /> : <UnlockIcon />}
+          aria-label="Edit Card"
+          onClick={() => {
+            props.handleLockState();
+            console.log("textState: ", textState);
+            !props.lockState &&
+              updated &&
+              updateCard({
+                variables: {
+                  cardId: props.cardId,
+                  text: textState,
+                  title: titleState,
+                },
+              });
+            setUpdate(false);
+          }}
+        />
       </Flex>
     </Box>
   );

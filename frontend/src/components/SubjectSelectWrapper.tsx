@@ -1,4 +1,4 @@
-import { Box, CircularProgress } from "@chakra-ui/react";
+import { Box, CircularProgress, Link } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import {
@@ -11,6 +11,7 @@ import { SingleSub } from "../types";
 import useIsAuth from "../utils/useIsAuth";
 import SingleNotecard from "./SingleNotecard";
 import { SubjectSelect } from "./SubjectSelect";
+import NextLink from "next/link";
 
 interface SubjectSelectWrapperProps {}
 
@@ -89,18 +90,25 @@ export const SubjectSelectWrapper: React.FC<
   };
 
   return (
-    <Box>
+    <Box p={8}>
       {loadingMe || loading ? (
         <CircularProgress isIndeterminate value={50} />
       ) : (
-        <Box>
+        <Box ml={4}>
           <SubjectSelect
             loading={loading}
-            handleClick={handleClick}
+            started={false}
             subjects={subjects}
             value={value}
             handleChange={handleChange}
           />
+          {value?.cards?.length === 0 && (
+            <Box mt={8}>
+              <NextLink href="/create-notecards">
+                <Link>create notecards</Link>
+              </NextLink>
+            </Box>
+          )}
           {value?.cards?.map((item) => (
             <SingleNotecard
               title={item.title}

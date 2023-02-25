@@ -1,6 +1,6 @@
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, Flex } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import Timer from "./Timer";
+import { useUpdateSubjectMutation } from "../../generated/graphql";
 
 interface QuizSidebarProps {
   prevScore: number;
@@ -8,6 +8,9 @@ interface QuizSidebarProps {
   started: boolean;
   numQuestions: number;
   numIncorrect: number;
+  id: number;
+  name: string;
+  hasCards: number;
 }
 
 const QuizSidebar: React.FC<QuizSidebarProps> = (props: QuizSidebarProps) => {
@@ -36,6 +39,7 @@ const QuizSidebar: React.FC<QuizSidebarProps> = (props: QuizSidebarProps) => {
   });
   /* *************************************/
 
+  /**********used to convert props of previous time*********/
   const [prevStringTime, setPrevStringTime] = useState({
     seconds: props.prevTime % 60,
     minutes: (props.prevTime - (props.prevTime % 60)) / 60,
@@ -46,26 +50,73 @@ const QuizSidebar: React.FC<QuizSidebarProps> = (props: QuizSidebarProps) => {
       seconds: props.prevTime % 60,
       minutes: (props.prevTime - (props.prevTime % 60)) / 60,
     });
-  }, [props.prevTime]);
+    console.log("props.name: ", props.hasCards);
+  }, [props.hasCards]);
+  /**********************************************/
+
+  useEffect(() => console.log("props.hasCards: ", props.hasCards), []);
+
+  const [updateSubject] = useUpdateSubjectMutation();
+
   return (
-    <Box mt={8}>
-      <Box p={3} border="solid" borderRadius={12} borderWidth={1} mr={2}>
-        <Box fontSize={28}>
-          {`${time.minutes.toString().padStart(2, "0")}:${time.seconds
-            .toString()
-            .padStart(2, "0")}`}
-        </Box>
-        {props.prevScore === null ? null : (
-          <Box mt={4}>previous score: {props.prevScore}%</Box>
-        )}
-        {props.prevTime === null ? null : (
-          <Box mt={4}>
-            previous time: {prevStringTime.minutes}:{prevStringTime.seconds}
-            {}
+    <Box>
+      {props.hasCards === 0 ? null : (
+        <Box position="sticky" top={30} height="1" zIndex="1" mt={8}>
+          <Box p={3} w={200} border="solid" borderRadius={12} borderWidth={1}>
+            <Flex>
+              <Box fontSize={28} textAlign="end">
+                {`${time.minutes.toString().padStart(2, "0")}:${time.seconds
+                  .toString()
+                  .padStart(2, "0")}`}
+              </Box>
+              {/* <Box>{props.numCards}</Box>
+              <Box>{typeof props.numCards}</Box> */}
+              <Box ml="auto">
+                <Button
+                  onClick={() =>
+                    updateSubject({
+                      variables: {
+                        input: {
+                          id: props.id,
+                          name: props.name,
+                          prevTime: time.minutes * 60 + time.seconds,
+                          prevScore: Math.floor(
+                            ((props.numQuestions - props.numIncorrect) /
+                              props.numQuestions) *
+                              100
+                          ),
+                        },
+                      },
+                    })
+                  }
+                >
+                  submit
+                </Button>
+              </Box>
+            </Flex>
           </Box>
-        )}
-        <Button mt={4}>submit</Button>
-      </Box>
+          {props.prevScore === null ? null : (
+            <Box p={3} border="solid" borderRadius={12} borderWidth={1} mt={4}>
+              {props.prevScore === null ? null : (
+                <Flex>
+                  <Box>previous score: </Box>
+                  <Box ml="auto">{props.prevScore}%</Box>
+                </Flex>
+              )}
+              {props.prevTime === null ? null : (
+                <Flex>
+                  <Box mt={4}>previous time:</Box>
+                  <Box mt={4} ml="auto">
+                    {prevStringTime.minutes}:
+                    {prevStringTime.seconds < 10 ? "0" : null}
+                    {prevStringTime.seconds}
+                  </Box>
+                </Flex>
+              )}
+            </Box>
+          )}
+        </Box>
+      )}
     </Box>
   );
 };
