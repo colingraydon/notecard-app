@@ -6,6 +6,7 @@ import { SingleSub } from "../../types";
 import useIsAuth from "../../utils/useIsAuth";
 import { SubjectSelect } from "../SubjectSelect";
 import QuizCard from "./QuizCard";
+import QuizSidebar from "./QuizSidebar";
 import Timer from "./Timer";
 
 interface QuizWrapperProps {}
@@ -21,26 +22,32 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
     name: "choose a subject",
     id: 0,
     cards: undefined,
+    prevScore: undefined,
+    prevTime: undefined,
   });
 
   const subjects = data?.getSubjects;
 
   /*used forsubjectSelect component */
-  const handleClick = ({ name, id }: SingleSub) => {
-    setValue({
-      name: name,
-      id: id,
-      cards: subjects[subjects.findIndex((sub) => sub.id === id)].cards,
-    });
-  };
+  // const handleClick = ({ name, id }: SingleSub) => {
+  //   const index: number = subjects.findIndex((sub) => sub.id === id);
+  //   setValue({
+  //     name: name,
+  //     id: id,
+  //     cards: subjects[index].cards,
+  //   });
+  // };
   /**************************************** */
 
   /****handles menu change to generate cards ****/
   const handleChange = ({ name, id }: SingleSub) => {
+    const index: number = subjects.findIndex((sub) => sub.id === id);
     setValue({
       name: name,
       id: id,
-      cards: subjects[subjects.findIndex((sub) => sub.id === id)].cards,
+      cards: subjects[index].cards,
+      prevScore: subjects[index].prevScore,
+      prevTime: subjects[index].prevTime,
     });
   };
   /*************************************** */
@@ -83,39 +90,44 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
   );
 
   return (
-    <Box>
-      {loadingMe || loading ? (
-        <CircularProgress isIndeterminate value={50} />
-      ) : (
-        <Flex>
-          <Box>
-            <SubjectSelect
-              loading={loading}
-              handleClick={handleClick}
-              subjects={subjects}
-              value={value}
-              handleChange={handleChange}
-              started={started}
-            />
-            {value?.cards?.map((item) => (
-              <QuizCard
-                title={item.title}
-                text={item.text}
-                key={item.cardId}
-                cardId={item.cardId}
-                checkState={checkState}
-                handleCheckChange={handleCheckChange}
+    <Flex>
+      <Box>
+        {loadingMe || loading ? (
+          <CircularProgress isIndeterminate value={50} />
+        ) : (
+          <Flex>
+            <Box>
+              <SubjectSelect
+                loading={loading}
+                subjects={subjects}
+                value={value}
+                handleChange={handleChange}
+                started={started}
               />
-            ))}
-          </Box>
-          <Button isDisabled={started} onClick={handleStart}>
-            start
-          </Button>
-        </Flex>
-      )}
-      <Button>submit</Button>
-      <Timer minutes={0} seconds={0} started={started} />
-    </Box>
+              {value?.cards?.map((item) => (
+                <QuizCard
+                  title={item.title}
+                  text={item.text}
+                  key={item.cardId}
+                  cardId={item.cardId}
+                  checkState={checkState}
+                  handleCheckChange={handleCheckChange}
+                />
+              ))}
+            </Box>
+            <Button isDisabled={started} onClick={handleStart}>
+              start
+            </Button>
+          </Flex>
+        )}
+        <Button>submit</Button>
+      </Box>
+      <QuizSidebar
+        prevScore={value.prevScore}
+        prevTime={value.prevTime}
+        started={started}
+      />
+    </Flex>
   );
 };
 

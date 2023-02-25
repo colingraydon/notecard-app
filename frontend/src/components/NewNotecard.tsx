@@ -57,7 +57,6 @@ const NewNotecard: React.FC<NewNotecardProps> = ({}) => {
               console.log("newValues: ", newValues);
 
               const response = await createNotecards({
-                //CHANGE THIS, just for testing
                 variables: { input: newValues },
               });
 

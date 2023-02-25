@@ -101,27 +101,6 @@ export class SubjectResolver {
     return true;
   }
 
-  //updates a subject's name. checks auth.
-  // @Mutation(() => Subject)
-  // @UseMiddleware(isAuthenticated)
-  // async updateSubject(
-  //   @Arg("id", () => Int) id: number,
-  //   @Arg("name") name: string,
-  //   @Ctx() { req }: Context
-  // ): Promise<Subject | null> {
-  //   const subj = await dataSource
-  //     .createQueryBuilder()
-  //     .update(Subject)
-  //     .set({ name })
-  //     .where('id = :id and "creatorId" = :creatorId', {
-  //       id,
-  //       creatorId: req.session.userId,
-  //     })
-  //     .returning("*")
-  //     .execute();
-
-  //   return subj.raw[0];
-  // }
   @Mutation(() => Subject)
   @UseMiddleware(isAuthenticated)
   async updateSubject(

@@ -13,7 +13,6 @@ interface SubjectSelectProps {
     id: number;
   };
   started: boolean;
-  handleClick: (item: { name: string; id: number }) => void;
   handleChange: (item: { name: string; id: number }) => void;
 }
 

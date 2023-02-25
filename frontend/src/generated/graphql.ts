@@ -109,8 +109,7 @@ export type MutationUpdateCardArgs = {
 };
 
 export type MutationUpdateSubjectArgs = {
-  id: Scalars["Int"];
-  name: Scalars["String"];
+  input: SubjectInput;
 };
 
 export type Query = {
@@ -138,7 +137,16 @@ export type Subject = {
   creatorId: Scalars["Float"];
   id: Scalars["Float"];
   name: Scalars["String"];
+  prevScore?: Maybe<Scalars["Float"]>;
+  prevTime?: Maybe<Scalars["Float"]>;
   updatedAt: Scalars["String"];
+};
+
+export type SubjectInput = {
+  id: Scalars["Float"];
+  name: Scalars["String"];
+  prevScore: Scalars["Float"];
+  prevTime: Scalars["Float"];
 };
 
 export type SubjectResponse = {
@@ -326,6 +334,8 @@ export type GetSubjectsQuery = {
     __typename?: "Subject";
     name: string;
     id: number;
+    prevScore?: number | null;
+    prevTime?: number | null;
     cards: Array<{
       __typename?: "Card";
       cardId: number;
@@ -835,6 +845,8 @@ export const GetSubjectsDocument = gql`
     getSubjects {
       name
       id
+      prevScore
+      prevTime
       cards {
         cardId
         title
