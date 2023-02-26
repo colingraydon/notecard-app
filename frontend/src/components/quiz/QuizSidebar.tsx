@@ -11,6 +11,7 @@ interface QuizSidebarProps {
   id: number;
   name: string;
   hasCards: number;
+  handleStarted: () => void;
 }
 
 const QuizSidebar: React.FC<QuizSidebarProps> = (props: QuizSidebarProps) => {
@@ -55,6 +56,23 @@ const QuizSidebar: React.FC<QuizSidebarProps> = (props: QuizSidebarProps) => {
 
   const [updateSubject] = useUpdateSubjectMutation();
 
+  const handleSubmit = () => {
+    props.handleStarted;
+    updateSubject({
+      variables: {
+        input: {
+          id: props.id,
+          name: props.name,
+          prevTime: time.minutes * 60 + time.seconds,
+          prevScore: Math.floor(
+            ((props.numQuestions - props.numIncorrect) / props.numQuestions) *
+              100
+          ),
+        },
+      },
+    });
+  };
+
   return (
     <Box position="sticky" top={55} height="1" zIndex="0" pr={2}>
       {props.hasCards === 0 ? null : (
@@ -71,22 +89,25 @@ const QuizSidebar: React.FC<QuizSidebarProps> = (props: QuizSidebarProps) => {
               <Box>{typeof props.numCards}</Box> */}
               <Box ml="auto">
                 <Button
-                  onClick={() =>
-                    updateSubject({
-                      variables: {
-                        input: {
-                          id: props.id,
-                          name: props.name,
-                          prevTime: time.minutes * 60 + time.seconds,
-                          prevScore: Math.floor(
-                            ((props.numQuestions - props.numIncorrect) /
-                              props.numQuestions) *
-                              100
-                          ),
-                        },
-                      },
-                    })
-                  }
+                  isDisabled={!props.started}
+                  onClick={() => {
+                    console.log("new test");
+                    props.handleStarted();
+                    // updateSubject({
+                    //   variables: {
+                    //     input: {
+                    //       id: props.id,
+                    //       name: props.name,
+                    //       prevTime: time.minutes * 60 + time.seconds,
+                    //       prevScore: Math.floor(
+                    //         ((props.numQuestions - props.numIncorrect) /
+                    //           props.numQuestions) *
+                    //           100
+                    //       ),
+                    //     },
+                    //   },
+                    // });
+                  }}
                 >
                   submit
                 </Button>

@@ -43,11 +43,11 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
   };
   /*************************************** */
 
-  //used to start quiz
+  //used to start and stop  quiz
   const [started, setStarted] = useState(false);
-  const handleStart = () => {
+  const handleStarted = () => {
     console.log("handle start");
-    setStarted(true);
+    setStarted(!started);
   };
 
   //used to track checked state
@@ -87,7 +87,11 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
                   </Box>
                   {value?.id === 0 || value?.cards.length === 0 ? null : (
                     <Box ml="auto" pr={4}>
-                      <Button w={24} isDisabled={started} onClick={handleStart}>
+                      <Button
+                        w={24}
+                        isDisabled={started}
+                        onClick={handleStarted}
+                      >
                         start
                       </Button>
                     </Box>
@@ -126,6 +130,7 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
             id={value.id}
             name={value.name}
             hasCards={value.cards.length}
+            handleStarted={handleStarted}
           />
         </Box>
       )}

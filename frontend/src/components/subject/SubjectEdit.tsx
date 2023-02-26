@@ -1,10 +1,7 @@
-import { EditIcon, LockIcon, UnlockIcon } from "@chakra-ui/icons";
+import { LockIcon, UnlockIcon } from "@chakra-ui/icons";
 import { Box, IconButton } from "@chakra-ui/react";
-import React, { ChangeEvent, useState } from "react";
-import {
-  useUpdateSubjectMutation,
-  useUpdateSubjectNameMutation,
-} from "../../generated/graphql";
+import React, { ChangeEvent } from "react";
+import { useUpdateSubjectNameMutation } from "../../generated/graphql";
 
 interface SubjectEditProps {
   name: string;

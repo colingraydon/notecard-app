@@ -1,4 +1,11 @@
-import { Box, Button, CircularProgress, Divider, Flex } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Divider,
+  Flex,
+  useToast,
+} from "@chakra-ui/react";
 import { Form, Formik, isNaN } from "formik";
 import { useRouter } from "next/router";
 import React from "react";
@@ -23,7 +30,7 @@ const NewNotecard: React.FC<NewNotecardProps> = ({}) => {
   const subjects = dataSub?.getSubjects;
 
   const [createNotecards] = useCreateCardMutation();
-
+  const toast = useToast();
   return (
     <Box>
       <Box ml={4} fontSize={32} mb={4}>
@@ -56,6 +63,14 @@ const NewNotecard: React.FC<NewNotecardProps> = ({}) => {
 
               if (response.data?.createCard.errors) {
                 setErrors(toErrorMap(response.data.createCard.errors));
+              } else {
+                toast({
+                  title: "notecard created",
+                  description: "we've created the notecard for you",
+                  status: "success",
+                  duration: 2000,
+                  isClosable: true,
+                });
               }
               //     //updateing apollo cache
               //     update: (cache) => {
