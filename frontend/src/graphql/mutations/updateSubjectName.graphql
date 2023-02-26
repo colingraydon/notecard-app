@@ -1,0 +1,6 @@
+mutation UpdateSubjectName($name: String!, $id: Int!) {
+  updateSubjectName(name: $name, id: $id) {
+    id
+    name
+  }
+}

@@ -1,4 +1,4 @@
-import { DeleteIcon, LockIcon, UnlockIcon } from "@chakra-ui/icons";
+import { DeleteIcon } from "@chakra-ui/icons";
 import {
   AlertDialog,
   AlertDialogBody,
@@ -8,11 +8,10 @@ import {
   AlertDialogOverlay,
   Box,
   Button,
-  Flex,
   IconButton,
   useDisclosure,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React from "react";
 
 interface SubjectDeleteProps {
   id: number;

@@ -66,6 +66,7 @@ export type Mutation = {
   register: UserResponse;
   updateCard?: Maybe<Card>;
   updateSubject: Subject;
+  updateSubjectName: Subject;
 };
 
 export type MutationChangePasswordArgs = {
@@ -110,6 +111,11 @@ export type MutationUpdateCardArgs = {
 
 export type MutationUpdateSubjectArgs = {
   input: SubjectInput;
+};
+
+export type MutationUpdateSubjectNameArgs = {
+  id: Scalars["Int"];
+  name: Scalars["String"];
 };
 
 export type Query = {
@@ -347,6 +353,16 @@ export type UpdateSubjectMutation = {
     prevScore?: number | null;
     prevTime?: number | null;
   };
+};
+
+export type UpdateSubjectNameMutationVariables = Exact<{
+  name: Scalars["String"];
+  id: Scalars["Int"];
+}>;
+
+export type UpdateSubjectNameMutation = {
+  __typename?: "Mutation";
+  updateSubjectName: { __typename?: "Subject"; id: number; name: string };
 };
 
 export type GetSubjectsQueryVariables = Exact<{ [key: string]: never }>;
@@ -963,6 +979,58 @@ export type UpdateSubjectMutationResult =
 export type UpdateSubjectMutationOptions = Apollo.BaseMutationOptions<
   UpdateSubjectMutation,
   UpdateSubjectMutationVariables
+>;
+export const UpdateSubjectNameDocument = gql`
+  mutation UpdateSubjectName($name: String!, $id: Int!) {
+    updateSubjectName(name: $name, id: $id) {
+      id
+      name
+    }
+  }
+`;
+export type UpdateSubjectNameMutationFn = Apollo.MutationFunction<
+  UpdateSubjectNameMutation,
+  UpdateSubjectNameMutationVariables
+>;
+
+/**
+ * __useUpdateSubjectNameMutation__
+ *
+ * To run a mutation, you first call `useUpdateSubjectNameMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateSubjectNameMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateSubjectNameMutation, { data, loading, error }] = useUpdateSubjectNameMutation({
+ *   variables: {
+ *      name: // value for 'name'
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useUpdateSubjectNameMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UpdateSubjectNameMutation,
+    UpdateSubjectNameMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    UpdateSubjectNameMutation,
+    UpdateSubjectNameMutationVariables
+  >(UpdateSubjectNameDocument, options);
+}
+export type UpdateSubjectNameMutationHookResult = ReturnType<
+  typeof useUpdateSubjectNameMutation
+>;
+export type UpdateSubjectNameMutationResult =
+  Apollo.MutationResult<UpdateSubjectNameMutation>;
+export type UpdateSubjectNameMutationOptions = Apollo.BaseMutationOptions<
+  UpdateSubjectNameMutation,
+  UpdateSubjectNameMutationVariables
 >;
 export const GetSubjectsDocument = gql`
   query GetSubjects {

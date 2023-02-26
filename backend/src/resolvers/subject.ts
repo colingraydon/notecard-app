@@ -132,4 +132,27 @@ export class SubjectResolver {
 
     return subj.raw[0];
   }
+
+  @Mutation(() => Subject)
+  @UseMiddleware(isAuthenticated)
+  async updateSubjectName(
+    @Arg("name") name: string,
+    @Arg("id", () => Int) id: number,
+    @Ctx() { req }: Context
+  ): Promise<Subject | null> {
+    const subj = await dataSource
+      .createQueryBuilder()
+      .update(Subject)
+      .set({
+        name: name,
+      })
+      .where('id = :id and "creatorId" = :creatorId', {
+        id: id,
+        creatorId: req.session.userId,
+      })
+      .returning("*")
+      .execute();
+
+    return subj.raw[0];
+  }
 }

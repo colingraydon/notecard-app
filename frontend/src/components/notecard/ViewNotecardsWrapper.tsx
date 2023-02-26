@@ -100,9 +100,9 @@ export const ViewNotecardsWrapper: React.FC<
           />
           {value?.cards?.length === 0 && (
             <Box mt={8}>
-              <NextLink href="/create-notecards">
-                <Link>create notecards</Link>
-              </NextLink>
+              <Link as={NextLink} href="/create-notecards">
+                create notecards
+              </Link>
             </Box>
           )}
           {value?.cards?.map((item) => (

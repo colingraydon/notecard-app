@@ -13,7 +13,7 @@ const FullSidebar = () => {
 
   return (
     <Box position="sticky" top="0" height="1" zIndex="1">
-      <HStack w="full" h="100vh" bg="gray.100" padding={2}>
+      <HStack w="full" h="100vh" bg="gray.100">
         <Flex
           as="aside"
           w="full"

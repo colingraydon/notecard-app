@@ -1,6 +1,9 @@
-import { Box, Divider, Flex } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
-import { useDeleteSubjectMutation } from "../../generated/graphql";
+import { Box, Divider, Flex, Input } from "@chakra-ui/react";
+import React, { ChangeEvent, useEffect, useState } from "react";
+import {
+  useDeleteSubjectMutation,
+  useUpdateSubjectMutation,
+} from "../../generated/graphql";
 import SubjectDelete from "./SubjectDelete";
 import SubjectEdit from "./SubjectEdit";
 
@@ -15,11 +18,11 @@ interface SingleSubjectProps {
 const SingleSubject: React.FC<SingleSubjectProps> = (
   props: SingleSubjectProps
 ) => {
-  const [readableDate, setReadableDate] = useState(
+  const [readableDate] = useState(
     new Date(parseInt(props.updatedAt)).toDateString()
   );
 
-  const [parsedTime, setParsedTime] = useState({
+  const [parsedTime] = useState({
     minutes: Math.floor(props.prevTime / 60),
     seconds: props.prevTime - Math.floor(props.prevTime / 60) * 60,
   });
@@ -38,12 +41,9 @@ const SingleSubject: React.FC<SingleSubjectProps> = (
     });
   };
 
-  const [updated, setUpdate] = useState(false);
-
   const [nameState, setNameState] = useState(props.name);
-  const handleNameChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setNameState(e.target.value);
-    setUpdate(true);
   };
   return (
     <Box>
@@ -51,35 +51,36 @@ const SingleSubject: React.FC<SingleSubjectProps> = (
         <Box>
           <Flex>
             <Box ml={4} w={250} pt={2} pb={2}>
-              {props.name}
+              {lockState ? (
+                <Box>{nameState}</Box>
+              ) : (
+                <Input onChange={handleNameChange} size="sm" />
+              )}
             </Box>
             <Box>
               <Divider orientation="vertical" />
             </Box>
 
             <Box pb={2} mr={2}>
-              <SubjectDelete
-                key={props.id}
-                id={props.id}
-                handleDelete={handleDelete}
-              />
-              <SubjectEdit
-                key={props.id}
-                name={nameState}
-                lockState={lockState}
-                id={props.id}
-                prevScore={props.prevScore}
-                prevTime={props.prevTime}
-                handleLockState={handleLockState}
-                handleNameChange={handleNameChange}
-              />
+              <Flex>
+                <SubjectDelete id={props.id} handleDelete={handleDelete} />
+                <SubjectEdit
+                  name={nameState}
+                  lockState={lockState}
+                  id={props.id}
+                  prevScore={props.prevScore}
+                  prevTime={props.prevTime}
+                  handleLockState={handleLockState}
+                  handleNameChange={handleNameChange}
+                />
+              </Flex>
             </Box>
             <Box>
               <Divider orientation="vertical" />
             </Box>
             <Box w={250} pt={2} pb={2} ml={4}>
               <Flex>
-                <Box>last updated: </Box>
+                <Box>updated: </Box>
                 <Box ml="auto">{readableDate}</Box>
               </Flex>
             </Box>
