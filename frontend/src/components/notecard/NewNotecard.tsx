@@ -1,13 +1,4 @@
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Divider,
-  Flex,
-  FormControl,
-  FormLabel,
-  Textarea,
-} from "@chakra-ui/react";
+import { Box, Button, CircularProgress, Divider, Flex } from "@chakra-ui/react";
 import { Form, Formik, isNaN } from "formik";
 import { useRouter } from "next/router";
 import React from "react";
@@ -35,10 +26,13 @@ const NewNotecard: React.FC<NewNotecardProps> = ({}) => {
 
   return (
     <Box>
+      <Box ml={4} fontSize={32} mb={4}>
+        create notecards
+      </Box>
       {loading || loadingSub ? (
         <CircularProgress isIndeterminate value={50} />
       ) : (
-        <Box>
+        <Box ml={4}>
           <Formik
             initialValues={{ title: "", text: "", subId: undefined }}
             onSubmit={async (values, { setErrors }) => {
@@ -73,7 +67,7 @@ const NewNotecard: React.FC<NewNotecardProps> = ({}) => {
             {({ isSubmitting }) => (
               <Box>
                 <Form>
-                  <Box w={400}>
+                  <Box w={280}>
                     <InputFieldSelect
                       name="subId"
                       placeholder="choose a subject..."

@@ -29,7 +29,7 @@ export const SubjectSelect: React.FC<SubjectSelectProps> = (
         <CircularProgress isIndeterminate value={50} />
       ) : (
         <React.Fragment>
-          <Box w={350}>
+          <Box w={280}>
             <Select
               isDisabled={props.started}
               placeholder="select a subject"
@@ -47,7 +47,7 @@ export const SubjectSelect: React.FC<SubjectSelectProps> = (
                 }
               }}
             >
-              {props.subjects.map((item) => (
+              {props.subjects?.map((item) => (
                 <option data-id={item.id} value={item.name} key={item.id}>
                   {item.name}
                 </option>

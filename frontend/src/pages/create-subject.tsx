@@ -36,43 +36,45 @@ const createSubject: React.FC<{}> = ({}) => {
       <FullSidebar></FullSidebar>
       <Box w="100%">
         <NavBar></NavBar>
-        <Box p={4}>
-          <Formik
-            initialValues={{ subject: "" }}
-            onSubmit={async (values, { setErrors }) => {
-              const response = await createSubject({
-                variables: { input: values.subject },
-                //updateing apollo cache
-                update: (cache) => {
-                  //evicting a query, on the root query, put in posts
-                  cache.evict({ fieldName: "subject" });
-                },
-              });
-
-              if (response.data?.createSubject.errors) {
-                setErrors(toErrorMap(response.data.createSubject.errors));
-              } else {
-                toast({
-                  title: "subject created.",
-                  description: "get started by creating notecards!",
-                  status: "success",
-                  duration: 3000,
-                  isClosable: true,
+        <Box p={8} ml={4}>
+          <Box fontSize={32}>subjects</Box>
+          <Box mt={4}>
+            <Formik
+              initialValues={{ subject: "" }}
+              onSubmit={async (values, { setErrors }) => {
+                const response = await createSubject({
+                  variables: { input: values.subject },
+                  //updateing apollo cache
+                  update: (cache) => {
+                    //evicting a query, on the root query, put in posts
+                    cache.evict({ fieldName: "subject" });
+                  },
                 });
-              }
-            }}
-          >
-            {({ isSubmitting }) => (
-              <Box>
-                <Form>
-                  <Flex align="end">
-                    <Box w={250} mr={10}>
+
+                if (response.data?.createSubject.errors) {
+                  setErrors(toErrorMap(response.data.createSubject.errors));
+                } else {
+                  toast({
+                    title: "subject created.",
+                    description: "get started by creating notecards!",
+                    status: "success",
+                    duration: 3000,
+                    isClosable: true,
+                  });
+                }
+              }}
+            >
+              {({ isSubmitting }) => (
+                <Box>
+                  <Form>
+                    <Box w={280} mr={10} pb={8}>
                       <InputField
                         name="subject"
                         placeholder="subject"
                         label="Subject"
                       />
                     </Box>
+
                     <Box>
                       <Button
                         type="submit"
@@ -82,17 +84,16 @@ const createSubject: React.FC<{}> = ({}) => {
                         create subject
                       </Button>
                     </Box>
-                  </Flex>
-                </Form>
-              </Box>
-            )}
-          </Formik>
-
+                  </Form>
+                </Box>
+              )}
+            </Formik>
+          </Box>
           {!dataSub && loadingSub ? (
             <CircularProgress isIndeterminate value={50} />
           ) : (
             <Stack spacing={8}>
-              {dataSub!.getSubjects.map((s) =>
+              {dataSub?.getSubjects.map((s) =>
                 !s ? null : (
                   <SingleSubject
                     name={s.name}

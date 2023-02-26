@@ -87,16 +87,20 @@ export const ViewNotecardsWrapper: React.FC<
 
   return (
     <Box p={8}>
+      <Box ml={4} fontSize={32}>
+        view notecards
+      </Box>
       {loadingMe || loading ? (
         <CircularProgress isIndeterminate value={50} />
       ) : (
-        <Box ml={4}>
+        <Box ml={4} mt={12}>
           <SubjectSelect
             loading={loading}
             started={false}
             subjects={subjects}
             value={value}
             handleChange={handleChange}
+            key={value.id}
           />
           {value?.cards?.length === 0 && (
             <Box mt={8}>

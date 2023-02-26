@@ -25,7 +25,7 @@ export const InputFieldSelect: React.FC<InputFieldSelectProps> = ({
     <FormControl isInvalid={!!error}>
       <FormLabel htmlFor={field.name}>{label}</FormLabel>
       <Select {...field} id={field.name} placeholder={props.placeholder}>
-        {options.map((option) => {
+        {options?.map((option) => {
           return (
             <option key={option.id} value={option.id}>
               {option.name}

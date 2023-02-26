@@ -63,6 +63,8 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
           variant="link"
           color="black"
           onClick={async () => {
+            //line may have to be removed
+            router.push("/");
             await logout(logoutVar);
             //refreshes cache
             await apollo.resetStore();

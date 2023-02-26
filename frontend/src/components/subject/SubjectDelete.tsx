@@ -10,6 +10,7 @@ import {
   Button,
   IconButton,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 import React from "react";
 
@@ -24,9 +25,16 @@ const SubjectDelete: React.FC<SubjectDeleteProps> = (
   //needed for chakra alert
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
-
+  const toast = useToast();
   const deleteClose = () => {
     props.handleDelete(props.id);
+    toast({
+      title: "subject deleted.",
+      description: "we've deleted the subject for you.",
+      status: "success",
+      duration: 2000,
+      isClosable: true,
+    });
     onClose();
   };
   return (

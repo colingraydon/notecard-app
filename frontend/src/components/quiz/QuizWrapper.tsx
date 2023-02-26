@@ -29,17 +29,6 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
 
   const subjects = data?.getSubjects;
 
-  /*used forsubjectSelect component */
-  // const handleClick = ({ name, id }: SingleSub) => {
-  //   const index: number = subjects.findIndex((sub) => sub.id === id);
-  //   setValue({
-  //     name: name,
-  //     id: id,
-  //     cards: subjects[index].cards,
-  //   });
-  // };
-  /**************************************** */
-
   /****handles menu change to generate cards ****/
   const handleChange = ({ name, id }: SingleSub) => {
     const index: number = subjects.findIndex((sub) => sub.id === id);
@@ -61,18 +50,6 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
     setStarted(true);
   };
 
-  /********controls render state for first render********** */
-  // const [initialRender, setInitialRender] = useState(true);
-
-  // useEffect(() => {
-  //   if (initialRender) {
-  //     setInitialRender(false);
-  //   } else {
-  //     console.log("value.cards: ", value.cards);
-  //   }
-  // }, [value]);
-  /**************************************************** */
-
   //used to track checked state
   const [checkState, setCheckState] = useState(false);
   const [incorrectCountState, setIncorrectCountState] = useState(0);
@@ -86,69 +63,71 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
     }
   };
 
-  // useEffect(
-  //   () => console.log("countState: ", incorrectCountState),
-  //   [incorrectCountState]
-  // );
-
   return (
     <Flex>
       <Box p={8} pb={2}>
         {loadingMe || loading ? (
           <CircularProgress isIndeterminate value={50} />
         ) : (
-          <Flex>
-            <Box>
-              <Flex>
-                <Box ml={4} mb={12}>
-                  <SubjectSelect
-                    loading={loading}
-                    subjects={subjects}
-                    value={value}
-                    handleChange={handleChange}
-                    started={started}
-                  />
-                </Box>
-                {value?.id === 0 || value?.cards.length === 0 ? null : (
-                  <Box ml="auto" pr={4}>
-                    <Button w={24} isDisabled={started} onClick={handleStart}>
-                      start
-                    </Button>
+          <Box>
+            <Box ml={4} fontSize={32} mb={12}>
+              quiz
+            </Box>
+            <Flex>
+              <Box>
+                <Flex>
+                  <Box ml={4} mb={12}>
+                    <SubjectSelect
+                      loading={loading}
+                      subjects={subjects}
+                      value={value}
+                      handleChange={handleChange}
+                      started={started}
+                    />
+                  </Box>
+                  {value?.id === 0 || value?.cards.length === 0 ? null : (
+                    <Box ml="auto" pr={4}>
+                      <Button w={24} isDisabled={started} onClick={handleStart}>
+                        start
+                      </Button>
+                    </Box>
+                  )}
+                </Flex>
+                {value?.cards?.length === 0 && (
+                  <Box ml={4}>
+                    <Link as={NextLink} href="/create-notecards">
+                      create notecards
+                    </Link>
                   </Box>
                 )}
-              </Flex>
-              {value?.cards?.length === 0 && (
-                <Box ml={4}>
-                  <Link as={NextLink} href="/create-notecards">
-                    create notecards
-                  </Link>
-                </Box>
-              )}
-              {value?.cards?.map((item) => (
-                <QuizCard
-                  title={item.title}
-                  text={item.text}
-                  key={item.cardId}
-                  cardId={item.cardId}
-                  checkState={checkState}
-                  handleCheckChange={handleCheckChange}
-                />
-              ))}
-            </Box>
-          </Flex>
+                {value?.cards?.map((item) => (
+                  <QuizCard
+                    title={item.title}
+                    text={item.text}
+                    key={item.cardId}
+                    cardId={item.cardId}
+                    checkState={checkState}
+                    handleCheckChange={handleCheckChange}
+                  />
+                ))}
+              </Box>
+            </Flex>
+          </Box>
         )}
       </Box>
       {value?.id === 0 ? null : (
-        <QuizSidebar
-          prevScore={value.prevScore}
-          prevTime={value.prevTime}
-          started={started}
-          numQuestions={value.numQuestions}
-          numIncorrect={incorrectCountState}
-          id={value.id}
-          name={value.name}
-          hasCards={value.cards.length}
-        />
+        <Box mt={2}>
+          <QuizSidebar
+            prevScore={value.prevScore}
+            prevTime={value.prevTime}
+            started={started}
+            numQuestions={value.numQuestions}
+            numIncorrect={incorrectCountState}
+            id={value.id}
+            name={value.name}
+            hasCards={value.cards.length}
+          />
+        </Box>
       )}
     </Flex>
   );

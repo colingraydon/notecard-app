@@ -78,7 +78,7 @@ const SingleSubject: React.FC<SingleSubjectProps> = (
             <Box>
               <Divider orientation="vertical" />
             </Box>
-            <Box w={270} pt={2} pb={2} ml={4} mt={2}>
+            <Box w={250} pt={2} pb={2} ml={4} mt={2}>
               <Flex>
                 <Box>updated: </Box>
                 <Box ml="auto">{readableDate}</Box>
