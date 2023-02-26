@@ -1,46 +1,40 @@
-import { Box, List, ListItem } from "@chakra-ui/react";
+import { List, ListItem } from "@chakra-ui/react";
 import {
   MdCalendarToday,
-  MdOutlineFlag,
+  MdEditNote,
+  MdOutlineArticle,
+  MdOutlineCreate,
   MdOutlineNotificationsActive,
+  MdOutlineQuiz,
   MdOutlineSettingsInputComposite,
-  MdOutlineShoppingBag,
   MdOutlineSpaceDashboard,
-  MdOutlineSupervisorAccount,
 } from "react-icons/md";
-import { AvatarBox } from "../AvatarBox";
 import { NavItem } from "./NavItem";
 
 const items = [
   {
     type: "link",
     label: "subjects",
-    icon: MdOutlineSpaceDashboard,
+    icon: MdOutlineCreate,
     path: "/create-subject",
   },
-  // {
-  //   type: "link",
-  //   label: "manage subjects",
-  //   icon: MdOutlineShoppingBag,
-  //   path: "/",
-  // },
 
   {
     type: "link",
     label: "create notecards",
-    icon: MdCalendarToday,
+    icon: MdEditNote,
     path: "/create-notecards",
   },
   {
     type: "link",
     label: "view notecards",
-    icon: MdOutlineSupervisorAccount,
+    icon: MdOutlineArticle,
     path: "/view-notecards",
   },
   {
     type: "link",
     label: "quiz",
-    icon: MdOutlineFlag,
+    icon: MdOutlineQuiz,
     path: "/quiz",
   },
   {

@@ -6,4 +6,4 @@ This app uses Postgres, Apollo, Express, Redis, TypeORM, and typegraphql on the 
 
 yarn dev
 
-in the root directory, and open a port to localhost:3000 to access the frontend. The Apollo sandbox can be accessed at localhost:4000/graphql
+in the root directory, and open a port to localhost:3000 to access the frontend. The Apollo sandbox can be accessed at localhost:4000/graphql. You will also need to create a postgres DB and pass the name to backend/src/data-source.ts

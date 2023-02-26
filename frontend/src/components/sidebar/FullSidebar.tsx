@@ -1,12 +1,9 @@
-import { Box, Flex, HStack, IconButton, Text } from "@chakra-ui/react";
+import { Box, Flex, HStack, IconButton } from "@chakra-ui/react";
 import React from "react";
 import { MdMenu } from "react-icons/md";
-import { NavBar } from "../NavBar";
 import { AvatarBox } from "./AvatarBox";
 import { Logo } from "./Logo";
-import { Navigation } from "./navigation/Navigation";
 import { Sidebar } from "./Sidebar";
-import { SwitchButtons } from "./SwitchButtons";
 
 const FullSidebar = () => {
   const [collapse, setCollapse] = React.useState(true);

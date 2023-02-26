@@ -8,9 +8,10 @@ import {
   useLogoutMutation,
   useMeQuery,
 } from "../generated/graphql";
-import { MdMenu } from "react-icons/md";
-import { useState } from "react";
+
 import { DarkModeSwitch } from "./DarkModeSwitch";
+import LoginPopoverForm from "./login/LoginPopoverForm";
+import RegisterPopoverForm from "./register/RegisterPopoverForm";
 
 interface NavBarProps {}
 
@@ -46,12 +47,15 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
   //user not logged in
   if (!data?.me) {
     body = (
-      <>
-        <NextLink style={{ marginRight: "5px" }} href="/login">
-          login
-        </NextLink>
-        <NextLink href="register">register</NextLink>
-      </>
+      <Flex>
+        <Box mr={2}>
+          <LoginPopoverForm />
+        </Box>
+
+        <Box>
+          <RegisterPopoverForm />
+        </Box>
+      </Flex>
     );
     //user is logged in
   } else {
