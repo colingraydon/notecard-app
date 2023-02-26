@@ -26,7 +26,8 @@ const documents = {
     "mutation UpdateSubject($input: SubjectInput!) {\n  updateSubject(input: $input) {\n    id\n    prevScore\n    prevTime\n  }\n}": types.UpdateSubjectDocument,
     "mutation UpdateSubjectName($name: String!, $id: Int!) {\n  updateSubjectName(name: $name, id: $id) {\n    id\n    name\n  }\n}": types.UpdateSubjectNameDocument,
     "query GetSubjects {\n  getSubjects {\n    name\n    id\n    prevScore\n    updatedAt\n    prevTime\n    cards {\n      cardId\n      title\n      text\n    }\n  }\n}": types.GetSubjectsDocument,
-    "query Me {\n  me {\n    id\n    username\n    email\n  }\n}": types.MeDocument,
+    "query Me {\n  me {\n    id\n    username\n  }\n}": types.MeDocument,
+    "query MeEmail {\n  meEmail {\n    id\n    username\n    email\n  }\n}": types.MeEmailDocument,
 };
 
 /**
@@ -98,7 +99,11 @@ export function graphql(source: "query GetSubjects {\n  getSubjects {\n    name\
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query Me {\n  me {\n    id\n    username\n    email\n  }\n}"): (typeof documents)["query Me {\n  me {\n    id\n    username\n    email\n  }\n}"];
+export function graphql(source: "query Me {\n  me {\n    id\n    username\n  }\n}"): (typeof documents)["query Me {\n  me {\n    id\n    username\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query MeEmail {\n  meEmail {\n    id\n    username\n    email\n  }\n}"): (typeof documents)["query MeEmail {\n  meEmail {\n    id\n    username\n    email\n  }\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

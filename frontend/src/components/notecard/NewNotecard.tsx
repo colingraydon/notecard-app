@@ -1,4 +1,13 @@
-import { Box, Button, CircularProgress, Flex } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Divider,
+  Flex,
+  FormControl,
+  FormLabel,
+  Textarea,
+} from "@chakra-ui/react";
 import { Form, Formik, isNaN } from "formik";
 import { useRouter } from "next/router";
 import React from "react";
@@ -20,7 +29,6 @@ const NewNotecard: React.FC<NewNotecardProps> = ({}) => {
   useIsAuth();
 
   const { data: dataSub, error, loading: loadingSub } = useGetSubjectsQuery();
-  // const [value, setValue] = useState(undefined);
   const subjects = dataSub?.getSubjects;
 
   const [createNotecards] = useCreateCardMutation();
@@ -40,8 +48,6 @@ const NewNotecard: React.FC<NewNotecardProps> = ({}) => {
                 text: values.text,
                 subId: tempSID,
               };
-              // console.log("typeof tempSID: ", typeof tempSID);
-              // console.log("typeof newValues.subId ", typeof newValues.subId);
               if (isNaN(tempSID)) {
                 newValues = {
                   title: values.title,
@@ -62,33 +68,43 @@ const NewNotecard: React.FC<NewNotecardProps> = ({}) => {
               //         //evicting a query, on the root query, put in cards
               //         cache.evict({fieldName: "card"})
               //     }
-              // })
             }}
           >
             {({ isSubmitting }) => (
-              <Box w={400}>
+              <Box>
                 <Form>
-                  <InputFieldSelect
-                    name="subId"
-                    placeholder="choose a subject..."
-                    label="subject"
-                    options={subjects}
-                    type="number"
-                  />
-                  <InputField
-                    name="title"
-                    placeholder="front"
-                    label="Front"
-                    textArea
-                  />
-                  <Box mt={4}>
-                    <InputField
-                      name="text"
-                      placeholder="back"
-                      label="Back"
-                      textArea
+                  <Box w={400}>
+                    <InputFieldSelect
+                      name="subId"
+                      placeholder="choose a subject..."
+                      label="subject"
+                      options={subjects}
+                      type="number"
                     />
                   </Box>
+
+                  <Flex mt={8}>
+                    <Box>
+                      <InputField
+                        name="title"
+                        placeholder="front"
+                        label="front"
+                        textArea
+                      />
+                    </Box>
+
+                    <Box mr={6} ml={6} mt={8}>
+                      <Divider orientation="vertical" />
+                    </Box>
+                    <Box w={400}>
+                      <InputField
+                        name="text"
+                        placeholder="back"
+                        label="back"
+                        textArea
+                      />
+                    </Box>
+                  </Flex>
                   <Flex>
                     <Button
                       type="submit"

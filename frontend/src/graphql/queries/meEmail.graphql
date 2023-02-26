@@ -1,0 +1,7 @@
+query MeEmail {
+  meEmail {
+    id
+    username
+    email
+  }
+}

@@ -46,11 +46,11 @@ const SingleSubject: React.FC<SingleSubjectProps> = (
     setNameState(e.target.value);
   };
   return (
-    <Box>
-      <Box w={960} mt={8} borderRadius={12} border="solid" borderWidth={1}>
+    <Box mt={8}>
+      <Box w={1100} borderRadius={12} border="solid" borderWidth={1}>
         <Box>
           <Flex>
-            <Box ml={4} w={250} pt={2} pb={2}>
+            <Box ml={4} w={300} pt={2} pb={2} mt={2}>
               {lockState ? (
                 <Box>{nameState}</Box>
               ) : (
@@ -61,7 +61,7 @@ const SingleSubject: React.FC<SingleSubjectProps> = (
               <Divider orientation="vertical" />
             </Box>
 
-            <Box pb={2} mr={2}>
+            <Box pb={2} mr={2} mt={2}>
               <Flex>
                 <SubjectDelete id={props.id} handleDelete={handleDelete} />
                 <SubjectEdit
@@ -78,7 +78,7 @@ const SingleSubject: React.FC<SingleSubjectProps> = (
             <Box>
               <Divider orientation="vertical" />
             </Box>
-            <Box w={250} pt={2} pb={2} ml={4}>
+            <Box w={270} pt={2} pb={2} ml={4} mt={2}>
               <Flex>
                 <Box>updated: </Box>
                 <Box ml="auto">{readableDate}</Box>
@@ -88,7 +88,7 @@ const SingleSubject: React.FC<SingleSubjectProps> = (
             <Box ml={2}>
               <Divider orientation="vertical" />
             </Box>
-            <Box w={170} ml={4} pt={2} pb={2}>
+            <Box w={170} ml={4} pt={2} pb={2} mt={2}>
               <Flex>
                 <Box>previous time: </Box>
                 {props.prevTime !== null && (
@@ -108,7 +108,7 @@ const SingleSubject: React.FC<SingleSubjectProps> = (
             <Box ml={2}>
               <Divider orientation="vertical" />
             </Box>
-            <Box w={200} ml={4} pt={2} pb={2} mr={4}>
+            <Box w={200} ml={4} pt={2} pb={2} mr={4} mt={2}>
               <Flex>
                 <Box>previous score: </Box>
                 {props.prevScore !== null && (

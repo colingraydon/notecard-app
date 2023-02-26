@@ -264,6 +264,14 @@ export class UserResolver {
     return User.findOne({ where: { id: req.session.userId } });
   }
 
+  //Returns user based on cookie
+  @Query(() => User, { nullable: true })
+  meEmail(@Ctx() { req }: Context) {
+    if (!req.session.userId) {
+      return null;
+    }
+    return User.findOne({ where: { id: req.session.userId } });
+  }
   //   //deletes the user's account
   //   //deleting a card, cascading not implemented yet
   @Mutation(() => Boolean)

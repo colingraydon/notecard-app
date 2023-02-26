@@ -1,35 +1,16 @@
-import React, { useEffect, useState } from "react";
+import { Box, Button, Flex, Link } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
-import {
-  FormControl,
-  FormLabel,
-  Input,
-  FormErrorMessage,
-  Box,
-  Button,
-  Link,
-  Flex,
-} from "@chakra-ui/react";
-import { Wrapper } from "../components/Wrapper";
-import { InputField } from "../components/InputField";
-import {
-  MeDocument,
-  MeQuery,
-  useLoginMutation,
-  useRegisterMutation,
-} from "../generated/graphql";
-import { toErrorMap } from "../utils/toErrorMap";
 import { useRouter } from "next/router";
-import NextLink from "next/link";
+import React from "react";
+import { InputField } from "../components/InputField";
+import { Wrapper } from "../components/Wrapper";
+import { MeDocument, MeQuery, useLoginMutation } from "../generated/graphql";
+import { toErrorMap } from "../utils/toErrorMap";
 import { withApollo } from "../utils/withApollo";
 
 interface registerProps {}
 
 const Login: React.FC<{}> = ({}) => {
-  //needed to fix hydration
-  // const [isServer, setIsServer] = useState(true);
-  // useEffect(() => setIsServer(false), []);
-
   //next.js router
   const router = useRouter();
   //react hook. useRegisterMutation codegened the graphql mutation

@@ -123,6 +123,7 @@ export type Query = {
   card?: Maybe<Card>;
   getSubjects?: Maybe<Array<Subject>>;
   me?: Maybe<User>;
+  meEmail?: Maybe<User>;
   subject?: Maybe<Subject>;
   test: Scalars["String"];
 };
@@ -389,7 +390,14 @@ export type MeQueryVariables = Exact<{ [key: string]: never }>;
 
 export type MeQuery = {
   __typename?: "Query";
-  me?: {
+  me?: { __typename?: "User"; id: number; username: string } | null;
+};
+
+export type MeEmailQueryVariables = Exact<{ [key: string]: never }>;
+
+export type MeEmailQuery = {
+  __typename?: "Query";
+  meEmail?: {
     __typename?: "User";
     id: number;
     username: string;
@@ -1101,7 +1109,6 @@ export const MeDocument = gql`
     me {
       id
       username
-      email
     }
   }
 `;
@@ -1136,3 +1143,52 @@ export function useMeLazyQuery(
 export type MeQueryHookResult = ReturnType<typeof useMeQuery>;
 export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>;
 export type MeQueryResult = Apollo.QueryResult<MeQuery, MeQueryVariables>;
+export const MeEmailDocument = gql`
+  query MeEmail {
+    meEmail {
+      id
+      username
+      email
+    }
+  }
+`;
+
+/**
+ * __useMeEmailQuery__
+ *
+ * To run a query within a React component, call `useMeEmailQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMeEmailQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMeEmailQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useMeEmailQuery(
+  baseOptions?: Apollo.QueryHookOptions<MeEmailQuery, MeEmailQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<MeEmailQuery, MeEmailQueryVariables>(
+    MeEmailDocument,
+    options
+  );
+}
+export function useMeEmailLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<MeEmailQuery, MeEmailQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<MeEmailQuery, MeEmailQueryVariables>(
+    MeEmailDocument,
+    options
+  );
+}
+export type MeEmailQueryHookResult = ReturnType<typeof useMeEmailQuery>;
+export type MeEmailLazyQueryHookResult = ReturnType<typeof useMeEmailLazyQuery>;
+export type MeEmailQueryResult = Apollo.QueryResult<
+  MeEmailQuery,
+  MeEmailQueryVariables
+>;

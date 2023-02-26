@@ -1,21 +1,14 @@
-import {
-  Avatar,
-  Box,
-  CircularProgress,
-  Flex,
-  IconButton,
-  Text,
-} from "@chakra-ui/react";
-import { useMeQuery } from "../../generated/graphql";
+import { Avatar, Box, CircularProgress, Flex, Text } from "@chakra-ui/react";
+import { useMeEmailQuery } from "../../generated/graphql";
 
 export const AvatarBox = ({ collapse }) => {
-  const { data, loading } = useMeQuery();
+  const { data, loading } = useMeEmailQuery();
 
   return (
     <Box>
       {loading ? (
         <CircularProgress isIndeterminate value={50} />
-      ) : !data.me ? (
+      ) : !data.meEmail ? (
         <Box></Box>
       ) : (
         <Flex
@@ -29,7 +22,7 @@ export const AvatarBox = ({ collapse }) => {
           gap={2}
           flexDirection={collapse ? "row" : "column-reverse"}
         >
-          <Avatar name={data.me?.username} bg="teal.300" />
+          <Avatar name={data.meEmail?.username} bg="teal.300" />
           {collapse && (
             <Flex
               w="full"
@@ -39,10 +32,10 @@ export const AvatarBox = ({ collapse }) => {
               alignItems="flex-start"
             >
               <Text fontSize="sm" fontWeight="bold" pb="0" lineHeight={0}>
-                {data.me?.username}
+                {data.meEmail?.username}
               </Text>
               <Text as="small" color="gray.500" fontSize={12} lineHeight={0}>
-                {data.me?.email}
+                {data.meEmail?.email}
               </Text>
             </Flex>
           )}
