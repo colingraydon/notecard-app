@@ -1,4 +1,11 @@
-import { Box, Button, CircularProgress, Flex, Link } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Flex,
+  Heading,
+  Link,
+} from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useGetSubjectsQuery, useMeQuery } from "../../generated/graphql";
@@ -70,9 +77,9 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
           <CircularProgress isIndeterminate value={50} />
         ) : (
           <Box>
-            <Box ml={4} fontSize={32} mb={12}>
+            <Heading ml={4} mb={12}>
               quiz
-            </Box>
+            </Heading>
             <Flex>
               <Box>
                 <Flex>

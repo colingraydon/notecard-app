@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Link } from "@chakra-ui/react";
+import { Box, CircularProgress, Heading, Link } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -87,9 +87,7 @@ export const ViewNotecardsWrapper: React.FC<
 
   return (
     <Box p={8}>
-      <Box ml={4} fontSize={32}>
-        view notecards
-      </Box>
+      <Heading ml={4}>view notecards</Heading>
       {loadingMe || loading ? (
         <CircularProgress isIndeterminate value={50} />
       ) : (

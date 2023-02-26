@@ -3,6 +3,7 @@ import {
   Button,
   CircularProgress,
   Flex,
+  Heading,
   Stack,
   useToast,
 } from "@chakra-ui/react";
@@ -37,7 +38,7 @@ const createSubject: React.FC<{}> = ({}) => {
       <Box w="100%">
         <NavBar></NavBar>
         <Box p={8} ml={4}>
-          <Box fontSize={32}>subjects</Box>
+          <Heading>subjects</Heading>
           <Box mt={4}>
             <Formik
               initialValues={{ subject: "" }}

@@ -4,6 +4,7 @@ import {
   CircularProgress,
   Divider,
   Flex,
+  Heading,
   useToast,
 } from "@chakra-ui/react";
 import { Form, Formik, isNaN } from "formik";
@@ -33,9 +34,9 @@ const NewNotecard: React.FC<NewNotecardProps> = ({}) => {
   const toast = useToast();
   return (
     <Box>
-      <Box ml={4} fontSize={32} mb={4}>
+      <Heading ml={4} mb={4}>
         create notecards
-      </Box>
+      </Heading>
       {loading || loadingSub ? (
         <CircularProgress isIndeterminate value={50} />
       ) : (
