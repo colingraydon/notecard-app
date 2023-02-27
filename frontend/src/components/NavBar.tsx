@@ -51,7 +51,6 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
         <Box mr={2}>
           <LoginPopoverForm />
         </Box>
-
         <Box>
           <RegisterPopoverForm />
         </Box>
@@ -60,11 +59,10 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
     //user is logged in
   } else {
     body = (
-      <Flex>
+      <Flex align="center">
         <Box mr={2}>{data.me.username}</Box>
         <Button
           isLoading={logoutFetching}
-          variant="link"
           color="black"
           onClick={async () => {
             //line may have to be removed
@@ -85,10 +83,12 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
         height={10}
         bg="white"
         top={0}
-        p={4}
         w="100%"
         borderRadius={12}
-        padding={6}
+        pt={6}
+        pb={6}
+        pl={6}
+        pr={2}
       >
         <Flex align="center" flex={1}>
           <Box>a lightweight study tool</Box>
