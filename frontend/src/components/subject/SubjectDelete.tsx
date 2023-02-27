@@ -16,7 +16,7 @@ import React from "react";
 
 interface SubjectDeleteProps {
   id: number;
-  handleDelete: (id: number) => void;
+  handleDeleteSubject: (id: number) => void;
 }
 
 const SubjectDelete: React.FC<SubjectDeleteProps> = (
@@ -27,7 +27,7 @@ const SubjectDelete: React.FC<SubjectDeleteProps> = (
   const cancelRef = React.useRef();
   const toast = useToast();
   const deleteClose = () => {
-    props.handleDelete(props.id);
+    props.handleDeleteSubject(props.id);
     toast({
       title: "subject deleted.",
       description: "we've deleted the subject for you.",

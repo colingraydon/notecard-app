@@ -109,17 +109,21 @@ export class SubjectResolver {
     // await subjectRepository.manager.create({name: input, creatorId: req.session.userId})
     // return { subject: subj };
 
+    //all other methods were not returning the id, or overwriting it with subject id
+    //must use repository, manually assign data (cannot use spread operator), then save via repository
+    //this is a known issue with typeorm for postgres with multiple tables, many to one, with an updatedDate column
+    // as per issues on their github
     const userRepository = dataSource.getRepository(User);
     const subjectRepository = dataSource.getRepository(Subject);
     let user = await userRepository.find({
       where: { id: req.session.userId },
     });
     let subject = new Subject();
+
     subject.name = input;
     subject.creatorId = user[0].id;
-    console.log("user: ", user);
     subject = await subjectRepository.save(subject);
-    console.log(subject);
+
     return { subject };
   }
 

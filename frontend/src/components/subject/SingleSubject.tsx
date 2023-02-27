@@ -14,6 +14,7 @@ interface SingleSubjectProps {
   prevTime: number;
   updatedAt: string;
   numCards: number;
+  handleDeleteSubject: (id: number) => void;
 }
 
 const SingleSubject: React.FC<SingleSubjectProps> = (
@@ -35,12 +36,12 @@ const SingleSubject: React.FC<SingleSubjectProps> = (
     setLockState(!lockState);
   };
 
-  const [deleteSubject] = useDeleteSubjectMutation();
-  const handleDelete = (id: number) => {
-    deleteSubject({
-      variables: { id },
-    });
-  };
+  // const [deleteSubject] = useDeleteSubjectMutation();
+  // const handleDelete = (id: number) => {
+  //   deleteSubject({
+  //     variables: { id },
+  //   });
+  // };
 
   const [nameState, setNameState] = useState(props.name);
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -64,7 +65,10 @@ const SingleSubject: React.FC<SingleSubjectProps> = (
 
             <Box pb={2} mr={2} mt={2}>
               <Flex>
-                <SubjectDelete id={props.id} handleDelete={handleDelete} />
+                <SubjectDelete
+                  id={props.id}
+                  handleDeleteSubject={props.handleDeleteSubject}
+                />
                 <SubjectEdit
                   name={nameState}
                   lockState={lockState}

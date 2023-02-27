@@ -16,6 +16,7 @@ import FullSidebar from "../components/sidebar/FullSidebar";
 import SingleSubject from "../components/subject/SingleSubject";
 import {
   useCreateSubjectMutation,
+  useDeleteSubjectMutation,
   useGetSubjectsQuery,
   useMeQuery,
 } from "../generated/graphql";
@@ -45,6 +46,14 @@ const createSubject: React.FC<{}> = ({}) => {
 
   const handleCreateSubject = (sub) => {
     setSubjects([...subjects, sub]);
+  };
+
+  const [deleteSubject] = useDeleteSubjectMutation();
+  const handleDeleteSubject = (id: number) => {
+    deleteSubject({
+      variables: { id },
+    });
+    setSubjects([...subjects.filter((s) => s.id !== id)]);
   };
 
   const toast = useToast();
@@ -119,13 +128,14 @@ const createSubject: React.FC<{}> = ({}) => {
               {subjects?.map((s) =>
                 !s ? null : (
                   <SingleSubject
+                    handleDeleteSubject={handleDeleteSubject}
                     name={s.name}
                     id={s.id}
                     prevScore={s.prevScore}
                     prevTime={s.prevTime}
                     updatedAt={s.updatedAt}
                     key={s.id}
-                    numCards={s.cards.length}
+                    numCards={s.cards?.length}
                   />
                 )
               )}
