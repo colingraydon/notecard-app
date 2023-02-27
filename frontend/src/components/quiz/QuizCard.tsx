@@ -8,19 +8,24 @@ import {
   Textarea,
   useDisclosure,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 
 interface QuizCardProps {
   title: string;
   text: string;
   cardId: number;
-  checkState: boolean;
-  handleCheckChange: () => void;
+
+  handleCheckChange: (check: boolean) => void;
 }
 
 const QuizCard: React.FC<QuizCardProps> = (props: QuizCardProps) => {
   const { isOpen, onToggle } = useDisclosure();
 
+  const [checkedState, setCheckedState] = useState(false);
+
+  const handleCheckedChange = () => {
+    setCheckedState(!checkedState);
+  };
   return (
     <Box>
       <Box mb={8} p={4}>
@@ -51,7 +56,13 @@ const QuizCard: React.FC<QuizCardProps> = (props: QuizCardProps) => {
         </Flex>
         <Flex align="center" justify="end" mt={1}>
           <Box textAlign="end" mr={4}>
-            <Checkbox onChange={props.handleCheckChange}>
+            <Checkbox
+              key={props.cardId}
+              onChange={() => {
+                props.handleCheckChange(checkedState);
+                handleCheckedChange();
+              }}
+            >
               mark incorrect
             </Checkbox>
           </Box>

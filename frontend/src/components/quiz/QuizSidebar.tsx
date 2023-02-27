@@ -1,13 +1,27 @@
-import { Box, Button, Flex } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  useDisclosure,
+} from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useUpdateSubjectMutation } from "../../generated/graphql";
-
+import { useRouter } from "next/router";
+import QuizResults from "./QuizResults";
 interface QuizSidebarProps {
   prevScore: number;
   prevTime: number;
   started: boolean;
-  numQuestions: number;
-  numIncorrect: number;
+  // numQuestions: number;
+  // numIncorrect: number;
+  score: number;
   id: number;
   name: string;
   hasCards: number;
@@ -15,6 +29,7 @@ interface QuizSidebarProps {
 }
 
 const QuizSidebar: React.FC<QuizSidebarProps> = (props: QuizSidebarProps) => {
+  const router = useRouter();
   /* ****************used for timer********/
   const [time, setTime] = React.useState({
     minutes: 0,
@@ -57,21 +72,20 @@ const QuizSidebar: React.FC<QuizSidebarProps> = (props: QuizSidebarProps) => {
   const [updateSubject] = useUpdateSubjectMutation();
 
   const handleSubmit = () => {
-    props.handleStarted;
     updateSubject({
       variables: {
         input: {
           id: props.id,
           name: props.name,
           prevTime: time.minutes * 60 + time.seconds,
-          prevScore: Math.floor(
-            ((props.numQuestions - props.numIncorrect) / props.numQuestions) *
-              100
-          ),
+          prevScore: props.score,
         },
       },
     });
   };
+
+  //necessary to control state of modal
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <Box position="sticky" top={55} height="1" zIndex="0" pr={2}>
@@ -85,32 +99,47 @@ const QuizSidebar: React.FC<QuizSidebarProps> = (props: QuizSidebarProps) => {
                   .toString()
                   .padStart(2, "0")}`}
               </Box>
-              {/* <Box>{props.numCards}</Box>
-              <Box>{typeof props.numCards}</Box> */}
+
               <Box ml="auto">
-                <Button
-                  isDisabled={!props.started}
-                  onClick={() => {
-                    console.log("new test");
-                    props.handleStarted();
-                    // updateSubject({
-                    //   variables: {
-                    //     input: {
-                    //       id: props.id,
-                    //       name: props.name,
-                    //       prevTime: time.minutes * 60 + time.seconds,
-                    //       prevScore: Math.floor(
-                    //         ((props.numQuestions - props.numIncorrect) /
-                    //           props.numQuestions) *
-                    //           100
-                    //       ),
-                    //     },
-                    //   },
-                    // });
-                  }}
-                >
-                  submit
-                </Button>
+                <Box>
+                  <Box>score: {props.score}</Box>
+                  <Button
+                    isDisabled={!props.started}
+                    onClick={() => {
+                      onOpen();
+                      props.handleStarted();
+                    }}
+                  >
+                    submit
+                  </Button>
+
+                  <Modal isOpen={isOpen} onClose={onClose}>
+                    <ModalOverlay />
+                    <ModalContent>
+                      <ModalHeader>results</ModalHeader>
+                      <ModalCloseButton />
+                      <ModalBody>
+                        <QuizResults
+                          prevSeconds={prevStringTime.seconds}
+                          prevMinutes={prevStringTime.minutes}
+                          prevScore={props.prevScore}
+                          currSeconds={time.seconds}
+                          currMinutes={time.minutes}
+                          currScore={props.score}
+                        />
+                      </ModalBody>
+
+                      <ModalFooter>
+                        <Button colorScheme="blue" mr={3} onClick={onClose}>
+                          close
+                        </Button>
+                        <Button variant="ghost" onClick={() => router.reload()}>
+                          try again
+                        </Button>
+                      </ModalFooter>
+                    </ModalContent>
+                  </Modal>
+                </Box>
               </Box>
             </Flex>
           </Box>

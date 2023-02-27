@@ -57,18 +57,19 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
     setStarted(!started);
   };
 
-  //used to track checked state
-  const [checkState, setCheckState] = useState(false);
+  //used to track incorrect state
   const [incorrectCountState, setIncorrectCountState] = useState(0);
-  const handleCheckChange = () => {
-    if (checkState) {
-      setCheckState(false);
-      setIncorrectCountState((count) => count - 1);
-    } else {
-      setCheckState(true);
-      setIncorrectCountState((count) => count + 1);
-    }
+  const handleCheckChange = (check: boolean) => {
+    check
+      ? setIncorrectCountState(incorrectCountState - 1)
+      : setIncorrectCountState(incorrectCountState + 1);
   };
+
+  //for testing incorrect count
+  useEffect(() => {
+    console.log("incorrect: ", incorrectCountState);
+    console.log("num questions: ", value.cards?.length);
+  });
 
   return (
     <Flex>
@@ -117,7 +118,6 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
                     text={item.text}
                     key={item.cardId}
                     cardId={item.cardId}
-                    checkState={checkState}
                     handleCheckChange={handleCheckChange}
                   />
                 ))}
@@ -132,12 +132,15 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
             prevScore={value.prevScore}
             prevTime={value.prevTime}
             started={started}
-            numQuestions={value.numQuestions}
-            numIncorrect={incorrectCountState}
             id={value.id}
             name={value.name}
             hasCards={value.cards.length}
             handleStarted={handleStarted}
+            score={Math.floor(
+              ((value.numQuestions - incorrectCountState) /
+                value.numQuestions) *
+                100
+            )}
           />
         </Box>
       )}
