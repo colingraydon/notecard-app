@@ -94,12 +94,16 @@ const SingleSubject: React.FC<SingleSubjectProps> = (
                 {props.prevTime !== null && (
                   <Box ml="auto">
                     <Flex>
-                      <Box>{parsedTime.minutes}:</Box>
-                      {parsedTime.seconds < 10 ? (
-                        <Box>0{parsedTime.seconds}</Box>
-                      ) : (
-                        <Box>{parsedTime.seconds}</Box>
+                      {!isNaN(parsedTime.minutes) && (
+                        <Box>{parsedTime.minutes}:</Box>
                       )}
+                      {parsedTime.seconds < 10
+                        ? !isNaN(parsedTime.seconds) && (
+                            <Box>0{parsedTime.seconds}</Box>
+                          )
+                        : !isNaN(parsedTime.seconds) && (
+                            <Box>{parsedTime.seconds}</Box>
+                          )}
                     </Flex>
                   </Box>
                 )}
@@ -111,7 +115,7 @@ const SingleSubject: React.FC<SingleSubjectProps> = (
             <Box w={200} ml={4} pt={2} pb={2} mr={4} mt={2}>
               <Flex>
                 <Box>previous score: </Box>
-                {props.prevScore !== null && (
+                {props.prevScore !== null && !isNaN(props.prevScore) && (
                   <Box ml="auto">{props.prevScore}%</Box>
                 )}
               </Flex>

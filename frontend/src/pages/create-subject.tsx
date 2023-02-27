@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { InputField } from "../components/InputField";
 import { NavBar } from "../components/NavBar";
 import FullSidebar from "../components/sidebar/FullSidebar";
@@ -25,12 +25,28 @@ import { withApollo } from "../utils/withApollo";
 
 const createSubject: React.FC<{}> = ({}) => {
   //must consider state of me query, as it will be false while loading
-  const { data, loading } = useMeQuery();
+  // const { data, loading } = useMeQuery();
   const router = useRouter();
   //custom hook that checks authorization using MeQuery
   useIsAuth();
   const [createSubject] = useCreateSubjectMutation();
-  const { data: dataSub, error, loading: loadingSub } = useGetSubjectsQuery();
+
+  const [subjects, setSubjects] = useState([]);
+  const { data, error, loading } = useGetSubjectsQuery({
+    // onCompleted: () => setSubjects(data?.getSubjects),
+  });
+
+  useEffect(() => {
+    if (data) {
+      setSubjects(data.getSubjects);
+    }
+    console.log("data.getSubjects: ", data?.getSubjects);
+  }, [data]);
+
+  const handleCreateSubject = (sub) => {
+    setSubjects([...subjects, sub]);
+  };
+
   const toast = useToast();
   return (
     <Flex>
@@ -49,6 +65,7 @@ const createSubject: React.FC<{}> = ({}) => {
                   update: (cache) => {
                     //evicting a query, on the root query, put in posts
                     cache.evict({ fieldName: "subject" });
+                    cache.gc();
                   },
                 });
 
@@ -59,10 +76,11 @@ const createSubject: React.FC<{}> = ({}) => {
                     title: "subject created.",
                     description: "get started by creating notecards!",
                     status: "success",
-                    duration: 3000,
+                    duration: 2000,
                     isClosable: true,
                   });
                 }
+                handleCreateSubject(response.data?.createSubject.subject);
               }}
             >
               {({ isSubmitting }) => (
@@ -90,11 +108,11 @@ const createSubject: React.FC<{}> = ({}) => {
               )}
             </Formik>
           </Box>
-          {!dataSub && loadingSub ? (
+          {!data && loading ? (
             <CircularProgress isIndeterminate value={50} />
           ) : (
             <Stack spacing={8}>
-              {dataSub?.getSubjects.map((s) =>
+              {subjects?.map((s) =>
                 !s ? null : (
                   <SingleSubject
                     name={s.name}

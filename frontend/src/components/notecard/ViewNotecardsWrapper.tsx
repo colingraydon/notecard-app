@@ -97,6 +97,7 @@ export const ViewNotecardsWrapper: React.FC<
             started={false}
             subjects={subjects}
             value={value}
+            startedOnce={false}
             handleChange={handleChange}
             key={value.id}
           />

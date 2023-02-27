@@ -1,15 +1,13 @@
-import { Flex, Button, Heading, Box, IconButton } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import NextLink from "next/link";
 import { useApolloClient } from "@apollo/client";
-import { isServerFn } from "../utils/isServer";
+import { Box, Button, Flex } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import {
   LogoutMutationVariables,
   useLogoutMutation,
   useMeQuery,
 } from "../generated/graphql";
+import { isServerFn } from "../utils/isServer";
 
-import { DarkModeSwitch } from "./DarkModeSwitch";
 import LoginPopoverForm from "./login/LoginPopoverForm";
 import RegisterPopoverForm from "./register/RegisterPopoverForm";
 
