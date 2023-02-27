@@ -83,15 +83,6 @@ const SingleSubject: React.FC<SingleSubjectProps> = (
             <Box>
               <Divider orientation="vertical" />
             </Box>
-            <Box w={250} pt={2} pb={2} ml={4} mt={2}>
-              <Flex>
-                <Box>updated: </Box>
-                <Box ml="auto">{readableDate}</Box>
-              </Flex>
-            </Box>
-            <Box ml={2}>
-              <Divider orientation="vertical" />
-            </Box>
             <Box w={100} pt={2} pb={2} ml={4} mt={2}>
               <Flex>
                 <Box>cards: </Box>
@@ -101,9 +92,19 @@ const SingleSubject: React.FC<SingleSubjectProps> = (
             <Box ml={2}>
               <Divider orientation="vertical" />
             </Box>
-            <Box w={170} ml={4} pt={2} pb={2} mt={2}>
+            <Box w={250} pt={2} pb={2} ml={4} mt={2}>
               <Flex>
-                <Box>previous time: </Box>
+                <Box>updated: </Box>
+                <Box ml="auto">{readableDate}</Box>
+              </Flex>
+            </Box>
+            <Box ml={2}>
+              <Divider orientation="vertical" />
+            </Box>
+
+            <Box w={150} ml={4} pt={2} pb={2} mt={2}>
+              <Flex>
+                <Box>last time: </Box>
                 {props.prevTime !== null && (
                   <Box ml="auto">
                     <Flex>
@@ -125,9 +126,9 @@ const SingleSubject: React.FC<SingleSubjectProps> = (
             <Box ml={2}>
               <Divider orientation="vertical" />
             </Box>
-            <Box w={200} ml={4} pt={2} pb={2} mr={4} mt={2}>
+            <Box w={150} ml={4} pt={2} pb={2} mr={4} mt={2}>
               <Flex>
-                <Box>previous score: </Box>
+                <Box>last score: </Box>
                 {props.prevScore !== null && !isNaN(props.prevScore) && (
                   <Box ml="auto">{props.prevScore}%</Box>
                 )}

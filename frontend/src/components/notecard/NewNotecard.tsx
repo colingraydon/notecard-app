@@ -5,6 +5,7 @@ import {
   Divider,
   Flex,
   Heading,
+  Link,
   useToast,
 } from "@chakra-ui/react";
 import { Form, Formik, isNaN } from "formik";
@@ -19,6 +20,7 @@ import { toErrorMap } from "../../utils/toErrorMap";
 import useIsAuth from "../../utils/useIsAuth";
 import { InputField } from "../InputField";
 import { InputFieldSelect } from "../InputFieldSelect";
+import NextLink from "next/link";
 
 interface NewNotecardProps {}
 
@@ -92,6 +94,13 @@ const NewNotecard: React.FC<NewNotecardProps> = ({}) => {
                       type="number"
                     />
                   </Box>
+                  {subjects.length === 0 && (
+                    <Box mt={12}>
+                      <Link as={NextLink} href="/create-subject">
+                        create subjects to get started.
+                      </Link>
+                    </Box>
+                  )}
 
                   <Flex mt={8}>
                     <Box>

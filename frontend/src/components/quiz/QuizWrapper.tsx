@@ -96,6 +96,7 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
                       startedOnce={startedOnce}
                     />
                   </Box>
+
                   {value?.id === 0 || value?.cards.length === 0 ? null : (
                     <Box ml="auto" pr={4}>
                       <Button
@@ -112,6 +113,13 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
                   <Box ml={4}>
                     <Link as={NextLink} href="/create-notecards">
                       create notecards
+                    </Link>
+                  </Box>
+                )}
+                {subjects.length === 0 && (
+                  <Box ml={4}>
+                    <Link as={NextLink} href="/create-subject">
+                      create subjects to get started.
                     </Link>
                   </Box>
                 )}

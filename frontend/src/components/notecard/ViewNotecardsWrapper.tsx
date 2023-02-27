@@ -108,6 +108,13 @@ export const ViewNotecardsWrapper: React.FC<
               </Link>
             </Box>
           )}
+          {subjects.length === 0 && (
+            <Box mt={12}>
+              <Link as={NextLink} href="/create-subject">
+                create subjects to get started.
+              </Link>
+            </Box>
+          )}
           {value?.cards?.map((item) => (
             <SingleNotecard
               title={item.title}
