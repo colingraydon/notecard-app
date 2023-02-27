@@ -52,7 +52,9 @@ const SingleSubject: React.FC<SingleSubjectProps> = (
           <Flex>
             <Box ml={4} w={300} pt={2} pb={2} mt={2}>
               {lockState ? (
-                <Box>{nameState}</Box>
+                <Box>
+                  {nameState}, {props.id}
+                </Box>
               ) : (
                 <Input onChange={handleNameChange} size="sm" />
               )}

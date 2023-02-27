@@ -40,7 +40,7 @@ const createSubject: React.FC<{}> = ({}) => {
     if (data) {
       setSubjects(data.getSubjects);
     }
-    console.log("data.getSubjects: ", data?.getSubjects);
+    // console.log("data.getSubjects: ", data?.getSubjects);
   }, [data]);
 
   const handleCreateSubject = (sub) => {
@@ -64,7 +64,7 @@ const createSubject: React.FC<{}> = ({}) => {
                   //updateing apollo cache
                   update: (cache) => {
                     //evicting a query, on the root query, put in posts
-                    cache.evict({ fieldName: "subject" });
+                    cache.evict({ fieldName: "Subject" });
                     cache.gc();
                   },
                 });
@@ -80,6 +80,10 @@ const createSubject: React.FC<{}> = ({}) => {
                     isClosable: true,
                   });
                 }
+                console.log(
+                  "subjectId: ",
+                  response.data.createSubject.subject.id
+                );
                 handleCreateSubject(response.data?.createSubject.subject);
               }}
             >
