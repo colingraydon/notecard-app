@@ -63,7 +63,8 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
         <Box mr={2}>{data.me.username}</Box>
         <Button
           isLoading={logoutFetching}
-          color="black"
+          // color="black"
+          variant="ghost"
           onClick={async () => {
             //line may have to be removed
             router.push("/");

@@ -52,9 +52,11 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
 
   //used to start and stop  quiz
   const [started, setStarted] = useState(false);
+  const [startedOnce, setStartedOnce] = useState(false);
   const handleStarted = () => {
     console.log("handle start");
     setStarted(!started);
+    setStartedOnce(true);
   };
 
   //used to track incorrect state
@@ -90,14 +92,15 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
                       subjects={subjects}
                       value={value}
                       handleChange={handleChange}
-                      started={started}
+                      started={startedOnce}
+                      startedOnce={startedOnce}
                     />
                   </Box>
                   {value?.id === 0 || value?.cards.length === 0 ? null : (
                     <Box ml="auto" pr={4}>
                       <Button
                         w={24}
-                        isDisabled={started}
+                        isDisabled={startedOnce}
                         onClick={handleStarted}
                       >
                         start

@@ -13,6 +13,7 @@ interface SubjectSelectProps {
     id: number;
   };
   started: boolean;
+  startedOnce: boolean;
   handleChange: (item: { name: string; id: number }) => void;
 }
 
@@ -20,8 +21,8 @@ export const SubjectSelect: React.FC<SubjectSelectProps> = (
   props: SubjectSelectProps
 ) => {
   const { data, error, loading } = useGetSubjectsQuery();
-  const [value, setValue] = useState("chose a subject");
-  const subjects = data?.getSubjects;
+  // const [value, setValue] = useState("chose a subject");
+  // const subjects = data?.getSubjects;
 
   return (
     <Box>
@@ -59,5 +60,3 @@ export const SubjectSelect: React.FC<SubjectSelectProps> = (
     </Box>
   );
 };
-
-//newValue => void

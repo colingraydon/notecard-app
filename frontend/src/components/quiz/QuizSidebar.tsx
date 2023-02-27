@@ -19,8 +19,6 @@ interface QuizSidebarProps {
   prevScore: number;
   prevTime: number;
   started: boolean;
-  // numQuestions: number;
-  // numIncorrect: number;
   score: number;
   id: number;
   name: string;
@@ -71,19 +69,6 @@ const QuizSidebar: React.FC<QuizSidebarProps> = (props: QuizSidebarProps) => {
 
   const [updateSubject] = useUpdateSubjectMutation();
 
-  const handleSubmit = () => {
-    updateSubject({
-      variables: {
-        input: {
-          id: props.id,
-          name: props.name,
-          prevTime: time.minutes * 60 + time.seconds,
-          prevScore: props.score,
-        },
-      },
-    });
-  };
-
   //necessary to control state of modal
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -102,12 +87,21 @@ const QuizSidebar: React.FC<QuizSidebarProps> = (props: QuizSidebarProps) => {
 
               <Box ml="auto">
                 <Box>
-                  <Box>score: {props.score}</Box>
                   <Button
                     isDisabled={!props.started}
                     onClick={() => {
                       onOpen();
                       props.handleStarted();
+                      updateSubject({
+                        variables: {
+                          input: {
+                            id: props.id,
+                            name: props.name,
+                            prevTime: time.minutes * 60 + time.seconds,
+                            prevScore: props.score,
+                          },
+                        },
+                      });
                     }}
                   >
                     submit
@@ -130,10 +124,13 @@ const QuizSidebar: React.FC<QuizSidebarProps> = (props: QuizSidebarProps) => {
                       </ModalBody>
 
                       <ModalFooter>
-                        <Button colorScheme="blue" mr={3} onClick={onClose}>
+                        <Button variant="ghost" mr={3} onClick={onClose}>
                           close
                         </Button>
-                        <Button variant="ghost" onClick={() => router.reload()}>
+                        <Button
+                          colorScheme="blue"
+                          onClick={() => router.reload()}
+                        >
                           try again
                         </Button>
                       </ModalFooter>
