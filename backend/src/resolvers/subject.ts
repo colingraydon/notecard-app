@@ -75,16 +75,52 @@ export class SubjectResolver {
         ],
       };
     }
-    const rawUser = await User.find({ where: { id: req.session.userId } });
-    const user = rawUser[0];
-    const subj = Subject.create({
-      name: input,
-      ...user,
-      creatorId: req.session.userId,
+    // const rawUser = await User.find({ where: { id: req.session.userId } });
+    // const user = rawUser[0];
+    // const subj = Subject.create({
+    //   name: input,
+    //   ...user,
+    //   creatorId: req.session.userId,
+    // });
+    // subj.save();
+
+    // const testResult = await dataSource
+    //   .createQueryBuilder()
+    //   .insert()
+    //   .into(Subject)
+    //   .values([
+    //     {
+    //       name: input,
+    //       creatorId: req.session.userId,
+    //     },
+    //   ])
+    //   .execute();
+
+    // const testResultReal = testResult.raw[0] as Subject;
+    // console.log("test resultReal: ", testResultReal);
+    // console.log("typeof testResultReal: ", typeof testResultReal);
+    // return testResultReal;
+
+    // const userRepository = dataSource.getRepository(User);
+    // const user = await userRepository.find({
+    //   where: { id: req.session.userId },
+    // });
+    // const subjectRepository = await dataSource.getRepository(Subject);
+    // await subjectRepository.manager.create({name: input, creatorId: req.session.userId})
+    // return { subject: subj };
+
+    const userRepository = dataSource.getRepository(User);
+    const subjectRepository = dataSource.getRepository(Subject);
+    let user = await userRepository.find({
+      where: { id: req.session.userId },
     });
-    subj.save();
-    console.log("subj from resolver: ", subj);
-    return { subject: subj };
+    let subject = new Subject();
+    subject.name = input;
+    subject.creatorId = user[0].id;
+    console.log("user: ", user);
+    subject = await subjectRepository.save(subject);
+    console.log(subject);
+    return { subject };
   }
 
   @Query(() => [Subject], { nullable: true })

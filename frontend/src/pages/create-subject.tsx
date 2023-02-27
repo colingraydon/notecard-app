@@ -125,6 +125,7 @@ const createSubject: React.FC<{}> = ({}) => {
                     prevTime={s.prevTime}
                     updatedAt={s.updatedAt}
                     key={s.id}
+                    numCards={s.cards.length}
                   />
                 )
               )}

@@ -13,6 +13,7 @@ interface SingleSubjectProps {
   prevScore: number;
   prevTime: number;
   updatedAt: string;
+  numCards: number;
 }
 
 const SingleSubject: React.FC<SingleSubjectProps> = (
@@ -52,9 +53,7 @@ const SingleSubject: React.FC<SingleSubjectProps> = (
           <Flex>
             <Box ml={4} w={300} pt={2} pb={2} mt={2}>
               {lockState ? (
-                <Box>
-                  {nameState}, {props.id}
-                </Box>
+                <Box>{nameState}</Box>
               ) : (
                 <Input onChange={handleNameChange} size="sm" />
               )}
@@ -86,7 +85,15 @@ const SingleSubject: React.FC<SingleSubjectProps> = (
                 <Box ml="auto">{readableDate}</Box>
               </Flex>
             </Box>
-
+            <Box ml={2}>
+              <Divider orientation="vertical" />
+            </Box>
+            <Box w={100} pt={2} pb={2} ml={4} mt={2}>
+              <Flex>
+                <Box>cards: </Box>
+                <Box ml="auto">{props.numCards}</Box>
+              </Flex>
+            </Box>
             <Box ml={2}>
               <Divider orientation="vertical" />
             </Box>
