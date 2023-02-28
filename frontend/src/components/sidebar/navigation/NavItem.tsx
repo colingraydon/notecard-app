@@ -6,12 +6,16 @@ import {
   Box,
   Badge,
   Text,
+  Divider,
 } from "@chakra-ui/react";
 import React from "react";
 
 export const NavItem = ({ item, isActive, collapse }) => {
   const { label } = item;
 
+  if (item.type === "border") {
+    return <Divider w={collapse ? 60 : 6} ml={collapse ? 0 : 2}></Divider>;
+  }
   if (item.type === "link") {
     const { icon, notifications, messages, path } = item;
     return (
@@ -20,7 +24,6 @@ export const NavItem = ({ item, isActive, collapse }) => {
         alignItems="center"
         my={6}
         justifyContent="center"
-        mb={!collapse ? 6 : 0}
         minH={25}
       >
         <LinkChakra
@@ -35,7 +38,15 @@ export const NavItem = ({ item, isActive, collapse }) => {
           w="full"
           justifyContent={!collapse ? "center" : ""}
         >
-          <ListIcon as={icon} fontSize={22} m="0" />
+          <ListIcon
+            as={icon}
+            fontSize={22}
+            // m="0"
+            mb={0}
+            ml={0}
+            mr={0}
+            mt={!collapse && item.label === "notifications" ? 1 : 0}
+          />
           {collapse && <Text>{label}</Text>}
         </LinkChakra>
         {collapse && (
@@ -71,10 +82,9 @@ export const NavItem = ({ item, isActive, collapse }) => {
       fontWeight="medium"
       textTransform="uppercase"
       fontSize="sm"
-      borderTopWidth={1}
+      // borderTopWidth={1}
       borderColor="gray.100"
-      //changed this
-      pt={0}
+      pt={!collapse ? 15 : 0}
       my={6}
     >
       <Text display={collapse ? "flex" : "none"}>{label}</Text>

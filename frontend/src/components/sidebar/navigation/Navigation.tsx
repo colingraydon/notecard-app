@@ -43,8 +43,11 @@ export const Navigation = ({ collapse }) => {
       path: "/quiz",
     },
     {
+      type: "border",
+    },
+    {
       type: "header",
-      label: "Account",
+      label: "account",
     },
 
     {

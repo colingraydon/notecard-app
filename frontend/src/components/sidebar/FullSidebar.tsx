@@ -15,8 +15,8 @@ const FullSidebar = () => {
           as="aside"
           w="full"
           h="full"
-          maxW={collapse ? 300 : 100}
-          minW={collapse ? 300 : 100}
+          maxW={collapse ? 300 : 85}
+          minW={collapse ? 300 : 85}
           bg="white"
           padding={6}
           flexDirection="column"

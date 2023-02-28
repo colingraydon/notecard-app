@@ -4,7 +4,7 @@ import { Navigation } from "./navigation/Navigation";
 
 export const Sidebar = ({ collapse }) => (
   <React.Fragment>
-    <Box w="full">
+    <Box w="full" ml={collapse ? 2 : 0}>
       <Navigation collapse={collapse} />
     </Box>
   </React.Fragment>
