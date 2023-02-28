@@ -3,5 +3,6 @@ query GetNotifications {
     id
     text
     read
+    createdAt
   }
 }

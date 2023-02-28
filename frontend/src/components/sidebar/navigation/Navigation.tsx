@@ -1,4 +1,4 @@
-import { List, ListItem } from "@chakra-ui/react";
+import { Box, List, ListItem } from "@chakra-ui/react";
 import {
   MdCalendarToday,
   MdEditNote,
@@ -9,61 +9,68 @@ import {
   MdOutlineSettingsInputComposite,
   MdOutlineSpaceDashboard,
 } from "react-icons/md";
+import { useGetNotificationsQuery } from "../../../generated/graphql";
 import { NavItem } from "./NavItem";
 
-const items = [
-  {
-    type: "link",
-    label: "subjects",
-    icon: MdOutlineCreate,
-    path: "/create-subject",
-  },
+export const Navigation = ({ collapse }) => {
+  const { data, loading, error } = useGetNotificationsQuery();
 
-  {
-    type: "link",
-    label: "create notecards",
-    icon: MdEditNote,
-    path: "/create-notecards",
-  },
-  {
-    type: "link",
-    label: "view notecards",
-    icon: MdOutlineArticle,
-    path: "/view-notecards",
-  },
-  {
-    type: "link",
-    label: "quiz",
-    icon: MdOutlineQuiz,
-    path: "/quiz",
-  },
-  {
-    type: "header",
-    label: "Account",
-  },
+  const numUnread = data?.getNotifications.filter((s) => !s.read);
+  const items = [
+    {
+      type: "link",
+      label: "subjects",
+      icon: MdOutlineCreate,
+      path: "/create-subject",
+    },
 
-  {
-    type: "link",
-    label: "notifications",
-    icon: MdOutlineNotificationsActive,
-    path: "/",
-    notifications: 0,
-  },
+    {
+      type: "link",
+      label: "create notecards",
+      icon: MdEditNote,
+      path: "/create-notecards",
+    },
+    {
+      type: "link",
+      label: "view notecards",
+      icon: MdOutlineArticle,
+      path: "/view-notecards",
+    },
+    {
+      type: "link",
+      label: "quiz",
+      icon: MdOutlineQuiz,
+      path: "/quiz",
+    },
+    {
+      type: "header",
+      label: "Account",
+    },
 
-  {
-    type: "link",
-    label: "settings",
-    icon: MdOutlineSettingsInputComposite,
-    path: "/",
-  },
-];
+    {
+      type: "link",
+      label: "notifications",
+      icon: MdOutlineNotificationsActive,
+      path: "/notifications",
+      notifications: numUnread?.length,
+    },
 
-export const Navigation = ({ collapse }) => (
-  <List w="full" my={8}>
-    {items.map((item, index) => (
-      <ListItem key={index}>
-        <NavItem item={item} isActive={index === 0} collapse={collapse} />
-      </ListItem>
-    ))}
-  </List>
-);
+    {
+      type: "link",
+      label: "settings",
+      icon: MdOutlineSettingsInputComposite,
+      path: "/",
+    },
+  ];
+  return (
+    <Box>
+      <List w="full" my={8}>
+        {items.map((item, index) => (
+          <ListItem key={index}>
+            <NavItem item={item} isActive={index === 0} collapse={collapse} />
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
+};

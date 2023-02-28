@@ -90,7 +90,7 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
         pr={2}
       >
         <Flex align="center" flex={1}>
-          <Box>a lightweight study tool</Box>
+          <Box>studying made simple</Box>
           <Box ml="auto" mr={2}>
             {body}
           </Box>

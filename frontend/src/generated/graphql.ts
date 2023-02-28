@@ -463,6 +463,7 @@ export type GetNotificationsQuery = {
     id: number;
     text: string;
     read: boolean;
+    createdAt: string;
   }> | null;
 };
 
@@ -1306,6 +1307,7 @@ export const GetNotificationsDocument = gql`
       id
       text
       read
+      createdAt
     }
   }
 `;

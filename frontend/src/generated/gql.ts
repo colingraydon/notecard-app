@@ -28,7 +28,7 @@ const documents = {
     "mutation UpdateNotification($id: Int!, $read: Boolean!) {\n  updateNotification(id: $id, read: $read) {\n    errors {\n      field\n      message\n    }\n    notification {\n      id\n      text\n      read\n    }\n  }\n}": types.UpdateNotificationDocument,
     "mutation UpdateSubject($input: SubjectInput!) {\n  updateSubject(input: $input) {\n    id\n    prevScore\n    prevTime\n  }\n}": types.UpdateSubjectDocument,
     "mutation UpdateSubjectName($name: String!, $id: Int!) {\n  updateSubjectName(name: $name, id: $id) {\n    id\n    name\n  }\n}": types.UpdateSubjectNameDocument,
-    "query GetNotifications {\n  getNotifications {\n    id\n    text\n    read\n  }\n}": types.GetNotificationsDocument,
+    "query GetNotifications {\n  getNotifications {\n    id\n    text\n    read\n    createdAt\n  }\n}": types.GetNotificationsDocument,
     "query GetSubjects {\n  getSubjects {\n    name\n    id\n    prevScore\n    updatedAt\n    prevTime\n    cards {\n      cardId\n      title\n      text\n    }\n  }\n}": types.GetSubjectsDocument,
     "query Me {\n  me {\n    id\n    username\n  }\n}": types.MeDocument,
     "query MeEmail {\n  meEmail {\n    id\n    username\n    email\n  }\n}": types.MeEmailDocument,
@@ -111,7 +111,7 @@ export function graphql(source: "mutation UpdateSubjectName($name: String!, $id:
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query GetNotifications {\n  getNotifications {\n    id\n    text\n    read\n  }\n}"): (typeof documents)["query GetNotifications {\n  getNotifications {\n    id\n    text\n    read\n  }\n}"];
+export function graphql(source: "query GetNotifications {\n  getNotifications {\n    id\n    text\n    read\n    createdAt\n  }\n}"): (typeof documents)["query GetNotifications {\n  getNotifications {\n    id\n    text\n    read\n    createdAt\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
