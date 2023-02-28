@@ -1,0 +1,13 @@
+mutation UpdateNotification($id: Int!, $read: Boolean!) {
+  updateNotification(id: $id, read: $read) {
+    errors {
+      field
+      message
+    }
+    notification {
+      id
+      text
+      read
+    }
+  }
+}

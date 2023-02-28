@@ -1,0 +1,7 @@
+mutation CreateNotification($read: Boolean!, $text: String!) {
+  createNotification(read: $read, text: $text) {
+    id
+    text
+    read
+  }
+}
