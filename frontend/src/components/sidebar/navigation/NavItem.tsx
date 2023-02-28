@@ -15,7 +15,14 @@ export const NavItem = ({ item, isActive, collapse }) => {
   if (item.type === "link") {
     const { icon, notifications, messages, path } = item;
     return (
-      <Box display="flex" alignItems="center" my={6} justifyContent="center">
+      <Box
+        display="flex"
+        alignItems="center"
+        my={6}
+        justifyContent="center"
+        mb={!collapse ? 6 : 0}
+        minH={25}
+      >
         <LinkChakra
           href={path}
           as={Link}
@@ -66,7 +73,8 @@ export const NavItem = ({ item, isActive, collapse }) => {
       fontSize="sm"
       borderTopWidth={1}
       borderColor="gray.100"
-      pt={collapse ? 8 : 0}
+      //changed this
+      pt={0}
       my={6}
     >
       <Text display={collapse ? "flex" : "none"}>{label}</Text>

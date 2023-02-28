@@ -1,4 +1,4 @@
-import { Box, Flex, HStack, IconButton } from "@chakra-ui/react";
+import { Box, Divider, Flex, HStack, IconButton } from "@chakra-ui/react";
 import React from "react";
 import { MdMenu } from "react-icons/md";
 import { AvatarBox } from "./AvatarBox";
@@ -31,6 +31,7 @@ const FullSidebar = () => {
             <Box alignContent="center">
               <Logo collapse={collapse} />
             </Box>
+
             <IconButton
               aria-label="Menu Collapse"
               icon={<MdMenu />}
@@ -39,6 +40,7 @@ const FullSidebar = () => {
               onClick={() => setCollapse(!collapse)}
             />
           </Flex>
+
           <Sidebar collapse={collapse} />
           <Box mt="auto">
             <AvatarBox collapse={collapse} />
