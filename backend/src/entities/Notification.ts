@@ -37,4 +37,8 @@ export class Notification extends BaseEntity {
   @Field(() => User)
   @ManyToOne(() => User, (user) => user.notifications)
   owner!: User;
+
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  creatorId!: number;
 }

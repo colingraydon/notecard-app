@@ -1,3 +1,4 @@
+import { isAuthenticated } from "../middleware/isAuthenticated";
 import {
   Arg,
   Ctx,
@@ -7,6 +8,7 @@ import {
   ObjectType,
   Query,
   Resolver,
+  UseMiddleware,
 } from "type-graphql";
 import { dataSource } from "../data-source";
 import { Notification } from "../entities/Notification";
@@ -49,6 +51,7 @@ export class NotificationResolver {
     console.log("realUser: ", realUser);
     notification.text = text;
     notification.owner = realUser;
+    notification.creatorId = realUser.id;
     notification.read = read;
     // notification.creatorId = user[0].id;
 
@@ -97,7 +100,7 @@ export class NotificationResolver {
         ],
       };
     }
-    console.log("notification raw 0", notification.raw[0]);
+    // console.log("notification raw 0", notification.raw[0]);
     return notification.raw[0];
   }
 
@@ -105,5 +108,17 @@ export class NotificationResolver {
   async deleteNotification(@Arg("id", () => Int) id: number): Promise<boolean> {
     await Notification.delete({ id: id });
     return true;
+  }
+
+  @Query(() => [Notification], { nullable: true })
+  @UseMiddleware(isAuthenticated)
+  async getNotifications(
+    @Ctx() { req }: Context
+  ): Promise<Notification[] | undefined> {
+    const data = await Notification.find({
+      where: { creatorId: req.session.userId },
+      order: { id: "DESC" },
+    });
+    return data;
   }
 }
