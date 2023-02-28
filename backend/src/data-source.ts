@@ -2,6 +2,7 @@ import { DataSource } from "typeorm";
 import { Card } from "./entities/Card";
 import { Subject } from "./entities/Subject";
 import { User } from "./entities/User";
+import { Notification } from "./entities/Notification";
 
 export const dataSource = new DataSource({
   type: "postgres",
@@ -13,5 +14,5 @@ export const dataSource = new DataSource({
   synchronize: true,
   //running mock migration
   // migrations: [path.join(__dirname, "./migrations/*")],
-  entities: [Card, User, Subject],
+  entities: [Card, User, Subject, Notification],
 });

@@ -48,7 +48,6 @@ export class SubjectResolver {
 
   //creates a subject in the subject table.
   //finds user by cookie, checks authentication, that user owns the subject
-  //move this to user resolver class and refactor?
   @Mutation(() => SubjectResponse)
   @UseMiddleware(isAuthenticated)
   async createSubject(

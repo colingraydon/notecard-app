@@ -32,13 +32,11 @@ export class Subject extends BaseEntity {
   updatedAt!: Date;
 
   @Field(() => User)
-  @ManyToOne(() => User, (user) => user.subjects, {
-    onDelete: "CASCADE",
-  })
+  @ManyToOne(() => User, (user) => user.subjects)
   creator!: User;
 
-  @Field()
-  @Column()
+  @Field({ nullable: true })
+  @Column({ nullable: true })
   creatorId!: number;
 
   @Field({ nullable: true })

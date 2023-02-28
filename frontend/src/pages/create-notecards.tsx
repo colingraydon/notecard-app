@@ -4,7 +4,6 @@ import React from "react";
 import { NavBar } from "../components/NavBar";
 import NewNotecard from "../components/notecard/NewNotecard";
 import FullSidebar from "../components/sidebar/FullSidebar";
-import { SubjectSelect } from "../components/SubjectSelect";
 import { useMeQuery } from "../generated/graphql";
 import useIsAuth from "../utils/useIsAuth";
 import { withApollo } from "../utils/withApollo";

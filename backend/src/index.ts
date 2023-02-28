@@ -13,12 +13,14 @@ import { COOKIENAME } from "./constants";
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "@apollo/server-plugin-landing-page-graphql-playground";
 import { CardResolver } from "./resolvers/card";
 import { SubjectResolver } from "./resolvers/subject";
+import { NotificationResolver } from "./resolvers/notification";
 import cors from "cors";
 // import { onError } from "apollo-link-error";
 
 // import { Card } from "./entities/Card";
 // import { User } from "./entities/User";
 // import { Subject } from "./entities/Subject";
+// import { Notification } from "./entities/Notification";
 
 const main = async () => {
   await dataSource.initialize();
@@ -27,6 +29,7 @@ const main = async () => {
   // await Card.delete({});
   // await Subject.delete({});
   // await User.delete({});
+  // await Notification.delete({});
 
   const app = express();
 
@@ -90,7 +93,13 @@ const main = async () => {
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [TestResolver, UserResolver, CardResolver, SubjectResolver],
+      resolvers: [
+        TestResolver,
+        UserResolver,
+        CardResolver,
+        SubjectResolver,
+        NotificationResolver,
+      ],
       validate: false,
     }),
     context: ({ req, res }): Context => ({

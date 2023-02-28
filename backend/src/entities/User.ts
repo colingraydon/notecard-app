@@ -9,6 +9,7 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import { Subject } from "./Subject";
+import { Notification } from "./Notification";
 
 @ObjectType()
 @Entity()
@@ -35,6 +36,15 @@ export class User extends BaseEntity {
   @Field(() => String)
   @UpdateDateColumn()
   updatedAt!: Date;
+
+  @Field(() => [Notification], { nullable: true })
+  @OneToMany(() => Notification, (notification) => notification.owner, {
+    cascade: true,
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE",
+    eager: true,
+  })
+  notifications!: Notification[];
 
   @Field(() => [Subject], { nullable: true })
   @OneToMany(() => Subject, (subject) => subject.creator, {
