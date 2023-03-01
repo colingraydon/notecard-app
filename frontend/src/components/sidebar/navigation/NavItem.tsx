@@ -56,16 +56,17 @@ export const NavItem = ({ item, isActive, collapse, hideNotifications }) => {
         </Tooltip>
         {collapse && (
           <React.Fragment>
-            {(notifications === 0 || !hideNotifications) && (
-              <Badge
-                borderRadius="full"
-                colorScheme="yellow"
-                w={6}
-                textAlign="center"
-              >
-                {notifications}
-              </Badge>
-            )}
+            {(notifications === 0 || !hideNotifications) &&
+              notifications !== 0 && (
+                <Badge
+                  borderRadius="full"
+                  colorScheme="yellow"
+                  w={6}
+                  textAlign="center"
+                >
+                  {notifications}
+                </Badge>
+              )}
             {messages && (
               <Badge
                 borderRadius="full"

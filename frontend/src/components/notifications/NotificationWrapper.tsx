@@ -1,7 +1,9 @@
 import { Box, CircularProgress, Heading, Stack } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { useGetNotificationsQuery } from "../../generated/graphql";
-import SingleSubject from "../subject/SingleSubject";
+import {
+  useGetNotificationsQuery,
+  useUpdateNotificationMutation,
+} from "../../generated/graphql";
 import SingleNotification from "./SingleNotification";
 
 interface NotificationWrapperProps {}
@@ -9,13 +11,35 @@ interface NotificationWrapperProps {}
 const NotificationWrapper: React.FC<NotificationWrapperProps> = ({}) => {
   const [notifications, setNotifications] = useState([]);
   const { data, loading, error } = useGetNotificationsQuery();
+  const [updateNotification] = useUpdateNotificationMutation();
 
   useEffect(() => {
     if (data) {
       setNotifications(data.getNotifications);
       console.log("notifications: ", notifications);
+      data.getNotifications.forEach((n) => {
+        updateNotification({
+          variables: {
+            id: n.id,
+            read: true,
+          },
+        });
+      });
     }
   }, [data]);
+
+  //marks all notifications as read
+  // if (data) {
+  //   data.getNotifications.forEach((n) => {
+  //     updateNotification({
+  //       variables: {
+  //         id: n.id,
+  //         read: true,
+  //       },
+  //     });
+  //   });
+  // }
+
   return (
     <Box ml={12}>
       <Heading mt={8}>notifications</Heading>
