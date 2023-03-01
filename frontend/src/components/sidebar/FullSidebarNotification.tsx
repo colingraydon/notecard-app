@@ -5,8 +5,12 @@ import { AvatarBox } from "./AvatarBox";
 import { Logo } from "./Logo";
 import { Sidebar } from "./Sidebar";
 
-const FullSidebar = () => {
-  const [collapse, setCollapse] = React.useState(true);
+interface FullSidebarNotificationProps {
+  collapse: boolean;
+  handleCollapse: () => void;
+}
+const FullSidebar = (props: FullSidebarNotificationProps) => {
+  const { collapse, handleCollapse } = props;
 
   return (
     <Box position="sticky" top="0" height="1" zIndex="1">
@@ -15,8 +19,8 @@ const FullSidebar = () => {
           as="aside"
           w="full"
           h="full"
-          maxW={collapse ? 300 : 100}
-          minW={collapse ? 300 : 100}
+          maxW={collapse ? 300 : 85}
+          minW={collapse ? 300 : 85}
           bg="white"
           padding={6}
           flexDirection="column"
@@ -31,14 +35,16 @@ const FullSidebar = () => {
             <Box alignContent="center">
               <Logo collapse={collapse} />
             </Box>
+
             <IconButton
               aria-label="Menu Collapse"
               icon={<MdMenu />}
               justifyContent="center"
               alignContent="center"
-              onClick={() => setCollapse(!collapse)}
+              onClick={handleCollapse}
             />
           </Flex>
+
           <Sidebar collapse={collapse} />
           <Box mt="auto">
             <AvatarBox collapse={collapse} />

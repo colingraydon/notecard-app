@@ -56,10 +56,37 @@ const createSubject: React.FC<{}> = ({}) => {
     setSubjects([...subjects.filter((s) => s.id !== id)]);
   };
 
+  //stores state for darkmode and collapse
+  const [items, setItems] = useState([{ collapse: true, darkMode: false }]);
+
+  //on page load, accesses local storage, sets items if there is data
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("items"));
+    if (data) {
+      setItems(data);
+    }
+  }, []);
+
+  //modifies collapse and setsState
+  const handleCollapse = () => {
+    const collapse = items[0].collapse;
+    const darkMode = items[0].darkMode;
+    setItems([{ collapse: !collapse, darkMode: darkMode }]);
+  };
+
+  //when items are updated, local storage is set
+  useEffect(() => {
+    localStorage.setItem("items", JSON.stringify(items));
+    console.log("items: ", items);
+  }, [items]);
+
   const toast = useToast();
   return (
     <Flex>
-      <FullSidebar></FullSidebar>
+      <FullSidebar
+        collapse={items[0]?.collapse}
+        handleCollapse={handleCollapse}
+      ></FullSidebar>
       <Box w="100%">
         <NavBar></NavBar>
         <Box p={8} ml={4}>

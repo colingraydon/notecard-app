@@ -3,3 +3,9 @@ export type SingleSub = {
   id: number;
   cards: any;
 };
+
+export type Collapse = boolean;
+
+export type WithChildrenProps = {
+  children: React.ReactNode;
+};

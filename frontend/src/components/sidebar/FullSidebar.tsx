@@ -5,8 +5,13 @@ import { AvatarBox } from "./AvatarBox";
 import { Logo } from "./Logo";
 import { Sidebar } from "./Sidebar";
 
-const FullSidebar = () => {
-  const [collapse, setCollapse] = React.useState(true);
+interface FullSidebarProps {
+  collapse: boolean;
+  handleCollapse: () => void;
+}
+
+const FullSidebar = (props: FullSidebarProps) => {
+  const { collapse, handleCollapse } = props;
 
   return (
     <Box position="sticky" top="0" height="1" zIndex="1">
@@ -37,7 +42,7 @@ const FullSidebar = () => {
               icon={<MdMenu />}
               justifyContent="center"
               alignContent="center"
-              onClick={() => setCollapse(!collapse)}
+              onClick={handleCollapse}
             />
           </Flex>
 

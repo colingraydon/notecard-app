@@ -1,14 +1,17 @@
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider } from "@chakra-ui/react";
 
-import theme from '../theme'
-import { AppProps } from 'next/app'
+import theme from "../theme";
+import { AppProps } from "next/app";
+import { CollapseContextProvider } from "../components/localStorage/CollapseContextProvider";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
+    // <CollapseContextProvider>
     <ChakraProvider theme={theme}>
       <Component {...pageProps} />
     </ChakraProvider>
-  )
+    // </CollapseContextProvider>
+  );
 }
 
-export default MyApp
+export default MyApp;
