@@ -7,12 +7,15 @@ import {
   Badge,
   Text,
   Divider,
+  Tooltip,
 } from "@chakra-ui/react";
 import React from "react";
+import { useRouter } from "next/router";
 
 export const NavItem = ({ item, isActive, collapse }) => {
   const { label } = item;
 
+  const router = useRouter();
   if (item.type === "border") {
     return <Divider w={collapse ? 60 : 6} ml={collapse ? 0 : 2}></Divider>;
   }
@@ -26,29 +29,31 @@ export const NavItem = ({ item, isActive, collapse }) => {
         justifyContent="center"
         minH={25}
       >
-        <LinkChakra
-          href={path}
-          as={Link}
-          gap={1}
-          display="flex"
-          alignItems="center"
-          _hover={{ textDecoration: "none", color: "black" }}
-          fontWeight="medium"
-          color={isActive ? "black" : "gray.400"}
-          w="full"
-          justifyContent={!collapse ? "center" : ""}
-        >
-          <ListIcon
-            as={icon}
-            fontSize={22}
-            // m="0"
-            mb={0}
-            ml={0}
-            mr={0}
-            mt={!collapse && item.label === "notifications" ? 1 : 0}
-          />
-          {collapse && <Text>{label}</Text>}
-        </LinkChakra>
+        <Tooltip label={label} isDisabled={collapse} placement="right">
+          <LinkChakra
+            href={path}
+            as={Link}
+            gap={1}
+            display="flex"
+            alignItems="center"
+            _hover={{ textDecoration: "none", color: "black" }}
+            fontWeight="medium"
+            color={isActive ? "black" : "gray.400"}
+            w="full"
+            justifyContent={!collapse ? "center" : ""}
+          >
+            <ListIcon
+              as={icon}
+              fontSize={22}
+              mb={0}
+              ml={0}
+              mr={0}
+              mt={!collapse && item.label === "notifications" ? 1 : 0}
+            />
+
+            {collapse && <Text>{label}</Text>}
+          </LinkChakra>
+        </Tooltip>
         {collapse && (
           <React.Fragment>
             {notifications > 0 && (

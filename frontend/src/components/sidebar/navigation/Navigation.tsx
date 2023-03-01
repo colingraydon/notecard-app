@@ -1,4 +1,5 @@
 import { Box, List, ListItem } from "@chakra-ui/react";
+import { useState } from "react";
 import {
   MdCalendarToday,
   MdEditNote,
@@ -16,6 +17,9 @@ export const Navigation = ({ collapse }) => {
   const { data, loading, error } = useGetNotificationsQuery();
 
   const numUnread = data?.getNotifications.filter((s) => !s.read);
+
+  const [isActive, setisActive] = useState(false);
+
   const items = [
     {
       type: "link",
@@ -70,7 +74,7 @@ export const Navigation = ({ collapse }) => {
       <List w="full" my={8}>
         {items.map((item, index) => (
           <ListItem key={index}>
-            <NavItem item={item} isActive={index === 0} collapse={collapse} />
+            <NavItem item={item} isActive={isActive} collapse={collapse} />
           </ListItem>
         ))}
       </List>

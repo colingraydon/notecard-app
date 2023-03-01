@@ -3,7 +3,7 @@ import { useMeEmailQuery, useMeQuery } from "../../generated/graphql";
 
 export const AvatarBox = ({ collapse }) => {
   const { data, loading } = useMeEmailQuery();
-  const { data: dataMe, loading: loadingMe } = useMeQuery();
+  // const { data: dataMe, loading: loadingMe } = useMeQuery();
 
   return (
     <Box>
