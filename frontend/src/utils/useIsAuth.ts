@@ -12,7 +12,8 @@ const useIsAuth = () => {
     //if there is no user and it is not fetching
     if (!data?.me && !loading) {
       //this will replace the route with the previous page, where it was routed from
-      router.replace("/" + router.pathname);
+      // router.replace("/" + router.pathname);
+      router.push("/");
     }
   }, [loading, data, router]);
 };

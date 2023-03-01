@@ -8,11 +8,23 @@ import {
   Text,
   Divider,
   Tooltip,
+  PopoverArrow,
+  Button,
+  Popover,
+  PopoverBody,
+  PopoverCloseButton,
+  PopoverContent,
+  PopoverFooter,
+  PopoverHeader,
+  PopoverTrigger,
+  Portal,
 } from "@chakra-ui/react";
 import React from "react";
 import { useRouter } from "next/router";
+import { useMeQuery } from "../../../generated/graphql";
 
 export const NavItem = ({ item, isActive, collapse, hideNotifications }) => {
+  const { data, loading } = useMeQuery();
   const { label } = item;
 
   const router = useRouter();
@@ -31,7 +43,7 @@ export const NavItem = ({ item, isActive, collapse, hideNotifications }) => {
       >
         <Tooltip label={label} isDisabled={collapse} placement="right">
           <LinkChakra
-            href={path}
+            href={data?.me || label === "about" ? path : "/"}
             as={Link}
             gap={1}
             display="flex"
@@ -42,6 +54,7 @@ export const NavItem = ({ item, isActive, collapse, hideNotifications }) => {
             w="full"
             justifyContent={!collapse ? "center" : ""}
           >
+            <Box></Box>
             <ListIcon
               as={icon}
               fontSize={22}
