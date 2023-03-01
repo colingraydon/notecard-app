@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 import { NavBar } from "../components/NavBar";
 import NotificationWrapper from "../components/notifications/NotificationWrapper";
-import FullSidebarNotification from "../components/sidebar/FullSidebarNotification";
+import FullSidebar from "../components/sidebar/FullSidebar";
 import { withApollo } from "../utils/withApollo";
 
 interface notificationsProps {}
@@ -34,10 +34,11 @@ const quiz: React.FC<notificationsProps> = ({}) => {
   }, [items]);
   return (
     <Flex>
-      <FullSidebarNotification
+      <FullSidebar
         collapse={items[0]?.collapse}
         handleCollapse={handleCollapse}
-      ></FullSidebarNotification>
+        hideNotifications={true}
+      ></FullSidebar>
       <Box w="100%">
         <NavBar></NavBar>
         <NotificationWrapper></NotificationWrapper>

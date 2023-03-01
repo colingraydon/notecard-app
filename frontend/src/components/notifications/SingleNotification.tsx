@@ -11,12 +11,14 @@ interface SingleNotificationProps {
 const SingleNotification: React.FC<SingleNotificationProps> = (
   props: SingleNotificationProps
 ) => {
-  console.log("props: ", props);
   return (
     <Box>
-      <Box>{props.text}</Box>
-      <Box>{props.read}</Box>
-      <Box>{new Date(parseInt(props.createdAt)).toDateString()}</Box>
+      <Box w={1000} borderRadius={12} border="solid" borderWidth={1}>
+        <Box my={4} ml={4}>
+          <Box>{props.text}</Box>
+          <Box mt={2}>{new Date(parseInt(props.createdAt)).toDateString()}</Box>
+        </Box>
+      </Box>
     </Box>
   );
 };

@@ -17,12 +17,12 @@ const NotificationWrapper: React.FC<NotificationWrapperProps> = ({}) => {
     }
   }, [data]);
   return (
-    <Box>
-      <Heading>notifications</Heading>
+    <Box ml={12}>
+      <Heading mt={8}>notifications</Heading>
       {!data && loading ? (
         <CircularProgress isIndeterminate value={50} />
       ) : (
-        <Stack spacing={8}>
+        <Stack spacing={8} mt={12}>
           {notifications?.map((n) =>
             !n ? null : (
               <SingleNotification

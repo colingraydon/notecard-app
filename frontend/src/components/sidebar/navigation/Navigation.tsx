@@ -13,7 +13,13 @@ import {
 import { useGetNotificationsQuery } from "../../../generated/graphql";
 import { NavItem } from "./NavItem";
 
-export const Navigation = ({ collapse }) => {
+interface NavigationProps {
+  collapse: boolean;
+  hideNotifications?: boolean;
+}
+
+export const Navigation = (props: NavigationProps) => {
+  const { collapse, hideNotifications } = props;
   const { data, loading, error } = useGetNotificationsQuery();
 
   const numUnread = data?.getNotifications.filter((s) => !s.read);
@@ -74,7 +80,12 @@ export const Navigation = ({ collapse }) => {
       <List w="full" my={8}>
         {items.map((item, index) => (
           <ListItem key={index}>
-            <NavItem item={item} isActive={isActive} collapse={collapse} />
+            <NavItem
+              item={item}
+              isActive={isActive}
+              collapse={collapse}
+              hideNotifications={hideNotifications}
+            />
           </ListItem>
         ))}
       </List>

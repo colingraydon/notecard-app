@@ -12,7 +12,7 @@ import {
 import React from "react";
 import { useRouter } from "next/router";
 
-export const NavItem = ({ item, isActive, collapse }) => {
+export const NavItem = ({ item, isActive, collapse, hideNotifications }) => {
   const { label } = item;
 
   const router = useRouter();
@@ -56,7 +56,7 @@ export const NavItem = ({ item, isActive, collapse }) => {
         </Tooltip>
         {collapse && (
           <React.Fragment>
-            {notifications > 0 && (
+            {(notifications === 0 || !hideNotifications) && (
               <Badge
                 borderRadius="full"
                 colorScheme="yellow"

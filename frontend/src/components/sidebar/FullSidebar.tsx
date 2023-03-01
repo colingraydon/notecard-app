@@ -7,6 +7,7 @@ import { Sidebar } from "./Sidebar";
 
 interface FullSidebarProps {
   collapse: boolean;
+  hideNotifications?: boolean;
   handleCollapse: () => void;
 }
 
@@ -46,7 +47,10 @@ const FullSidebar = (props: FullSidebarProps) => {
             />
           </Flex>
 
-          <Sidebar collapse={collapse} />
+          <Sidebar
+            hideNotifications={props.hideNotifications}
+            collapse={collapse}
+          />
           <Box mt="auto">
             <AvatarBox collapse={collapse} />
           </Box>
