@@ -2,7 +2,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 
 import theme from "../theme";
 import { AppProps } from "next/app";
-import { CollapseContextProvider } from "../components/localStorage/CollapseContextProvider";
+import { CollapseContextProvider } from "../components/storage/CollapseContextProvider";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

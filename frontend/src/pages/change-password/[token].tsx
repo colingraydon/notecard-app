@@ -4,8 +4,8 @@ import { NextPage } from "next";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { InputField } from "../../components/InputField";
-import { Wrapper } from "../../components/Wrapper";
+import { InputField } from "../../components/input/InputField";
+import { Wrapper } from "../../components/input/Wrapper";
 import {
   MeDocument,
   MeQuery,

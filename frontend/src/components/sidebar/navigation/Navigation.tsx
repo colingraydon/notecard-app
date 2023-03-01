@@ -1,14 +1,12 @@
 import { Box, List, ListItem } from "@chakra-ui/react";
 import { useState } from "react";
 import {
-  MdCalendarToday,
   MdEditNote,
+  MdInfoOutline,
   MdOutlineArticle,
   MdOutlineCreate,
   MdOutlineNotificationsActive,
   MdOutlineQuiz,
-  MdOutlineSettingsInputComposite,
-  MdOutlineSpaceDashboard,
 } from "react-icons/md";
 import { useGetNotificationsQuery } from "../../../generated/graphql";
 import { NavItem } from "./NavItem";
@@ -70,9 +68,9 @@ export const Navigation = (props: NavigationProps) => {
 
     {
       type: "link",
-      label: "settings",
-      icon: MdOutlineSettingsInputComposite,
-      path: "/",
+      label: "about",
+      icon: MdInfoOutline,
+      path: "/about",
     },
   ];
   return (

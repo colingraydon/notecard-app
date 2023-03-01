@@ -10,8 +10,8 @@ import {
 import { Form, Formik } from "formik";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { InputField } from "../components/InputField";
-import { NavBar } from "../components/NavBar";
+import { InputField } from "../components/input/InputField";
+import { NavBar } from "../components/navbar/NavBar";
 import FullSidebar from "../components/sidebar/FullSidebar";
 import SingleSubject from "../components/subject/SingleSubject";
 import {

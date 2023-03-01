@@ -1,7 +1,7 @@
 import { Box, Flex } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { NavBar } from "../components/NavBar";
+import { NavBar } from "../components/navbar/NavBar";
 import NewNotecard from "../components/notecard/NewNotecard";
 import FullSidebar from "../components/sidebar/FullSidebar";
 import { useMeQuery } from "../generated/graphql";

@@ -5,11 +5,11 @@ import {
   LogoutMutationVariables,
   useLogoutMutation,
   useMeQuery,
-} from "../generated/graphql";
-import { isServerFn } from "../utils/isServer";
+} from "../../generated/graphql";
+import { isServerFn } from "../../utils/isServer";
 
-import LoginPopoverForm from "./login/LoginPopoverForm";
-import RegisterPopoverForm from "./register/RegisterPopoverForm";
+import LoginPopoverForm from "../login/LoginPopoverForm";
+import RegisterPopoverForm from "../register/RegisterPopoverForm";
 
 interface NavBarProps {}
 

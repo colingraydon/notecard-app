@@ -4,7 +4,7 @@ import { Form, Formik } from "formik";
 import { useRouter } from "next/router";
 import { useLoginMutation, MeQuery, MeDocument } from "../../generated/graphql";
 import { toErrorMap } from "../../utils/toErrorMap";
-import { InputField } from "../InputField";
+import { InputField } from "../input/InputField";
 
 const LoginForm = ({ firstFieldRef, onCancel }) => {
   //next.js router

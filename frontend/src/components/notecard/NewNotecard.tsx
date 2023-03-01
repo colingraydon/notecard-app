@@ -18,8 +18,8 @@ import {
 } from "../../generated/graphql";
 import { toErrorMap } from "../../utils/toErrorMap";
 import useIsAuth from "../../utils/useIsAuth";
-import { InputField } from "../InputField";
-import { InputFieldSelect } from "../InputFieldSelect";
+import { InputField } from "../input/InputField";
+import { InputFieldSelect } from "../input/InputFieldSelect";
 import NextLink from "next/link";
 
 interface NewNotecardProps {}

@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import {
   useCollapseContext,
   useSetCollapseContext,
-} from "../components/localStorage/contextFunctions";
-import { NavBar } from "../components/NavBar";
+} from "../components/storage/contextFunctions";
+import { NavBar } from "../components/navbar/NavBar";
 import FullSidebar from "../components/sidebar/FullSidebar";
 import { withApollo } from "../utils/withApollo";
 

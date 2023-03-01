@@ -1,14 +1,16 @@
 import { Flex, Box } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
+import AboutWrapper from "../components/about/AboutWrapper";
 import { NavBar } from "../components/navbar/NavBar";
+import NotificationWrapper from "../components/notifications/NotificationWrapper";
 import FullSidebar from "../components/sidebar/FullSidebar";
 import { withApollo } from "../utils/withApollo";
 
-interface testProps {}
+interface aboutProps {}
 
-const test: React.FC<testProps> = ({}) => {
+const about: React.FC<aboutProps> = ({}) => {
   //stores state for darkmode and collapse
-  const [items, setItems] = useState([{ collapse: false, darkMode: false }]);
+  const [items, setItems] = useState([{ collapse: true, darkMode: false }]);
 
   //on page load, accesses local storage, sets items if there is data
   useEffect(() => {
@@ -35,12 +37,14 @@ const test: React.FC<testProps> = ({}) => {
       <FullSidebar
         collapse={items[0]?.collapse}
         handleCollapse={handleCollapse}
+        hideNotifications={true}
       ></FullSidebar>
       <Box w="100%">
         <NavBar></NavBar>
+        <AboutWrapper></AboutWrapper>
       </Box>
     </Flex>
   );
 };
 
-export default withApollo({ ssr: false })(test);
+export default withApollo({ ssr: false })(about);

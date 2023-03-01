@@ -9,7 +9,7 @@ import {
   useRegisterMutation,
 } from "../../generated/graphql";
 import { toErrorMap } from "../../utils/toErrorMap";
-import { InputField } from "../InputField";
+import { InputField } from "../input/InputField";
 
 const RegisterForm = ({ firstFieldRef, onCancel }) => {
   //next.js router
