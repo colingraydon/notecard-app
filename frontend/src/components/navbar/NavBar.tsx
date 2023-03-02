@@ -65,7 +65,7 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
           variant="ghost"
           onClick={async () => {
             //line may have to be removed
-            // await router.push("/");
+            await router.push("/");
             await logout(logoutVar);
             //refreshes cache
             await apollo.resetStore();

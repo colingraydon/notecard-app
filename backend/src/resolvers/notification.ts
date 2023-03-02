@@ -1,4 +1,3 @@
-import { isAuthenticated } from "../middleware/isAuthenticated";
 import {
   Arg,
   Ctx,
@@ -8,7 +7,6 @@ import {
   ObjectType,
   Query,
   Resolver,
-  UseMiddleware,
 } from "type-graphql";
 import { dataSource } from "../data-source";
 import { Notification } from "../entities/Notification";
