@@ -1,26 +1,16 @@
-import Link from "next/link";
 import {
-  ListIcon,
-  Link as LinkChakra,
-  Heading,
-  Box,
   Badge,
-  Text,
+  Box,
   Divider,
+  Heading,
+  Link as LinkChakra,
+  ListIcon,
+  Text,
   Tooltip,
-  PopoverArrow,
-  Button,
-  Popover,
-  PopoverBody,
-  PopoverCloseButton,
-  PopoverContent,
-  PopoverFooter,
-  PopoverHeader,
-  PopoverTrigger,
-  Portal,
 } from "@chakra-ui/react";
-import React from "react";
+import Link from "next/link";
 import { useRouter } from "next/router";
+import React from "react";
 import { useMeQuery } from "../../../generated/graphql";
 
 export const NavItem = ({ item, isActive, collapse, hideNotifications }) => {

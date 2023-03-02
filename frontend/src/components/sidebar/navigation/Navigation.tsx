@@ -21,6 +21,7 @@ export const Navigation = (props: NavigationProps) => {
   const { data, loading, error } = useGetNotificationsQuery();
 
   const numUnread = data?.getNotifications.filter((s) => !s.read);
+  // const numUnread = 5;
 
   const [isActive, setisActive] = useState(false);
 

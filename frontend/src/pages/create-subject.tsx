@@ -26,10 +26,16 @@ import { withApollo } from "../utils/withApollo";
 
 const createSubject: React.FC<{}> = ({}) => {
   //must consider state of me query, as it will be false while loading
-  // const { data, loading } = useMeQuery();
-  const router = useRouter();
-  //custom hook that checks authorization using MeQuery
+
   useIsAuth();
+  const router = useRouter();
+  const { data: dataMe, loading: loadingMe } = useMeQuery();
+
+  // if (!dataMe?.me && !loadingMe) {
+  //   router.push("/");
+  // }
+  //custom hook that checks authorization using MeQuery
+
   const [createSubject] = useCreateSubjectMutation();
 
   const [subjects, setSubjects] = useState([]);
@@ -77,7 +83,6 @@ const createSubject: React.FC<{}> = ({}) => {
   //when items are updated, local storage is set
   useEffect(() => {
     localStorage.setItem("items", JSON.stringify(items));
-    console.log("items: ", items);
   }, [items]);
 
   const toast = useToast();
@@ -91,64 +96,65 @@ const createSubject: React.FC<{}> = ({}) => {
         <NavBar></NavBar>
         <Box p={8} ml={4}>
           <Heading>subjects</Heading>
-          <Box mt={4}>
-            <Formik
-              initialValues={{ subject: "" }}
-              onSubmit={async (values, { setErrors }) => {
-                const response = await createSubject({
-                  variables: { input: values.subject },
-                  //updateing apollo cache
-                  update: (cache) => {
-                    //evicting a query, on the root query, put in posts
-                    cache.evict({ fieldName: "Subject" });
-                    cache.gc();
-                  },
-                });
-
-                if (response.data?.createSubject.errors) {
-                  setErrors(toErrorMap(response.data.createSubject.errors));
-                } else {
-                  toast({
-                    title: "subject created.",
-                    description: "get started by creating notecards!",
-                    status: "success",
-                    duration: 2000,
-                    isClosable: true,
+          {!dataMe?.me ? (
+            <Box>loading...</Box>
+          ) : (
+            <Box mt={4}>
+              <Formik
+                initialValues={{ subject: "" }}
+                onSubmit={async (values, { setErrors }) => {
+                  const response = await createSubject({
+                    variables: { input: values.subject },
+                    //updateing apollo cache
+                    update: (cache) => {
+                      //evicting a query, on the root query, put in subjects
+                      cache.evict({ fieldName: "Subject" });
+                      cache.gc();
+                    },
                   });
-                }
-                console.log(
-                  "subjectId: ",
-                  response.data.createSubject.subject.id
-                );
-                handleCreateSubject(response.data?.createSubject.subject);
-              }}
-            >
-              {({ isSubmitting }) => (
-                <Box>
-                  <Form>
-                    <Box w={280} mr={10} pb={8}>
-                      <InputField
-                        name="subject"
-                        placeholder="subject"
-                        label="Subject"
-                      />
-                    </Box>
 
-                    <Box>
-                      <Button
-                        type="submit"
-                        background="teal"
-                        isLoading={isSubmitting}
-                      >
-                        create subject
-                      </Button>
-                    </Box>
-                  </Form>
-                </Box>
-              )}
-            </Formik>
-          </Box>
-          {!data && loading ? (
+                  if (response.data?.createSubject.errors) {
+                    setErrors(toErrorMap(response.data.createSubject.errors));
+                  } else {
+                    toast({
+                      title: "subject created.",
+                      description: "get started by creating notecards!",
+                      status: "success",
+                      duration: 2000,
+                      isClosable: true,
+                    });
+                  }
+
+                  handleCreateSubject(response.data?.createSubject.subject);
+                }}
+              >
+                {({ isSubmitting }) => (
+                  <Box>
+                    <Form>
+                      <Box w={280} mr={10} pb={8}>
+                        <InputField
+                          name="subject"
+                          placeholder="subject"
+                          label="Subject"
+                        />
+                      </Box>
+
+                      <Box>
+                        <Button
+                          type="submit"
+                          background="teal"
+                          isLoading={isSubmitting}
+                        >
+                          create subject
+                        </Button>
+                      </Box>
+                    </Form>
+                  </Box>
+                )}
+              </Formik>
+            </Box>
+          )}
+          {!data?.getSubjects && loading ? (
             <CircularProgress isIndeterminate value={50} />
           ) : (
             <Stack spacing={8}>

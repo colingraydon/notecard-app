@@ -1,4 +1,4 @@
-import { Flex } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import {
   useCollapseContext,
@@ -7,6 +7,7 @@ import {
 import { NavBar } from "../components/navbar/NavBar";
 import FullSidebar from "../components/sidebar/FullSidebar";
 import { withApollo } from "../utils/withApollo";
+import { useMeQuery } from "../generated/graphql";
 
 const Index = () => {
   //this would be used if the contextprovider was used.
@@ -16,6 +17,8 @@ const Index = () => {
   // const handleCollapse = () => {
   //   setStoredCollapse(!collapse);
   // };
+
+  const { data, loading } = useMeQuery();
 
   //stores state for darkmode and collapse
   const [items, setItems] = useState([{ collapse: true, darkMode: false }]);
@@ -47,7 +50,12 @@ const Index = () => {
         collapse={items[0].collapse}
         handleCollapse={handleCollapse}
       ></FullSidebar>
-      <NavBar></NavBar>
+      <Box w="100%">
+        <NavBar></NavBar>
+        <Box mt={12} ml={12}>
+          {data?.me ? "hello, " : "log in to get started"}
+        </Box>
+      </Box>
     </Flex>
   );
 };

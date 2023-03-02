@@ -30,7 +30,6 @@ const about: React.FC<aboutProps> = ({}) => {
   //when items are updated, local storage is set
   useEffect(() => {
     localStorage.setItem("items", JSON.stringify(items));
-    console.log("items: ", items);
   }, [items]);
   return (
     <Flex>

@@ -111,7 +111,6 @@ export class NotificationResolver {
   }
 
   @Query(() => [Notification], { nullable: true })
-  @UseMiddleware(isAuthenticated)
   async getNotifications(
     @Ctx() { req }: Context
   ): Promise<Notification[] | undefined> {

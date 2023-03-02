@@ -51,9 +51,10 @@ const FullSidebar = (props: FullSidebarProps) => {
             hideNotifications={props.hideNotifications}
             collapse={collapse}
           />
-          <Box mt="auto">
+          {/* could also be, but not sole cause*/}
+          {/* <Box mt="auto">
             <AvatarBox collapse={collapse} />
-          </Box>
+          </Box> */}
         </Flex>
         <Flex>
           <Flex
