@@ -58,6 +58,9 @@ const createSubject: React.FC<{}> = ({}) => {
   const handleDeleteSubject = (id: number) => {
     deleteSubject({
       variables: { id },
+      update: (cache) => {
+        cache.evict({ fieldName: "getSubjects" });
+      },
     });
     setSubjects([...subjects.filter((s) => s.id !== id)]);
   };
@@ -108,8 +111,8 @@ const createSubject: React.FC<{}> = ({}) => {
                     //updateing apollo cache
                     update: (cache) => {
                       //evicting a query, on the root query, put in subjects
-                      cache.evict({ fieldName: "Subject" });
-                      cache.gc();
+                      cache.evict({ fieldName: "getSubjects" });
+                      // cache.gc();
                     },
                   });
 

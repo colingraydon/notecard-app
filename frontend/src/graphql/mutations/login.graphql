@@ -9,6 +9,7 @@ mutation Login($usernameOrEmail: String!, $password: String!) {
       id
       updatedAt
       username
+      email
     }
   }
 }

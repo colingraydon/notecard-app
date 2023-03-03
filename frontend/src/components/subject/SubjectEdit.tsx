@@ -30,6 +30,9 @@ const SubjectEdit: React.FC<SubjectEditProps> = (props: SubjectEditProps) => {
               id: props.id,
               name: props.name,
             },
+            update: (cache) => {
+              cache.evict({ fieldName: "getNotifications" });
+            },
           });
         }}
       />

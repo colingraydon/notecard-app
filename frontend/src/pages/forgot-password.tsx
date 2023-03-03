@@ -1,11 +1,11 @@
-import { Box, Button, Flex } from "@chakra-ui/react";
+import { Box, Button, Flex, Link } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import React, { useState } from "react";
 import { InputField } from "../components/input/InputField";
 import { Wrapper } from "../components/input/Wrapper";
 import { useForgotPasswordMutation } from "../generated/graphql";
 import { withApollo } from "../utils/withApollo";
-
+import NextLink from "next/link";
 const forgotPassword: React.FC<{}> = ({}) => {
   const [complete, setComplete] = useState(false);
   const [forgotPassword] = useForgotPasswordMutation();
@@ -39,13 +39,18 @@ const forgotPassword: React.FC<{}> = ({}) => {
                   background="teal"
                   isLoading={isSubmitting}
                 >
-                  Forgot Password
+                  forgot password
                 </Button>
               </Flex>
             </Form>
           )
         }
       </Formik>
+      <Box mt={8}>
+        <Link as={NextLink} href="/">
+          click here to get back to studying
+        </Link>
+      </Box>
     </Wrapper>
   );
 };

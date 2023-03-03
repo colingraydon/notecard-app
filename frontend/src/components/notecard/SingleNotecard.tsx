@@ -92,6 +92,9 @@ const SingleNotecard: React.FC<SingleNotecardProps> = (
                   text: textState,
                   title: titleState,
                 },
+                update: (cache) => {
+                  cache.evict({ fieldName: "getSubjects" });
+                },
               });
             setUpdate(false);
           }}

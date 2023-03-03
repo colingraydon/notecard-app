@@ -19,7 +19,7 @@ export const NavItem = ({ item, isActive, collapse, hideNotifications }) => {
 
   const router = useRouter();
   if (item.type === "border") {
-    return <Divider w={collapse ? 60 : 6} ml={collapse ? 0 : 2}></Divider>;
+    return <Divider w={collapse ? 60 : 8} ml={collapse ? 0 : 1}></Divider>;
   }
   if (item.type === "link") {
     const { icon, notifications, messages, path } = item;
@@ -51,12 +51,18 @@ export const NavItem = ({ item, isActive, collapse, hideNotifications }) => {
               mb={0}
               ml={0}
               mr={0}
-              mt={!collapse && item.label === "notifications" ? 1 : 0}
+              mt={
+                (!collapse && item.label === "notifications") ||
+                item.label === "about"
+                  ? 1
+                  : 0
+              }
             />
 
             {collapse && <Text>{label}</Text>}
           </LinkChakra>
         </Tooltip>
+
         {collapse && (
           <React.Fragment>
             {(notifications === 0 || !hideNotifications) &&

@@ -21,8 +21,8 @@ const FullSidebar = (props: FullSidebarProps) => {
           as="aside"
           w="full"
           h="full"
-          maxW={collapse ? 300 : 85}
-          minW={collapse ? 300 : 85}
+          maxW={collapse ? 300 : 83}
+          minW={collapse ? 300 : 83}
           bg="white"
           padding={6}
           flexDirection="column"
@@ -51,10 +51,10 @@ const FullSidebar = (props: FullSidebarProps) => {
             hideNotifications={props.hideNotifications}
             collapse={collapse}
           />
-          {/* could also be, but not sole cause*/}
-          {/* <Box mt="auto">
+
+          <Box mt="auto">
             <AvatarBox collapse={collapse} />
-          </Box> */}
+          </Box>
         </Flex>
         <Flex>
           <Flex

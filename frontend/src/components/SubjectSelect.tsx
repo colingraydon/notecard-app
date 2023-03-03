@@ -43,8 +43,14 @@ export const SubjectSelect: React.FC<SubjectSelectProps> = (
                   optionElement.getAttribute("data-id")
                 );
 
+                console.log("index: ", index);
+                console.log("optionElement: ", optionElement);
+                console.log("SubName:", subName);
+                console.log("optionElementId: ", optionElementId);
+
                 if (subName.length > 1) {
                   props.handleChange({ name: subName, id: optionElementId });
+                  console.log("change handled");
                 }
               }}
             >

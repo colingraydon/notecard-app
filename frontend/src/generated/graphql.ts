@@ -360,6 +360,7 @@ export type LoginMutation = {
       id: number;
       updatedAt: string;
       username: string;
+      email: string;
     } | null;
   };
 };
@@ -939,6 +940,7 @@ export const LoginDocument = gql`
         id
         updatedAt
         username
+        email
       }
     }
   }

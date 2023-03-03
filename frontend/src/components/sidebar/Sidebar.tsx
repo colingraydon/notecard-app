@@ -9,7 +9,7 @@ interface SidebarProps {
 
 export const Sidebar = (props: SidebarProps) => (
   <React.Fragment>
-    <Box w="full" ml={props.collapse ? 2 : 0}>
+    <Box w="full" ml={props.collapse ? 1 : 0}>
       <Navigation
         hideNotifications={props.hideNotifications}
         collapse={props.collapse}

@@ -12,9 +12,11 @@ import { Form, Formik, isNaN } from "formik";
 import { useRouter } from "next/router";
 import React from "react";
 import {
+  GetSubjectsDocument,
   useCreateCardMutation,
   useGetSubjectsQuery,
   useMeQuery,
+  GetSubjectsQuery,
 } from "../../generated/graphql";
 import { toErrorMap } from "../../utils/toErrorMap";
 import useIsAuth from "../../utils/useIsAuth";
@@ -62,6 +64,15 @@ const NewNotecard: React.FC<NewNotecardProps> = ({}) => {
 
               const response = await createNotecards({
                 variables: { input: newValues },
+                // update: (cache, {data}) => {
+                //   cache.writeQuery<GetSubjectsQuery>({
+                //     query: GetSubjectsDocument,
+                //     data: {
+                //       __typename: "Query",
+                //       getSubjects:
+                //     }
+                //   })
+                // },
               });
 
               if (response.data?.createCard.errors) {
@@ -75,11 +86,11 @@ const NewNotecard: React.FC<NewNotecardProps> = ({}) => {
                   isClosable: true,
                 });
               }
-              //     //updateing apollo cache
-              //     update: (cache) => {
-              //         //evicting a query, on the root query, put in cards
-              //         cache.evict({fieldName: "card"})
-              //     }
+              //updateing apollo cache
+              // update: (cache) => {
+              //   //evicting a query, on the root query, put in cards
+              //   cache.evict({ fieldName: "card" });
+              // };
             }}
           >
             {({ isSubmitting }) => (

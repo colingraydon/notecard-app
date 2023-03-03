@@ -7,6 +7,9 @@ import {
   MeQuery,
   MeDocument,
   useRegisterMutation,
+  useCreateNotificationMutation,
+  GetNotificationsQuery,
+  GetNotificationsDocument,
 } from "../../generated/graphql";
 import { toErrorMap } from "../../utils/toErrorMap";
 import { InputField } from "../input/InputField";
@@ -16,6 +19,10 @@ const RegisterForm = ({ firstFieldRef, onCancel }) => {
   const router = useRouter();
   //react hook. useRegisterMutation codegened the graphql mutation
   const [register] = useRegisterMutation();
+  const [createNotification] = useCreateNotificationMutation();
+  const firstNotification = `thanks for registering! 
+    
+    we hope that we can help you pass your next exam.`;
   return (
     <Stack spacing={4}>
       <Formik
@@ -23,6 +30,7 @@ const RegisterForm = ({ firstFieldRef, onCancel }) => {
         onSubmit={async (values, { setErrors }) => {
           const response = await register({
             variables: { options: values },
+
             update: (cache, { data }) => {
               //pass in me query for type defs
               cache.writeQuery<MeQuery>({
@@ -33,6 +41,7 @@ const RegisterForm = ({ firstFieldRef, onCancel }) => {
                   me: data?.register.user,
                 },
               });
+              // cache.evict({ fieldName: "getNotifications" });
             },
           });
           if (response.data?.register.errors) {
@@ -40,6 +49,12 @@ const RegisterForm = ({ firstFieldRef, onCancel }) => {
           } else if (response.data?.register.user) {
             //it worked
             //nav to landing page
+            await createNotification({
+              variables: {
+                read: false,
+                text: firstNotification,
+              },
+            });
             router.push("/");
           }
         }}

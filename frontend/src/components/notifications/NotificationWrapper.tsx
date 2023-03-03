@@ -1,6 +1,8 @@
 import { Box, CircularProgress, Heading, Stack } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import {
+  GetNotificationsDocument,
+  GetNotificationsQuery,
   useGetNotificationsQuery,
   useUpdateNotificationMutation,
 } from "../../generated/graphql";
@@ -23,6 +25,9 @@ const NotificationWrapper: React.FC<NotificationWrapperProps> = ({}) => {
             id: n.id,
             read: true,
           },
+          // update: (cache) => {
+          //   cache.evict({ fieldName: "getNotifications" });
+          // },
         });
       });
     }
@@ -60,7 +65,7 @@ const NotificationWrapper: React.FC<NotificationWrapperProps> = ({}) => {
           )}
         </Stack>
       )}
-      <Box></Box>
+      <Box pb={12}></Box>
     </Box>
   );
 };

@@ -2,14 +2,21 @@ import { Stack, ButtonGroup, Button, Link, Box, Flex } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/router";
-import { useLoginMutation, MeQuery, MeDocument } from "../../generated/graphql";
+import {
+  useLoginMutation,
+  MeQuery,
+  MeDocument,
+  MeEmailQuery,
+  MeEmailDocument,
+  GetNotificationsQuery,
+  GetNotificationsDocument,
+} from "../../generated/graphql";
 import { toErrorMap } from "../../utils/toErrorMap";
 import { InputField } from "../input/InputField";
 
 const LoginForm = ({ firstFieldRef, onCancel }) => {
   //next.js router
   const router = useRouter();
-  //react hook. useRegisterMutation codegened the graphql mutation
   const [login] = useLoginMutation();
   return (
     <Stack spacing={4}>
@@ -28,7 +35,17 @@ const LoginForm = ({ firstFieldRef, onCancel }) => {
                   me: data?.login.user,
                 },
               }),
-                cache.evict({ fieldName: "subjects:{}" });
+                cache.writeQuery<MeEmailQuery>({
+                  query: MeEmailDocument,
+                  //get data, result of the register, sticking the cache with me query.
+                  data: {
+                    __typename: "Query",
+                    meEmail: data?.login.user,
+                  },
+                }),
+                cache.evict({ fieldName: "subject" });
+              //evicts all old notifications from cache
+              cache.evict({ fieldName: "getNotifications" });
             },
           });
           if (response.data?.login.errors) {
