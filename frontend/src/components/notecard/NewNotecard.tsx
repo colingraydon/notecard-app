@@ -17,6 +17,7 @@ import {
   useGetSubjectsQuery,
   useMeQuery,
   GetSubjectsQuery,
+  Card,
 } from "../../generated/graphql";
 import { toErrorMap } from "../../utils/toErrorMap";
 import useIsAuth from "../../utils/useIsAuth";
@@ -32,7 +33,7 @@ const NewNotecard: React.FC<NewNotecardProps> = ({}) => {
   useIsAuth();
 
   const { data: dataSub, error, loading: loadingSub } = useGetSubjectsQuery();
-  const subjects = dataSub?.getSubjects;
+  let subjects = dataSub?.getSubjects;
 
   const [createNotecards] = useCreateCardMutation();
   const toast = useToast();
@@ -49,6 +50,10 @@ const NewNotecard: React.FC<NewNotecardProps> = ({}) => {
             initialValues={{ title: "", text: "", subId: undefined }}
             onSubmit={async (values, { setErrors }) => {
               const tempSID: number = parseInt(values.subId);
+              const index = dataSub.getSubjects.findIndex(
+                (sub) => sub.id === tempSID
+              );
+              console.log("index: ", index);
               let newValues = {
                 title: values.title,
                 text: values.text,
@@ -64,15 +69,6 @@ const NewNotecard: React.FC<NewNotecardProps> = ({}) => {
 
               const response = await createNotecards({
                 variables: { input: newValues },
-                // update: (cache, {data}) => {
-                //   cache.writeQuery<GetSubjectsQuery>({
-                //     query: GetSubjectsDocument,
-                //     data: {
-                //       __typename: "Query",
-                //       getSubjects:
-                //     }
-                //   })
-                // },
               });
 
               if (response.data?.createCard.errors) {
@@ -86,11 +82,6 @@ const NewNotecard: React.FC<NewNotecardProps> = ({}) => {
                   isClosable: true,
                 });
               }
-              //updateing apollo cache
-              // update: (cache) => {
-              //   //evicting a query, on the root query, put in cards
-              //   cache.evict({ fieldName: "card" });
-              // };
             }}
           >
             {({ isSubmitting }) => (

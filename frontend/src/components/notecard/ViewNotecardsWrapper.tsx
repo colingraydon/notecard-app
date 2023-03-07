@@ -21,7 +21,9 @@ export const ViewNotecardsWrapper: React.FC<
 
   useIsAuth();
 
-  const { data, error, loading } = useGetSubjectsQuery();
+  const { data, error, loading } = useGetSubjectsQuery({
+    fetchPolicy: "cache-and-network",
+  });
   const [value, setValue] = useState({
     name: "choose a subject",
     id: 0,
