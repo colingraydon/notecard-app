@@ -1,8 +1,6 @@
 import { Box, CircularProgress, Heading, Stack } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import {
-  GetNotificationsDocument,
-  GetNotificationsQuery,
   useGetNotificationsQuery,
   useMeQuery,
   useUpdateNotificationMutation,
@@ -20,7 +18,7 @@ const NotificationWrapper: React.FC<NotificationWrapperProps> = ({}) => {
   const { data: dataMe } = useMeQuery();
 
   useEffect(() => {
-    if (data && dataMe.me) {
+    if (data && dataMe?.me) {
       setNotifications(data.getNotifications);
       data.getNotifications.forEach((n) => {
         updateNotification({

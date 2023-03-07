@@ -43,6 +43,12 @@ export const NavItem = ({ item, isActive, collapse, hideNotifications }) => {
             color={isActive ? "black" : "gray.400"}
             w="full"
             justifyContent={!collapse ? "center" : ""}
+            mt={
+              (!collapse && item.label === "notifications") ||
+              item.label === "about"
+                ? 0
+                : 0
+            }
           >
             <Box></Box>
             <ListIcon
@@ -51,12 +57,12 @@ export const NavItem = ({ item, isActive, collapse, hideNotifications }) => {
               mb={0}
               ml={0}
               mr={0}
-              mt={
-                (!collapse && item.label === "notifications") ||
-                item.label === "about"
-                  ? 1
-                  : 0
-              }
+              // mt={
+              //   (!collapse && item.label === "notifications") ||
+              //   item.label === "about"
+              //     ? 0
+              //     : 0
+              // }
             />
 
             {collapse && <Text>{label}</Text>}
@@ -99,7 +105,7 @@ export const NavItem = ({ item, isActive, collapse, hideNotifications }) => {
       fontSize="sm"
       // borderTopWidth={1}
       borderColor="gray.100"
-      pt={!collapse ? 15 : 0}
+      pt={!collapse ? "1.2em" : 0}
       my={6}
     >
       <Text display={collapse ? "flex" : "none"}>{label}</Text>

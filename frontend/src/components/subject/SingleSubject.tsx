@@ -1,5 +1,6 @@
 import { Box, Divider, Flex, Input } from "@chakra-ui/react";
 import React, { ChangeEvent, useState } from "react";
+import { blue, gray, green } from "../../themes/Lightmode";
 import SubjectDelete from "./SubjectDelete";
 import SubjectEdit from "./SubjectEdit";
 
@@ -38,7 +39,14 @@ const SingleSubject: React.FC<SingleSubjectProps> = (
   };
   return (
     <Box mt={8}>
-      <Box w={1100} borderRadius={12} border="solid" borderWidth={1}>
+      <Box
+        w={1100}
+        borderRadius={12}
+        border="solid"
+        borderWidth="1px"
+        _hover={{ borderColor: blue }}
+        boxShadow="2xl"
+      >
         <Box>
           <Flex>
             <Box ml={4} w={300} pt={2} pb={2} mt={2}>
@@ -75,7 +83,9 @@ const SingleSubject: React.FC<SingleSubjectProps> = (
             <Box w={100} pt={2} pb={2} ml={4} mt={2}>
               <Flex>
                 <Box>cards: </Box>
-                <Box ml="auto">{props.numCards}</Box>
+                <Box textColor="gray.400" ml="auto">
+                  {props.numCards}
+                </Box>
               </Flex>
             </Box>
             <Box ml={2}>
@@ -84,7 +94,9 @@ const SingleSubject: React.FC<SingleSubjectProps> = (
             <Box w={250} pt={2} pb={2} ml={4} mt={2}>
               <Flex>
                 <Box>updated: </Box>
-                <Box ml="auto">{readableDate}</Box>
+                <Box ml="auto" textColor="gray.400">
+                  {readableDate}
+                </Box>
               </Flex>
             </Box>
             <Box ml={2}>
@@ -95,7 +107,7 @@ const SingleSubject: React.FC<SingleSubjectProps> = (
               <Flex>
                 <Box>last time: </Box>
                 {props.prevTime !== null && (
-                  <Box ml="auto">
+                  <Box ml="auto" textColor="gray.400">
                     <Flex>
                       {!isNaN(parsedTime.minutes) && (
                         <Box>{parsedTime.minutes}:</Box>
@@ -119,7 +131,18 @@ const SingleSubject: React.FC<SingleSubjectProps> = (
               <Flex>
                 <Box>last score: </Box>
                 {props.prevScore !== null && !isNaN(props.prevScore) && (
-                  <Box ml="auto">{props.prevScore}%</Box>
+                  <Box
+                    ml="auto"
+                    textColor={
+                      props.prevScore !== null &&
+                      !isNaN(props.prevScore) &&
+                      props.prevScore > 85
+                        ? "gray.400"
+                        : "gray.400"
+                    }
+                  >
+                    {props.prevScore}%
+                  </Box>
                 )}
               </Flex>
             </Box>

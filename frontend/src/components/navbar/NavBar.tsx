@@ -1,5 +1,11 @@
 import { useApolloClient } from "@apollo/client";
-import { Box, Button, Flex } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  useColorMode,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import {
   LogoutMutationVariables,
@@ -10,6 +16,7 @@ import { isServerFn } from "../../utils/isServer";
 
 import LoginPopoverForm from "../login/LoginPopoverForm";
 import RegisterPopoverForm from "../register/RegisterPopoverForm";
+import { DarkModeSwitch } from "./DarkModeSwitch";
 
 interface NavBarProps {}
 
@@ -22,6 +29,8 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
   //needed to fix hydration errors
   // const [isServer, setIsServer] = useState(true);
   // useEffect(() => setIsServer(false), []);
+
+  const { colorMode } = useColorMode();
 
   const [logout, { loading: logoutFetching }] = useLogoutMutation();
 
@@ -75,10 +84,17 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
     );
   }
   return (
-    <Flex w="100%" position="sticky" top="0" h={14} zIndex="9999" bg="gray.100">
+    <Flex
+      w="100%"
+      position="sticky"
+      top="0"
+      h={14}
+      zIndex="9999"
+      bg={useColorModeValue("gray.100", "gray.600")}
+    >
       <Flex
         height={10}
-        bg="white"
+        // bg="white"
         top={0}
         w="100%"
         borderRadius={12}
@@ -86,10 +102,12 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
         pb={6}
         pl={6}
         pr={2}
+        bg={useColorModeValue("white", "#1a202c")}
       >
         <Flex align="center" flex={1}>
           <Box>studying made simple</Box>
-          <Box ml="auto" mr={2}>
+          <DarkModeSwitch />
+          <Box ml={2} mr={2}>
             {body}
           </Box>
         </Flex>

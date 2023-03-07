@@ -30,6 +30,7 @@ export const SubjectSelect: React.FC<SubjectSelectProps> = (
         <React.Fragment>
           <Box w={280}>
             <Select
+              boxShadow="2xl"
               isDisabled={props.started}
               placeholder="select a subject"
               onChange={(e) => {

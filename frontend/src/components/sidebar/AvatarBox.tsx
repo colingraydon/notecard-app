@@ -1,5 +1,6 @@
 import { Avatar, Box, CircularProgress, Flex, Text } from "@chakra-ui/react";
 import { useMeEmailQuery } from "../../generated/graphql";
+import { blue, green, testgreen } from "../../themes/Lightmode";
 
 export const AvatarBox = ({ collapse }) => {
   const { data, loading } = useMeEmailQuery();
@@ -23,7 +24,7 @@ export const AvatarBox = ({ collapse }) => {
           gap={2}
           flexDirection={collapse ? "row" : "column-reverse"}
         >
-          <Avatar name={data.meEmail?.username} bg="teal.300" />
+          <Avatar name={data.meEmail?.username} bg={blue} />
           {collapse && (
             <Flex
               w="full"
@@ -36,7 +37,9 @@ export const AvatarBox = ({ collapse }) => {
                 {data.meEmail?.username}
               </Text>
               <Text as="small" color="gray.500" fontSize={12} lineHeight={0}>
-                {data.meEmail?.email}
+                {data.meEmail?.email.length <= 28
+                  ? data.meEmail?.email
+                  : data.meEmail?.email.substring(0, 26) + "..."}
               </Text>
             </Flex>
           )}

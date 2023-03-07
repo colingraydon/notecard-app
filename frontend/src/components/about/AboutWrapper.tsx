@@ -10,9 +10,8 @@ const AboutWrapper: React.FC<AboutWrapperProps> = ({}) => {
       <Stack spacing={8} mt={12} w={600}>
         <Box>my name is colin and i'm terrible at memorization.</Box>
         <Box>
-          i've relied on physical notecards for every test i've ever taken, but
-          at 700+ notecards for my last exam, i realized i was spending more
-          time writing than studying.
+          after making over 500 physical note cards for my last exam, i realized
+          i was spending more time making cards than studying.
         </Box>
         <Box>that's when i created notecard app. </Box>
         <Box>

@@ -34,6 +34,7 @@ export const InputField: React.FC<InputFieldProps> = ({
         resize="none"
         minH={textArea && 200}
         minW={textArea && 400}
+        boxShadow="2xl"
       />
       {error ? <FormErrorMessage>{error}</FormErrorMessage> : null}
     </FormControl>

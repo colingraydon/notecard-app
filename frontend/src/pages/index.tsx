@@ -8,6 +8,7 @@ import { NavBar } from "../components/navbar/NavBar";
 import FullSidebar from "../components/sidebar/FullSidebar";
 import { withApollo } from "../utils/withApollo";
 import { useMeQuery } from "../generated/graphql";
+import { DarkModeSwitch } from "../components/navbar/DarkModeSwitch";
 
 const Index = () => {
   //this would be used if the contextprovider was used.
@@ -45,18 +46,20 @@ const Index = () => {
   }, [items]);
 
   return (
-    <Flex>
-      <FullSidebar
-        collapse={items[0].collapse}
-        handleCollapse={handleCollapse}
-      ></FullSidebar>
-      <Box w="100%">
-        <NavBar></NavBar>
-        <Box mt={12} ml={12}>
-          {data?.me ? "hello, " : "log in to get started"}
+    <Box>
+      <Flex>
+        <FullSidebar
+          collapse={items[0].collapse}
+          handleCollapse={handleCollapse}
+        ></FullSidebar>
+        <Box w="100%">
+          <NavBar></NavBar>
+          <Box mt={12} ml={12}>
+            {data?.me ? "hello, " : "log in to get started"}
+          </Box>
         </Box>
-      </Box>
-    </Flex>
+      </Flex>
+    </Box>
   );
 };
 

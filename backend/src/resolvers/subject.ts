@@ -173,7 +173,17 @@ export class SubjectResolver {
     @Arg("name") name: string,
     @Arg("id", () => Int) id: number,
     @Ctx() { req }: Context
-  ): Promise<Subject | null> {
+  ): Promise<Subject> {
+    // if (name.length > 30) {
+    //   return {
+    //     errors: [
+    //       {
+    //         message: "subject must have 30 or fewer characters",
+    //         field: "subject",
+    //       },
+    //     ],
+    //   };
+    // }
     const subj = await dataSource
       .createQueryBuilder()
       .update(Subject)

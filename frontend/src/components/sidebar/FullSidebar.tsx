@@ -1,4 +1,11 @@
-import { Box, Flex, HStack, IconButton } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  HStack,
+  IconButton,
+  useColorMode,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { MdMenu } from "react-icons/md";
 import { AvatarBox } from "./AvatarBox";
 import { Logo } from "./Logo";
@@ -12,17 +19,18 @@ interface FullSidebarProps {
 
 const FullSidebar = (props: FullSidebarProps) => {
   const { collapse, handleCollapse } = props;
+  const { colorMode } = useColorMode();
 
   return (
     <Box position="sticky" top="0" height="1" zIndex="1">
-      <HStack w="full" h="100vh" bg="gray.100">
+      <HStack w="full" h="100vh" bg={useColorModeValue("gray.100", "gray.600")}>
         <Flex
           as="aside"
           w="full"
           h="full"
           maxW={collapse ? 300 : 83}
           minW={collapse ? 300 : 83}
-          bg="white"
+          bg={useColorModeValue("white", "#1a202c")}
           padding={6}
           flexDirection="column"
           borderRadius="12px"

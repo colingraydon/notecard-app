@@ -17,6 +17,7 @@ import {
   useGetSubjectsQuery,
   useMeQuery,
 } from "../../generated/graphql";
+import { green } from "../../themes/Lightmode";
 import { toErrorMap } from "../../utils/toErrorMap";
 import useIsAuth from "../../utils/useIsAuth";
 import { InputField } from "../input/InputField";
@@ -127,7 +128,7 @@ const NewNotecard: React.FC<NewNotecardProps> = ({}) => {
                       type="submit"
                       mr={2}
                       mt={6}
-                      background="teal"
+                      background={green}
                       isLoading={isSubmitting}
                     >
                       create card

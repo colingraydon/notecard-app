@@ -24,16 +24,21 @@ const SubjectEdit: React.FC<SubjectEditProps> = (props: SubjectEditProps) => {
         aria-label="Update Subject"
         onClick={() => {
           props.handleLockState();
-          !props.lockState && props.name.length > 0 && props.name.length < 30;
-          updateSubjectName({
-            variables: {
-              id: props.id,
-              name: props.name,
-            },
-            update: (cache) => {
-              cache.evict({ fieldName: "getNotifications" });
-            },
-          });
+          if (
+            !props.lockState &&
+            props.name.length > 0 &&
+            props.name.length < 30
+          ) {
+            updateSubjectName({
+              variables: {
+                id: props.id,
+                name: props.name,
+              },
+              update: (cache) => {
+                cache.evict({ fieldName: "getNotifications" });
+              },
+            });
+          }
         }}
       />
     </Box>
