@@ -1,15 +1,11 @@
-import { Stack, ButtonGroup, Button, Link, Box, Flex } from "@chakra-ui/react";
-import NextLink from "next/link";
+import { Box, Button, ButtonGroup, Flex, Stack } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/router";
 import {
-  useLoginMutation,
-  MeQuery,
   MeDocument,
-  useRegisterMutation,
+  MeQuery,
   useCreateNotificationMutation,
-  GetNotificationsQuery,
-  GetNotificationsDocument,
+  useRegisterMutation,
 } from "../../generated/graphql";
 import { toErrorMap } from "../../utils/toErrorMap";
 import { InputField } from "../input/InputField";
@@ -53,6 +49,9 @@ const RegisterForm = ({ firstFieldRef, onCancel }) => {
               variables: {
                 read: false,
                 text: firstNotification,
+              },
+              update: (cache) => {
+                cache.evict({ fieldName: "getNotifications" });
               },
             });
             router.push("/");

@@ -1,9 +1,5 @@
 import { Box, Divider, Flex, Input } from "@chakra-ui/react";
-import React, { ChangeEvent, useEffect, useState } from "react";
-import {
-  useDeleteSubjectMutation,
-  useUpdateSubjectMutation,
-} from "../../generated/graphql";
+import React, { ChangeEvent, useState } from "react";
 import SubjectDelete from "./SubjectDelete";
 import SubjectEdit from "./SubjectEdit";
 
@@ -35,13 +31,6 @@ const SingleSubject: React.FC<SingleSubjectProps> = (
   const handleLockState = () => {
     setLockState(!lockState);
   };
-
-  // const [deleteSubject] = useDeleteSubjectMutation();
-  // const handleDelete = (id: number) => {
-  //   deleteSubject({
-  //     variables: { id },
-  //   });
-  // };
 
   const [nameState, setNameState] = useState(props.name);
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {

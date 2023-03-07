@@ -9,21 +9,18 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { Form, Formik, isNaN } from "formik";
+import NextLink from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import {
-  GetSubjectsDocument,
   useCreateCardMutation,
   useGetSubjectsQuery,
   useMeQuery,
-  GetSubjectsQuery,
-  Card,
 } from "../../generated/graphql";
 import { toErrorMap } from "../../utils/toErrorMap";
 import useIsAuth from "../../utils/useIsAuth";
 import { InputField } from "../input/InputField";
 import { InputFieldSelect } from "../input/InputFieldSelect";
-import NextLink from "next/link";
 
 interface NewNotecardProps {}
 
@@ -53,7 +50,6 @@ const NewNotecard: React.FC<NewNotecardProps> = ({}) => {
               const index = dataSub.getSubjects.findIndex(
                 (sub) => sub.id === tempSID
               );
-              console.log("index: ", index);
               let newValues = {
                 title: values.title,
                 text: values.text,
@@ -96,7 +92,7 @@ const NewNotecard: React.FC<NewNotecardProps> = ({}) => {
                       type="number"
                     />
                   </Box>
-                  {subjects.length === 0 && (
+                  {subjects?.length === 0 && (
                     <Box mt={12}>
                       <Link as={NextLink} href="/create-subject">
                         create subjects to get started.

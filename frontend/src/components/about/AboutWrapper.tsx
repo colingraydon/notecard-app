@@ -8,7 +8,7 @@ const AboutWrapper: React.FC<AboutWrapperProps> = ({}) => {
     <Box ml={12}>
       <Heading mt={8}>about</Heading>
       <Stack spacing={8} mt={12} w={600}>
-        <Box>my name is colin graydon and i'm terrible at memorization.</Box>
+        <Box>my name is colin and i'm terrible at memorization.</Box>
         <Box>
           i've relied on physical notecards for every test i've ever taken, but
           at 700+ notecards for my last exam, i realized i was spending more

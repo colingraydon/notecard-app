@@ -79,7 +79,7 @@ const QuizResults: React.FC<QuizResultsProps> = (props: QuizResultsProps) => {
   );
   return (
     <Box>
-      <Box>{currScore >= prevScore && congrats}</Box>
+      <Box>{currScore >= prevScore && currScore > 0 && congrats}</Box>
       <Box>{score}</Box>
       <Box mt={6}>{time}</Box>
     </Box>

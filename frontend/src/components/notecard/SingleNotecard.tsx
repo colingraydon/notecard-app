@@ -83,7 +83,6 @@ const SingleNotecard: React.FC<SingleNotecardProps> = (
           aria-label="Edit Card"
           onClick={() => {
             props.handleLockState();
-            console.log("textState: ", textState);
             !props.lockState &&
               updated &&
               updateCard({

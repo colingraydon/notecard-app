@@ -118,7 +118,7 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
                     </Link>
                   </Box>
                 )}
-                {subjects.length === 0 && (
+                {subjects?.length === 0 && (
                   <Box ml={4}>
                     <Link as={NextLink} href="/create-subject">
                       create subjects to get started.

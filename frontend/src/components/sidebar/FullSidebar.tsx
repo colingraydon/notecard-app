@@ -1,5 +1,4 @@
-import { Box, Divider, Flex, HStack, IconButton } from "@chakra-ui/react";
-import React from "react";
+import { Box, Flex, HStack, IconButton } from "@chakra-ui/react";
 import { MdMenu } from "react-icons/md";
 import { AvatarBox } from "./AvatarBox";
 import { Logo } from "./Logo";

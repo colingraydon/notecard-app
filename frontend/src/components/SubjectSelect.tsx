@@ -1,5 +1,5 @@
 import { Box, CircularProgress, Select } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React from "react";
 import { useGetSubjectsQuery } from "../generated/graphql";
 
 interface SubjectSelectProps {
@@ -21,8 +21,6 @@ export const SubjectSelect: React.FC<SubjectSelectProps> = (
   props: SubjectSelectProps
 ) => {
   const { data, error, loading } = useGetSubjectsQuery();
-  // const [value, setValue] = useState("chose a subject");
-  // const subjects = data?.getSubjects;
 
   return (
     <Box>

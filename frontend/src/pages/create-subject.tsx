@@ -39,15 +39,12 @@ const createSubject: React.FC<{}> = ({}) => {
   const [createSubject] = useCreateSubjectMutation();
 
   const [subjects, setSubjects] = useState([]);
-  const { data, error, loading } = useGetSubjectsQuery({
-    // onCompleted: () => setSubjects(data?.getSubjects),
-  });
+  const { data, error, loading } = useGetSubjectsQuery();
 
   useEffect(() => {
     if (data) {
       setSubjects(data.getSubjects);
     }
-    // console.log("data.getSubjects: ", data?.getSubjects);
   }, [data]);
 
   const handleCreateSubject = (sub) => {

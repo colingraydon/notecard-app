@@ -31,8 +31,7 @@ const Login: React.FC<{}> = ({}) => {
                   __typename: "Query",
                   me: data?.login.user,
                 },
-              }),
-                cache.evict({ fieldName: "posts:{}" });
+              });
             },
           });
           if (response.data?.login.errors) {

@@ -1,5 +1,5 @@
 import { Avatar, Box, CircularProgress, Flex, Text } from "@chakra-ui/react";
-import { useMeEmailQuery, useMeQuery } from "../../generated/graphql";
+import { useMeEmailQuery } from "../../generated/graphql";
 
 export const AvatarBox = ({ collapse }) => {
   const { data, loading } = useMeEmailQuery();

@@ -1,8 +1,7 @@
-import { Flex, Box } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import AboutWrapper from "../components/about/AboutWrapper";
 import { NavBar } from "../components/navbar/NavBar";
-import NotificationWrapper from "../components/notifications/NotificationWrapper";
 import FullSidebar from "../components/sidebar/FullSidebar";
 import { withApollo } from "../utils/withApollo";
 

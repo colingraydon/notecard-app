@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useUpdateSubjectMutation } from "../../generated/graphql";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import QuizResults from "./QuizResults";
 interface QuizSidebarProps {
   prevScore: number;
@@ -129,7 +129,7 @@ const QuizSidebar: React.FC<QuizSidebarProps> = (props: QuizSidebarProps) => {
                         </Button>
                         <Button
                           colorScheme="blue"
-                          onClick={() => router.reload()}
+                          onClick={() => router.refresh()}
                         >
                           try again
                         </Button>

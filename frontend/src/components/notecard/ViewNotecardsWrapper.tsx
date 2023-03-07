@@ -1,7 +1,6 @@
 import { Box, CircularProgress, Heading, Link } from "@chakra-ui/react";
 import NextLink from "next/link";
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   useDeleteCardMutation,
   useGetSubjectsQuery,
@@ -46,23 +45,9 @@ export const ViewNotecardsWrapper: React.FC<
       id: id,
       cards: subjects[subjects.findIndex((sub) => sub.id === id)].cards,
     });
-    console.log("Handle change entered in wrapper");
-    console.log(
-      "wrapper optoins: ",
-      name,
-      id,
-      subjects[subjects.findIndex((sub) => sub.id === id)].cards
-    );
   };
 
   const [initialRender, setInitialRender] = useState(true);
-
-  //controls render state to avoid error on first hydration
-  // useEffect(() => {
-  //   if (initialRender) {
-  //     setInitialRender(false);
-  //   }
-  // }, [value]);
 
   //used to lock and unlock posts for editing
   const [lockState, setLockState] = useState(true);
@@ -76,7 +61,6 @@ export const ViewNotecardsWrapper: React.FC<
     deleteCard({
       variables: { cardId },
       update: (cache) => {
-        // cache.evict({ id: "Card:" + cardId });
         cache.evict({ fieldName: "getSubjects" });
       },
     });
@@ -118,7 +102,7 @@ export const ViewNotecardsWrapper: React.FC<
               </Link>
             </Box>
           )}
-          {subjects.length === 0 && (
+          {subjects?.length === 0 && (
             <Box mt={12}>
               <Link as={NextLink} href="/create-subject">
                 create subjects to get started.

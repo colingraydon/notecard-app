@@ -4,46 +4,37 @@ import {
   GetNotificationsDocument,
   GetNotificationsQuery,
   useGetNotificationsQuery,
+  useMeQuery,
   useUpdateNotificationMutation,
 } from "../../generated/graphql";
+import useIsAuth from "../../utils/useIsAuth";
 import SingleNotification from "./SingleNotification";
 
 interface NotificationWrapperProps {}
 
 const NotificationWrapper: React.FC<NotificationWrapperProps> = ({}) => {
+  useIsAuth();
   const [notifications, setNotifications] = useState([]);
   const { data, loading, error } = useGetNotificationsQuery();
   const [updateNotification] = useUpdateNotificationMutation();
+  const { data: dataMe } = useMeQuery();
 
   useEffect(() => {
-    if (data) {
+    if (data && dataMe.me) {
       setNotifications(data.getNotifications);
-      console.log("notifications: ", notifications);
       data.getNotifications.forEach((n) => {
         updateNotification({
           variables: {
             id: n.id,
             read: true,
           },
-          // update: (cache) => {
-          //   cache.evict({ fieldName: "getNotifications" });
-          // },
+          update: (cache) => {
+            cache.evict({ fieldName: "getNotifications" });
+          },
         });
       });
     }
   }, [data]);
-
-  //marks all notifications as read
-  // if (data) {
-  //   data.getNotifications.forEach((n) => {
-  //     updateNotification({
-  //       variables: {
-  //         id: n.id,
-  //         read: true,
-  //       },
-  //     });
-  //   });
-  // }
 
   return (
     <Box ml={12}>
