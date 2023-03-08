@@ -17,7 +17,7 @@ import {
   useGetSubjectsQuery,
   useMeQuery,
 } from "../../generated/graphql";
-import { clickGreen, green, hoverGreen } from "../../themes/Lightmode";
+import { clickGreen, green, hoverGreen } from "../../styles/themes/Lightmode";
 import { toErrorMap } from "../../utils/toErrorMap";
 import useIsAuth from "../../utils/useIsAuth";
 import { InputField } from "../input/InputField";

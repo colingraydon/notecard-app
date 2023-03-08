@@ -20,7 +20,7 @@ import {
   hoverGreen,
   hoverPurple,
   purple,
-} from "../../themes/Lightmode";
+} from "../../styles/themes/Lightmode";
 
 interface SubjectDeleteProps {
   id: number;

@@ -1,6 +1,6 @@
 import { Box, Divider, Flex, Input } from "@chakra-ui/react";
 import React, { ChangeEvent, useState } from "react";
-import { blue, gray, green } from "../../themes/Lightmode";
+import { blue, gray, green } from "../../styles/themes/Lightmode";
 import SubjectDelete from "./SubjectDelete";
 import SubjectEdit from "./SubjectEdit";
 

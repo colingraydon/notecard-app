@@ -19,7 +19,7 @@ import {
   hoverGreen,
   hoverPurple,
   purple,
-} from "../../themes/Lightmode";
+} from "../../styles/themes/Lightmode";
 import { isServerFn } from "../../utils/isServer";
 
 import LoginPopoverForm from "../login/LoginPopoverForm";
@@ -98,7 +98,7 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
       position="sticky"
       top="0"
       h={14}
-      zIndex="9999"
+      zIndex="2"
       bg={useColorModeValue("gray.100", "gray.600")}
     >
       <Flex

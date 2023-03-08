@@ -6,7 +6,7 @@ import { Wrapper } from "../components/input/Wrapper";
 import { useForgotPasswordMutation } from "../generated/graphql";
 import { withApollo } from "../utils/withApollo";
 import NextLink from "next/link";
-import { clickGreen, green, hoverGreen } from "../themes/Lightmode";
+import { clickGreen, green, hoverGreen } from "../styles/themes/Lightmode";
 const forgotPassword: React.FC<{}> = ({}) => {
   const [complete, setComplete] = useState(false);
   const [forgotPassword] = useForgotPasswordMutation();

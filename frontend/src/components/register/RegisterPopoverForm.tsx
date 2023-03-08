@@ -20,7 +20,7 @@ import {
   clickPurple,
   hoverPurple,
   purple,
-} from "../../themes/Lightmode";
+} from "../../styles/themes/Lightmode";
 import RegisterForm from "./RegisterForm";
 
 const RegisterPopoverForm = () => {

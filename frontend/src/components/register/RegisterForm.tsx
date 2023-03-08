@@ -7,7 +7,7 @@ import {
   useCreateNotificationMutation,
   useRegisterMutation,
 } from "../../generated/graphql";
-import { green, hoverGreen, clickGreen } from "../../themes/Lightmode";
+import { green, hoverGreen, clickGreen } from "../../styles/themes/Lightmode";
 import { toErrorMap } from "../../utils/toErrorMap";
 import { InputField } from "../input/InputField";
 

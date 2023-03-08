@@ -1,16 +1,11 @@
-import { Box, Flex } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
-import {
-  useCollapseContext,
-  useSetCollapseContext,
-} from "../components/storage/contextFunctions";
+import { Box, Flex, Image } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import { NavBar } from "../components/navbar/NavBar";
 import FullSidebar from "../components/sidebar/FullSidebar";
-import { withApollo } from "../utils/withApollo";
 import { useMeQuery } from "../generated/graphql";
-import { DarkModeSwitch } from "../components/navbar/DarkModeSwitch";
-import NewWaves from "../icons/NewWaves";
-
+import NewWaves from "../styles/icons/NewWaves";
+import { withApollo } from "../utils/withApollo";
+// import {imageSource} from "../public/svg.png"
 const Index = () => {
   //this would be used if the contextprovider was used.
   // const collapse = useCollapseContext();
@@ -53,14 +48,29 @@ const Index = () => {
           collapse={items[0].collapse}
           handleCollapse={handleCollapse}
         ></FullSidebar>
-        <Box w="100%">
+        <Box
+          w="100%"
+          // backgroundImage={"linear-gradient(to bottom right, red, yellow);"}
+        >
           <NavBar></NavBar>
           <Box mt={12} ml={12}>
             {data?.me ? "hello, " : "log in to get started"}
           </Box>
-          <Box height={400} minHeight={400} maxHeight={400}>
+          {/* <Box height={400} minHeight={400} maxHeight={400} mt="auto"> */}
+          <Flex
+            mt="auto"
+            height={400}
+            minHeight={400}
+            maxHeight={400}
+            position="absolute"
+            bottom="0"
+          >
             <NewWaves />
-          </Box>
+            {/* <Image as={NewWaves} mt="auto" display="block" /> */}
+            {/* <Image src="../public/svg.png" /> */}
+          </Flex>
+          {/* </Box> */}
+
           <Box bg="tomato" h="20" w="1000"></Box>
         </Box>
       </Flex>

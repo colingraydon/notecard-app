@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import React from "react";
-import { blue } from "../../themes/Lightmode";
+import { blue } from "../../styles/themes/Lightmode";
 
 interface SingleNotificationProps {
   text: string;

@@ -13,7 +13,7 @@ import {
 } from "../../generated/graphql";
 import { toErrorMap } from "../../utils/toErrorMap";
 import { InputField } from "../input/InputField";
-import { green, hoverGreen, clickGreen } from "../../themes/Lightmode";
+import { green, hoverGreen, clickGreen } from "../../styles/themes/Lightmode";
 
 const LoginForm = ({ firstFieldRef, onCancel }) => {
   //next.js router

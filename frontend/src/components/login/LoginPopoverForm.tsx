@@ -22,7 +22,7 @@ import {
   purple,
   hoverPurple,
   clickPurple,
-} from "../../themes/Lightmode";
+} from "../../styles/themes/Lightmode";
 const LoginPopoverForm = () => {
   const { onOpen, onClose, isOpen } = useDisclosure();
   const firstFieldRef = React.useRef(null);

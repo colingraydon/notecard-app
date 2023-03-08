@@ -22,7 +22,7 @@ import {
   blue,
   clickBlue,
   hoverBlue,
-} from "../../themes/Lightmode";
+} from "../../styles/themes/Lightmode";
 interface QuizSidebarProps {
   prevScore: number;
   prevTime: number;

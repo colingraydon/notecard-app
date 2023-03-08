@@ -15,7 +15,7 @@ import {
   hoverBlue,
   hoverPurple,
   purple,
-} from "../../themes/Lightmode";
+} from "../../styles/themes/Lightmode";
 
 interface QuizCardProps {
   title: string;
@@ -53,6 +53,7 @@ const QuizCard: React.FC<QuizCardProps> = (props: QuizCardProps) => {
               resize="none"
               borderColor="gray.200"
               _active={{ borderColor: clickBlue }}
+              _hover={{ borderColor: hoverBlue }}
             ></Textarea>
           </Box>
           <Box h={226} mr={2} ml={2}>

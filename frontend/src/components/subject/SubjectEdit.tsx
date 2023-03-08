@@ -2,7 +2,11 @@ import { LockIcon, UnlockIcon } from "@chakra-ui/icons";
 import { Box, IconButton } from "@chakra-ui/react";
 import React, { ChangeEvent } from "react";
 import { useUpdateSubjectNameMutation } from "../../generated/graphql";
-import { purple, hoverPurple, clickPurple } from "../../themes/Lightmode";
+import {
+  purple,
+  hoverPurple,
+  clickPurple,
+} from "../../styles/themes/Lightmode";
 
 interface SubjectEditProps {
   name: string;

@@ -2,12 +2,12 @@ const NewWaves = () => {
   return (
     <svg
       id="svg"
-      xmlns="http://www.w3.org/2000/svg"
       className="transition duration-300 ease-in-out delay-150"
       preserveAspectRatio="none"
       viewBox="0 92.19 1440 507.81"
-      height="100%"
+      height="400px"
       width="100%"
+      style={{ display: "block" }}
     >
       {" "}
       <defs>

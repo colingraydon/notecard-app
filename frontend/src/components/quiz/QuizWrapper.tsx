@@ -16,7 +16,7 @@ import QuizCard from "./QuizCard";
 import NextLink from "next/link";
 
 import QuizSidebar from "./QuizSidebar";
-import { green, hoverGreen, clickGreen } from "../../themes/Lightmode";
+import { green, hoverGreen, clickGreen } from "../../styles/themes/Lightmode";
 
 interface QuizWrapperProps {}
 

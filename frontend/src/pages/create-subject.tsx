@@ -20,7 +20,12 @@ import {
   useGetSubjectsQuery,
   useMeQuery,
 } from "../generated/graphql";
-import { blue, clickGreen, green, hoverGreen } from "../themes/Lightmode";
+import {
+  blue,
+  clickGreen,
+  green,
+  hoverGreen,
+} from "../styles/themes/Lightmode";
 import { toErrorMap } from "../utils/toErrorMap";
 import useIsAuth from "../utils/useIsAuth";
 import { withApollo } from "../utils/withApollo";

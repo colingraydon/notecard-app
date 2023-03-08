@@ -1,6 +1,6 @@
 import { Avatar, Box, CircularProgress, Flex, Text } from "@chakra-ui/react";
 import { useMeEmailQuery } from "../../generated/graphql";
-import { blue, green, testgreen } from "../../themes/Lightmode";
+import { blue, green, testgreen } from "../../styles/themes/Lightmode";
 
 export const AvatarBox = ({ collapse }) => {
   const { data, loading } = useMeEmailQuery();

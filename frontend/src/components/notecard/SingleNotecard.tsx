@@ -5,7 +5,12 @@ import {
   useDeleteCardMutation,
   useUpdateCardMutation,
 } from "../../generated/graphql";
-import { blue, clickPurple, hoverPurple, purple } from "../../themes/Lightmode";
+import {
+  blue,
+  clickPurple,
+  hoverPurple,
+  purple,
+} from "../../styles/themes/Lightmode";
 
 interface SingleNotecardProps {
   title: string;
