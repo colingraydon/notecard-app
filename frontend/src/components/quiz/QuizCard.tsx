@@ -9,6 +9,13 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
+import {
+  clickBlue,
+  clickPurple,
+  hoverBlue,
+  hoverPurple,
+  purple,
+} from "../../themes/Lightmode";
 
 interface QuizCardProps {
   title: string;
@@ -30,19 +37,35 @@ const QuizCard: React.FC<QuizCardProps> = (props: QuizCardProps) => {
     <Box>
       <Box mb={8} p={4}>
         <Flex>
-          <Box p={3} border="solid" borderRadius={12} borderWidth={1} mr={2}>
+          <Box
+            p={3}
+            border="solid"
+            borderRadius={12}
+            borderWidth={1}
+            mr={2}
+            boxShadow="xl"
+          >
             <Textarea
               w={400}
               h={200}
               defaultValue={props.title}
               isReadOnly
               resize="none"
+              borderColor="gray.200"
+              _active={{ borderColor: clickBlue }}
             ></Textarea>
           </Box>
           <Box h={226} mr={2} ml={2}>
-            <Divider orientation="vertical" />
+            <Divider orientation="vertical" borderColor="gray.400" />
           </Box>
-          <Box p={3} border="solid" borderRadius={12} borderWidth={1} ml={2}>
+          <Box
+            p={3}
+            border="solid"
+            borderRadius={12}
+            borderWidth={1}
+            ml={2}
+            boxShadow="xl"
+          >
             <Fade in={isOpen}>
               <Textarea
                 w={400}
@@ -50,11 +73,13 @@ const QuizCard: React.FC<QuizCardProps> = (props: QuizCardProps) => {
                 defaultValue={props.text}
                 isReadOnly
                 resize="none"
+                borderColor="gray.200"
+                _active={{ borderColor: clickBlue }}
               ></Textarea>
             </Fade>
           </Box>
         </Flex>
-        <Flex align="center" justify="end" mt={1}>
+        <Flex align="center" justify="end" mt={4}>
           <Box textAlign="end" mr={4}>
             <Checkbox
               key={props.cardId}
@@ -67,7 +92,14 @@ const QuizCard: React.FC<QuizCardProps> = (props: QuizCardProps) => {
             </Checkbox>
           </Box>
           <Box>
-            <Button w={20} onClick={onToggle}>
+            <Button
+              w={20}
+              onClick={onToggle}
+              background={purple}
+              _hover={{ background: hoverPurple }}
+              _active={{ background: clickPurple }}
+              boxShadow="xl"
+            >
               {isOpen ? "hide" : "show"}
             </Button>
           </Box>

@@ -149,6 +149,7 @@ const createSubject: React.FC<{}> = ({}) => {
                               background={green}
                               _hover={{ background: hoverGreen }}
                               _active={{ background: clickGreen }}
+                              boxShadow="xl"
                             >
                               create subject
                             </Button>

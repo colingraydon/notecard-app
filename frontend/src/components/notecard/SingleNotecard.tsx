@@ -83,7 +83,7 @@ const SingleNotecard: React.FC<SingleNotecardProps> = (
           ></Textarea>
         </Box>
       </Flex>
-      <Flex mt={2} justify="end">
+      <Flex mt={2} justify="end" align="center">
         <Box>delete</Box>
         <IconButton
           ml={2}

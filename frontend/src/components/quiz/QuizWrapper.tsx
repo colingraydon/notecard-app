@@ -16,6 +16,7 @@ import QuizCard from "./QuizCard";
 import NextLink from "next/link";
 
 import QuizSidebar from "./QuizSidebar";
+import { green, hoverGreen, clickGreen } from "../../themes/Lightmode";
 
 interface QuizWrapperProps {}
 
@@ -105,6 +106,10 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
                         w={24}
                         isDisabled={startedOnce}
                         onClick={handleStarted}
+                        background={green}
+                        _hover={{ background: hoverGreen }}
+                        _active={{ background: clickGreen }}
+                        boxShadow="xl"
                       >
                         start
                       </Button>

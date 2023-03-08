@@ -20,6 +20,7 @@ const SingleNotification: React.FC<SingleNotificationProps> = (
         border="solid"
         borderWidth="1px"
         _hover={{ borderColor: blue }}
+        boxShadow="2xl"
       >
         <Box my={4} ml={4}>
           <Box>{props.text}</Box>

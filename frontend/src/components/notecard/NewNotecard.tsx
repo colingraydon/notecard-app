@@ -132,6 +132,7 @@ const NewNotecard: React.FC<NewNotecardProps> = ({}) => {
                       _hover={{ background: hoverGreen }}
                       _active={{ background: clickGreen }}
                       isLoading={isSubmitting}
+                      boxShadow="xl"
                     >
                       create card
                     </Button>

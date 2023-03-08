@@ -1,5 +1,8 @@
 export const white = "#F2F5FF";
-export const blue = "#35A7FF";
+
+export const blue = "blue.300";
+export const hoverBlue = "blue.400";
+export const clickBlue = "blue.500";
 
 export const green = "green.300";
 export const hoverGreen = "green.400";

@@ -7,6 +7,7 @@ import {
   ListIcon,
   Text,
   Tooltip,
+  useColorMode,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -14,6 +15,9 @@ import React from "react";
 import { useMeQuery } from "../../../generated/graphql";
 
 export const NavItem = ({ item, isActive, collapse, hideNotifications }) => {
+  const { colorMode } = useColorMode();
+  const isDark = colorMode === "dark";
+
   const { data, loading } = useMeQuery();
   const { label } = item;
 
@@ -38,7 +42,10 @@ export const NavItem = ({ item, isActive, collapse, hideNotifications }) => {
             gap={1}
             display="flex"
             alignItems="center"
-            _hover={{ textDecoration: "none", color: "black" }}
+            _hover={{
+              textDecoration: "none",
+              color: isDark ? "white" : "black",
+            }}
             fontWeight="medium"
             color={isActive ? "black" : "gray.400"}
             w="full"

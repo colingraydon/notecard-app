@@ -15,6 +15,14 @@ import React, { useEffect, useState } from "react";
 import { useUpdateSubjectMutation } from "../../generated/graphql";
 import { useRouter } from "next/navigation";
 import QuizResults from "./QuizResults";
+import {
+  green,
+  hoverGreen,
+  clickGreen,
+  blue,
+  clickBlue,
+  hoverBlue,
+} from "../../themes/Lightmode";
 interface QuizSidebarProps {
   prevScore: number;
   prevTime: number;
@@ -77,7 +85,14 @@ const QuizSidebar: React.FC<QuizSidebarProps> = (props: QuizSidebarProps) => {
       {props.hasCards === 0 ? null : (
         <Box>
           <Box h={8}></Box>
-          <Box p={3} w={200} border="solid" borderRadius={12} borderWidth={1}>
+          <Box
+            p={3}
+            w={200}
+            border="solid"
+            borderRadius={12}
+            borderWidth={1}
+            boxShadow="xl"
+          >
             <Flex>
               <Box fontSize={28} textAlign="end">
                 {`${time.minutes.toString().padStart(2, "0")}:${time.seconds
@@ -88,6 +103,14 @@ const QuizSidebar: React.FC<QuizSidebarProps> = (props: QuizSidebarProps) => {
               <Box ml="auto">
                 <Box>
                   <Button
+                    background={!props.started ? "gray.200" : green}
+                    boxShadow="xl"
+                    _hover={{
+                      background: !props.started ? "gray.200" : hoverGreen,
+                    }}
+                    _active={{
+                      background: !props.started ? "gray.200" : clickGreen,
+                    }}
                     isDisabled={!props.started}
                     onClick={() => {
                       onOpen();
@@ -124,11 +147,19 @@ const QuizSidebar: React.FC<QuizSidebarProps> = (props: QuizSidebarProps) => {
                       </ModalBody>
 
                       <ModalFooter>
-                        <Button variant="ghost" mr={3} onClick={onClose}>
+                        <Button
+                          variant="ghost"
+                          boxShadow="xl"
+                          mr={3}
+                          onClick={onClose}
+                        >
                           close
                         </Button>
                         <Button
-                          colorScheme="blue"
+                          boxShadow="xl"
+                          background={blue}
+                          _hover={{ background: hoverBlue }}
+                          _active={{ background: clickBlue }}
                           onClick={() => router.refresh()}
                         >
                           try again
@@ -141,17 +172,26 @@ const QuizSidebar: React.FC<QuizSidebarProps> = (props: QuizSidebarProps) => {
             </Flex>
           </Box>
           {props.prevScore === null ? null : (
-            <Box p={3} border="solid" borderRadius={12} borderWidth={1} mt={4}>
+            <Box
+              p={3}
+              border="solid"
+              borderRadius={12}
+              borderWidth={1}
+              mt={4}
+              boxShadow="xl"
+            >
               {props.prevScore === null ? null : (
                 <Flex>
                   <Box>previous score: </Box>
-                  <Box ml="auto">{props.prevScore}%</Box>
+                  <Box ml="auto" color="gray.400">
+                    {props.prevScore}%
+                  </Box>
                 </Flex>
               )}
               {props.prevTime === null ? null : (
                 <Flex>
                   <Box mt={4}>previous time:</Box>
-                  <Box mt={4} ml="auto">
+                  <Box mt={4} ml="auto" color="gray.400">
                     {prevStringTime.minutes}:
                     {prevStringTime.seconds < 10 ? "0" : null}
                     {prevStringTime.seconds}
