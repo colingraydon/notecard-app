@@ -75,7 +75,7 @@ export const NavItem = ({ item, isActive, collapse, hideNotifications }) => {
               notifications !== 0 && (
                 <Badge
                   borderRadius="full"
-                  colorScheme="yellow"
+                  backgroundColor="green.300"
                   w={6}
                   textAlign="center"
                 >

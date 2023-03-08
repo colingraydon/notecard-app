@@ -20,7 +20,7 @@ import {
   useGetSubjectsQuery,
   useMeQuery,
 } from "../generated/graphql";
-import { blue, green } from "../themes/Lightmode";
+import { blue, clickGreen, green, hoverGreen } from "../themes/Lightmode";
 import { toErrorMap } from "../utils/toErrorMap";
 import useIsAuth from "../utils/useIsAuth";
 import { withApollo } from "../utils/withApollo";
@@ -145,9 +145,10 @@ const createSubject: React.FC<{}> = ({}) => {
                           <Box pt="31px">
                             <Button
                               type="submit"
-                              background="green.300"
                               isLoading={isSubmitting}
-                              _hover={{ background: "green.400" }}
+                              background={green}
+                              _hover={{ background: hoverGreen }}
+                              _active={{ background: clickGreen }}
                             >
                               create subject
                             </Button>

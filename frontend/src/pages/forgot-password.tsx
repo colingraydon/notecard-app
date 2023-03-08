@@ -6,6 +6,7 @@ import { Wrapper } from "../components/input/Wrapper";
 import { useForgotPasswordMutation } from "../generated/graphql";
 import { withApollo } from "../utils/withApollo";
 import NextLink from "next/link";
+import { clickGreen, green, hoverGreen } from "../themes/Lightmode";
 const forgotPassword: React.FC<{}> = ({}) => {
   const [complete, setComplete] = useState(false);
   const [forgotPassword] = useForgotPasswordMutation();
@@ -36,7 +37,9 @@ const forgotPassword: React.FC<{}> = ({}) => {
                   type="submit"
                   mr={2}
                   mt={6}
-                  background="teal"
+                  background={green}
+                  _hover={{ background: hoverGreen }}
+                  _active={{ background: clickGreen }}
                   isLoading={isSubmitting}
                 >
                   forgot password

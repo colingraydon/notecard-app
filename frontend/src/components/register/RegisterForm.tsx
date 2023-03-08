@@ -7,6 +7,7 @@ import {
   useCreateNotificationMutation,
   useRegisterMutation,
 } from "../../generated/graphql";
+import { green, hoverGreen, clickGreen } from "../../themes/Lightmode";
 import { toErrorMap } from "../../utils/toErrorMap";
 import { InputField } from "../input/InputField";
 
@@ -82,7 +83,12 @@ const RegisterForm = ({ firstFieldRef, onCancel }) => {
               <Button variant="outline" onClick={onCancel}>
                 cancel
               </Button>
-              <Button colorScheme="teal" type="submit">
+              <Button
+                background={green}
+                _hover={{ background: hoverGreen }}
+                _active={{ background: clickGreen }}
+                type="submit"
+              >
                 register
               </Button>
             </ButtonGroup>

@@ -13,6 +13,7 @@ import {
 } from "../../generated/graphql";
 import { toErrorMap } from "../../utils/toErrorMap";
 import { InputField } from "../input/InputField";
+import { green, hoverGreen, clickGreen } from "../../themes/Lightmode";
 
 const LoginForm = ({ firstFieldRef, onCancel }) => {
   //next.js router
@@ -88,7 +89,12 @@ const LoginForm = ({ firstFieldRef, onCancel }) => {
               <Button variant="outline" onClick={onCancel}>
                 cancel
               </Button>
-              <Button colorScheme="teal" type="submit">
+              <Button
+                background={green}
+                _hover={{ background: hoverGreen }}
+                _active={{ background: clickGreen }}
+                type="submit"
+              >
                 login
               </Button>
             </ButtonGroup>

@@ -23,7 +23,9 @@ const SingleNotification: React.FC<SingleNotificationProps> = (
       >
         <Box my={4} ml={4}>
           <Box>{props.text}</Box>
-          <Box mt={2}>{new Date(parseInt(props.createdAt)).toDateString()}</Box>
+          <Box color="gray.400" mt={2}>
+            {new Date(parseInt(props.createdAt)).toDateString()}
+          </Box>
         </Box>
       </Box>
     </Box>

@@ -22,7 +22,7 @@ export const InputFieldSelect: React.FC<InputFieldSelectProps> = ({
 }) => {
   const [field, { error }] = useField(props);
   return (
-    <FormControl isInvalid={!!error}>
+    <FormControl isInvalid={!!error} pb={4} minH={99} maxH={99}>
       <FormLabel htmlFor={field.name}>{label}</FormLabel>
       <Select {...field} id={field.name} placeholder={props.placeholder}>
         {options?.map((option) => {

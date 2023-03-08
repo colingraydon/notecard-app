@@ -15,6 +15,7 @@ import {
 import React from "react";
 import LoginForm from "./LoginForm";
 import { MdLogin } from "react-icons/md";
+import { green, hoverGreen, clickGreen } from "../../themes/Lightmode";
 const LoginPopoverForm = () => {
   const { onOpen, onClose, isOpen } = useDisclosure();
   const firstFieldRef = React.useRef(null);
@@ -30,7 +31,13 @@ const LoginPopoverForm = () => {
         closeOnBlur={false}
       >
         <PopoverTrigger>
-          <Button aria-label="test" size="md">
+          <Button
+            aria-label="test"
+            size="md"
+            background={green}
+            _hover={{ background: hoverGreen }}
+            _active={{ background: clickGreen }}
+          >
             login
           </Button>
         </PopoverTrigger>
