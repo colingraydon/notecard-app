@@ -9,6 +9,7 @@ import FullSidebar from "../components/sidebar/FullSidebar";
 import { withApollo } from "../utils/withApollo";
 import { useMeQuery } from "../generated/graphql";
 import { DarkModeSwitch } from "../components/navbar/DarkModeSwitch";
+import NewWaves from "../icons/NewWaves";
 
 const Index = () => {
   //this would be used if the contextprovider was used.
@@ -57,6 +58,10 @@ const Index = () => {
           <Box mt={12} ml={12}>
             {data?.me ? "hello, " : "log in to get started"}
           </Box>
+          <Box height={400} minHeight={400} maxHeight={400}>
+            <NewWaves />
+          </Box>
+          <Box bg="tomato" h="20" w="1000"></Box>
         </Box>
       </Flex>
     </Box>

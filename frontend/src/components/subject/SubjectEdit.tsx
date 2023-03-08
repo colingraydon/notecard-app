@@ -2,6 +2,7 @@ import { LockIcon, UnlockIcon } from "@chakra-ui/icons";
 import { Box, IconButton } from "@chakra-ui/react";
 import React, { ChangeEvent } from "react";
 import { useUpdateSubjectNameMutation } from "../../generated/graphql";
+import { purple, hoverPurple, clickPurple } from "../../themes/Lightmode";
 
 interface SubjectEditProps {
   name: string;
@@ -22,6 +23,9 @@ const SubjectEdit: React.FC<SubjectEditProps> = (props: SubjectEditProps) => {
         ml={2}
         icon={props.lockState ? <LockIcon /> : <UnlockIcon />}
         aria-label="Update Subject"
+        background={purple}
+        _hover={{ background: hoverPurple }}
+        _active={{ background: clickPurple }}
         onClick={() => {
           props.handleLockState();
           if (

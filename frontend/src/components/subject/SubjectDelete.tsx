@@ -13,6 +13,14 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import React from "react";
+import {
+  clickGreen,
+  clickPurple,
+  green,
+  hoverGreen,
+  hoverPurple,
+  purple,
+} from "../../themes/Lightmode";
 
 interface SubjectDeleteProps {
   id: number;
@@ -44,6 +52,9 @@ const SubjectDelete: React.FC<SubjectDeleteProps> = (
         icon={<DeleteIcon />}
         aria-label="Delete Subject"
         onClick={onOpen}
+        background={purple}
+        _hover={{ background: hoverPurple }}
+        _active={{ background: clickPurple }}
       />
       <Box>
         <AlertDialog

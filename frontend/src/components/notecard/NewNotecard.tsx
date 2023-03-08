@@ -17,7 +17,7 @@ import {
   useGetSubjectsQuery,
   useMeQuery,
 } from "../../generated/graphql";
-import { green } from "../../themes/Lightmode";
+import { clickGreen, green, hoverGreen } from "../../themes/Lightmode";
 import { toErrorMap } from "../../utils/toErrorMap";
 import useIsAuth from "../../utils/useIsAuth";
 import { InputField } from "../input/InputField";
@@ -111,7 +111,7 @@ const NewNotecard: React.FC<NewNotecardProps> = ({}) => {
                       />
                     </Box>
 
-                    <Box mr={6} ml={6} mt={8}>
+                    <Box mr={6} ml={6} mt={8} h={200}>
                       <Divider orientation="vertical" />
                     </Box>
                     <Box w={400} pb={4} minH={280} maxH={280}>
@@ -129,6 +129,8 @@ const NewNotecard: React.FC<NewNotecardProps> = ({}) => {
                       mr={2}
                       mt={2}
                       background={green}
+                      _hover={{ background: hoverGreen }}
+                      _active={{ background: clickGreen }}
                       isLoading={isSubmitting}
                     >
                       create card

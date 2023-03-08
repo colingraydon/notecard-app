@@ -5,6 +5,7 @@ import {
   useDeleteCardMutation,
   useUpdateCardMutation,
 } from "../../generated/graphql";
+import { blue, clickPurple, hoverPurple, purple } from "../../themes/Lightmode";
 
 interface SingleNotecardProps {
   title: string;
@@ -42,7 +43,14 @@ const SingleNotecard: React.FC<SingleNotecardProps> = (
   return (
     <Box w={886} mt={8}>
       <Flex>
-        <Box p={3} border="solid" borderRadius={12} borderWidth={1} mr={2}>
+        <Box
+          p={3}
+          border="solid"
+          borderRadius={12}
+          borderWidth={1}
+          mr={2}
+          boxShadow="xl"
+        >
           <Textarea
             w={400}
             h={200}
@@ -50,12 +58,20 @@ const SingleNotecard: React.FC<SingleNotecardProps> = (
             onChange={handleTitleChange}
             isReadOnly={props.lockState}
             resize="none"
+            _hover={{ borderColor: blue }}
           ></Textarea>
         </Box>
         <Box h={226} mr={2} ml={2}>
-          <Divider orientation="vertical" />
+          <Divider orientation="vertical" borderColor="gray.400" />
         </Box>
-        <Box p={3} border="solid" borderRadius={12} borderWidth={1} ml={2}>
+        <Box
+          p={3}
+          border="solid"
+          borderRadius={12}
+          borderWidth={1}
+          ml={2}
+          boxShadow="xl"
+        >
           <Textarea
             w={400}
             h={200}
@@ -63,6 +79,7 @@ const SingleNotecard: React.FC<SingleNotecardProps> = (
             onChange={handleTextChange}
             isReadOnly={props.lockState}
             resize="none"
+            _hover={{ borderColor: blue }}
           ></Textarea>
         </Box>
       </Flex>
@@ -71,6 +88,9 @@ const SingleNotecard: React.FC<SingleNotecardProps> = (
         <IconButton
           ml={2}
           icon={<DeleteIcon />}
+          background={purple}
+          _hover={{ background: hoverPurple }}
+          _active={{ background: clickPurple }}
           aria-label="Delete Card"
           onClick={() => {
             props.handleDelete(props.subName, props.id, props.cardId);
@@ -81,6 +101,9 @@ const SingleNotecard: React.FC<SingleNotecardProps> = (
           ml={2}
           icon={props.lockState ? <LockIcon /> : <UnlockIcon />}
           aria-label="Edit Card"
+          background={purple}
+          _hover={{ background: hoverPurple }}
+          _active={{ background: clickPurple }}
           onClick={() => {
             props.handleLockState();
             !props.lockState &&

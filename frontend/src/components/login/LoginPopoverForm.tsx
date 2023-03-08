@@ -15,7 +15,14 @@ import {
 import React from "react";
 import LoginForm from "./LoginForm";
 import { MdLogin } from "react-icons/md";
-import { green, hoverGreen, clickGreen } from "../../themes/Lightmode";
+import {
+  green,
+  hoverGreen,
+  clickGreen,
+  purple,
+  hoverPurple,
+  clickPurple,
+} from "../../themes/Lightmode";
 const LoginPopoverForm = () => {
   const { onOpen, onClose, isOpen } = useDisclosure();
   const firstFieldRef = React.useRef(null);
@@ -34,9 +41,9 @@ const LoginPopoverForm = () => {
           <Button
             aria-label="test"
             size="md"
-            background={green}
-            _hover={{ background: hoverGreen }}
-            _active={{ background: clickGreen }}
+            background={purple}
+            _hover={{ background: hoverPurple }}
+            _active={{ background: clickPurple }}
           >
             login
           </Button>

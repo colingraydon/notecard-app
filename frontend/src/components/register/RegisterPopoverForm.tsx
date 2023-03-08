@@ -13,7 +13,14 @@ import {
 } from "@chakra-ui/react";
 
 import React from "react";
-import { green, hoverGreen, clickGreen } from "../../themes/Lightmode";
+import {
+  green,
+  hoverGreen,
+  clickGreen,
+  clickPurple,
+  hoverPurple,
+  purple,
+} from "../../themes/Lightmode";
 import RegisterForm from "./RegisterForm";
 
 const RegisterPopoverForm = () => {
@@ -34,9 +41,9 @@ const RegisterPopoverForm = () => {
           <Button
             aria-label="register"
             size="md"
-            background={green}
-            _hover={{ background: hoverGreen }}
-            _active={{ background: clickGreen }}
+            background={purple}
+            _hover={{ background: hoverPurple }}
+            _active={{ background: clickPurple }}
           >
             register
           </Button>

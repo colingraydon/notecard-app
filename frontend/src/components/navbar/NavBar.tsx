@@ -12,7 +12,14 @@ import {
   useLogoutMutation,
   useMeQuery,
 } from "../../generated/graphql";
-import { clickGreen, green, hoverGreen } from "../../themes/Lightmode";
+import {
+  clickGreen,
+  clickPurple,
+  green,
+  hoverGreen,
+  hoverPurple,
+  purple,
+} from "../../themes/Lightmode";
 import { isServerFn } from "../../utils/isServer";
 
 import LoginPopoverForm from "../login/LoginPopoverForm";
@@ -71,10 +78,9 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
         <Box mr={2}>{data.me.username}</Box>
         <Button
           isLoading={logoutFetching}
-          // color="black"
-          background={green}
-          _hover={{ background: hoverGreen }}
-          _active={{ background: clickGreen }}
+          background={purple}
+          _hover={{ background: hoverPurple }}
+          _active={{ background: clickPurple }}
           onClick={async () => {
             await router.push("/");
             await logout(logoutVar);
