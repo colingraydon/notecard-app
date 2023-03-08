@@ -48,30 +48,26 @@ const Index = () => {
           collapse={items[0].collapse}
           handleCollapse={handleCollapse}
         ></FullSidebar>
-        <Box
-          w="100%"
-          // backgroundImage={"linear-gradient(to bottom right, red, yellow);"}
-        >
+        <Box w="100%">
           <NavBar></NavBar>
-          <Box mt={12} ml={12}>
-            {data?.me ? "hello, " : "log in to get started"}
-          </Box>
-          {/* <Box height={400} minHeight={400} maxHeight={400} mt="auto"> */}
-          <Flex
-            mt="auto"
-            height={400}
-            minHeight={400}
-            maxHeight={400}
-            position="absolute"
-            bottom="0"
+          <Box
+            bgGradient="linear(to-b, purple.300, blue.300)"
+            // style={{
+            //   backgroundImage: "linear-gradient(to bottom right, , yellow)",
+            // }}
           >
-            <NewWaves />
-            {/* <Image as={NewWaves} mt="auto" display="block" /> */}
-            {/* <Image src="../public/svg.png" /> */}
-          </Flex>
-          {/* </Box> */}
-
-          <Box bg="tomato" h="20" w="1000"></Box>
+            <Flex maxH="calc(100vh - 107px)" minH="calc(100vh - 107px)">
+              <Box
+                height={350}
+                minHeight={350}
+                maxHeight={350}
+                mt="auto"
+                width="100%"
+              >
+                <NewWaves />
+              </Box>
+            </Flex>
+          </Box>
         </Box>
       </Flex>
     </Box>
