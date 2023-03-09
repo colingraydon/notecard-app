@@ -14,10 +14,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import {
-  clickGreen,
   clickPurple,
-  green,
-  hoverGreen,
   hoverPurple,
   purple,
 } from "../../styles/themes/Lightmode";

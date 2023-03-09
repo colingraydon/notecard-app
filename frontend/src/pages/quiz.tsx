@@ -1,7 +1,6 @@
-import { Flex, Box } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { NavBar } from "../components/navbar/NavBar";
-import NewNotecard from "../components/notecard/NewNotecard";
 import QuizWrapper from "../components/quiz/QuizWrapper";
 import FullSidebar from "../components/sidebar/FullSidebar";
 import { withApollo } from "../utils/withApollo";
@@ -30,7 +29,6 @@ const quiz: React.FC<quizProps> = ({}) => {
   //when items are updated, local storage is set
   useEffect(() => {
     localStorage.setItem("items", JSON.stringify(items));
-    console.log("items: ", items);
   }, [items]);
   return (
     <Flex>

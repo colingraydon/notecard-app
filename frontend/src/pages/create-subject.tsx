@@ -20,12 +20,7 @@ import {
   useGetSubjectsQuery,
   useMeQuery,
 } from "../generated/graphql";
-import {
-  blue,
-  clickGreen,
-  green,
-  hoverGreen,
-} from "../styles/themes/Lightmode";
+import { clickGreen, green, hoverGreen } from "../styles/themes/Lightmode";
 import { toErrorMap } from "../utils/toErrorMap";
 import useIsAuth from "../utils/useIsAuth";
 import { withApollo } from "../utils/withApollo";
@@ -36,11 +31,6 @@ const createSubject: React.FC<{}> = ({}) => {
   useIsAuth();
   const router = useRouter();
   const { data: dataMe, loading: loadingMe } = useMeQuery();
-
-  // if (!dataMe?.me && !loadingMe) {
-  //   router.push("/");
-  // }
-  //custom hook that checks authorization using MeQuery
 
   const [createSubject] = useCreateSubjectMutation();
 

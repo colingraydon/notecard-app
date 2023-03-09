@@ -61,7 +61,7 @@ const QuizResults: React.FC<QuizResultsProps> = (props: QuizResultsProps) => {
       ) : (
         <Box></Box>
       )}
-      <Flex w={200}>
+      <Flex w={200} mt={2}>
         <Box>time:</Box>
         <Box ml="auto">
           {currMinutes}:{currSeconds < 10 ? "0" : null}

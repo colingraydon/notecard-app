@@ -13,10 +13,11 @@ const AboutWrapper: React.FC<AboutWrapperProps> = ({}) => {
           after making over 500 physical note cards for my last exam, i realized
           i was spending more time making cards than studying.
         </Box>
-        <Box>that's when i created notecard app. </Box>
+        <Box>that's when i created simplify studying. </Box>
         <Box>
-          notecard app is designed to be as fast and easy to use as possible, so
-          you can spend more time studying and less time making notecards.
+          simplify studying is designed to be as fast and easy to use as
+          possible, so you can spend more time studying and less time making
+          notecards.
         </Box>
       </Stack>
       <Box mt={20} w={450}>

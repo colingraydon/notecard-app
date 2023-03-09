@@ -35,7 +35,6 @@ const FullSidebar = (props: FullSidebarProps) => {
           borderRadius="12px"
         >
           <Flex
-            display="flex"
             transition="ease-in-out .2s"
             justifyContent="center"
             alignItems="center"

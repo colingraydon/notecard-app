@@ -97,7 +97,7 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
       >
         <Flex align="center" flex={1}>
           <Link as={NextLink} href="/">
-            studying made simple
+            simplify studying
           </Link>
 
           <Box ml="auto" mr={2}>
