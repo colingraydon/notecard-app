@@ -1,6 +1,16 @@
-import { Box, Flex, Image } from "@chakra-ui/react";
+import {
+  Box,
+  Container,
+  Flex,
+  Image,
+  ListItem,
+  OrderedList,
+  UnorderedList,
+} from "@chakra-ui/react";
+import { url } from "inspector";
 import { useEffect, useState } from "react";
 import { NavBar } from "../components/navbar/NavBar";
+import QuizCard from "../components/quiz/QuizCard";
 import FullSidebar from "../components/sidebar/FullSidebar";
 import { useMeQuery } from "../generated/graphql";
 import NewWaves from "../styles/icons/NewWaves";
@@ -50,19 +60,46 @@ const Index = () => {
         ></FullSidebar>
         <Box w="100%">
           <NavBar></NavBar>
-          <Box
-            bgGradient="linear(to-b, purple.300, blue.300)"
-            // style={{
-            //   backgroundImage: "linear-gradient(to bottom right, , yellow)",
-            // }}
-          >
-            <Flex maxH="calc(100vh - 107px)" minH="calc(100vh - 107px)">
+          <Box>
+            <Box mt={8}>
               <Box
-                height={350}
-                minHeight={350}
-                maxHeight={350}
-                mt="auto"
+                fontSize={54}
+                ml="auto"
+                mr="auto"
+                w="100%"
+                textAlign="center"
+              >
+                studying made simple
+              </Box>
+              <Box textAlign="center" fontSize={20}>
+                create subjects. make notecards. quiz yourself. it's that easy.
+              </Box>
+
+              <Flex mt={4}>
+                <Box m="auto">
+                  <QuizCard
+                    title="Marie Curie"
+                    text="Born in 1867. A physicist and chemist notable for her work on radioactivity. Only person to receive a Nobel prize in two different fields."
+                    handleCheckChange={() => void 0}
+                    cardId={-1}
+                  ></QuizCard>
+                </Box>
+              </Flex>
+            </Box>
+
+            <Flex
+              maxH="calc(100vh - 561px)"
+              minH="calc(100vh - 561px)"
+              mt="auto"
+
+              // bg="teal"
+            >
+              <Box
+                // maxH="calc(100vh - 545px)"
+                // minH="calc(100vh - 545px)"
+                // mt="auto"
                 width="100%"
+                mt="auto"
               >
                 <NewWaves />
               </Box>
