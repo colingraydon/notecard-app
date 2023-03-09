@@ -11,11 +11,19 @@ const breakpoints = {
 
 const theme = extendTheme({
   semanticTokens: {
+    styles: {
+      global: () => ({
+        body: {
+          bg: "#202124",
+        },
+      }),
+    },
     colors: {
       text: {
         default: "#16161D",
         _dark: "#ade3b8",
       },
+
       heroGradientStart: {
         default: "#7928CA",
         _dark: "#e3a7f9",

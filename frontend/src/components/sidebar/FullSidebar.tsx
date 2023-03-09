@@ -30,7 +30,7 @@ const FullSidebar = (props: FullSidebarProps) => {
           h="full"
           maxW={collapse ? 300 : 83}
           minW={collapse ? 300 : 83}
-          bg={useColorModeValue("white", "#1a202c")}
+          bg={useColorModeValue("white", "gray.800")}
           padding={6}
           flexDirection="column"
           borderRadius="12px"

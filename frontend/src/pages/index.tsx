@@ -1,13 +1,4 @@
-import {
-  Box,
-  Container,
-  Flex,
-  Image,
-  ListItem,
-  OrderedList,
-  UnorderedList,
-} from "@chakra-ui/react";
-import { url } from "inspector";
+import { Box, Flex, useColorMode } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { NavBar } from "../components/navbar/NavBar";
 import QuizCard from "../components/quiz/QuizCard";
@@ -38,6 +29,9 @@ const Index = () => {
     }
   }, []);
 
+  //dark mode hook
+  const { colorMode } = useColorMode();
+
   //modifies collapse and setsState
   const handleCollapse = () => {
     const collapse = items[0].collapse;
@@ -57,6 +51,7 @@ const Index = () => {
         <FullSidebar
           collapse={items[0].collapse}
           handleCollapse={handleCollapse}
+          hideNotifications={!data?.me ? true : false}
         ></FullSidebar>
         <Box w="100%">
           <NavBar></NavBar>

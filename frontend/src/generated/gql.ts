@@ -23,7 +23,7 @@ const documents = {
     "mutation ForgotPassword($email: String!) {\n  forgotPassword(email: $email)\n}": types.ForgotPasswordDocument,
     "mutation Login($usernameOrEmail: String!, $password: String!) {\n  login(usernameOrEmail: $usernameOrEmail, password: $password) {\n    errors {\n      message\n      field\n    }\n    user {\n      createdAt\n      id\n      updatedAt\n      username\n      email\n    }\n  }\n}": types.LoginDocument,
     "mutation Logout {\n  logout\n}": types.LogoutDocument,
-    "mutation Register($options: UsernamePasswordInput!) {\n  register(options: $options) {\n    errors {\n      message\n      field\n    }\n    user {\n      createdAt\n      id\n      updatedAt\n      username\n    }\n  }\n}": types.RegisterDocument,
+    "mutation Register($options: UsernamePasswordInput!) {\n  register(options: $options) {\n    errors {\n      message\n      field\n    }\n    user {\n      createdAt\n      id\n      updatedAt\n      username\n      email\n    }\n  }\n}": types.RegisterDocument,
     "mutation UpdateCard($cardId: Int!, $title: String!, $text: String!) {\n  updateCard(cardId: $cardId, title: $title, text: $text) {\n    cardId\n    title\n    text\n  }\n}": types.UpdateCardDocument,
     "mutation UpdateNotification($id: Int!, $read: Boolean!) {\n  updateNotification(id: $id, read: $read) {\n    errors {\n      field\n      message\n    }\n    notification {\n      id\n      text\n      read\n    }\n  }\n}": types.UpdateNotificationDocument,
     "mutation UpdateSubject($input: SubjectInput!) {\n  updateSubject(input: $input) {\n    id\n    prevScore\n    prevTime\n  }\n}": types.UpdateSubjectDocument,
@@ -91,7 +91,7 @@ export function graphql(source: "mutation Logout {\n  logout\n}"): (typeof docum
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "mutation Register($options: UsernamePasswordInput!) {\n  register(options: $options) {\n    errors {\n      message\n      field\n    }\n    user {\n      createdAt\n      id\n      updatedAt\n      username\n    }\n  }\n}"): (typeof documents)["mutation Register($options: UsernamePasswordInput!) {\n  register(options: $options) {\n    errors {\n      message\n      field\n    }\n    user {\n      createdAt\n      id\n      updatedAt\n      username\n    }\n  }\n}"];
+export function graphql(source: "mutation Register($options: UsernamePasswordInput!) {\n  register(options: $options) {\n    errors {\n      message\n      field\n    }\n    user {\n      createdAt\n      id\n      updatedAt\n      username\n      email\n    }\n  }\n}"): (typeof documents)["mutation Register($options: UsernamePasswordInput!) {\n  register(options: $options) {\n    errors {\n      message\n      field\n    }\n    user {\n      createdAt\n      id\n      updatedAt\n      username\n      email\n    }\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

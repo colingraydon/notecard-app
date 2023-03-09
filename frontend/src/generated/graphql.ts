@@ -388,6 +388,7 @@ export type RegisterMutation = {
       id: number;
       updatedAt: string;
       username: string;
+      email: string;
     } | null;
   };
 };
@@ -1042,6 +1043,7 @@ export const RegisterDocument = gql`
         id
         updatedAt
         username
+        email
       }
     }
   }

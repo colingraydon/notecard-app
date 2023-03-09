@@ -3,6 +3,8 @@ import { Form, Formik } from "formik";
 import { useRouter } from "next/router";
 import {
   MeDocument,
+  MeEmailDocument,
+  MeEmailQuery,
   MeQuery,
   useCreateNotificationMutation,
   useRegisterMutation,
@@ -36,6 +38,13 @@ const RegisterForm = ({ firstFieldRef, onCancel }) => {
                 data: {
                   __typename: "Query",
                   me: data?.register.user,
+                },
+              });
+              cache.writeQuery<MeEmailQuery>({
+                query: MeEmailDocument,
+                data: {
+                  __typename: "Query",
+                  meEmail: data?.register.user,
                 },
               });
               // cache.evict({ fieldName: "getNotifications" });

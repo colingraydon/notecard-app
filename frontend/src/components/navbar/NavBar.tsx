@@ -111,7 +111,7 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
         pb={6}
         pl={6}
         pr={2}
-        bg={useColorModeValue("white", "#1a202c")}
+        bg={useColorModeValue("white", "gray.800")}
       >
         <Flex align="center" flex={1}>
           <Box>studying made simple</Box>

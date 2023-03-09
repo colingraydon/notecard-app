@@ -9,6 +9,7 @@ mutation Register($options: UsernamePasswordInput!) {
       id
       updatedAt
       username
+      email
     }
   }
 }

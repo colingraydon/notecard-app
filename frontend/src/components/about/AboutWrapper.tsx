@@ -7,8 +7,8 @@ const AboutWrapper: React.FC<AboutWrapperProps> = ({}) => {
   return (
     <Box ml={12}>
       <Heading mt={8}>about</Heading>
-      <Stack spacing={8} mt={12} w={600}>
-        <Box>my name is colin and i'm terrible at memorization.</Box>
+      <Stack spacing={8} mt={12} w={450}>
+        <Box>my name is colin graydon and i'm terrible at memorization.</Box>
         <Box>
           after making over 500 physical note cards for my last exam, i realized
           i was spending more time making cards than studying.
@@ -19,10 +19,9 @@ const AboutWrapper: React.FC<AboutWrapperProps> = ({}) => {
           you can spend more time studying and less time making notecards.
         </Box>
       </Stack>
-      <Box mt={20}>
-        if you have any technical issues with the site, please report them{" "}
+      <Box mt={20} w={450}>
         <Link href="https://github.com/colingraydon/notecard-app/issues">
-          here.
+          please report any technical issues here.
         </Link>
       </Box>
     </Box>
