@@ -74,39 +74,6 @@ export class SubjectResolver {
         ],
       };
     }
-    // const rawUser = await User.find({ where: { id: req.session.userId } });
-    // const user = rawUser[0];
-    // const subj = Subject.create({
-    //   name: input,
-    //   ...user,
-    //   creatorId: req.session.userId,
-    // });
-    // subj.save();
-
-    // const testResult = await dataSource
-    //   .createQueryBuilder()
-    //   .insert()
-    //   .into(Subject)
-    //   .values([
-    //     {
-    //       name: input,
-    //       creatorId: req.session.userId,
-    //     },
-    //   ])
-    //   .execute();
-
-    // const testResultReal = testResult.raw[0] as Subject;
-    // console.log("test resultReal: ", testResultReal);
-    // console.log("typeof testResultReal: ", typeof testResultReal);
-    // return testResultReal;
-
-    // const userRepository = dataSource.getRepository(User);
-    // const user = await userRepository.find({
-    //   where: { id: req.session.userId },
-    // });
-    // const subjectRepository = await dataSource.getRepository(Subject);
-    // await subjectRepository.manager.create({name: input, creatorId: req.session.userId})
-    // return { subject: subj };
 
     //all other methods were not returning the id, or overwriting it with subject id
     //must use repository, manually assign data (cannot use spread operator), then save via repository
@@ -174,16 +141,6 @@ export class SubjectResolver {
     @Arg("id", () => Int) id: number,
     @Ctx() { req }: Context
   ): Promise<Subject> {
-    // if (name.length > 30) {
-    //   return {
-    //     errors: [
-    //       {
-    //         message: "subject must have 30 or fewer characters",
-    //         field: "subject",
-    //       },
-    //     ],
-    //   };
-    // }
     const subj = await dataSource
       .createQueryBuilder()
       .update(Subject)

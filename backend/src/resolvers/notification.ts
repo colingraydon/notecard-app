@@ -46,7 +46,7 @@ export class NotificationResolver {
     let notification = new Notification();
 
     const realUser = user[0];
-    console.log("realUser: ", realUser);
+
     notification.text = text;
     notification.owner = realUser;
     notification.creatorId = realUser.id;
@@ -54,7 +54,7 @@ export class NotificationResolver {
     // notification.creatorId = user[0].id;
 
     notification = await notificationRepository.save(notification);
-    console.log("notification: ", notification);
+
     return notification;
   }
 
@@ -78,16 +78,6 @@ export class NotificationResolver {
       .returning("*")
       .execute();
 
-    // const userRepository = dataSource.getRepository(User);
-    // let user = await userRepository.find({
-    //   where: { id: req.session.userId },
-    // });
-
-    // const newnot = await Notification.findOne({
-    //   where: { id: notification.raw[0].id },
-    // });
-    // let newNot = { ...notification.raw[0] };
-    // console.log("newNot: ", newNot);
     if (notification.raw.length < 1) {
       return {
         errors: [
@@ -98,7 +88,6 @@ export class NotificationResolver {
         ],
       };
     }
-    // console.log("notification raw 0", notification.raw[0]);
     return notification.raw[0];
   }
 

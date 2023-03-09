@@ -42,7 +42,6 @@ const Index = () => {
   //when items are updated, local storage is set
   useEffect(() => {
     localStorage.setItem("items", JSON.stringify(items));
-    console.log("items: ", items);
   }, [items]);
 
   return (
@@ -105,5 +104,6 @@ const Index = () => {
     </Box>
   );
 };
+export { getServerSideProps } from "../chakra";
 
 export default withApollo({ ssr: false })(Index);

@@ -1,11 +1,5 @@
 import { useApolloClient } from "@apollo/client";
-import {
-  Box,
-  Button,
-  Flex,
-  useColorMode,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, Link, useColorModeValue } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import {
   LogoutMutationVariables,
@@ -13,10 +7,7 @@ import {
   useMeQuery,
 } from "../../generated/graphql";
 import {
-  clickGreen,
   clickPurple,
-  green,
-  hoverGreen,
   hoverPurple,
   purple,
 } from "../../styles/themes/Lightmode";
@@ -25,6 +16,7 @@ import { isServerFn } from "../../utils/isServer";
 import LoginPopoverForm from "../login/LoginPopoverForm";
 import RegisterPopoverForm from "../register/RegisterPopoverForm";
 import { DarkModeSwitch } from "./DarkModeSwitch";
+import NextLink from "next/link";
 
 interface NavBarProps {}
 
@@ -33,12 +25,6 @@ let logoutVar: LogoutMutationVariables;
 
 export const NavBar: React.FC<NavBarProps> = ({}) => {
   const router = useRouter();
-  // useEffect only runs in the browser, so just set state, which will rerender the page
-  //needed to fix hydration errors
-  // const [isServer, setIsServer] = useState(true);
-  // useEffect(() => setIsServer(false), []);
-
-  const { colorMode } = useColorMode();
 
   const [logout, { loading: logoutFetching }] = useLogoutMutation();
 
@@ -49,10 +35,6 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
     //don't need if the cookie is passed from the client to next.js to graphql endpoint
     skip: isServerFn(),
   });
-
-  // const [pause, setPause] = useState(true);
-  // useEffect(() => { setPause(isServerFn()) }, []);
-  // const [{ data, fetching }] = useMeQuery({ pause });
 
   let body = null;
 
@@ -114,7 +96,9 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
         bg={useColorModeValue("white", "gray.800")}
       >
         <Flex align="center" flex={1}>
-          <Box>studying made simple</Box>
+          <Link as={NextLink} href="/">
+            studying made simple
+          </Link>
 
           <Box ml="auto" mr={2}>
             {body}

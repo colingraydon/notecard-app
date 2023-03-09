@@ -1,9 +1,6 @@
-import { EditIcon } from "@chakra-ui/icons";
 import {
-  Box,
   Button,
   FocusLock,
-  IconButton,
   Popover,
   PopoverArrow,
   PopoverCloseButton,
@@ -13,16 +10,12 @@ import {
 } from "@chakra-ui/react";
 
 import React from "react";
-import LoginForm from "./LoginForm";
-import { MdLogin } from "react-icons/md";
 import {
-  green,
-  hoverGreen,
-  clickGreen,
-  purple,
-  hoverPurple,
   clickPurple,
+  hoverPurple,
+  purple,
 } from "../../styles/themes/Lightmode";
+import LoginForm from "./LoginForm";
 const LoginPopoverForm = () => {
   const { onOpen, onClose, isOpen } = useDisclosure();
   const firstFieldRef = React.useRef(null);
@@ -49,7 +42,6 @@ const LoginPopoverForm = () => {
           </Button>
         </PopoverTrigger>
         <PopoverContent p={5}>
-          {/* removed return focus */}
           <FocusLock persistentFocus={false}>
             <PopoverArrow />
             <PopoverCloseButton />

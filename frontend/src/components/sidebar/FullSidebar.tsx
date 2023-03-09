@@ -19,7 +19,6 @@ interface FullSidebarProps {
 
 const FullSidebar = (props: FullSidebarProps) => {
   const { collapse, handleCollapse } = props;
-  const { colorMode } = useColorMode();
 
   return (
     <Box position="sticky" top="0" height="1" zIndex="1">

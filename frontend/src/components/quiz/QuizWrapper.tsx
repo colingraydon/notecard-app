@@ -6,17 +6,16 @@ import {
   Heading,
   Link,
 } from "@chakra-ui/react";
-import { useRouter } from "next/router";
+import NextLink from "next/link";
 import React, { useEffect, useState } from "react";
 import { useGetSubjectsQuery, useMeQuery } from "../../generated/graphql";
 import { SingleSub } from "../../types";
 import useIsAuth from "../../utils/useIsAuth";
 import { SubjectSelect } from "../SubjectSelect";
 import QuizCard from "./QuizCard";
-import NextLink from "next/link";
 
+import { clickGreen, green, hoverGreen } from "../../styles/themes/Lightmode";
 import QuizSidebar from "./QuizSidebar";
-import { green, hoverGreen, clickGreen } from "../../styles/themes/Lightmode";
 
 interface QuizWrapperProps {}
 
@@ -57,7 +56,6 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
   const [started, setStarted] = useState(false);
   const [startedOnce, setStartedOnce] = useState(false);
   const handleStarted = () => {
-    console.log("handle start");
     setStarted(!started);
     setStartedOnce(true);
   };
@@ -69,12 +67,6 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
       ? setIncorrectCountState(incorrectCountState - 1)
       : setIncorrectCountState(incorrectCountState + 1);
   };
-
-  //for testing incorrect count
-  useEffect(() => {
-    console.log("incorrect: ", incorrectCountState);
-    console.log("num questions: ", value.cards?.length);
-  });
 
   return (
     <Flex>

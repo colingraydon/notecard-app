@@ -37,41 +37,15 @@ class CardResponse {
   card?: Card;
 }
 
-//to be used in the delete mutation
-// @ObjectType()
-// class DeleteResponse {
-//   @Field(() => Boolean, { nullable: true })
-//   errors?: boolean;
-
-//   @Field(() => String, { nullable: true })
-//   response?: string;
-// }
-// @ObjectType()
-// class PaginatedCards {
-//   @Field(() => [Card])
-//   cards: Card[];
-//   @Field()
-//   hasMore: boolean;
-// }
-
 @Resolver(Card)
 export class CardResolver {
-  //   @Query(() => PaginatedCards)
-  //   async cards(
-  //       @Ctx() {}: Context
-  //   ): Promise<Card> {} {
-  //       return Card.find({ where: {id}})
-  //   }
-
   //creates a card, uses middleware to check auth
   @Mutation(() => CardResponse)
   @UseMiddleware(isAuthenticated)
   async createCard(
     @Arg("input") input: CardInput,
-    // @Arg("id", () => Int) id: number,
     @Ctx() { req }: Context
   ): Promise<CardResponse> {
-    console.log("entered method--------------");
     if (input.title.length === 0) {
       return {
         errors: [

@@ -1,19 +1,17 @@
-import { Stack, ButtonGroup, Button, Link, Box, Flex } from "@chakra-ui/react";
-import NextLink from "next/link";
+import { Box, Button, ButtonGroup, Flex, Link, Stack } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
+import NextLink from "next/link";
 import { useRouter } from "next/router";
 import {
-  useLoginMutation,
-  MeQuery,
   MeDocument,
-  MeEmailQuery,
   MeEmailDocument,
-  GetNotificationsQuery,
-  GetNotificationsDocument,
+  MeEmailQuery,
+  MeQuery,
+  useLoginMutation,
 } from "../../generated/graphql";
+import { clickGreen, green, hoverGreen } from "../../styles/themes/Lightmode";
 import { toErrorMap } from "../../utils/toErrorMap";
 import { InputField } from "../input/InputField";
-import { green, hoverGreen, clickGreen } from "../../styles/themes/Lightmode";
 
 const LoginForm = ({ firstFieldRef, onCancel }) => {
   //next.js router

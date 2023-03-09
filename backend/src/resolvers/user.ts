@@ -80,15 +80,12 @@ export class UserResolver {
         return {
           errors: [
             {
-              message: "Username already exists",
+              message: "username or email already exists",
               field: "username",
             },
           ],
         };
       }
-
-      //@TODO implement dupe email error, add enumaration to prevent attacks
-      console.log("message: ", err.message);
     }
 
     //sets cookie

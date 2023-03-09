@@ -7,21 +7,7 @@ const client = new ApolloClient({
   cache: new InMemoryCache({
     typePolicies: {
       Query: {
-        fields: {
-          //   posts: {
-          //     //specify which args are importnat, can also pass in "limit" here
-          //     keyArgs: [],
-          //     merge(
-          //       existing: PaginatedPosts | undefined,
-          //       incoming: PaginatedPosts
-          //     ): PaginatedPosts {
-          //       return {
-          //         ...incoming,
-          //         posts: [...(existing?.posts || []), ...incoming.posts],
-          //       };
-          //     },
-          //   },
-        },
+        fields: {},
       },
     },
   }),

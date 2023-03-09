@@ -1,9 +1,6 @@
-import { EditIcon } from "@chakra-ui/icons";
 import {
-  Box,
   Button,
   FocusLock,
-  IconButton,
   Popover,
   PopoverArrow,
   PopoverCloseButton,
@@ -14,9 +11,6 @@ import {
 
 import React from "react";
 import {
-  green,
-  hoverGreen,
-  clickGreen,
   clickPurple,
   hoverPurple,
   purple,

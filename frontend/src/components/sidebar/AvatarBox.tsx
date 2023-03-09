@@ -4,7 +4,6 @@ import { blue, green, testgreen } from "../../styles/themes/Lightmode";
 
 export const AvatarBox = ({ collapse }) => {
   const { data, loading } = useMeEmailQuery();
-  // const { data: dataMe, loading: loadingMe } = useMeQuery();
 
   return (
     <Box>
