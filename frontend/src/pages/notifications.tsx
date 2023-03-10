@@ -40,7 +40,9 @@ const quiz: React.FC<notificationsProps> = ({}) => {
       ></FullSidebar>
       <Box w="100%">
         <NavBar></NavBar>
-        <NotificationWrapper></NotificationWrapper>
+        <Flex justifyContent="center">
+          <NotificationWrapper></NotificationWrapper>
+        </Flex>
       </Box>
     </Flex>
   );

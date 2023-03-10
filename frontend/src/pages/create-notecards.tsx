@@ -47,9 +47,9 @@ const createNotecards: React.FC<createNotecardsProps> = ({}) => {
       ></FullSidebar>
       <Box w="100%">
         <NavBar></NavBar>
-        <Box ml={8} mt={8}>
+        <Flex justifyContent="center" mt={8}>
           <NewNotecard></NewNotecard>
-        </Box>
+        </Flex>
       </Box>
     </Flex>
   );

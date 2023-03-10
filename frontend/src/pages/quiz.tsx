@@ -38,7 +38,9 @@ const quiz: React.FC<quizProps> = ({}) => {
       ></FullSidebar>
       <Box w="100%">
         <NavBar></NavBar>
-        <QuizWrapper></QuizWrapper>
+        <Box>
+          <QuizWrapper></QuizWrapper>
+        </Box>
       </Box>
     </Flex>
   );

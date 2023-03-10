@@ -81,13 +81,13 @@ const QuizSidebar: React.FC<QuizSidebarProps> = (props: QuizSidebarProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Box position="sticky" top={55} height="1" zIndex="0" pr={2}>
+    <Box position="sticky" top={55} height="1" zIndex="0">
       {props.hasCards === 0 ? null : (
-        <Box>
+        <Box w={300}>
           <Box h={8}></Box>
           <Box
             p={3}
-            w={200}
+            w={300}
             border="solid"
             borderRadius={12}
             borderWidth={1}

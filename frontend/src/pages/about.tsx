@@ -39,7 +39,9 @@ const about: React.FC<aboutProps> = ({}) => {
       ></FullSidebar>
       <Box w="100%">
         <NavBar></NavBar>
-        <AboutWrapper></AboutWrapper>
+        <Flex justifyContent="center">
+          <AboutWrapper></AboutWrapper>
+        </Flex>
       </Box>
     </Flex>
   );

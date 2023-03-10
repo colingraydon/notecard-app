@@ -69,7 +69,7 @@ const Index = () => {
                 create subjects. make notecards. quiz yourself. it's that easy.
               </Box>
 
-              <Flex mt={4}>
+              <Flex mt={12}>
                 <Box m="auto">
                   <QuizCard
                     title="Marie Curie"

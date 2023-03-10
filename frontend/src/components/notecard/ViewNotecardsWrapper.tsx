@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Heading, Link } from "@chakra-ui/react";
+import { Box, CircularProgress, Flex, Heading, Link } from "@chakra-ui/react";
 import NextLink from "next/link";
 import React, { useState } from "react";
 import {
@@ -80,50 +80,53 @@ export const ViewNotecardsWrapper: React.FC<
   };
 
   return (
-    <Box p={8}>
-      <Heading ml={4}>view notecards</Heading>
-      {loadingMe || loading ? (
-        <CircularProgress isIndeterminate value={50} />
-      ) : (
-        <Box ml={4} mt={12}>
-          <SubjectSelect
-            loading={loading}
-            started={false}
-            subjects={subjects}
-            value={value}
-            startedOnce={false}
-            handleChange={handleChange}
-            // key={value.id}
-          />
-          {value?.cards?.length === 0 && (
-            <Box mt={8}>
-              <Link as={NextLink} href="/create-notecards">
-                create notecards
-              </Link>
-            </Box>
-          )}
-          {subjects?.length === 0 && (
-            <Box mt={12}>
-              <Link as={NextLink} href="/create-subject">
-                create subjects to get started.
-              </Link>
-            </Box>
-          )}
-          {value?.cards?.map((item) => (
-            <SingleNotecard
-              title={item.title}
-              text={item.text}
-              key={item.cardId}
-              cardId={item.cardId}
-              lockState={lockState}
-              handleLockState={handleLockState}
-              handleDelete={handleDelete}
-              subName={value.name}
-              id={value.id}
+    //width is 559
+    <Flex justifyContent="center">
+      <Box p={8} w={1178}>
+        <Heading ml={4}>view notecards</Heading>
+        {loadingMe || loading ? (
+          <CircularProgress isIndeterminate value={50} />
+        ) : (
+          <Box ml={4} mt={12}>
+            <SubjectSelect
+              loading={loading}
+              started={false}
+              subjects={subjects}
+              value={value}
+              startedOnce={false}
+              handleChange={handleChange}
+              // key={value.id}
             />
-          ))}
-        </Box>
-      )}
-    </Box>
+            {value?.cards?.length === 0 && (
+              <Box mt={8}>
+                <Link as={NextLink} href="/create-notecards">
+                  create notecards
+                </Link>
+              </Box>
+            )}
+            {subjects?.length === 0 && (
+              <Box mt={12}>
+                <Link as={NextLink} href="/create-subject">
+                  create subjects to get started.
+                </Link>
+              </Box>
+            )}
+            {value?.cards?.map((item) => (
+              <SingleNotecard
+                title={item.title}
+                text={item.text}
+                key={item.cardId}
+                cardId={item.cardId}
+                lockState={lockState}
+                handleLockState={handleLockState}
+                handleDelete={handleDelete}
+                subName={value.name}
+                id={value.id}
+              />
+            ))}
+          </Box>
+        )}
+      </Box>
+    </Flex>
   );
 };

@@ -69,91 +69,95 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
   };
 
   return (
-    <Flex>
-      <Box p={8} pb={2}>
-        {loadingMe || loading ? (
-          <CircularProgress isIndeterminate value={50} />
-        ) : (
-          <Box>
-            <Heading ml={4} mb={12}>
-              quiz
-            </Heading>
-            <Flex>
-              <Box>
+    <Flex justifyContent="center">
+      <Box w={1420} minW={1420}>
+        <Flex>
+          <Box p={8} pb={2}>
+            {loadingMe || loading ? (
+              <CircularProgress isIndeterminate value={50} />
+            ) : (
+              <Box w={1100}>
+                <Heading ml={4} mb={12}>
+                  quiz
+                </Heading>
                 <Flex>
-                  <Box ml={4} mb={12}>
-                    <SubjectSelect
-                      loading={loading}
-                      subjects={subjects}
-                      value={value}
-                      handleChange={handleChange}
-                      started={startedOnce}
-                      startedOnce={startedOnce}
-                    />
-                  </Box>
+                  <Box>
+                    <Flex>
+                      <Box ml={4} mb={12}>
+                        <SubjectSelect
+                          loading={loading}
+                          subjects={subjects}
+                          value={value}
+                          handleChange={handleChange}
+                          started={startedOnce}
+                          startedOnce={startedOnce}
+                        />
+                      </Box>
 
-                  {value?.id === 0 || value?.cards.length === 0 ? null : (
-                    <Box ml="auto" pr={4}>
-                      <Button
-                        w={24}
-                        isDisabled={startedOnce}
-                        onClick={handleStarted}
-                        background={green}
-                        _hover={{ background: hoverGreen }}
-                        _active={{ background: clickGreen }}
-                        boxShadow="xl"
-                      >
-                        start
-                      </Button>
-                    </Box>
-                  )}
+                      {value?.id === 0 || value?.cards.length === 0 ? null : (
+                        <Box ml="auto" pr={4}>
+                          <Button
+                            w={24}
+                            isDisabled={startedOnce}
+                            onClick={handleStarted}
+                            background={green}
+                            _hover={{ background: hoverGreen }}
+                            _active={{ background: clickGreen }}
+                            boxShadow="xl"
+                          >
+                            start
+                          </Button>
+                        </Box>
+                      )}
+                    </Flex>
+                    {value?.cards?.length === 0 && (
+                      <Box ml={4}>
+                        <Link as={NextLink} href="/create-notecards">
+                          create notecards
+                        </Link>
+                      </Box>
+                    )}
+                    {subjects?.length === 0 && (
+                      <Box ml={4}>
+                        <Link as={NextLink} href="/create-subject">
+                          create subjects to get started.
+                        </Link>
+                      </Box>
+                    )}
+                    {value?.cards?.map((item) => (
+                      <QuizCard
+                        title={item.title}
+                        text={item.text}
+                        key={item.cardId}
+                        cardId={item.cardId}
+                        handleCheckChange={handleCheckChange}
+                      />
+                    ))}
+                  </Box>
                 </Flex>
-                {value?.cards?.length === 0 && (
-                  <Box ml={4}>
-                    <Link as={NextLink} href="/create-notecards">
-                      create notecards
-                    </Link>
-                  </Box>
-                )}
-                {subjects?.length === 0 && (
-                  <Box ml={4}>
-                    <Link as={NextLink} href="/create-subject">
-                      create subjects to get started.
-                    </Link>
-                  </Box>
-                )}
-                {value?.cards?.map((item) => (
-                  <QuizCard
-                    title={item.title}
-                    text={item.text}
-                    key={item.cardId}
-                    cardId={item.cardId}
-                    handleCheckChange={handleCheckChange}
-                  />
-                ))}
               </Box>
-            </Flex>
-          </Box>
-        )}
-      </Box>
-      {value?.id === 0 ? null : (
-        <Box mt={2}>
-          <QuizSidebar
-            prevScore={value.prevScore}
-            prevTime={value.prevTime}
-            started={started}
-            id={value.id}
-            name={value.name}
-            hasCards={value.cards.length}
-            handleStarted={handleStarted}
-            score={Math.floor(
-              ((value.numQuestions - incorrectCountState) /
-                value.numQuestions) *
-                100
             )}
-          />
-        </Box>
-      )}
+          </Box>
+          {value?.id === 0 ? null : (
+            <Box mt={2}>
+              <QuizSidebar
+                prevScore={value.prevScore}
+                prevTime={value.prevTime}
+                started={started}
+                id={value.id}
+                name={value.name}
+                hasCards={value.cards.length}
+                handleStarted={handleStarted}
+                score={Math.floor(
+                  ((value.numQuestions - incorrectCountState) /
+                    value.numQuestions) *
+                    100
+                )}
+              />
+            </Box>
+          )}
+        </Flex>
+      </Box>
     </Flex>
   );
 };

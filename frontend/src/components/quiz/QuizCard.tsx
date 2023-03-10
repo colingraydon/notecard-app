@@ -46,8 +46,8 @@ const QuizCard: React.FC<QuizCardProps> = (props: QuizCardProps) => {
             boxShadow="xl"
           >
             <Textarea
-              w={400}
-              h={200}
+              w={500}
+              h={300}
               defaultValue={props.title}
               isReadOnly
               resize="none"
@@ -56,7 +56,7 @@ const QuizCard: React.FC<QuizCardProps> = (props: QuizCardProps) => {
               _hover={{ borderColor: hoverBlue }}
             ></Textarea>
           </Box>
-          <Box h={226} mr={2} ml={2}>
+          <Box h={326} mr={2} ml={2}>
             <Divider orientation="vertical" borderColor="gray.400" />
           </Box>
           <Box
@@ -69,8 +69,8 @@ const QuizCard: React.FC<QuizCardProps> = (props: QuizCardProps) => {
           >
             <Fade in={isOpen}>
               <Textarea
-                w={400}
-                h={200}
+                w={500}
+                h={300}
                 defaultValue={props.text}
                 isReadOnly
                 resize="none"

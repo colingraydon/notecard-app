@@ -90,94 +90,98 @@ const createSubject: React.FC<{}> = ({}) => {
       ></FullSidebar>
       <Box w="100%">
         <NavBar></NavBar>
-        <Box p={8} ml={4}>
-          <Heading>subjects</Heading>
-          {!dataMe?.me ? (
-            <Box>loading...</Box>
-          ) : (
-            <Box mt={4}>
-              <Formik
-                initialValues={{ subject: "" }}
-                onSubmit={async (values, { setErrors }) => {
-                  const response = await createSubject({
-                    variables: { input: values.subject },
-                    //updateing apollo cache
-                    update: (cache) => {
-                      //evicting a query, on the root query, put in subjects
-                      cache.evict({ fieldName: "getSubjects" });
-                      // cache.gc();
-                    },
-                  });
-
-                  if (response.data?.createSubject.errors) {
-                    setErrors(toErrorMap(response.data.createSubject.errors));
-                  } else {
-                    toast({
-                      title: "subject created.",
-                      description: "get started by creating notecards!",
-                      status: "success",
-                      duration: 2000,
-                      isClosable: true,
+        <Flex justifyContent="center">
+          <Box w={1100}>
+            <Heading justifyContent="left" pt={8}>
+              subjects
+            </Heading>
+            {!dataMe?.me ? (
+              <Box>loading...</Box>
+            ) : (
+              <Box mt={4}>
+                <Formik
+                  initialValues={{ subject: "" }}
+                  onSubmit={async (values, { setErrors }) => {
+                    const response = await createSubject({
+                      variables: { input: values.subject },
+                      //updateing apollo cache
+                      update: (cache) => {
+                        //evicting a query, on the root query, put in subjects
+                        cache.evict({ fieldName: "getSubjects" });
+                        // cache.gc();
+                      },
                     });
-                  }
 
-                  handleCreateSubject(response.data?.createSubject.subject);
-                }}
-              >
-                {({ isSubmitting }) => (
-                  <Box>
-                    <Form>
-                      <Box>
-                        <Flex>
-                          <Box w={280} mr={10} minH={105} maxH={105} pb={8}>
-                            <InputField
-                              name="subject"
-                              placeholder="subject"
-                              label="Subject"
-                            />
-                          </Box>
+                    if (response.data?.createSubject.errors) {
+                      setErrors(toErrorMap(response.data.createSubject.errors));
+                    } else {
+                      toast({
+                        title: "subject created.",
+                        description: "get started by creating notecards!",
+                        status: "success",
+                        duration: 2000,
+                        isClosable: true,
+                      });
+                    }
 
-                          <Box pt="31px">
-                            <Button
-                              type="submit"
-                              isLoading={isSubmitting}
-                              background={green}
-                              _hover={{ background: hoverGreen }}
-                              _active={{ background: clickGreen }}
-                              boxShadow="xl"
-                            >
-                              create subject
-                            </Button>
-                          </Box>
-                        </Flex>
-                      </Box>
-                    </Form>
-                  </Box>
+                    handleCreateSubject(response.data?.createSubject.subject);
+                  }}
+                >
+                  {({ isSubmitting }) => (
+                    <Box justifyContent="left">
+                      <Form>
+                        <Box>
+                          <Flex>
+                            <Box w={280} mr={10} minH={105} maxH={105} pb={8}>
+                              <InputField
+                                name="subject"
+                                placeholder="subject"
+                                label="Subject"
+                              />
+                            </Box>
+
+                            <Box pt="31px">
+                              <Button
+                                type="submit"
+                                isLoading={isSubmitting}
+                                background={green}
+                                _hover={{ background: hoverGreen }}
+                                _active={{ background: clickGreen }}
+                                boxShadow="xl"
+                              >
+                                create subject
+                              </Button>
+                            </Box>
+                          </Flex>
+                        </Box>
+                      </Form>
+                    </Box>
+                  )}
+                </Formik>
+              </Box>
+            )}
+            {!data?.getSubjects && loading ? (
+              <CircularProgress isIndeterminate value={50} />
+            ) : (
+              <Stack spacing={8}>
+                {subjects?.map((s) =>
+                  !s ? null : (
+                    <SingleSubject
+                      handleDeleteSubject={handleDeleteSubject}
+                      name={s.name}
+                      id={s.id}
+                      prevScore={s.prevScore}
+                      prevTime={s.prevTime}
+                      updatedAt={s.updatedAt}
+                      key={s.id}
+                      numCards={s.cards?.length}
+                    />
+                  )
                 )}
-              </Formik>
-            </Box>
-          )}
-          {!data?.getSubjects && loading ? (
-            <CircularProgress isIndeterminate value={50} />
-          ) : (
-            <Stack spacing={8}>
-              {subjects?.map((s) =>
-                !s ? null : (
-                  <SingleSubject
-                    handleDeleteSubject={handleDeleteSubject}
-                    name={s.name}
-                    id={s.id}
-                    prevScore={s.prevScore}
-                    prevTime={s.prevTime}
-                    updatedAt={s.updatedAt}
-                    key={s.id}
-                    numCards={s.cards?.length}
-                  />
-                )
-              )}
-            </Stack>
-          )}
-        </Box>
+              </Stack>
+            )}
+          </Box>
+        </Flex>
       </Box>
     </Flex>
   );

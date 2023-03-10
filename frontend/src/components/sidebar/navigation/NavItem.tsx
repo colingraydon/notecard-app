@@ -23,7 +23,13 @@ export const NavItem = ({ item, isActive, collapse, hideNotifications }) => {
 
   const router = useRouter();
   if (item.type === "border") {
-    return <Divider w={collapse ? 60 : 8} ml={collapse ? 0 : 1}></Divider>;
+    return (
+      <Divider
+        borderColor="gray.300"
+        w={collapse ? 60 : 8}
+        ml={collapse ? 0 : 1}
+      ></Divider>
+    );
   }
   if (item.type === "link") {
     const { icon, notifications, messages, path } = item;

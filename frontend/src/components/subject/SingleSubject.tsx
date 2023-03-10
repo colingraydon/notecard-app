@@ -49,7 +49,7 @@ const SingleSubject: React.FC<SingleSubjectProps> = (
       >
         <Box>
           <Flex>
-            <Box ml={4} w={300} pt={2} pb={2} mt={2}>
+            <Box ml={4} w={300} pt={2} pb={2} mt={2} pr={2}>
               {lockState ? (
                 <Box>{nameState}</Box>
               ) : (

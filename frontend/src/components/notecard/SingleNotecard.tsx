@@ -46,7 +46,7 @@ const SingleNotecard: React.FC<SingleNotecardProps> = (
   const [updateCard] = useUpdateCardMutation();
 
   return (
-    <Box w={886} mt={8}>
+    <Box w={1085} mt={8}>
       <Flex>
         <Box
           p={3}
@@ -57,8 +57,8 @@ const SingleNotecard: React.FC<SingleNotecardProps> = (
           boxShadow="xl"
         >
           <Textarea
-            w={400}
-            h={200}
+            w={500}
+            h={300}
             defaultValue={titleState}
             onChange={handleTitleChange}
             isReadOnly={props.lockState}
@@ -66,7 +66,7 @@ const SingleNotecard: React.FC<SingleNotecardProps> = (
             _hover={{ borderColor: blue }}
           ></Textarea>
         </Box>
-        <Box h={226} mr={2} ml={2}>
+        <Box h={326} mr={2} ml={2}>
           <Divider orientation="vertical" borderColor="gray.400" />
         </Box>
         <Box
@@ -78,8 +78,8 @@ const SingleNotecard: React.FC<SingleNotecardProps> = (
           boxShadow="xl"
         >
           <Textarea
-            w={400}
-            h={200}
+            w={500}
+            h={300}
             defaultValue={textState}
             onChange={handleTextChange}
             isReadOnly={props.lockState}

@@ -102,7 +102,7 @@ const NewNotecard: React.FC<NewNotecardProps> = ({}) => {
                   )}
 
                   <Flex mt={8}>
-                    <Box pb={4} minH={280} maxH={280}>
+                    <Box pb={4} minH={300} maxH={300}>
                       <InputField
                         name="title"
                         placeholder="front"
@@ -111,10 +111,10 @@ const NewNotecard: React.FC<NewNotecardProps> = ({}) => {
                       />
                     </Box>
 
-                    <Box mr={6} ml={6} mt={8} h={200}>
+                    <Box mr={6} ml={6} mt={8} h={300}>
                       <Divider orientation="vertical" />
                     </Box>
-                    <Box w={400} pb={4} minH={280} maxH={280}>
+                    <Box w={500} pb={4} minH={300} maxH={300}>
                       <InputField
                         name="text"
                         placeholder="back"
@@ -127,7 +127,7 @@ const NewNotecard: React.FC<NewNotecardProps> = ({}) => {
                     <Button
                       type="submit"
                       mr={2}
-                      mt={2}
+                      mt={6}
                       background={green}
                       _hover={{ background: hoverGreen }}
                       _active={{ background: clickGreen }}
