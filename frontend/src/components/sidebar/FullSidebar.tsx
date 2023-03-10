@@ -22,7 +22,7 @@ const FullSidebar = (props: FullSidebarProps) => {
 
   return (
     <Box position="sticky" top="0" height="1" zIndex="1">
-      <HStack w="full" h="100vh" bg={useColorModeValue("gray.100", "gray.600")}>
+      <HStack w="full" h="100vh" bg={useColorModeValue("gray.100", "gray.500")}>
         <Flex
           as="aside"
           w="full"

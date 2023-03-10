@@ -81,7 +81,7 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
       top="0"
       h={14}
       zIndex="2"
-      bg={useColorModeValue("gray.100", "gray.600")}
+      bg={useColorModeValue("gray.100", "gray.500")}
     >
       <Flex
         height={10}

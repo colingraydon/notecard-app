@@ -2,7 +2,7 @@ import express from "express";
 import { dataSource } from "./data-source";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
-import { TestResolver } from "./resolvers/test";
+import { TestResolver } from "./resolvers/helloworld";
 import { Context } from "./types";
 import { UserResolver } from "./resolvers/user";
 import connectRedis from "connect-redis";

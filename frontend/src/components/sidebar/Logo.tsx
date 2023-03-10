@@ -6,7 +6,7 @@ export const Logo = ({ collapse }) => (
     <Box mr={collapse ? 0 : 0} display="flex" gap={2}>
       {collapse && (
         <NextLink href="/">
-          <Text fontWeight="bold" mr={12} fontSize={20}>
+          <Text fontWeight="bold" mr={8} fontSize={20}>
             simplify studying
           </Text>
         </NextLink>

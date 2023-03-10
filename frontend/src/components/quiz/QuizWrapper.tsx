@@ -69,7 +69,7 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
   };
 
   return (
-    <Flex justifyContent="center">
+    <Flex justifyContent="center" pr={4} pl={2}>
       <Box w={1420} minW={1420}>
         <Flex>
           <Box p={8} pb={2}>
