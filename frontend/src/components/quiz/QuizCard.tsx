@@ -75,6 +75,7 @@ const QuizCard: React.FC<QuizCardProps> = (props: QuizCardProps) => {
                 isReadOnly
                 resize="none"
                 borderColor="gray.200"
+                _hover={{ borderColor: hoverBlue }}
                 _active={{ borderColor: clickBlue }}
               ></Textarea>
             </Fade>

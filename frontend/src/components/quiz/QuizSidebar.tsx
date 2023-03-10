@@ -83,11 +83,11 @@ const QuizSidebar: React.FC<QuizSidebarProps> = (props: QuizSidebarProps) => {
   return (
     <Box position="sticky" top={55} height="1" zIndex="0">
       {props.hasCards === 0 ? null : (
-        <Box w={300}>
+        <Box w={240}>
           <Box h={8}></Box>
           <Box
             p={3}
-            w={300}
+            w={240}
             border="solid"
             borderRadius={12}
             borderWidth={1}
@@ -157,9 +157,9 @@ const QuizSidebar: React.FC<QuizSidebarProps> = (props: QuizSidebarProps) => {
                         </Button>
                         <Button
                           boxShadow="xl"
-                          background={blue}
-                          _hover={{ background: hoverBlue }}
-                          _active={{ background: clickBlue }}
+                          background={green}
+                          _hover={{ background: hoverGreen }}
+                          _active={{ background: clickGreen }}
                           onClick={() => router.refresh()}
                         >
                           try again

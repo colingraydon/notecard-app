@@ -17,7 +17,8 @@ const AboutWrapper: React.FC<AboutWrapperProps> = ({}) => {
         <Box>
           simplify studying is designed to be as fast and easy to use as
           possible, so you can spend more time studying and less time making
-          notecards.
+          notecards. i hope that using this site helps you ace your next text,
+          pass a licensing exam, or prepare for an interview.
         </Box>
       </Stack>
       <Box mt={20} w={450}>
