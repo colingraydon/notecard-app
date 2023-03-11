@@ -23,7 +23,7 @@ export const AvatarBox = ({ collapse }) => {
           gap={2}
           flexDirection={collapse ? "row" : "column-reverse"}
         >
-          <Avatar name={data.meEmail?.username} bg={blue} />
+          <Avatar name={data?.meEmail?.username} bg={blue} />
           {collapse && (
             <Flex
               w="full"
@@ -33,12 +33,12 @@ export const AvatarBox = ({ collapse }) => {
               alignItems="flex-start"
             >
               <Text fontSize="sm" fontWeight="bold" pb="0" lineHeight={0}>
-                {data.meEmail?.username}
+                {data?.meEmail?.username}
               </Text>
               <Text as="small" color="gray.500" fontSize={12} lineHeight={0}>
-                {data.meEmail?.email.length <= 28
-                  ? data.meEmail?.email
-                  : data.meEmail?.email.substring(0, 26) + "..."}
+                {data?.meEmail?.email.length <= 28
+                  ? data?.meEmail?.email
+                  : data?.meEmail?.email.substring(0, 26) + "..."}
               </Text>
             </Flex>
           )}

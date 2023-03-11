@@ -1,4 +1,6 @@
 import express from "express";
+import "dotenv-safe/config";
+
 import { dataSource } from "./data-source";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
@@ -38,7 +40,7 @@ const main = async () => {
 
   //tossed in any typing as connect-redis @types were not up to date
 
-  const redis: any = new Redis({});
+  const redis: any = new Redis(process.env.REDIS_URL);
   // redis.connect().catch(console.error)
 
   app.use(
@@ -61,8 +63,13 @@ const main = async () => {
   );
 
   /*****redis middleware ends here*********/
-  app.listen(4000, () => {
+
+  app.listen(parseInt(process.env.PORT), () => {
     console.log("🚀 Listening on port 4000");
+    // console.log("process.env.port: ", process.env);
+    // console.log("redis url", process.env.REDIS_URL);
+    // console.log("process.env.port type: ", typeof process.env.PORT);
+    // console.log("hi");
   });
 
   const apolloServer = new ApolloServer({
