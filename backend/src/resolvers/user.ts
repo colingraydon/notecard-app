@@ -248,7 +248,7 @@ export class UserResolver {
 
     await sendEmail(
       email,
-      `<a href="http://localhost:3000/change-password/${token}">resetpassword</a>`
+      `<a href="${process.env.CORS_ORIGIN}/change-password/${token}">resetpassword</a>`
     );
     return true;
   }

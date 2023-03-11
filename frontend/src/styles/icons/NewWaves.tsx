@@ -23,7 +23,7 @@ const NewWaves = () => {
         stroke="none"
         strokeWidth="0"
         fill="url(#gradient)"
-        fill-opacity="0.53"
+        fillOpacity="0.53"
         className="transition-all duration-300 ease-in-out delay-150 path-0"
       ></path>{" "}
       <defs>
@@ -39,7 +39,7 @@ const NewWaves = () => {
         stroke="none"
         strokeWidth="0"
         fill="url(#gradient)"
-        fill-opacity="1"
+        fillOpacity="1"
         className="transition-all duration-300 ease-in-out delay-150 path-1"
       ></path>{" "}
     </svg>

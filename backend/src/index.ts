@@ -10,7 +10,7 @@ import { UserResolver } from "./resolvers/user";
 import connectRedis from "connect-redis";
 import session from "express-session";
 import Redis from "ioredis";
-import { COOKIENAME } from "./constants";
+import { COOKIENAME, __prod__ } from "./constants";
 //the plugin for playground which allows cookies, prod only
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "@apollo/server-plugin-landing-page-graphql-playground";
 import { CardResolver } from "./resolvers/card";
@@ -29,7 +29,7 @@ const main = async () => {
 
   app.use(
     cors({
-      origin: "http://localhost:3000",
+      origin: process.env.CORS_ORIGIN,
       credentials: true,
     })
   );
@@ -43,6 +43,9 @@ const main = async () => {
   const redis: any = new Redis(process.env.REDIS_URL);
   // redis.connect().catch(console.error)
 
+  //set proxy for nginx
+  app.set("proxy", 1);
+
   app.use(
     session({
       name: COOKIENAME,
@@ -53,11 +56,12 @@ const main = async () => {
       cookie: {
         maxAge: 1000 * 60 * 60 * 60 * 364 * 10, //10 year cookie time
         httpOnly: true, //javascript code in front end cannot access cookie
-        secure: false, //cookie only works in https if true. can set to __prod__ if in prod
+        secure: __prod__, //cookie only works in https if true. can set to __prod__ if in prod
         sameSite: "lax", //must be changed to lax for prod
+        domain: __prod__ ? ".simplifystudying.com" : undefined,
       },
       saveUninitialized: false,
-      secret: "randomizedstringaasdfasdf",
+      secret: process.env.SESSION_SECRET,
       resave: false,
     })
   );
@@ -65,11 +69,7 @@ const main = async () => {
   /*****redis middleware ends here*********/
 
   app.listen(parseInt(process.env.PORT), () => {
-    console.log("🚀 Listening on port 4000");
-    // console.log("process.env.port: ", process.env);
-    // console.log("redis url", process.env.REDIS_URL);
-    // console.log("process.env.port type: ", typeof process.env.PORT);
-    // console.log("hi");
+    console.log(`🚀 Listening on port ${process.env.PORT}`);
   });
 
   const apolloServer = new ApolloServer({

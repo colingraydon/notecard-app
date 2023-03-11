@@ -15,6 +15,9 @@ RUN yarn
 # Bundle app source
 COPY . .
 
+#copies .env.production and reads as .env
+COPY .env.production .env
+
 RUN yarn build
 
 ENV NODE_ENV production
