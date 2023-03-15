@@ -1,5 +1,5 @@
 import express from "express";
-import "dotenv-safe/config";
+import "dotenv/config";
 
 import { dataSource } from "./data-source";
 import { ApolloServer } from "apollo-server-express";
