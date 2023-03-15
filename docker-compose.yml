@@ -1,0 +1,48 @@
+#think this is deprecated
+version: "3.9"
+
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - 3000:3000
+
+  backend:
+    build: ./backend
+    ports:
+      - 4000:4000
+    environment:
+      - DB_URL: postgresql://db/simplifystudying
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER: postgres
+      - POSTGRES_PASSWORD: postgres
+
+    ports:
+      - "5432:5432"
+
+    # adminer:
+    #   image: adminer
+    #   restart: always
+    #   ports:
+    #     - 8080:8080
+
+    pg-admin:
+      image: dpage/pgadmin4:6
+
+      environment:
+        - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+        - PGADMIN_DEFAULT_PASSWORD=admin
+        - PGADMIN_LISTEN_PORT=5050
+
+      ports:
+        - "5050:5050"
+
+    volumes:
+      -simplifystudying: /var/lib/postgresql/data
+
+volumes:
+  simplifystudying:
