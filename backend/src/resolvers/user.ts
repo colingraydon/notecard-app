@@ -1,4 +1,5 @@
-import argon2 from "argon2";
+// import argon2 from "argon2";
+import bcryptjs from "bcryptjs";
 import { sendEmail } from "../utils/sendEmail";
 import {
   Arg,
@@ -57,7 +58,8 @@ export class UserResolver {
       return { errors };
     }
 
-    const hashedPassword = await argon2.hash(options.password);
+    // const hashedPassword = await argon2.hash(options.password);
+    const hashedPassword = await bcryptjs.hash(options.password, 10);
     let user;
 
     try {
@@ -121,7 +123,9 @@ export class UserResolver {
     }
 
     //checks pw
-    const valid = await argon2.verify(user.password, password);
+    // const valid = await argon2.verify(user.password, password);
+    const valid = await bcryptjs.compare(password, user.password);
+
     //logic and fieldError for bad pw/username combo
     if (!valid) {
       return {
@@ -208,7 +212,8 @@ export class UserResolver {
     User.update(
       { id: userIdNum },
       {
-        password: await argon2.hash(newPassword),
+        // password: await argon2.hash(newPassword),
+        password: await bcryptjs.hash(newPassword, 10),
       }
     );
 
