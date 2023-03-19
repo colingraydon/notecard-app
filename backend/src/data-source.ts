@@ -8,10 +8,17 @@ import path from "path";
 
 export const dataSource = new DataSource({
   type: "postgres",
-  database: "notecard-app",
+  //added
+  // host: "127.0.0.1",
+  port: 5432,
+  //might be wrong
+  host: "postgres",
+  // host: "postgres",
+  //changed from "notecard-app"
+  database: "postgres",
   username: "postgres",
   password: "postgres",
-  url: process.env.DATABASE_URL,
+  // url: process.env.DATABASE_URL,
   logging: true,
   //creates tables automatically, no need for running a migration
   synchronize: true,

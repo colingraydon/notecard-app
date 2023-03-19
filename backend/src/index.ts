@@ -19,7 +19,15 @@ import { NotificationResolver } from "./resolvers/notification";
 import cors from "cors";
 
 const main = async () => {
-  await dataSource.initialize();
+  // await dataSource.initialize();
+  dataSource
+    .initialize()
+    .then(() => {
+      console.log("initialized successfully");
+    })
+    .catch((err) => {
+      console.log("data source initialization error occurred: ", err);
+    });
 
   const app = express();
 

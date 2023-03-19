@@ -1,50 +1,51 @@
-#think this is deprecated
-version: "3.9"
-
 services:
   frontend:
+    container_name: frontend_container
     build: ./frontend
     ports:
-      - 3000:3001
+      - 3000:3000
 
   backend:
+    container_name: backend_container
     build: ./backend
     ports:
       - 4000:4000
     environment:
-      DB_URL: postgresql://db/simplifystudying
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: postgres
+    depends_on:
+      - postgres
+    links:
+      - postgres
+    networks:
+      - mynet
+    volumes:
+      - /usr/src/app/node_modules
+      # - ./:/usr/src/app/
 
-  db:
+  postgres:
+    container_name: postgres
     image: postgres
     restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
 
     ports:
       - "5432:5432"
-
-    # adminer:
-    #   image: adminer
-    #   restart: always
-    #   ports:
-    #     - 8080:8080
-
-    # pg-admin:
-    #   image: dpage/pgadmin4:6
-
-    #   environment:
-    #     - PGADMIN_DEFAULT_EMAIL=admin@admin.com
-    #     - PGADMIN_DEFAULT_PASSWORD=admin
-    #     - PGADMIN_LISTEN_PORT=5050
-
-    #   ports:
-    #     - "5050:5050"
-
     volumes:
-      - simplifystudying:/var/lib/postgresql/data
+      - notecard-app:/var/lib/postgresql/data
+    networks:
+      - mynet
 
 volumes:
-  simplifystudying:
-# volumes:
-#   - ./simplifystudying:
+  notecard-app:
+    driver: local
+
+networks:
+  mynet:
+    driver: bridge

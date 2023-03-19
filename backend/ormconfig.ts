@@ -1,10 +1,12 @@
 export default {
   type: "postgres",
-  host: "localhost",
+  //changed from localhost
+  host: "postgres",
   port: 5432,
   username: "postgres",
   password: "postgres",
-  database: "notecard-app2",
+  //changed from notecard-app
+  database: "postgres",
   entities: ["dist/entities/*.js"],
   migrations: ["dist/migrations/*.js"],
 };
