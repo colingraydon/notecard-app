@@ -48,6 +48,7 @@ const main = async () => {
 
   //tossed in any typing as connect-redis @types were not up to date
 
+  // const redis: any = new Redis({ host: "redis", port: 6379 });
   const redis: any = new Redis(process.env.REDIS_URL);
   // redis.connect().catch(console.error)
 
@@ -96,7 +97,7 @@ const main = async () => {
       res,
       redis,
     }),
-
+    cache: "bounded",
     //only for prod
     plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
   });

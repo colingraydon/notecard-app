@@ -20,6 +20,7 @@ services:
       - postgres
     links:
       - postgres
+      - redis
     networks:
       - mynet
     volumes:
@@ -39,6 +40,16 @@ services:
       - "5432:5432"
     volumes:
       - notecard-app:/var/lib/postgresql/data
+    networks:
+      - mynet
+
+  redis:
+    image: redis
+    container_name: redis
+    expose:
+      - 6379
+    ports:
+      - 6379:6379
     networks:
       - mynet
 
