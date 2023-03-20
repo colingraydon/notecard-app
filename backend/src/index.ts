@@ -65,9 +65,9 @@ const main = async () => {
       cookie: {
         maxAge: 1000 * 60 * 60 * 60 * 364 * 10, //10 year cookie time
         httpOnly: true, //javascript code in front end cannot access cookie
-        secure: __prod__, //cookie only works in https if true. can set to __prod__ if in prod
+        secure: false, //cookie only works in https if true. can set to __prod__ if in prod
         sameSite: "lax", //must be changed to lax for prod
-        domain: __prod__ ? ".simplifystudying.com" : undefined,
+        // domain: __prod__ ? ".simplifystudying.com" : undefined,
       },
       saveUninitialized: false,
       secret: process.env.SESSION_SECRET,
