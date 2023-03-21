@@ -1,5 +1,12 @@
 import { useApolloClient } from "@apollo/client";
-import { Box, Button, Flex, Link, useColorModeValue } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Link,
+  useColorModeValue,
+  Image,
+} from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import {
   LogoutMutationVariables,
@@ -17,6 +24,7 @@ import LoginPopoverForm from "../login/LoginPopoverForm";
 import RegisterPopoverForm from "../register/RegisterPopoverForm";
 import { DarkModeSwitch } from "./DarkModeSwitch";
 import NextLink from "next/link";
+import * as icon from "../../../public/Icon.png";
 
 interface NavBarProps {}
 
@@ -96,6 +104,7 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
         bg={useColorModeValue("white", "gray.800")}
       >
         <Flex align="center" flex={1}>
+          <Image src="Icon.png" height="40px" width="70px" mr={2} />
           <Link as={NextLink} href="/">
             simplify studying
           </Link>

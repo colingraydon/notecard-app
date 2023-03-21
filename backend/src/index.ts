@@ -41,6 +41,7 @@ const main = async () => {
       credentials: true,
     })
   );
+
   /**********redis middleware starts here. must be before the apollo middleware**/
   // redis@v4
 
