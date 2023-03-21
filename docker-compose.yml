@@ -43,6 +43,20 @@ services:
     networks:
       - mynet
 
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    networks:
+      - mynet
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+
   redis:
     image: redis
     container_name: redis
@@ -52,9 +66,15 @@ services:
       - 6379:6379
     networks:
       - mynet
+    volumes:
+      - redis-data:/data
 
 volumes:
   notecard-app:
+    driver: local
+  redis-data:
+    driver: local
+  pgadmin-data:
     driver: local
 
 networks:

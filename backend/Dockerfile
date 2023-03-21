@@ -28,7 +28,7 @@
 
 # USER node
 
-FROM node:16
+FROM node:16-alpine
 
 ENV NODE_ENV production
 
