@@ -24,7 +24,6 @@ import LoginPopoverForm from "../login/LoginPopoverForm";
 import RegisterPopoverForm from "../register/RegisterPopoverForm";
 import { DarkModeSwitch } from "./DarkModeSwitch";
 import NextLink from "next/link";
-import * as icon from "../../../public/Icon.png";
 
 interface NavBarProps {}
 
@@ -104,7 +103,7 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
         bg={useColorModeValue("white", "gray.800")}
       >
         <Flex align="center" flex={1}>
-          <Image src="Icon.png" height="40px" width="70px" mr={2} />
+          <Image src="Icon2.png" height={10} mr={2} />
           <Link as={NextLink} href="/">
             simplify studying
           </Link>
