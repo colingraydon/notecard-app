@@ -98,12 +98,20 @@ export const NavBar: React.FC<NavBarProps> = ({}) => {
         borderRadius={12}
         pt={6}
         pb={6}
-        pl={6}
+        pl={2}
         pr={2}
         bg={useColorModeValue("white", "gray.800")}
       >
         <Flex align="center" flex={1}>
-          <Image src="Icon2.png" height={10} mr={2} />
+          <Image
+            _hover={{ cursor: "pointer" }}
+            src="Icon.png"
+            height={10}
+            mr={2}
+            onClick={async () => {
+              await router.push("/");
+            }}
+          />
           <Link as={NextLink} href="/">
             simplify studying
           </Link>
