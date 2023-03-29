@@ -26,7 +26,7 @@ services:
       - mynet
     volumes:
       - /usr/src/app/node_modules
-      # - ./:/usr/src/app/
+      - ./:/usr/src/app/
 
   postgres:
     container_name: postgres
