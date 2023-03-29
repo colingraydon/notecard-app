@@ -25,8 +25,11 @@ services:
     networks:
       - mynet
     volumes:
-      - /usr/src/app/node_modules
+      #added this line
       - ./:/usr/src/app/
+      - /usr/src/app/node_modules/
+      #uncommented below line
+      # - ./:/usr/src/app/
 
   postgres:
     container_name: postgres
