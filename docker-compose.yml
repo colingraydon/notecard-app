@@ -26,7 +26,8 @@ services:
       - mynet
     volumes:
       #added this line
-      - ./:/usr/src/app/
+      # - ./:/usr/src/app/
+      - ./backend:/usr/src/app
       - /usr/src/app/node_modules/
       #uncommented below line
       # - ./:/usr/src/app/
