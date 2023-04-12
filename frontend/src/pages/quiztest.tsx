@@ -2,6 +2,7 @@ import { Box, Flex } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { NavBar } from "../components/navbar/NavBar";
 import QuizWrapper from "../components/quiz/QuizWrapper";
+import QuizWrapperTest from "../components/quiz/QuizWrapperTest";
 import FullSidebar from "../components/sidebar/FullSidebar";
 import { withApollo } from "../utils/withApollo";
 
@@ -38,8 +39,9 @@ const quiz: React.FC<quizProps> = ({}) => {
       ></FullSidebar>
       <Box w="100%" minW={1420}>
         <NavBar></NavBar>
+
         <Box>
-          <QuizWrapper></QuizWrapper>
+          <QuizWrapperTest></QuizWrapperTest>
         </Box>
       </Box>
     </Flex>

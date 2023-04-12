@@ -17,12 +17,12 @@ import QuizCard from "./QuizCard";
 import { clickGreen, green, hoverGreen } from "../../styles/themes/Lightmode";
 import QuizSidebar from "./QuizSidebar";
 
-interface QuizWrapperProps {}
+interface QuizWrapperTestProps {}
 
-const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
+const QuizWrapperTest: React.FC<QuizWrapperTestProps> = ({}) => {
   const { data: dataMe, loading: loadingMe } = useMeQuery();
 
-  useIsAuth();
+  // useIsAuth();
 
   const { data, error, loading } = useGetSubjectsQuery({
     fetchPolicy: "cache-and-network",
@@ -73,70 +73,66 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
       <Box w={1420} minW={1420}>
         <Flex>
           <Box p={8} pb={2}>
-            {loadingMe || loading ? (
-              <CircularProgress isIndeterminate value={50} />
-            ) : (
-              <Box w={1100}>
-                <Heading ml={4} mb={12}>
-                  quiz
-                </Heading>
-                <Flex>
-                  <Box>
-                    <Flex>
-                      <Box ml={4} mb={12}>
-                        <SubjectSelect
-                          loading={loading}
-                          subjects={subjects}
-                          value={value}
-                          handleChange={handleChange}
-                          started={startedOnce}
-                          startedOnce={startedOnce}
-                        />
-                      </Box>
-
-                      {value?.id === 0 || value?.cards.length === 0 ? null : (
-                        <Box ml="auto" pr={4}>
-                          <Button
-                            w={24}
-                            isDisabled={startedOnce}
-                            onClick={handleStarted}
-                            background={green}
-                            _hover={{ background: hoverGreen }}
-                            _active={{ background: clickGreen }}
-                            boxShadow="xl"
-                          >
-                            start
-                          </Button>
-                        </Box>
-                      )}
-                    </Flex>
-                    {value?.cards?.length === 0 && (
-                      <Box ml={4}>
-                        <Link as={NextLink} href="/create-notecards">
-                          create notecards
-                        </Link>
-                      </Box>
-                    )}
-                    {subjects?.length === 0 && (
-                      <Box ml={4}>
-                        <Link as={NextLink} href="/create-subject">
-                          create subjects to get started.
-                        </Link>
-                      </Box>
-                    )}
-                    {value?.cards?.map((item) => (
-                      <QuizCard
-                        title={item.title}
-                        text={item.text}
-                        key={item.cardId}
-                        cardId={item.cardId}
-                        handleCheckChange={handleCheckChange}
+            <Box w={1100}>
+              <Heading ml={4} mb={12}>
+                quiz
+              </Heading>
+              <Flex>
+                <Box>
+                  <Flex>
+                    <Box ml={4} mb={12}>
+                      <SubjectSelect
+                        loading={loading}
+                        subjects={subjects}
+                        value={value}
+                        handleChange={handleChange}
+                        started={startedOnce}
+                        startedOnce={startedOnce}
                       />
-                    ))}
-                  </Box>
-                </Flex>
-              </Box>
-            )}
+                    </Box>
+
+                    {value?.id === 0 || value?.cards.length === 0 ? null : (
+                      <Box ml="auto" pr={4}>
+                        <Button
+                          w={24}
+                          isDisabled={startedOnce}
+                          onClick={handleStarted}
+                          background={green}
+                          _hover={{ background: hoverGreen }}
+                          _active={{ background: clickGreen }}
+                          boxShadow="xl"
+                        >
+                          start
+                        </Button>
+                      </Box>
+                    )}
+                  </Flex>
+                  {value?.cards?.length === 0 && (
+                    <Box ml={4}>
+                      <Link as={NextLink} href="/create-notecards">
+                        create notecards
+                      </Link>
+                    </Box>
+                  )}
+                  {subjects?.length === 0 && (
+                    <Box ml={4}>
+                      <Link as={NextLink} href="/create-subject">
+                        create subjects to get started.
+                      </Link>
+                    </Box>
+                  )}
+                  {value?.cards?.map((item) => (
+                    <QuizCard
+                      title={item.title}
+                      text={item.text}
+                      key={item.cardId}
+                      cardId={item.cardId}
+                      handleCheckChange={handleCheckChange}
+                    />
+                  ))}
+                </Box>
+              </Flex>
+            </Box>
           </Box>
           {value?.id === 0 ? null : (
             <Box mt={2}>
@@ -162,4 +158,4 @@ const QuizWrapper: React.FC<QuizWrapperProps> = ({}) => {
   );
 };
 
-export default QuizWrapper;
+export default QuizWrapperTest;
