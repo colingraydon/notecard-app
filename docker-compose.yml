@@ -2,6 +2,9 @@ services:
   frontend:
     container_name: frontend_container
     build: ./frontend
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
     ports:
       - 3000:3000
 
@@ -27,8 +30,14 @@ services:
     volumes:
       #added this line
       # - ./:/usr/src/app/
+      # - ./backend:/usr/src/app
+
+      # commented out, was working
       - ./backend:/usr/src/app
       - /usr/src/app/node_modules/
+
+      #tried moving folder
+      # - /usr/src/backend/node_modules
       #uncommented below line
       # - ./:/usr/src/app/
 
