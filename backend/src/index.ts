@@ -49,8 +49,8 @@ const main = async () => {
 
   //tossed in any typing as connect-redis @types were not up to date
 
-  // const redis: any = new Redis({ host: "redis", port: 6379 });
-  const redis: any = new Redis(process.env.REDIS_URL);
+  const redis: any = new Redis({ host: "redis", port: 6379 });
+  // const redis: any = new Redis(process.env.REDIS_URL);
   // redis.connect().catch(console.error)
 
   //set proxy for nginx
@@ -78,8 +78,8 @@ const main = async () => {
 
   /*****redis middleware ends here*********/
 
-  app.listen(parseInt(process.env.PORT), () => {
-    console.log(`🚀 Listening on port ${process.env.PORT}`);
+  app.listen(4000, () => {
+    console.log(`🚀 Listening on port 4000`);
   });
 
   const apolloServer = new ApolloServer({
