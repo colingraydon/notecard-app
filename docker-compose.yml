@@ -1,5 +1,6 @@
 services:
   frontend:
+    restart: always
     container_name: frontend_container
     build: ./frontend
     volumes:
@@ -14,17 +15,20 @@ services:
     ports:
       - 4000:4000
     environment:
+      PORT: 4000
       DB_HOST: postgres
       DB_PORT: 5432
       DB_USER: postgres
       DB_PASSWORD: postgres
       DB_NAME: postgres
+      SESSION_SECRET: randomizedstringaasdfasdf
     depends_on:
       postgres:
         condition: service_healthy
     links:
       - postgres
       - redis
+    restart: always
     networks:
       - mynet
     volumes:
