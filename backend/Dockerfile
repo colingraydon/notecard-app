@@ -34,12 +34,12 @@ FROM node:16-alpine
 
 WORKDIR /usr/src/app
 
-COPY package.json .
-COPY yarn.lock .
+COPY package.json /usr/src/app/package.json
+COPY yarn.lock /usr/src/app/yarn.lock
 
 RUN yarn
 
-COPY . .
+COPY . /usr/src/app
 
 RUN yarn build
 

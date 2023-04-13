@@ -6,6 +6,7 @@ services:
     volumes:
       - ./frontend:/usr/src/app
       - /usr/src/app/node_modules
+      - /usr/src/app/.next
     ports:
       - 3000:3000
 
@@ -31,19 +32,19 @@ services:
     restart: always
     networks:
       - mynet
-    volumes:
-      #added this line
-      # - ./:/usr/src/app/
-      # - ./backend:/usr/src/app
+    #volumes:
+    #added this line
+    # - ./:/usr/src/app/
+    # - ./backend:/usr/src/app
 
-      # commented out, was working
-      - ./backend:/usr/src/app
-      - /usr/src/app/node_modules/
+    # commented out, was working
+    #- ./backend:/usr/src/app
+    #- /usr/src/app/node_modules/
 
-      #tried moving folder
-      # - /usr/src/backend/node_modules
-      #uncommented below line
-      # - ./:/usr/src/app/
+    #tried moving folder
+    # - /usr/src/backend/node_modules
+    #uncommented below line
+    # - ./:/usr/src/app/
 
   postgres:
     container_name: postgres
