@@ -41,7 +41,15 @@ export const NavItem = ({ item, isActive, collapse, hideNotifications }) => {
         justifyContent="center"
         minH={25}
       >
-        <Tooltip label={label} isDisabled={collapse} placement="right">
+        <Tooltip
+          label={
+            !data?.me && label !== "about"
+              ? "sign in or register to get started "
+              : label
+          }
+          isDisabled={collapse}
+          placement="right"
+        >
           <LinkChakra
             href={data?.me || label === "about" ? path : "/"}
             as={Link}

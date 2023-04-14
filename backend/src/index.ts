@@ -105,15 +105,17 @@ const main = async () => {
 
   await apolloServer.start();
 
-  //********* */
+  //*********for prod */
   apolloServer.applyMiddleware({
     app,
-    // cors: { credentials: true, origin: "https://studio.apollographql.com" },
-    cors: false,
+    cors: { credentials: true, origin: "http://54.226.166.201:3000/" },
   });
 
-  //****** */
-  apolloServer.applyMiddleware({ app });
+  //****** for dev only */
+  // apolloServer.applyMiddleware({
+  //   app,
+  //   cors: { credentials: true, origin: "http://localhost:3000" },
+  // });
 };
 
 main().catch((err) => {
