@@ -47,8 +47,9 @@ export const NavItem = ({ item, isActive, collapse, hideNotifications }) => {
               ? "sign in or register to get started "
               : label
           }
-          isDisabled={collapse}
+          // isDisabled={collapse}
           placement="right"
+          ml={collapse ? 3 : 0}
         >
           <LinkChakra
             href={data?.me || label === "about" ? path : "/"}
