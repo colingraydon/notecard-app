@@ -108,7 +108,10 @@ const main = async () => {
   //********* */
   apolloServer.applyMiddleware({
     app,
-    cors: { credentials: true, origin: "http://44.204.241.127:3000" },
+    cors: {
+      origin: process.env.CORS_ORIGIN,
+      credentials: true,
+    },
   });
 
   //****** for dev only */

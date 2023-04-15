@@ -23,6 +23,7 @@ services:
       DB_PASSWORD: postgres
       DB_NAME: postgres
       SESSION_SECRET: randomizedstringaasdfasdf
+      CORS_ORIGIN: http://44.204.241.127:3000
     depends_on:
       postgres:
         condition: service_healthy
