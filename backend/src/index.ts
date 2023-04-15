@@ -12,7 +12,7 @@ import session from "express-session";
 import Redis from "ioredis";
 import { COOKIENAME, __prod__ } from "./constants";
 //the plugin for playground which allows cookies, prod only
-// import { ApolloServerPluginLandingPageGraphQLPlayground } from "@apollo/server-plugin-landing-page-graphql-playground";
+import { ApolloServerPluginLandingPageGraphQLPlayground } from "@apollo/server-plugin-landing-page-graphql-playground";
 import { CardResolver } from "./resolvers/card";
 import { SubjectResolver } from "./resolvers/subject";
 import { NotificationResolver } from "./resolvers/notification";
@@ -100,22 +100,19 @@ const main = async () => {
     }),
     cache: "bounded",
     //only for prod
-    //plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
+    plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
   });
 
   await apolloServer.start();
 
-  //*********for prod */
+  //********* */
   apolloServer.applyMiddleware({
     app,
-    cors: { credentials: true, origin: "http://simplifystudying.com:3000/" },
+    cors: { credentials: true, origin: "http://44.204.241.127:3000" },
   });
 
   //****** for dev only */
-  // apolloServer.applyMiddleware({
-  //   app,
-  //   cors: { credentials: true, origin: "http://localhost:3000" },
-  // });
+  //apolloServer.applyMiddleware({ app });
 };
 
 main().catch((err) => {
