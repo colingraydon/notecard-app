@@ -108,7 +108,7 @@ const main = async () => {
   //*********for prod */
   apolloServer.applyMiddleware({
     app,
-    cors: { credentials: true, origin: "http://54.226.166.201:3000/" },
+    cors: { credentials: true, origin: "http://simplifystudying.com:3000/" },
   });
 
   //****** for dev only */
