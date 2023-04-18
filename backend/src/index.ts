@@ -69,6 +69,7 @@ const main = async () => {
         secure: false, //cookie only works in https if true. can set to __prod__ if in prod
         sameSite: "lax", //must be changed to lax for prod
         // domain: __prod__ ? ".simplifystudying.com" : undefined,
+        domain: ".simplifystudying.com",
       },
       saveUninitialized: false,
       secret: process.env.SESSION_SECRET,
