@@ -54,8 +54,9 @@ const main = async () => {
   // redis.connect().catch(console.error)
 
   //set proxy for nginx
-  app.set("proxy", 1);
+  // app.set("proxy", 1);
 
+  app.set("trust proxy", true);
   app.use(
     session({
       name: COOKIENAME,

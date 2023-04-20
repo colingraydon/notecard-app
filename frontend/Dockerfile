@@ -16,6 +16,8 @@ RUN yarn build
 
 ENV NODE_ENV production
 
+ENV NEXT_PUBLIC_API_URL http://52.91.195.68:4000/graphql
+
 EXPOSE 3000
 
 CMD [ "yarn", "start" ]
