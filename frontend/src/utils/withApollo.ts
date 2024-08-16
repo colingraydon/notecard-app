@@ -3,7 +3,7 @@ import { withApollo as createWithApollo } from "next-apollo";
 
 const client = new ApolloClient({
   credentials: "include",
-  uri: "http://54.210.32.185:4000/graphql",
+  uri: "http://simplifystudying.com:4000/graphql",
   cache: new InMemoryCache({
     typePolicies: {
       Query: {

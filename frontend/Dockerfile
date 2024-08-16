@@ -16,7 +16,8 @@ RUN yarn build
 
 ENV NODE_ENV production
 
-ENV NEXT_PUBLIC_API_URL http://54.210.32.185:4000/graphql
+#ENV NEXT_PUBLIC_API_URL http://54.210.32.185:4000/graphql
+ENV NEXT_PUBLIC_API_URL http://54.167.229.114:4000/graphql
 
 EXPOSE 3000
 

@@ -14,7 +14,6 @@ export const dataSource = new DataSource({
   //might be wrong
   host: "postgres",
   // host: "postgres",
-  //changed from "notecard-app"
   database: "postgres",
   username: "postgres",
   password: "postgres",

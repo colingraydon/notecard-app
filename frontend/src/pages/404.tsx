@@ -15,11 +15,11 @@ const NotFound = () => {
     >
       <Heading>404 error</Heading>
       <Box mt={8}>not sure how you ended up here.</Box>
-      <Box mt={4}>
+      {/* <Box mt={4}>
         <Link as={NextLink} href="/">
           click me to get back to studying!
         </Link>
-      </Box>
+      </Box> */}
     </Flex>
   );
 };

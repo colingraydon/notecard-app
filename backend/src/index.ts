@@ -20,6 +20,7 @@ import cors from "cors";
 
 const main = async () => {
   // await dataSource.initialize();
+
   dataSource
     .initialize()
     .then(() => {
